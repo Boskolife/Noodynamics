@@ -1,1 +1,70 @@
-#header {}
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  padding: 30px 0;
+
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+  }
+
+  &__logo {
+    display: block;
+    width: 171px;
+  }
+
+  &__nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 32px;
+  }
+
+  &__nav-link {
+    font-family: $base-font-serif;
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 32px;
+  }
+
+  &__action {
+
+    &--primary {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+
+      span {
+        font-family: $base-font-serif;
+        font-weight: 500;
+        font-size: 14px;
+        text-transform: uppercase;
+      }
+    }
+
+    &--secondary {
+      font-family: $base-font-serif;
+      font-weight: 500;
+      font-size: 14px;
+      text-transform: uppercase;
+      padding: 17px 16px;
+      border: 1px solid $color-white-100;
+      border-radius: 4px;
+
+      &:hover{
+        background-color: $color-white-20;
+      }
+    }
+  }
+}

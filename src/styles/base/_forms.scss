@@ -9,16 +9,16 @@ input[type='text'],
 input[type='tel'],
 input[type='email'],
 input[type='search'],
-input[type='password'],
-//input[type='url'],
-// input[type='date'],
-textarea {
+	input[type='password'],
+	//input[type='url'],
+	// input[type='date'],
+	textarea {
 	-webkit-appearance: none;
 	-webkit-border-radius: 0;
 	outline: none;
 	box-sizing: border-box;
-	border: 1px solid $form-element-border-color;
-	color: $black;
+		border: 1px solid $form-element-border-color;
+		color: $base-text-color;
 	// &:hover {
 
 	// }

@@ -31,7 +31,7 @@ export async function convertFile(inputPath) {
   const parsed = path.parse(inputPath);
   const webpPath = path.join(parsed.dir, `${parsed.name}.webp`);
   await sharp(inputPath)
-    .webp({ quality: 85 })
+    .webp({ quality: 90 })
     .toFile(webpPath);
   console.log(`[convertToWebp] ${path.relative(publicDir, inputPath)} -> ${path.relative(publicDir, webpPath)}`);
 }

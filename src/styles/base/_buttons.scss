@@ -1,0 +1,19 @@
+.btn {
+    display: inline-block;
+  font-family: $base-font-serif;
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: uppercase;
+  padding: 17px 16px;
+  background-color: transparent;
+  border-radius: 4px;
+
+  &--primary {
+    color: $color-white-100;
+    border: 1px solid $color-white-100;
+
+    &:hover {
+      background-color: $color-white-20;
+    }
+  }
+}

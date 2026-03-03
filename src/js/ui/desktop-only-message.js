@@ -1,5 +1,5 @@
 export function showDesktopOnlyMessage() {
-  const { body, head, createElement } = document;
+  const { body, head } = document;
 
   // Remove all existing content
   while (body.firstChild) {
@@ -7,7 +7,7 @@ export function showDesktopOnlyMessage() {
   }
 
   // Inject basic styles for the message
-  const styleEl = createElement('style');
+  const styleEl = document.createElement('style');
   styleEl.textContent = `
     .desktop-only-wrapper {
       min-height: 100vh;
@@ -36,10 +36,10 @@ export function showDesktopOnlyMessage() {
   `;
   head.appendChild(styleEl);
 
-  const wrapper = createElement('div');
+  const wrapper = document.createElement('div');
   wrapper.className = 'desktop-only-wrapper';
 
-  const message = createElement('div');
+  const message = document.createElement('div');
   message.className = 'desktop-only-message';
   message.innerHTML =
     '<strong>Desktop access only</strong>' +

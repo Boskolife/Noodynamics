@@ -52,19 +52,5 @@
         text-transform: uppercase;
       }
     }
-
-    &--secondary {
-      font-family: $base-font-serif;
-      font-weight: 500;
-      font-size: 14px;
-      text-transform: uppercase;
-      padding: 17px 16px;
-      border: 1px solid $color-white-100;
-      border-radius: 4px;
-
-      &:hover{
-        background-color: $color-white-20;
-      }
-    }
   }
 }

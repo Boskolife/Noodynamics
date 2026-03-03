@@ -53,7 +53,15 @@ export function initMainSlider() {
   if (mainSliderSection && swiper.mousewheel && typeof window !== 'undefined') {
     const updateMousewheelState = () => {
       const rect = mainSliderSection.getBoundingClientRect();
-      const shouldEnable = rect.top <= 10 && rect.bottom > 0;
+      const viewportHeight =
+        window.innerHeight || document.documentElement.clientHeight || 0;
+
+      // Enable only when the section fully covers the viewport:
+      // its top is at or above the top edge, and its bottom is
+      // at or below the bottom edge of the viewport.
+      const center = rect.top + rect.height / 2;
+      const shouldEnable =
+        center >= viewportHeight * 0.25 && center <= viewportHeight * 0.8;
 
       if (shouldEnable) {
         swiper.mousewheel.enable();

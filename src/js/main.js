@@ -8,6 +8,15 @@ import { isDesktopDevice } from './utils/device.js';
 import { showDesktopOnlyMessage } from './ui/desktop-only-message.js';
 import { initMainSlider } from './slider/main-slider.js';
 
+function initFooterYear() {
+  const yearEl = document.querySelector('.footer__bottom-year');
+  if (yearEl) {
+    const year = String(new Date().getFullYear());
+    yearEl.textContent = year;
+    yearEl.setAttribute('datetime', year);
+  }
+}
+
 function initApp() {
   if (!isDesktopDevice()) {
     showDesktopOnlyMessage();
@@ -15,6 +24,7 @@ function initApp() {
   }
 
   initMainSlider();
+  initFooterYear();
 }
 
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {

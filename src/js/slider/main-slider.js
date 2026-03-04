@@ -14,6 +14,7 @@ export function initMainSlider() {
     modules: [Pagination, Mousewheel, EffectCreative],
     slidesPerView: 1,
     direction: 'vertical',
+    speed: 2000,
     mousewheel: {
       enabled: false,
       forceToAxis: true,

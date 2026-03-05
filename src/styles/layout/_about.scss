@@ -1,0 +1,154 @@
+.about__buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  margin: 80px 0 40px 0;
+}
+
+.about__button {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-weight: 500;
+  font-size: 14px;
+  color: $color-white-100;
+  text-transform: uppercase;
+
+  &:hover {
+    color: $color-white-80;
+  }
+
+  &.active {
+    color: $color-white-60;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+}
+
+.organization-chart {
+  &__title {
+    text-align: center;
+    font-size: 80px;
+    margin-bottom: 40px;
+  }
+
+  &__img {
+    display: block;
+    width: 100%;
+    height: auto;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+}
+
+.about-how {
+  padding: 140px 0 85px 0;
+
+  &__item {
+    position: relative;
+
+    &:not(:last-child) {
+      margin-bottom: 100px;
+    }
+
+    &:nth-child(1) {
+      .about-how__item-img {
+        width: 55%;
+      }
+    }
+
+    &:nth-child(2) {
+      .about-how__item-img {
+        width: 45%;
+      }
+    }
+
+    &:nth-child(3) {
+      .about-how__item-img {
+        width: 45%;
+      }
+    }
+
+    &:nth-child(4) {
+      .about-how__item-img {
+        width: 45%;
+      }
+    }
+
+    &:nth-child(5) {
+      .about-how__item-img {
+        width: 40%;
+      }
+    }
+
+    &:nth-child(6) {
+      .about-how__item-img {
+        width: 35%;
+        top: auto;
+        bottom: 0;
+        transform: translateY(0);
+      }
+    }
+
+    &:nth-child(even) {
+      .about-how__item-img {
+        left: 0;
+        right: auto;
+      }
+
+      .about-how__item-content {
+        margin-left: auto;
+      }
+    }
+
+    &:nth-child(odd) {
+      .about-how__item-img {
+        left: auto;
+        right: 0;
+      }
+    }
+
+    &-img {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 0;
+      width: 45%;
+      height: auto;
+      z-index: -1;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+
+    &-content {
+      width: 63%;
+      padding: 0 40px;
+    }
+
+    &-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 40px;
+      text-transform: uppercase;
+    }
+
+    &-title {
+      font-size: 32px;
+      margin-bottom: 24px;
+    }
+
+    &-text {
+      color: $color-white-80;
+    }
+  }
+}

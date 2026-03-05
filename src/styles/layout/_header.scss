@@ -1,16 +1,24 @@
 .header {
-  padding: 30px 0;
+  padding: 30px 40px;
 
   &__inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 30px;
+    position: relative;
   }
 
   &__logo {
     display: block;
     width: 171px;
+  }
+
+  &__nav{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   &__nav-list {

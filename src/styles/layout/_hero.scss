@@ -35,14 +35,9 @@
     height: 100%;
   }
 
-  &__img-wrapper {
-    position: relative;
-    width: 100%;
-  }
-
   &__img {
     display: block;
-    max-width: 1270px;
+    transform: translateY(32%);
     width: 100%;
     height: auto;
     margin: 0 auto 32px auto;

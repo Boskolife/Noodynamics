@@ -15,14 +15,25 @@
 <body>
   {{> header }}
   <main id="main">
-    {{> section-hero }}
-    {{> section-main-slider }}
-    {{> section-culture-systems }}
-    {{> section-synopsis }}
-    {{> section-member }}
+    <div class="about__buttons">
+      <button class="about__button active">organization & administration</button>
+      <button class="about__button">code of ethics</button>
+      <button class="about__button">contacts</button>
+    </div>
+    <div id="organization-administration">
+      {{> section-organization-chart }}
+      {{> section-about-how }}
+      {{> section-member }}
+    </div>
   </main>
   {{> footer }}
   <script type="module" src="/js/main.js"></script>
 </body>
+
+<div class="about__content">
+  <div class="about__content-inner">
+    <h1 class="about__content-title">About</h1>
+  </div>
+</div>
 
 </html>

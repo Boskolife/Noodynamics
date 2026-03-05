@@ -8,8 +8,6 @@ import {
   startWatch as startWebpWatch,
 } from './scripts/convertToWebp.js';
 
-const base = '/Noodynamics/';
-
 /**
  * Renders <picture> with WebP source and PNG/JPEG fallback.
  * Usage: {{{picture "/images/photo.png" alt="Description"}}} (triple braces for raw HTML)

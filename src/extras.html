@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Noodynamics - Extras</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+    <link rel="stylesheet" href="/styles/main.scss">
+</head>
+
+<body class="extras-page">
+    {{> header }}
+    <main id="main">
+        {{{picture "/images/sharp-bg.png" alt="Description" class="extras__bg"}}}
+        <div class="tabs__buttons extras__tabs-buttons">
+            <button class="tabs__button active" data-tab="blog">blog</button>
+            <button class="tabs__button" data-tab="online-radio-station">online radio station</button>
+            <button class="tabs__button" data-tab="links">links</button>
+        </div>
+        <div class="tab-panels">
+            <div class="tab-panel active" id="blog">
+                {{> section-blog }}
+            </div>
+            <div class="tab-panel" id="online-radio-station">
+                {{> section-code-of-ethics }}
+                {{> section-member }}
+            </div>
+            <div class="tab-panel" id="links">
+                {{> section-about-contacts }}
+            </div>
+        </div>
+    </main>
+    {{> footer }}
+    <script type="module" src="/js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+$tab-transition-duration: 0.3s;
+
+.tab-panels {
+  position: relative;
+  min-height: 1px;
+}
+
+.tab-panel {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  transition: opacity $tab-transition-duration ease,
+    visibility $tab-transition-duration ease;
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+    position: relative;
+    pointer-events: auto;
+  }
+}

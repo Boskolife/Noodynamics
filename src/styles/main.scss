@@ -1,21 +1,21 @@
 $breakpoints: (
-	'xs-phone': 320px,
-	'phone': 480px,
-	'tablet': 768px,
-	'tablet_x': 860px,
-	'desktop': 1024px,
-	'widescreen': 1200px
+  'xs-phone': 320px,
+  'phone': 480px,
+  'tablet': 768px,
+  'tablet_x': 860px,
+  'desktop': 1024px,
+  'widescreen': 1200px,
 );
 
 // keywords
 $media-expressions: (
-	'screen': 'screen',
-	'print': 'print',
-	'handheld': 'handheld',
-	'landscape': '(orientation: landscape)',
-	'portrait': '(orientation: portrait)',
-	'retina2x': '(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)',
-	'retina3x': '(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 240dpi)'
+  'screen': 'screen',
+  'print': 'print',
+  'handheld': 'handheld',
+  'landscape': '(orientation: landscape)',
+  'portrait': '(orientation: portrait)',
+  'retina2x': '(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)',
+  'retina3x': '(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 240dpi)',
 );
 
 // ligatured operators ≥ ≤
@@ -34,6 +34,7 @@ $media-expressions: (
 @import 'base/forms';
 @import 'base/buttons';
 @import 'base/breadcrumbs';
+@import 'base/tabs';
 
 @import 'layout/header';
 @import 'layout/common';
@@ -46,7 +47,6 @@ $media-expressions: (
 @import 'layout/synopsis';
 @import 'layout/member';
 
-
 // Journal Pages
 @import 'layout/journal';
 
@@ -55,3 +55,7 @@ $media-expressions: (
 
 // Events Pages
 @import 'layout/events';
+
+
+// Extras Pages
+@import 'layout/blog';

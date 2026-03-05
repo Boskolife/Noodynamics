@@ -7,7 +7,7 @@ import 'swiper/css/scrollbar';
 import { isDesktopDevice } from './utils/device.js';
 import { showDesktopOnlyMessage } from './ui/desktop-only-message.js';
 import { initMainSlider } from './slider/main-slider.js';
-import { initAboutTabs } from './about-tabs.js';
+import { initTabs } from './tabs.js';
 import { initEventsFilter } from './events-filter.js';
 
 function initFooterYear() {
@@ -27,7 +27,7 @@ function initApp() {
 
   initMainSlider();
   initFooterYear();
-  initAboutTabs();
+  initTabs();
   initEventsFilter();
 }
 

@@ -70,12 +70,11 @@
     line-height: calc(120 / 120);
 
     span {
-      &:nth-child(1) {
-        font-family: $base-font-serif;
+      &:first-child {
+        font-family: $base-font-sans-serif;
       }
 
       &:nth-child(2) {
-        font-family: $base-font-sans-serif;
         color: transparent;
         background: linear-gradient(180deg, #ffffff 0%, #a3a3a3 100%);
         background-clip: text;
@@ -86,7 +85,6 @@
   }
 
   &__text {
-    font-family: $base-font-serif;
     max-width: 630px;
     text-align: center;
     width: 100%;

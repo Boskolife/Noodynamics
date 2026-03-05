@@ -1,8 +1,8 @@
 // forms
 form,
 fieldset {
-	margin: 0;
-	border-style: none;
+  margin: 0;
+  border-style: none;
 }
 
 input[type='text'],
@@ -13,36 +13,35 @@ input[type='search'],
 	//input[type='url'],
 	// input[type='date'],
 	textarea {
-	-webkit-appearance: none;
-	-webkit-border-radius: 0;
-	outline: none;
-	box-sizing: border-box;
-		border: 1px solid $form-element-border-color;
-		color: $base-text-color;
-	// &:hover {
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+  outline: none;
+  box-sizing: border-box;
+  border: 1px solid $form-element-border-color;
+  color: $base-text-color;
+  // &:hover {
 
-	// }
+  // }
 
-	&:focus {
-		border-color: $form-element-focus-border-color;
-	}
+  &:focus {
+    border-color: $form-element-focus-border-color;
+  }
 
-	@include placeholder {
-		color: $placeholder-color;
-	}
+  @include placeholder {
+    color: $placeholder-color;
+  }
 }
 
-input[attribute="value"] {}
+input[attribute='value'] {
+}
 
 select {
-	-webkit-border-radius: 0;
+  -webkit-border-radius: 0;
 }
 
-
-
 textarea {
-	vertical-align: top;
-	resize: none;
+  vertical-align: top;
+  resize: none;
 }
 
 button,
@@ -50,10 +49,41 @@ input[type='button'],
 input[type='reset'],
 input[type='file'],
 input[type='submit'] {
-	-webkit-appearance: none;
-	-webkit-border-radius: 0;
-	cursor: pointer;
-	font-family: $base-font-sans-serif;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+  cursor: pointer;
+  font-family: $base-font-sans-serif;
 
-	&:hover {}
+  &:hover {
+  }
+}
+
+.short-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  input,
+  textarea {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid $color-white-20;
+    color: $color-white-100;
+    padding-bottom: 4px;
+    height: 26px;
+    
+    @include placeholder {
+      color: $color-white-80;
+      text-transform: uppercase;
+    }
+
+    &:focus {
+      outline: none;
+      border-bottom-color: $color-white-100;
+    }
+  }
+
+  .btn {
+    margin-top: 28px;
+  }
 }

@@ -1,7 +1,7 @@
 .footer {
   margin-top: 80px;
   position: relative;
-  padding: 0 40px;
+  padding: 0 40px 40px 40px;
 
   &::before {
     content: '';
@@ -57,7 +57,6 @@
     &-title {
       font-size: 16px;
       line-height: calc(20 / 16);
-      font-family: $base-font-serif;
       color: $color-white-60;
       text-transform: uppercase;
 
@@ -74,36 +73,7 @@
       display: block;
       color: $color-white-100;
       margin-bottom: 28px !important;
-    }
-
-    &-form {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-
-      input,
-      textarea {
-        background-color: transparent;
-        border: none;
-        border-bottom: 1px solid $color-white-20;
-        color: $color-white-100;
-        padding-bottom: 4px;
-        font-family: $base-font-serif;
-        height: 26px;
-        @include placeholder {
-          color: $color-white-80;
-          text-transform: uppercase;
-        }
-
-        &:focus {
-          outline: none;
-          border-bottom-color: $color-white-100;
-        }
-      }
-
-      &-btn {
-        margin-top: 28px;
-      }
+      font-family: $base-font-sans-serif;
     }
 
     &-list {
@@ -130,7 +100,6 @@
     &-text {
       font-size: 16px;
       line-height: calc(20 / 16);
-      font-family: $base-font-serif;
       color: $color-white-80;
       text-transform: uppercase;
     }

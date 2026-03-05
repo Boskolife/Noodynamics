@@ -25,7 +25,6 @@ function initApp() {
 
   initMainSlider();
   initFooterYear();
-  initHeaderNav();
 }
 
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {

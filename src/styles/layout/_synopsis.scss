@@ -24,7 +24,6 @@
     font-weight: 500;
     line-height: calc(18 / 14);
     letter-spacing: -0.02em;
-    font-family: $base-font-serif;
     color: $color-white-100;
     text-transform: uppercase;
     text-align: end;
@@ -47,7 +46,6 @@
     &-text {
       font-size: 18px;
       line-height: calc(25 / 18);
-      font-family: $base-font-serif;
       color: $color-white-80;
     }
 
@@ -58,7 +56,6 @@
     li {
       font-size: 18px;
       line-height: calc(25 / 18);
-      font-family: $base-font-serif;
       color: $color-white-80;
     }
   }

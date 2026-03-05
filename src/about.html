@@ -16,21 +16,23 @@
   {{> header }}
   <main id="main">
     <div class="about__buttons">
-      <button class="about__button active">organization & administration</button>
-      <button class="about__button">code of ethics</button>
-      <button class="about__button">contacts</button>
+      <button class="about__button active" data-tab="organization-administration">organization & administration</button>
+      <button class="about__button" data-tab="code-of-ethics">code of ethics</button>
+      <button class="about__button" data-tab="contacts">contacts</button>
     </div>
-    <div id="organization-administration">
-      {{> section-organization-chart }}
-      {{> section-about-how }}
-      {{> section-member }}
-    </div>
-    <div id="code-of-ethics">
-      {{> section-code-of-ethics }}
-      {{> section-member }}
-    </div>
-    <div id="contacts">
-      {{> section-about-contacts }}
+    <div class="about__panels">
+      <div class="about__tab-panel active" id="organization-administration">
+        {{> section-organization-chart }}
+        {{> section-about-how }}
+        {{> section-member }}
+      </div>
+      <div class="about__tab-panel" id="code-of-ethics">
+        {{> section-code-of-ethics }}
+        {{> section-member }}
+      </div>
+      <div class="about__tab-panel" id="contacts">
+        {{> section-about-contacts }}
+      </div>
     </div>
   </main>
   {{> footer }}

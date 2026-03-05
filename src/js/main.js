@@ -7,6 +7,7 @@ import 'swiper/css/scrollbar';
 import { isDesktopDevice } from './utils/device.js';
 import { showDesktopOnlyMessage } from './ui/desktop-only-message.js';
 import { initMainSlider } from './slider/main-slider.js';
+import { initAboutTabs } from './about-tabs.js';
 
 function initFooterYear() {
   const yearEl = document.querySelector('.footer__bottom-year');
@@ -25,6 +26,7 @@ function initApp() {
 
   initMainSlider();
   initFooterYear();
+  initAboutTabs();
 }
 
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {

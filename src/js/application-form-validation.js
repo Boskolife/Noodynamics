@@ -5,7 +5,7 @@
 
 const FORM_SELECTOR = '.application-membership__form';
 const ERROR_CLASS = 'is-invalid';
-const ERROR_MESSAGE_CLASS = 'application-membership__form-error';
+const ERROR_MESSAGE_CLASS = 'application-membership__form-error form-card__error';
 
 const messages = {
   required: 'This field is required.',

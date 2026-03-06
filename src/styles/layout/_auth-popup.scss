@@ -1,0 +1,137 @@
+.auth-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: auto;
+  background-color: $color-white-100;
+  z-index: 1000;
+  border-radius: 8px;
+  border: 1px solid $color-white-60;
+  overflow: hidden;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $color-black-100;
+    padding: 12px;
+  }
+
+  &__logo {
+    width: 170px;
+    height: auto;
+    object-fit: contain;
+  }
+
+  &__inner {
+    padding: 24px 40px;
+  }
+
+  &__title {
+    font-family: $base-font-sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: calc(24 / 20);
+    text-transform: uppercase;
+    color: $color-black-100;
+    text-align: center;
+    margin-bottom: 8px;
+    background: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: $color-black-100;
+  }
+
+  &__text {
+    color: $color-black-80;
+    text-align: center;
+    margin-bottom: 24px;
+
+    &-social,
+    &-signup {
+      font-size: 14px;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: $color-black-100;
+    }
+
+    &-signup {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 0;
+
+      a {
+        text-decoration: underline;
+        color: $color-black-100;
+        font-weight: 700px;
+      }
+    }
+  }
+
+  &__form {
+    padding: 0;
+    gap: 0;
+
+    input {
+      width: 100%;
+      border-color: $color-black-20;
+      color: $color-black-100;
+
+      @include placeholder {
+        color: $color-black-60;
+      }
+
+      &:focus {
+        border-color: $color-black-100;
+      }
+    }
+
+    &-link {
+      color: $color-black-100;
+      text-decoration: underline;
+      font-size: 14px;
+      text-transform: uppercase;
+      display: block;
+      margin-left: auto;
+      width: max-content;
+      margin-bottom: 32px;
+
+      &:hover {
+        text-decoration: none;
+        color: $color-black-60;
+      }
+    }
+
+    &-button {
+      margin-bottom: 40px;
+    }
+
+    &-social {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+
+      &-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+      }
+    }
+  }
+
+  .form-card__group {
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 12px;
+  }
+
+  .form-card__label {
+    color: $color-black-100;
+  }
+}

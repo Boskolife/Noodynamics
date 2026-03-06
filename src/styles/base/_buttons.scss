@@ -25,6 +25,16 @@
       background-color: $color-dark-brown;
     }
   }
+
+  &--black {
+    color: $color-white-100;
+    background-color: $color-black-100;
+    border: none;
+
+    &:hover {
+      background-color: $color-black-80;
+    }
+  }
 }
 
 .tabs__buttons {

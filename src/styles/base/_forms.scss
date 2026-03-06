@@ -87,3 +87,247 @@ input[type='submit'] {
     margin-top: 28px;
   }
 }
+
+// Unified form card (bordered form layout): inputs, labels, radio, checkbox, select, errors.
+// Use class "form-card" on the form and form-card__* on inner elements to apply.
+.form-card {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  padding: 40px;
+  border: 1px solid $color-white-60;
+  border-radius: 12px;
+  max-width: 965px;
+  width: 100%;
+  margin: 0 auto;
+
+  &__group {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 44px;
+
+    &-radio {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+  }
+
+  &__label {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    font-size: 14px;
+    text-transform: uppercase;
+
+    &-radio {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      font-size: 14px;
+      color: $color-white-80;
+      text-transform: uppercase;
+      position: relative;
+
+      input[type='radio'] {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+  }
+
+  input,
+  textarea {
+    background-color: transparent;
+    border: 1px solid $color-white-20;
+    color: $color-white-100;
+    border-radius: 4px;
+    padding: 12px 14px;
+    font-size: 14px;
+
+    @include placeholder {
+      color: $color-white-60;
+      text-transform: uppercase;
+    }
+
+    &:focus {
+      border-color: $color-white-100;
+    }
+
+    &.is-invalid {
+      border-color: $color-red;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &__error {
+    display: block;
+    font-size: 14px;
+    color: $color-red;
+    text-transform: uppercase;
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  textarea {
+    height: 120px;
+  }
+
+  .select__trigger {
+    border: 1px solid $color-white-20;
+    color: $color-white-100;
+    border-radius: 4px;
+    padding: 12px 14px;
+  }
+
+  .select.is-invalid .select__trigger {
+    border-color: $color-red;
+  }
+
+  .select__dropdown {
+    border-radius: 4px;
+    border: 1px solid $color-white-20;
+  }
+
+  .radio-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  fieldset.radio-group {
+    margin: 0;
+    padding: 0;
+    border: none;
+    min-width: 0;
+    width: 100%;
+  }
+
+  fieldset.radio-group &__label {
+    margin-bottom: 12px;
+  }
+
+  &__radio-mark {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1px solid $color-white-40;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition:
+      border-color 0.2s ease,
+      background-color 0.2s ease;
+
+    &::after {
+      content: '';
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: $color-white-100;
+      transform: scale(0);
+      transition: transform 0.15s ease;
+    }
+  }
+
+  &__label-radio:hover &__radio-mark {
+    border-color: $color-white-80;
+  }
+
+  &__label-radio input[type='radio']:checked + &__radio-mark {
+    border-color: $color-white-100;
+
+    &::after {
+      transform: scale(1);
+    }
+  }
+
+  &__label-radio input.is-invalid + &__radio-mark {
+    border-color: $color-red;
+  }
+
+  &__agree-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  &__agree {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 16px;
+    color: $color-white-80;
+    line-height: calc(20 / 16);
+    cursor: pointer;
+
+    input[type='checkbox'] {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+
+  &__checkbox-mark {
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    border: 1px solid $color-white-40;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+    transition:
+      border-color 0.2s ease,
+      background-color 0.2s ease;
+
+    &::after {
+      content: '';
+      width: 20px;
+      height: 20px;
+      border-radius: 2px;
+      background-color: $color-white-100;
+      opacity: 0;
+      transform: scale(0.8);
+      transition:
+        opacity 0.15s ease,
+        transform 0.15s ease;
+    }
+  }
+
+  &__checkbox-text {
+    display: inline-block;
+  }
+
+  &__agree:hover &__checkbox-mark {
+    border-color: $color-white-80;
+  }
+
+  &__agree input[type='checkbox']:checked + &__checkbox-mark {
+    border-color: $color-white-100;
+    background-color: $color-white-20;
+
+    &::after {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  &__agree input.is-invalid + &__checkbox-mark {
+    border-color: $color-red;
+  }
+}

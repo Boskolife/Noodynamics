@@ -3,6 +3,23 @@
   position: relative;
   padding: 0;
 
+  &.member-slider {
+
+    .main-slider__slide-col {
+      &.col-2 {
+        max-width: 550px;
+        width: 100%;
+      }
+
+      &.col-3 {
+        width: 25%;
+      }
+    }
+    .main-slider__slide-img {
+      width: 100%;
+    }
+  }
+
   &::before {
     content: '';
     position: absolute;

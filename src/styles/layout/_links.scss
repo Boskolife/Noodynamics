@@ -1,0 +1,30 @@
+.links {
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 290px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__name {
+    font-size: 16px;
+    font-weight: 500;
+    color: $color-white-100;
+    text-transform: uppercase;
+  }
+
+  &__link {
+    font-size: 16px;
+    font-weight: 500;
+    color: $color-white-60;
+    text-transform: uppercase;
+  }
+}

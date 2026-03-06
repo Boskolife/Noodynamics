@@ -19,10 +19,13 @@ body {
   min-width: $base-min-width;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-section{
-  padding: 0 40px;
+main {
+  flex: 1 0 auto;
 }
 
 // adaptive images

@@ -1,207 +1,209 @@
 <section class="events" id="events">
     {{{picture "/images/sharp-bg.png" alt="Description" class="events__bg"}}}
-    <div class="events__inner-wrapper">
-        <h2 class="events__title">
-            Our Events Calendar
-        </h2>
-        <div class="events__actions">
-            <div class="events__selector">
-                <button type="button" class="events__selector-trigger" aria-expanded="false" aria-haspopup="listbox"
-                    aria-label="Select event type">
-                    <span class="events__selector-value">All Events</span>
-                    <span class="events__selector-arrow" aria-hidden="true">
-                        <img src="/icons/arrow-down.svg" alt="image not found">
-                    </span>
-                </button>
-                <ul class="events__selector-dropdown" role="listbox" hidden>
-                    <li class="events__selector-option" role="option" data-value="all">All Events</li>
-                    <li class="events__selector-option" role="option" data-value="special-exhibitions">Special
-                        Exhibitions</li>
-                    <li class="events__selector-option" role="option" data-value="workshops">Workshops</li>
-                    <li class="events__selector-option" role="option" data-value="lectures">Lectures</li>
-                </ul>
-            </div>
-            <div class="events__calendar">
-                <div class="events__calendar-bar">
-                    <button type="button" class="events__calendar-nav events__calendar-nav--prev"
-                        aria-label="Previous date">
-                        <img src="/icons/arrow-down.svg" alt="image not found">
-                    </button>
-                    <button type="button" class="events__calendar-date" aria-expanded="false" aria-haspopup="dialog"
-                        aria-label="Select date">
-                        <span class="events__calendar-date-text"></span>
-                        <span class="events__calendar-icon" aria-hidden="true">
-                            <img src="/icons/calendar.svg" alt="image not found">
+    <div class="container">
+        <div class="events__inner-wrapper">
+            <h2 class="events__title">
+                Our Events Calendar
+            </h2>
+            <div class="events__actions">
+                <div class="events__selector">
+                    <button type="button" class="events__selector-trigger" aria-expanded="false" aria-haspopup="listbox"
+                        aria-label="Select event type">
+                        <span class="events__selector-value">All Events</span>
+                        <span class="events__selector-arrow" aria-hidden="true">
+                            <img src="/icons/arrow-down.svg" alt="image not found">
                         </span>
                     </button>
-                    <button type="button" class="events__calendar-nav events__calendar-nav--next"
-                        aria-label="Next date">
-                        <img src="/icons/arrow-down.svg" alt="image not found">
-                    </button>
+                    <ul class="events__selector-dropdown" role="listbox" hidden>
+                        <li class="events__selector-option" role="option" data-value="all">All Events</li>
+                        <li class="events__selector-option" role="option" data-value="special-exhibitions">Special
+                            Exhibitions</li>
+                        <li class="events__selector-option" role="option" data-value="workshops">Workshops</li>
+                        <li class="events__selector-option" role="option" data-value="lectures">Lectures</li>
+                    </ul>
                 </div>
-                <div class="events__calendar-dropdown" hidden>
-                    <div class="events__calendar-header">
-                        <button type="button" class="events__calendar-header-nav events__calendar-header-nav--prev"
-                            aria-label="Previous month">
+                <div class="events__calendar">
+                    <div class="events__calendar-bar">
+                        <button type="button" class="events__calendar-nav events__calendar-nav--prev"
+                            aria-label="Previous date">
                             <img src="/icons/arrow-down.svg" alt="image not found">
                         </button>
-                        <span class="events__calendar-header-title"></span>
-                        <button type="button" class="events__calendar-header-nav events__calendar-header-nav--next"
-                            aria-label="Next month">
+                        <button type="button" class="events__calendar-date" aria-expanded="false" aria-haspopup="dialog"
+                            aria-label="Select date">
+                            <span class="events__calendar-date-text"></span>
+                            <span class="events__calendar-icon" aria-hidden="true">
+                                <img src="/icons/calendar.svg" alt="image not found">
+                            </span>
+                        </button>
+                        <button type="button" class="events__calendar-nav events__calendar-nav--next"
+                            aria-label="Next date">
                             <img src="/icons/arrow-down.svg" alt="image not found">
                         </button>
                     </div>
-                    <div class="events__calendar-weekdays">
-                        <span class="events__calendar-weekday">Sun</span>
-                        <span class="events__calendar-weekday">Mon</span>
-                        <span class="events__calendar-weekday">Tue</span>
-                        <span class="events__calendar-weekday">Wed</span>
-                        <span class="events__calendar-weekday">Thu</span>
-                        <span class="events__calendar-weekday">Fri</span>
-                        <span class="events__calendar-weekday">Sat</span>
-                    </div>
-                    <div class="events__calendar-days" role="grid" aria-label="Calendar"></div>
-                </div>
-            </div>
-        </div>
-        <div class="events__inner">
-            <h3 class="events__inner-title">
-                Special Exhibitions
-            </h3>
-            <div class="events__inner-content">
-                <div class="events__inner-item" data-event-date="2026-01-26">
-                    {{{picture "/images/events-img-1.png" alt="Description" class="events__inner-item-img"}}}
-                    <div class="events__inner-item-content">
-                        <h4 class="events__inner-item-title">
-                            Humanlight Celebration
-                        </h4>
-                        <p class="events__inner-item-text">This is a Humanist holiday celebrated annually since 2011.
-                            The
-                            secular holiday is intended to focus on the positive human values of reason, compassion,
-                            humanity and hope. www.humanlight.org</p>
-                        <time class="events__inner-item-time" datetime="2026-01-26">january 26, 2026</time>
-                        <a href="single-event.html" class="events__inner-item-btn btn btn--primary">
-                            book now
-                        </a>
-                    </div>
-                </div>
-                <div class="events__inner-item" data-event-date="2026-02-14">
-                    {{{picture "/images/events-img-1.png" alt="Description" class="events__inner-item-img"}}}
-                    <div class="events__inner-item-content">
-                        <h4 class="events__inner-item-title">
-                            Humanlight Celebration
-                        </h4>
-                        <p class="events__inner-item-text">This is a Humanist holiday celebrated annually since 2011.
-                            The
-                            secular holiday is intended to focus on the positive human values of reason, compassion,
-                            humanity and hope. www.humanlight.org</p>
-                        <time class="events__inner-item-time" datetime="2026-02-14">february 14, 2026</time>
-                        <a href="single-event.html" class="events__inner-item-btn btn btn--primary">
-                            book now
-                        </a>
-                    </div>
-                </div>
-                <div class="events__inner-item" data-event-date="2026-03-08">
-                    {{{picture "/images/events-img-1.png" alt="Description" class="events__inner-item-img"}}}
-                    <div class="events__inner-item-content">
-                        <h4 class="events__inner-item-title">
-                            Humanlight Celebration
-                        </h4>
-                        <p class="events__inner-item-text">This is a Humanist holiday celebrated annually since 2011.
-                            The
-                            secular holiday is intended to focus on the positive human values of reason, compassion,
-                            humanity and hope. www.humanlight.org</p>
-                        <time class="events__inner-item-time" datetime="2026-03-08">march 8, 2026</time>
-                        <a href="single-event.html" class="events__inner-item-btn btn btn--primary">
-                            book now
-                        </a>
-                    </div>
-                </div>
-                <div class="events__inner-item" data-event-date="2026-01-15">
-                    {{{picture "/images/events-img-1.png" alt="Description" class="events__inner-item-img"}}}
-                    <div class="events__inner-item-content">
-                        <h4 class="events__inner-item-title">
-                            Humanlight Celebration
-                        </h4>
-                        <p class="events__inner-item-text">This is a Humanist holiday celebrated annually since 2011.
-                            The
-                            secular holiday is intended to focus on the positive human values of reason, compassion,
-                            humanity and hope. www.humanlight.org</p>
-                        <time class="events__inner-item-time" datetime="2026-01-15">january 15, 2026</time>
-                        <a href="single-event.html" class="events__inner-item-btn btn btn--primary">
-                            book now
-                        </a>
+                    <div class="events__calendar-dropdown" hidden>
+                        <div class="events__calendar-header">
+                            <button type="button" class="events__calendar-header-nav events__calendar-header-nav--prev"
+                                aria-label="Previous month">
+                                <img src="/icons/arrow-down.svg" alt="image not found">
+                            </button>
+                            <span class="events__calendar-header-title"></span>
+                            <button type="button" class="events__calendar-header-nav events__calendar-header-nav--next"
+                                aria-label="Next month">
+                                <img src="/icons/arrow-down.svg" alt="image not found">
+                            </button>
+                        </div>
+                        <div class="events__calendar-weekdays">
+                            <span class="events__calendar-weekday">Sun</span>
+                            <span class="events__calendar-weekday">Mon</span>
+                            <span class="events__calendar-weekday">Tue</span>
+                            <span class="events__calendar-weekday">Wed</span>
+                            <span class="events__calendar-weekday">Thu</span>
+                            <span class="events__calendar-weekday">Fri</span>
+                            <span class="events__calendar-weekday">Sat</span>
+                        </div>
+                        <div class="events__calendar-days" role="grid" aria-label="Calendar"></div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="events__inner" data-event-type="workshops">
-            <h3 class="events__inner-title">
-                Workshops
-            </h3>
-            <div class="events__inner-content">
-                <div class="events__inner-item" data-event-date="2026-02-20">
-                    {{{picture "/images/events-img-1.png" alt="Description" class="events__inner-item-img"}}}
-                    <div class="events__inner-item-content">
-                        <h4 class="events__inner-item-title">
-                            Humanlight Celebration
-                        </h4>
-                        <p class="events__inner-item-text">This is a Humanist holiday celebrated annually since 2011.
-                            The
-                            secular holiday is intended to focus on the positive human values of reason, compassion,
-                            humanity and hope. www.humanlight.org</p>
-                        <time class="events__inner-item-time" datetime="2026-02-20">february 20, 2026</time>
-                        <a href="single-event.html" class="events__inner-item-btn btn btn--primary">
-                            book now
-                        </a>
+            <div class="events__inner">
+                <h3 class="events__inner-title">
+                    Special Exhibitions
+                </h3>
+                <div class="events__inner-content">
+                    <div class="events__inner-item" data-event-date="2026-01-26">
+                        {{{picture "/images/events-img-1.png" alt="Description" class="events__inner-item-img"}}}
+                        <div class="events__inner-item-content">
+                            <h4 class="events__inner-item-title">
+                                Humanlight Celebration
+                            </h4>
+                            <p class="events__inner-item-text">This is a Humanist holiday celebrated annually since 2011.
+                                The
+                                secular holiday is intended to focus on the positive human values of reason, compassion,
+                                humanity and hope. www.humanlight.org</p>
+                            <time class="events__inner-item-time" datetime="2026-01-26">january 26, 2026</time>
+                            <a href="single-event.html" class="events__inner-item-btn btn btn--primary">
+                                book now
+                            </a>
+                        </div>
+                    </div>
+                    <div class="events__inner-item" data-event-date="2026-02-14">
+                        {{{picture "/images/events-img-1.png" alt="Description" class="events__inner-item-img"}}}
+                        <div class="events__inner-item-content">
+                            <h4 class="events__inner-item-title">
+                                Humanlight Celebration
+                            </h4>
+                            <p class="events__inner-item-text">This is a Humanist holiday celebrated annually since 2011.
+                                The
+                                secular holiday is intended to focus on the positive human values of reason, compassion,
+                                humanity and hope. www.humanlight.org</p>
+                            <time class="events__inner-item-time" datetime="2026-02-14">february 14, 2026</time>
+                            <a href="single-event.html" class="events__inner-item-btn btn btn--primary">
+                                book now
+                            </a>
+                        </div>
+                    </div>
+                    <div class="events__inner-item" data-event-date="2026-03-08">
+                        {{{picture "/images/events-img-1.png" alt="Description" class="events__inner-item-img"}}}
+                        <div class="events__inner-item-content">
+                            <h4 class="events__inner-item-title">
+                                Humanlight Celebration
+                            </h4>
+                            <p class="events__inner-item-text">This is a Humanist holiday celebrated annually since 2011.
+                                The
+                                secular holiday is intended to focus on the positive human values of reason, compassion,
+                                humanity and hope. www.humanlight.org</p>
+                            <time class="events__inner-item-time" datetime="2026-03-08">march 8, 2026</time>
+                            <a href="single-event.html" class="events__inner-item-btn btn btn--primary">
+                                book now
+                            </a>
+                        </div>
+                    </div>
+                    <div class="events__inner-item" data-event-date="2026-01-15">
+                        {{{picture "/images/events-img-1.png" alt="Description" class="events__inner-item-img"}}}
+                        <div class="events__inner-item-content">
+                            <h4 class="events__inner-item-title">
+                                Humanlight Celebration
+                            </h4>
+                            <p class="events__inner-item-text">This is a Humanist holiday celebrated annually since 2011.
+                                The
+                                secular holiday is intended to focus on the positive human values of reason, compassion,
+                                humanity and hope. www.humanlight.org</p>
+                            <time class="events__inner-item-time" datetime="2026-01-15">january 15, 2026</time>
+                            <a href="single-event.html" class="events__inner-item-btn btn btn--primary">
+                                book now
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <div class="events__inner-item" data-event-date="2026-03-15">
-                    {{{picture "/images/events-img-1.png" alt="Description" class="events__inner-item-img"}}}
-                    <div class="events__inner-item-content">
-                        <h4 class="events__inner-item-title">
-                            Humanlight Celebration
-                        </h4>
-                        <p class="events__inner-item-text">This is a Humanist holiday celebrated annually since 2011.
-                            The
-                            secular holiday is intended to focus on the positive human values of reason, compassion,
-                            humanity and hope. www.humanlight.org</p>
-                        <time class="events__inner-item-time" datetime="2026-03-15">march 15, 2026</time>
-                        <a href="single-event.html" class="events__inner-item-btn btn btn--primary">
-                            book now
-                        </a>
+            </div>
+            <div class="events__inner" data-event-type="workshops">
+                <h3 class="events__inner-title">
+                    Workshops
+                </h3>
+                <div class="events__inner-content">
+                    <div class="events__inner-item" data-event-date="2026-02-20">
+                        {{{picture "/images/events-img-1.png" alt="Description" class="events__inner-item-img"}}}
+                        <div class="events__inner-item-content">
+                            <h4 class="events__inner-item-title">
+                                Humanlight Celebration
+                            </h4>
+                            <p class="events__inner-item-text">This is a Humanist holiday celebrated annually since 2011.
+                                The
+                                secular holiday is intended to focus on the positive human values of reason, compassion,
+                                humanity and hope. www.humanlight.org</p>
+                            <time class="events__inner-item-time" datetime="2026-02-20">february 20, 2026</time>
+                            <a href="single-event.html" class="events__inner-item-btn btn btn--primary">
+                                book now
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="events__inner-item" data-event-date="2026-04-10">
-                    {{{picture "/images/events-img-1.png" alt="Description" class="events__inner-item-img"}}}
-                    <div class="events__inner-item-content">
-                        <h4 class="events__inner-item-title">
-                            Humanlight Celebration
-                        </h4>
-                        <p class="events__inner-item-text">This is a Humanist holiday celebrated annually since 2011.
-                            The
-                            secular holiday is intended to focus on the positive human values of reason, compassion,
-                            humanity and hope. www.humanlight.org</p>
-                        <time class="events__inner-item-time" datetime="2026-04-10">april 10, 2026</time>
-                        <a href="single-event.html" class="events__inner-item-btn btn btn--primary">
-                            book now
-                        </a>
+                    <div class="events__inner-item" data-event-date="2026-03-15">
+                        {{{picture "/images/events-img-1.png" alt="Description" class="events__inner-item-img"}}}
+                        <div class="events__inner-item-content">
+                            <h4 class="events__inner-item-title">
+                                Humanlight Celebration
+                            </h4>
+                            <p class="events__inner-item-text">This is a Humanist holiday celebrated annually since 2011.
+                                The
+                                secular holiday is intended to focus on the positive human values of reason, compassion,
+                                humanity and hope. www.humanlight.org</p>
+                            <time class="events__inner-item-time" datetime="2026-03-15">march 15, 2026</time>
+                            <a href="single-event.html" class="events__inner-item-btn btn btn--primary">
+                                book now
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="events__inner-item" data-event-date="2026-02-28">
-                    {{{picture "/images/events-img-1.png" alt="Description" class="events__inner-item-img"}}}
-                    <div class="events__inner-item-content">
-                        <h4 class="events__inner-item-title">
-                            Humanlight Celebration
-                        </h4>
-                        <p class="events__inner-item-text">This is a Humanist holiday celebrated annually since 2011.
-                            The
-                            secular holiday is intended to focus on the positive human values of reason, compassion,
-                            humanity and hope. www.humanlight.org</p>
-                        <time class="events__inner-item-time" datetime="2026-02-28">february 28, 2026</time>
-                        <a href="single-event.html" class="events__inner-item-btn btn btn--primary">
-                            book now
-                        </a>
+                    <div class="events__inner-item" data-event-date="2026-04-10">
+                        {{{picture "/images/events-img-1.png" alt="Description" class="events__inner-item-img"}}}
+                        <div class="events__inner-item-content">
+                            <h4 class="events__inner-item-title">
+                                Humanlight Celebration
+                            </h4>
+                            <p class="events__inner-item-text">This is a Humanist holiday celebrated annually since 2011.
+                                The
+                                secular holiday is intended to focus on the positive human values of reason, compassion,
+                                humanity and hope. www.humanlight.org</p>
+                            <time class="events__inner-item-time" datetime="2026-04-10">april 10, 2026</time>
+                            <a href="single-event.html" class="events__inner-item-btn btn btn--primary">
+                                book now
+                            </a>
+                        </div>
+                    </div>
+                    <div class="events__inner-item" data-event-date="2026-02-28">
+                        {{{picture "/images/events-img-1.png" alt="Description" class="events__inner-item-img"}}}
+                        <div class="events__inner-item-content">
+                            <h4 class="events__inner-item-title">
+                                Humanlight Celebration
+                            </h4>
+                            <p class="events__inner-item-text">This is a Humanist holiday celebrated annually since 2011.
+                                The
+                                secular holiday is intended to focus on the positive human values of reason, compassion,
+                                humanity and hope. www.humanlight.org</p>
+                            <time class="events__inner-item-time" datetime="2026-02-28">february 28, 2026</time>
+                            <a href="single-event.html" class="events__inner-item-btn btn btn--primary">
+                                book now
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

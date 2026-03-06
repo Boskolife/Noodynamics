@@ -16,134 +16,144 @@
     {{> header }}
     <main id="main">
         <nav class="breadcrumbs">
-            <ul class="breadcrumbs__list">
-                <li class="breadcrumbs__item">
-                    <a href="events.html" class="breadcrumbs__link">Events</a>
-                </li>
-                <li class="breadcrumbs__item">
-                    <span class="breadcrumbs__link current">Humanlight Celebration</span>
-                </li>
-            </ul>
+            <div class="container">
+                <ul class="breadcrumbs__list">
+                    <li class="breadcrumbs__item">
+                        <a href="events.html" class="breadcrumbs__link">Events</a>
+                    </li>
+                    <li class="breadcrumbs__item">
+                        <span class="breadcrumbs__link current">Humanlight Celebration</span>
+                    </li>
+                </ul>
+            </div>
         </nav>
         <section class="single-event">
-            <h1 class="single-event__title">Humanlight Celebration</h1>
-            <div class="single-event__header">
-                <div class="single-event__info">
-                    <span>Palace, Floor T2/T1, Theater 2</span>
-                    <time datetime="2026-01-26">january 26, 2026</time>
+            <div class="container">
+                <h1 class="single-event__title">Humanlight Celebration</h1>
+                <div class="single-event__header">
+                    <div class="single-event__info">
+                        <span>Palace, Floor T2/T1, Theater 2</span>
+                        <time datetime="2026-01-26">january 26, 2026</time>
+                    </div>
+                    <div class="single-event__actions">
+                        <button class="single-event__btn ">add to calendar
+                            <img src="/icons/calendar.svg" alt="calendar icon">
+                        </button>
+                        <button class="btn btn--primary">book now</button>
+                    </div>
                 </div>
-                <div class="single-event__actions">
-                    <button class="single-event__btn ">add to calendar
-                        <img src="/icons/calendar.svg" alt="calendar icon">
-                    </button>
-                    <button class="btn btn--primary">book now</button>
+                <div class="single-event__inner">
+                    <div class="single-event__content">
+                        <p>HumanLight is a Humanist holiday celebrated annually since 2011, created to illuminate the
+                            shared values that unite humanity beyond religious or cultural boundaries. Rooted in secular
+                            humanism, HumanLight emphasizes reason, compassion, humanity, and hope—principles that guide
+                            ethical living and collective progress. This exhibition explores HumanLight not only as a
+                            holiday, but as a living philosophy expressed through art, ideas, and human connection.
+
+                            The exhibition invites visitors to reflect on how reason empowers us to understand the world
+                            through critical thinking, science, and evidence, encouraging informed choices and
+                            thoughtful dialogue. Through visual works, interactive installations, and narrative
+                            displays, the theme of reason is presented as a tool for liberation—allowing individuals to
+                            question, learn, and grow while respecting diverse perspectives.
+
+                            Compassion lies at the heart of HumanLight, and this exhibition highlights acts of empathy,
+                            solidarity, and care that define our shared humanity. Featured works examine kindness in
+                            everyday life, social responsibility, and the moral impulse to reduce suffering and promote
+                            well-being. These pieces remind us that compassion is not passive, but an active commitment
+                            to justice, inclusion, and mutual respect.
+
+                            Humanity, as celebrated by HumanLight, recognizes the inherent dignity and worth of every
+                            person. The exhibition showcases stories and representations of human resilience,
+                            creativity, and cooperation across cultures and generations. By centering human experience,
+                            the exhibition underscores our interconnectedness and our collective responsibility to one
+                            another.
+
+                            Finally, hope is presented as a forward-looking force—an optimism grounded in action rather
+                            than wishful thinking. Through hopeful visions of the future, the exhibition encourages
+                            visitors to imagine
+                            a world shaped by reasoned choices and compassionate values.
+
+                            HumanLight is a reminder that meaning, ethics, and celebration can be rooted in our shared
+                            human experience. This exhibition invites all visitors to engage with these values and to
+                            carry the light of humanity forward into their communities and lives.</p>
+                    </div>
+                    {{{picture "/images/events-img-1.png" alt="Description" class="single-event__img"}}}
                 </div>
-            </div>
-            <div class="single-event__inner">
-                <div class="single-event__content">
-                    <p>HumanLight is a Humanist holiday celebrated annually since 2011, created to illuminate the
-                        shared values that unite humanity beyond religious or cultural boundaries. Rooted in secular
-                        humanism, HumanLight emphasizes reason, compassion, humanity, and hope—principles that guide
-                        ethical living and collective progress. This exhibition explores HumanLight not only as a
-                        holiday, but as a living philosophy expressed through art, ideas, and human connection.
-
-                        The exhibition invites visitors to reflect on how reason empowers us to understand the world
-                        through critical thinking, science, and evidence, encouraging informed choices and
-                        thoughtful dialogue. Through visual works, interactive installations, and narrative
-                        displays, the theme of reason is presented as a tool for liberation—allowing individuals to
-                        question, learn, and grow while respecting diverse perspectives.
-
-                        Compassion lies at the heart of HumanLight, and this exhibition highlights acts of empathy,
-                        solidarity, and care that define our shared humanity. Featured works examine kindness in
-                        everyday life, social responsibility, and the moral impulse to reduce suffering and promote
-                        well-being. These pieces remind us that compassion is not passive, but an active commitment
-                        to justice, inclusion, and mutual respect.
-
-                        Humanity, as celebrated by HumanLight, recognizes the inherent dignity and worth of every
-                        person. The exhibition showcases stories and representations of human resilience,
-                        creativity, and cooperation across cultures and generations. By centering human experience,
-                        the exhibition underscores our interconnectedness and our collective responsibility to one
-                        another.
-
-                        Finally, hope is presented as a forward-looking force—an optimism grounded in action rather
-                        than wishful thinking. Through hopeful visions of the future, the exhibition encourages
-                        visitors to imagine
-                        a world shaped by reasoned choices and compassionate values.
-
-                        HumanLight is a reminder that meaning, ethics, and celebration can be rooted in our shared
-                        human experience. This exhibition invites all visitors to engage with these values and to
-                        carry the light of humanity forward into their communities and lives.</p>
-                </div>
-                {{{picture "/images/events-img-1.png" alt="Description" class="single-event__img"}}}
             </div>
         </section>
         <div class="events__inner">
-            <h3 class="events__inner-title">
-                Special Exhibitions
-            </h3>
-            <div class="events__inner-content">
-                <div class="events__inner-item" data-event-date="2026-01-26">
-                    {{{picture "/images/events-img-1.png" alt="Description" class="events__inner-item-img"}}}
-                    <div class="events__inner-item-content">
-                        <h4 class="events__inner-item-title">
-                            Humanlight Celebration
-                        </h4>
-                        <p class="events__inner-item-text">This is a Humanist holiday celebrated annually since 2011.
-                            The
-                            secular holiday is intended to focus on the positive human values of reason, compassion,
-                            humanity and hope. www.humanlight.org</p>
-                        <time class="events__inner-item-time" datetime="2026-01-26">january 26, 2026</time>
-                        <button class="events__inner-item-btn btn btn--primary">
-                            book now
-                        </button>
+            <div class="container">
+                <h3 class="events__inner-title">
+                    Special Exhibitions
+                </h3>
+                <div class="events__inner-content">
+                    <div class="events__inner-item" data-event-date="2026-01-26">
+                        {{{picture "/images/events-img-1.png" alt="Description" class="events__inner-item-img"}}}
+                        <div class="events__inner-item-content">
+                            <h4 class="events__inner-item-title">
+                                Humanlight Celebration
+                            </h4>
+                            <p class="events__inner-item-text">This is a Humanist holiday celebrated annually since
+                                2011.
+                                The
+                                secular holiday is intended to focus on the positive human values of reason, compassion,
+                                humanity and hope. www.humanlight.org</p>
+                            <time class="events__inner-item-time" datetime="2026-01-26">january 26, 2026</time>
+                            <button class="events__inner-item-btn btn btn--primary">
+                                book now
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div class="events__inner-item" data-event-date="2026-02-14">
-                    {{{picture "/images/events-img-1.png" alt="Description" class="events__inner-item-img"}}}
-                    <div class="events__inner-item-content">
-                        <h4 class="events__inner-item-title">
-                            Humanlight Celebration
-                        </h4>
-                        <p class="events__inner-item-text">This is a Humanist holiday celebrated annually since 2011.
-                            The
-                            secular holiday is intended to focus on the positive human values of reason, compassion,
-                            humanity and hope. www.humanlight.org</p>
-                        <time class="events__inner-item-time" datetime="2026-02-14">february 14, 2026</time>
-                        <button class="events__inner-item-btn btn btn--primary">
-                            book now
-                        </button>
+                    <div class="events__inner-item" data-event-date="2026-02-14">
+                        {{{picture "/images/events-img-1.png" alt="Description" class="events__inner-item-img"}}}
+                        <div class="events__inner-item-content">
+                            <h4 class="events__inner-item-title">
+                                Humanlight Celebration
+                            </h4>
+                            <p class="events__inner-item-text">This is a Humanist holiday celebrated annually since
+                                2011.
+                                The
+                                secular holiday is intended to focus on the positive human values of reason, compassion,
+                                humanity and hope. www.humanlight.org</p>
+                            <time class="events__inner-item-time" datetime="2026-02-14">february 14, 2026</time>
+                            <button class="events__inner-item-btn btn btn--primary">
+                                book now
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div class="events__inner-item" data-event-date="2026-03-08">
-                    {{{picture "/images/events-img-1.png" alt="Description" class="events__inner-item-img"}}}
-                    <div class="events__inner-item-content">
-                        <h4 class="events__inner-item-title">
-                            Humanlight Celebration
-                        </h4>
-                        <p class="events__inner-item-text">This is a Humanist holiday celebrated annually since 2011.
-                            The
-                            secular holiday is intended to focus on the positive human values of reason, compassion,
-                            humanity and hope. www.humanlight.org</p>
-                        <time class="events__inner-item-time" datetime="2026-03-08">march 8, 2026</time>
-                        <button class="events__inner-item-btn btn btn--primary">
-                            book now
-                        </button>
+                    <div class="events__inner-item" data-event-date="2026-03-08">
+                        {{{picture "/images/events-img-1.png" alt="Description" class="events__inner-item-img"}}}
+                        <div class="events__inner-item-content">
+                            <h4 class="events__inner-item-title">
+                                Humanlight Celebration
+                            </h4>
+                            <p class="events__inner-item-text">This is a Humanist holiday celebrated annually since
+                                2011.
+                                The
+                                secular holiday is intended to focus on the positive human values of reason, compassion,
+                                humanity and hope. www.humanlight.org</p>
+                            <time class="events__inner-item-time" datetime="2026-03-08">march 8, 2026</time>
+                            <button class="events__inner-item-btn btn btn--primary">
+                                book now
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div class="events__inner-item" data-event-date="2026-01-15">
-                    {{{picture "/images/events-img-1.png" alt="Description" class="events__inner-item-img"}}}
-                    <div class="events__inner-item-content">
-                        <h4 class="events__inner-item-title">
-                            Humanlight Celebration
-                        </h4>
-                        <p class="events__inner-item-text">This is a Humanist holiday celebrated annually since 2011.
-                            The
-                            secular holiday is intended to focus on the positive human values of reason, compassion,
-                            humanity and hope. www.humanlight.org</p>
-                        <time class="events__inner-item-time" datetime="2026-01-15">january 15, 2026</time>
-                        <button class="events__inner-item-btn btn btn--primary">
-                            book now
-                        </button>
+                    <div class="events__inner-item" data-event-date="2026-01-15">
+                        {{{picture "/images/events-img-1.png" alt="Description" class="events__inner-item-img"}}}
+                        <div class="events__inner-item-content">
+                            <h4 class="events__inner-item-title">
+                                Humanlight Celebration
+                            </h4>
+                            <p class="events__inner-item-text">This is a Humanist holiday celebrated annually since
+                                2011.
+                                The
+                                secular holiday is intended to focus on the positive human values of reason, compassion,
+                                humanity and hope. www.humanlight.org</p>
+                            <time class="events__inner-item-time" datetime="2026-01-15">january 15, 2026</time>
+                            <button class="events__inner-item-btn btn btn--primary">
+                                book now
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

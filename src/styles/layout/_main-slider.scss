@@ -25,10 +25,14 @@
     z-index: 1;
   }
 
+  .container {
+    position: relative;
+  }
+
   &__counter {
     position: absolute;
     top: 40px;
-    left: 80px;
+    left: 95px;
     z-index: 3;
 
     display: flex;
@@ -55,7 +59,7 @@
   &__label {
     position: absolute;
     top: 40px;
-    right: 40px;
+    right: 15px;
     z-index: 3;
     font-size: 14px;
     font-weight: 500;
@@ -83,6 +87,7 @@
   &__swiper {
     height: 100%;
     z-index: 10 !important;
+    overflow: visible !important;
   }
 
   &__slide {
@@ -91,7 +96,7 @@
     justify-content: space-between;
     gap: 30px;
     height: 100%;
-    padding: 40px 40px 40px 80px;
+    padding: 40px 0 0 80px;
 
     &-title {
       width: 100%;
@@ -129,26 +134,12 @@
   &__slide-col {
     position: relative;
     z-index: 1;
-
-    &.col-1 {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 30%;
-    }
-
-    &.col-2 {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 30%;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
 
     &.col-3 {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 30%;
       text-align: end;
     }
   }

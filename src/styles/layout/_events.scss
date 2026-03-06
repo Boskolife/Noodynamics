@@ -386,10 +386,6 @@
     }
   }
 
-  &__inner-wrapper {
-    padding: 0 40px;
-  }
-
   &__title {
     font-size: 80px;
     margin-bottom: 40px;
@@ -470,8 +466,6 @@
 }
 
 .single-event {
-  padding: 0 40px 80px 40px;
-  border-bottom: 1px solid $color-white-20;
 
   &__title {
     font-size: 80px;
@@ -536,6 +530,8 @@
     align-items: flex-start;
     justify-content: space-between;
     gap: 40px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid $color-white-20;
   }
 
   &__content {

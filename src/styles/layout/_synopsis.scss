@@ -2,11 +2,15 @@
   padding: 40px 40px 80px 40px;
   position: relative;
 
+  .container {
+    position: relative;
+  }
+
   &__img {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    right: 30px;
+    right: 0;
     width: 428px;
     z-index: -1;
     height: auto;
@@ -34,7 +38,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 80px 40px;
-    width: 73%;
+    width: 72%;
   }
 
   &__inner-item {

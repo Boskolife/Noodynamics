@@ -1,76 +1,75 @@
 /**
- * Generic tabs controller that can be reused on any page.
+ * Initialize tabs on the page.
  */
-class Tabs {
-  constructor(options = {}) {
-    const {
-      root = document,
-      buttonSelector = '.tabs__button[data-tab]',
-      panelSelector = '.tab-panel',
-      activeClass = 'active',
-    } = options;
+export function initTabs(options = {}) {
+  if (typeof document === 'undefined') return;
 
-    this.root = root;
-    this.buttonSelector = buttonSelector;
-    this.panelSelector = panelSelector;
-    this.activeClass = activeClass;
+  const {
+    root = document,
+    buttonSelector = '.tabs__button[data-tab]',
+    panelSelector = '.tab-panel',
+    activeClass = 'active',
+    scrollOnChange = true,
+    scrollOffset = 80,
+  } = options;
 
-    this.buttons = Array.from(root.querySelectorAll(this.buttonSelector));
-    this.panels = Array.from(root.querySelectorAll(this.panelSelector));
+  const container =
+    root.querySelector('.tab-panels') || root.querySelector(panelSelector)?.parentElement || root;
 
-    if (!this.buttons.length || !this.panels.length) {
-      return;
-    }
+  const buttons = Array.from(root.querySelectorAll(buttonSelector));
+  const panels = Array.from(root.querySelectorAll(panelSelector));
 
-    this.handleButtonClick = this.handleButtonClick.bind(this);
-    this.bindEvents();
+  if (!buttons.length || !panels.length) {
+    return;
   }
 
-  bindEvents() {
-    this.buttons.forEach((button) => {
-      button.addEventListener('click', this.handleButtonClick);
-    });
-  }
-
-  handleButtonClick(event) {
+  const handleButtonClick = (event) => {
     const button = event.currentTarget;
     const targetId = button.getAttribute('data-tab');
     if (!targetId) return;
 
-    const targetPanel = this.root.getElementById
-      ? this.root.getElementById(targetId)
-      : this.root.querySelector(`#${targetId}`);
+    const targetPanel = root.getElementById
+      ? root.getElementById(targetId)
+      : root.querySelector(`#${targetId}`);
     if (!targetPanel) return;
 
-    const activeButton = this.root.querySelector(
-      `${this.buttonSelector}.${this.activeClass}`,
-    );
-    const activePanel = this.root.querySelector(
-      `${this.panelSelector}.${this.activeClass}`,
-    );
+    const activeButton = root.querySelector(`${buttonSelector}.${activeClass}`);
+    const activePanel = root.querySelector(`${panelSelector}.${activeClass}`);
 
     if (activeButton === button && activePanel === targetPanel) {
       return;
     }
 
     if (activeButton) {
-      activeButton.classList.remove(this.activeClass);
+      activeButton.classList.remove(activeClass);
     }
 
     if (activePanel) {
-      activePanel.classList.remove(this.activeClass);
+      activePanel.classList.remove(activeClass);
     }
 
-    button.classList.add(this.activeClass);
-    targetPanel.classList.add(this.activeClass);
-  }
-}
+    button.classList.add(activeClass);
+    targetPanel.classList.add(activeClass);
 
-/**
- * Initialize tabs on the page.
- */
-export function initTabs() {
-  if (typeof document === 'undefined') return;
+    if (scrollOnChange && container && typeof window !== 'undefined') {
+      const rect = container.getBoundingClientRect();
+      const targetTop = window.pageYOffset + rect.top - scrollOffset;
+      window.scrollTo({
+        top: targetTop,
+        behavior: 'smooth',
+      });
+    }
+  };
 
-  return new Tabs();
+  buttons.forEach((button) => {
+    button.addEventListener('click', handleButtonClick);
+  });
+
+  return {
+    destroy() {
+      buttons.forEach((button) => {
+        button.removeEventListener('click', handleButtonClick);
+      });
+    },
+  };
 }

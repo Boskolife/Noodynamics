@@ -12,6 +12,7 @@ import { initEventsFilter } from './events-filter.js';
 import { initFormSelects } from './custom-select-form.js';
 import { initApplicationFormValidation } from './application-form-validation.js';
 import { initAuthPopup } from './auth-popup.js';
+import { initHeaderNavActive } from './header-nav-active.js';
 
 function initFooterYear() {
   const yearEl = document.querySelector('.footer__bottom-year');
@@ -35,6 +36,7 @@ function initApp() {
   initFormSelects();
   initApplicationFormValidation();
   initAuthPopup();
+  initHeaderNavActive();
 }
 
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {

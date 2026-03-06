@@ -1,16 +1,74 @@
-.auth-popup {
+// Backdrop: full-screen overlay, hidden by default
+.auth-popup-backdrop {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 500px;
-  height: auto;
-  background-color: $color-white-100;
+  inset: 0;
   z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    visibility 0.2s ease,
+    opacity 0.2s ease;
+
+  &.is-open {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+.auth-popup__overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.auth-popup {
+  position: relative;
+  width: 500px;
+  max-width: 100%;
+  max-height: calc(100vh - 40px);
+  background-color: $color-white-100;
+  z-index: 1;
   border-radius: 8px;
   border: 1px solid $color-white-60;
-  overflow: hidden;
+  overflow: auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
 
+.auth-popup__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: $color-white-100;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  img {
+    display: block;
+    filter: invert(1) brightness(2);
+  }
+}
+
+.auth-popup {
   &__header {
     display: flex;
     align-items: center;

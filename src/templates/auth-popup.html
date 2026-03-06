@@ -1,37 +1,43 @@
-<div class="auth-popup">
-    <div class="auth-popup__header">
-        <img src="/images/logo-text.png" alt="image not found" class="auth-popup__logo">
-    </div>
-    <div class="auth-popup__inner">
-        <h2 class="auth-popup__title">Log In or create an account <br> to continue</h2>
-        <p class="auth-popup__text">Log In or create an account to easily manage your membership in one place.</p>
-        <form class="auth-popup__form form-card">
-            <div class="form-card__group">
-                <label class="form-card__label" for="name">name
-                    <input class="form-card__input" type="text" id="name" name="name" placeholder="Enter your name"
-                        required>
-                </label>
-                <label class="form-card__label" for="name">password
-                    <input class="form-card__input" type="password" id="password" name="password"
-                        placeholder="enter your password" required>
-                </label>
-            </div>
-            <a href="#" class="auth-popup__form-link">Forgot your password?</a>
-            <button type="submit" class="auth-popup__form-button btn btn--black">Log In</button>
-        </form>
-        <p class="auth-popup__text auth-popup__text-social">or log in with</p>
-        <div class="auth-popup__form-social">
-            <a href="#" class="auth-popup__form-social-link btn btn--black">
-                <img src="/icons/google.svg" alt="image not found">
-                Google
-            </a>
-            <a href="#" class="auth-popup__form-social-link btn btn--black">
-                <img src="/icons/apple.svg" alt="image not found">
-                Apple
-            </a>
+<div class="auth-popup-backdrop" id="auth-popup-backdrop" aria-hidden="true">
+    <div class="auth-popup__overlay" aria-hidden="true"></div>
+    <div class="auth-popup" role="dialog" aria-modal="true" aria-labelledby="auth-popup-title" aria-describedby="auth-popup-desc">
+        <button type="button" class="auth-popup__close" aria-label="Close login popup">
+            <img src="/icons/cross.svg" alt="" width="24" height="24">
+        </button>
+        <div class="auth-popup__header">
+            <img src="/images/logo-text.png" alt="Noodynamics" class="auth-popup__logo">
         </div>
-        <p class="auth-popup__text-signup">don’t have an account?
-            <a href="#" class="auth-popup__link">sign up</a>
-        </p>
+        <div class="auth-popup__inner">
+            <h2 id="auth-popup-title" class="auth-popup__title">Log In or create an account <br> to continue</h2>
+            <p id="auth-popup-desc" class="auth-popup__text">Log In or create an account to easily manage your membership in one place.</p>
+            <form class="auth-popup__form form-card">
+                <div class="form-card__group">
+                    <label class="form-card__label" for="auth-name">name
+                        <input class="form-card__input" type="text" id="auth-name" name="name" placeholder="Enter your name"
+                            required>
+                    </label>
+                    <label class="form-card__label" for="auth-password">password
+                        <input class="form-card__input" type="password" id="auth-password" name="password"
+                            placeholder="enter your password" required>
+                    </label>
+                </div>
+                <a href="#" class="auth-popup__form-link">Forgot your password?</a>
+                <button type="submit" class="auth-popup__form-button btn btn--black">Log In</button>
+            </form>
+            <p class="auth-popup__text auth-popup__text-social">or log in with</p>
+            <div class="auth-popup__form-social">
+                <a href="#" class="auth-popup__form-social-link btn btn--black">
+                    <img src="/icons/google.svg" alt="">
+                    Google
+                </a>
+                <a href="#" class="auth-popup__form-social-link btn btn--black">
+                    <img src="/icons/apple.svg" alt="">
+                    Apple
+                </a>
+            </div>
+            <p class="auth-popup__text-signup">don't have an account?
+                <a href="#" class="auth-popup__link">sign up</a>
+            </p>
+        </div>
     </div>
 </div>

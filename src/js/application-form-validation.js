@@ -13,6 +13,32 @@ const messages = {
   agree: 'You must agree to the membership terms to continue.',
 };
 
+/**
+ * Restrict input to numbers only. Use data-numeric="integer" for digits only,
+ * data-numeric="phone" for digits and leading +, data-numeric="ages" for digits, commas, spaces.
+ */
+function initNumericInputs(form) {
+  if (!form) return;
+  const inputs = form.querySelectorAll('input[data-numeric]');
+  inputs.forEach((input) => {
+    const mode = input.getAttribute('data-numeric') || 'integer';
+    input.addEventListener('input', () => {
+      let value = input.value;
+      if (mode === 'integer') {
+        value = value.replace(/\D/g, '');
+      } else if (mode === 'phone') {
+        const hasPlus = value.startsWith('+');
+        value = value.replace(/\D/g, '');
+        if (hasPlus && value.length > 0) value = '+' + value;
+        else if (hasPlus && value.length === 0) value = '+';
+      } else if (mode === 'ages') {
+        value = value.replace(/[^\d\s,]/g, '');
+      }
+      if (value !== input.value) input.value = value;
+    });
+  });
+}
+
 function getErrorElement(input) {
   const id = input.id || input.name;
   if (!id) return null;
@@ -184,13 +210,73 @@ function initChildrenAgesToggle(form) {
   });
 }
 
+function initMembershipLevelSelection(section) {
+  const levelContainer = section.querySelector('.application-membership__form-level');
+  if (!levelContainer) return;
+
+  const levelItems = Array.from(
+    levelContainer.querySelectorAll('.application-membership__form-level-item[data-level]'),
+  );
+  const levelButtons = levelContainer.querySelectorAll(
+    '.application-membership__form-level-item-button',
+  );
+  const continueBtn = levelContainer.querySelector(
+    '.application-membership__form-level-btn',
+  );
+
+  if (!levelItems.length || !levelButtons.length || !continueBtn) return;
+
+  let selectedLevel = '';
+  continueBtn.disabled = true;
+
+  function selectLevel(item) {
+    const value = item.getAttribute('data-level');
+    if (!value) return;
+    selectedLevel = value;
+
+    levelItems.forEach((it) => {
+      it.classList.toggle(
+        'application-membership__form-level-item--selected',
+        it === item,
+      );
+    });
+
+    continueBtn.disabled = false;
+  }
+
+  levelButtons.forEach((button) => {
+    const item = button.closest('.application-membership__form-level-item');
+    if (!item) return;
+
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      selectLevel(item);
+    });
+  });
+
+  continueBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    if (!selectedLevel) {
+      console.log('Please select a membership level before continuing.');
+      continueBtn.focus();
+      return;
+    }
+
+    console.log('Selected membership level:', selectedLevel);
+    // Here you could trigger navigation to payment.
+  });
+}
+
 export function initApplicationFormValidation() {
   if (typeof document === 'undefined') return;
 
   const form = document.querySelector(FORM_SELECTOR);
   if (!form) return;
 
+  const section = form.closest('.application-membership');
+
   initChildrenAgesToggle(form);
+  initNumericInputs(form);
 
   form.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -204,7 +290,6 @@ export function initApplicationFormValidation() {
     const data = Object.fromEntries(formData.entries());
     console.log('Application form data:', data);
 
-    const section = form.closest('.application-membership');
     const step2 = section?.querySelector('[data-step="2"]');
     const counterCurrent = section?.querySelector('.application-membership__steps-counter-current');
     const stepLabels = section?.querySelectorAll('.application-membership__step');
@@ -220,7 +305,14 @@ export function initApplicationFormValidation() {
       stepLabels[0]?.classList.remove('application-membership__step--active');
       stepLabels[1]?.classList.add('application-membership__step--active');
     }
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   });
+
+  if (section) {
+    initMembershipLevelSelection(section);
+  }
 
   form.addEventListener('input', (event) => {
     const target = event.target;

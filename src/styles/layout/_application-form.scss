@@ -355,6 +355,11 @@
       border: 1px solid $color-white-20;
       border-radius: 4px;
 
+      &--selected {
+        border-color: $color-white-100;
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+
       &:last-child {
         grid-column: span 2;
       }
@@ -378,6 +383,11 @@
 
     &-btn {
       width: 100%;
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
     }
   }
 }

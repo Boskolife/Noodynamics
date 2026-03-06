@@ -58,7 +58,7 @@
                             ONLY)
                             <input type="tel" id="applicant-phone" name="applicantPhone"
                                 class="application-membership__form-input" placeholder="enter your phone number"
-                                autocomplete="tel" required aria-required="true">
+                                autocomplete="tel" required aria-required="true" inputmode="numeric" data-numeric="phone">
                         </label>
                     </div>
                     <div class="application-membership__form-group">
@@ -124,7 +124,8 @@
                     <div class="application-membership__form-group">
                         <label for="children-ages" class="application-membership__form-label">IF YES, AGE(S)
                             <input type="text" id="children-ages" name="childrenAges"
-                                class="application-membership__form-input" placeholder="enter age(s)" required aria-required="true">
+                                class="application-membership__form-input" placeholder="enter age(s)" required aria-required="true"
+                                inputmode="numeric" data-numeric="ages">
                         </label>
                         <label for="education" class="application-membership__form-label">Education
                             <input type="text" id="education" name="education"
@@ -160,7 +161,8 @@
                         </label>
                         <label for="years-at-job" class="application-membership__form-label">Years at job
                             <input type="text" id="years-at-job" name="yearsAtJob"
-                                class="application-membership__form-input" placeholder="enter your years at job" required aria-required="true">
+                                class="application-membership__form-input" placeholder="enter your years at job" required aria-required="true"
+                                inputmode="numeric" data-numeric="integer">
                         </label>
                     </div>
                     <label for="qualifications" class="application-membership__form-label">
@@ -254,49 +256,49 @@
                 <div class="application-membership__form-level" data-step="2" hidden>
                     <h3 class="application-membership__form-level-title">Choose your membership level</h3>
                     <div class="application-membership__form-level-items">
-                        <div class="application-membership__form-level-item">
+                        <div class="application-membership__form-level-item" data-level="student">
                             <div class="application-membership__form-level-item-header">
                                 <h4 class="application-membership__form-level-item-title">Student</h4>
                                 <span class="application-membership__form-level-item-price">$50</span>
                             </div>
                             <button type="button" class="application-membership__form-level-item-button btn btn--primary">Select</button>
                         </div>
-                        <div class="application-membership__form-level-item">
+                        <div class="application-membership__form-level-item" data-level="scholar">
                             <div class="application-membership__form-level-item-header">
                                 <h4 class="application-membership__form-level-item-title">Scholar</h4>
                                 <span class="application-membership__form-level-item-price">$50</span>
                             </div>
                             <button type="button" class="application-membership__form-level-item-button btn btn--primary">Select</button>
                         </div>
-                        <div class="application-membership__form-level-item">
+                        <div class="application-membership__form-level-item" data-level="estate-family">
                             <div class="application-membership__form-level-item-header">
                                 <h4 class="application-membership__form-level-item-title">Estate (Family)</h4>
                                 <span class="application-membership__form-level-item-price">$100</span>
                             </div>
                             <button type="button" class="application-membership__form-level-item-button btn btn--primary">Select</button>
                         </div>
-                        <div class="application-membership__form-level-item">
+                        <div class="application-membership__form-level-item" data-level="supporting-member">
                             <div class="application-membership__form-level-item-header">
                                 <h4 class="application-membership__form-level-item-title">Supporting Member</h4>
                                 <span class="application-membership__form-level-item-price">$250</span>
                             </div>
                             <button type="button" class="application-membership__form-level-item-button btn btn--primary">Select</button>
                         </div>
-                        <div class="application-membership__form-level-item">
+                        <div class="application-membership__form-level-item" data-level="contribution-member">
                             <div class="application-membership__form-level-item-header">
                                 <h4 class="application-membership__form-level-item-title">Contribution Member</h4>
                                 <span class="application-membership__form-level-item-price">$500</span>
                             </div>
                             <button type="button" class="application-membership__form-level-item-button btn btn--primary">Select</button>
                         </div>
-                        <div class="application-membership__form-level-item">
+                        <div class="application-membership__form-level-item" data-level="sustaining-member">
                             <div class="application-membership__form-level-item-header">
                                 <h4 class="application-membership__form-level-item-title">Sustaining Member</h4>
                                 <span class="application-membership__form-level-item-price">$1000</span>
                             </div>
                             <button type="button" class="application-membership__form-level-item-button btn btn--primary">Select</button>
                         </div>
-                        <div class="application-membership__form-level-item">
+                        <div class="application-membership__form-level-item" data-level="culture-bearing-statum">
                             <div class="application-membership__form-level-item-header">
                                 <h4 class="application-membership__form-level-item-title">Culture-bearing Statum</h4>
                                 <span class="application-membership__form-level-item-price">$5000</span>

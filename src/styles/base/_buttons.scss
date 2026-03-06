@@ -16,6 +16,15 @@
       background-color: $color-white-20;
     }
   }
+
+  &--secondary {
+    background-color: $color-brown;
+    border: 1px solid $color-white-100;
+
+    &:hover {
+      background-color: $color-dark-brown;
+    }
+  }
 }
 
 .tabs__buttons {

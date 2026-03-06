@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Noodynamics - Application for Membership</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+    <link rel="stylesheet" href="/styles/main.scss">
+</head>
+
+<body class="application-membership-page">
+    {{> header }}
+    <main id="main">
+        <nav class="breadcrumbs">
+            <div class="container">
+                <ul class="breadcrumbs__list">
+                    <li class="breadcrumbs__item">
+                        <a href="index.html" class="breadcrumbs__link">home</a>
+                    </li>
+                    <li class="breadcrumbs__item">
+                        <a href="membership.html" class="breadcrumbs__link">membership</a>
+                    </li>
+                    <li class="breadcrumbs__item">
+                        <span class="breadcrumbs__link current">apply for membership </span>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <section class="application-membership">
+            <div class="container">
+                <h2 class="application-membership__title">
+                    Application for <br> Membership
+                </h2>
+                <div class="application-membership__steps">
+                    <span class="application-membership__step application-membership__step--active">1. Complete the application form</span>
+                    <span class="application-membership__separator"></span>
+                    <span class="application-membership__step">2. Choose your membership level</span>
+                </div>
+                <div class="application-membership__steps-counter">
+                    <span class="application-membership__steps-counter-label">step</span>
+                    <span class="application-membership__steps-counter-current">1</span>
+                    <span class="application-membership__steps-counter-separator">/</span>
+                    <span class="application-membership__steps-counter-total">2</span>
+                </div>
+                <form action="#" class="application-membership__form wide-form" method="post" novalidate data-step="1">
+                    <div class="application-membership__form-group">
+                        <label for="applicant-name" class="application-membership__form-label">Name
+                            <input type="text" id="applicant-name" name="applicantName"
+                                class="application-membership__form-input" placeholder="enter your name" required
+                                aria-required="true" autocomplete="name">
+                        </label>
+                        <label for="applicant-phone" class="application-membership__form-label">Phone (FOR CONFIRMATION
+                            PURPOSES
+                            ONLY)
+                            <input type="tel" id="applicant-phone" name="applicantPhone"
+                                class="application-membership__form-input" placeholder="enter your phone number"
+                                autocomplete="tel" required aria-required="true">
+                        </label>
+                    </div>
+                    <div class="application-membership__form-group">
+                        <label for="applicant-email" class="application-membership__form-label">Email
+                            <input type="email" id="applicant-email" name="applicantEmail"
+                                class="application-membership__form-input" placeholder="enter your email" required
+                                aria-required="true" autocomplete="email">
+                        </label>
+                        <label for="applicant-address" class="application-membership__form-label">Address
+                            <input type="text" id="applicant-address" name="applicantAddress"
+                                class="application-membership__form-input" placeholder="enter your address"
+                                autocomplete="street-address" required aria-required="true">
+                        </label>
+                    </div>
+                    <div class="application-membership__form-group">
+                        <label for="date-of-birth" class="application-membership__form-label">DATE OF BIRTH
+                            <input type="date" id="date-of-birth" name="dateOfBirth"
+                                class="application-membership__form-input" placeholder="MM/DD/YYYY" autocomplete="bday"
+                                required aria-required="true">
+                        </label>
+                        <label for="marital-status" class="application-membership__form-label">marital status
+                            <select id="marital-status" name="maritalStatus" class="application-membership__form-input"
+                                hidden required aria-required="true">
+                                <option value="">Select marital status</option>
+                                <option value="single">Single</option>
+                                <option value="married">Married</option>
+                                <option value="divorced">Divorced</option>
+                                <option value="widowed">Widowed</option>
+                            </select>
+                            <div class="application-membership__select select" data-select-native-id="marital-status">
+                                <button type="button" class="select__trigger" aria-expanded="false"
+                                    aria-haspopup="listbox" aria-label="Select marital status">
+                                    <span class="select__value">Select marital status</span>
+                                    <span class="select__arrow" aria-hidden="true">
+                                        <img src="/icons/arrow-down.svg" alt="Toggle marital status list">
+                                    </span>
+                                </button>
+                                <ul class="select__dropdown" role="listbox" hidden>
+                                    <li class="select__option" role="option" data-value="single">Single</li>
+                                    <li class="select__option" role="option" data-value="married">Married</li>
+                                    <li class="select__option" role="option" data-value="divorced">Divorced</li>
+                                    <li class="select__option" role="option" data-value="widowed">Widowed</li>
+                                </ul>
+                            </div>
+                        </label>
+                    </div>
+                    <fieldset class="application-membership__form-group radio-group" aria-labelledby="legend-children">
+                        <legend id="legend-children" class="application-membership__form-label">Do you have any
+                            children?</legend>
+                        <div class="application-membership__form-group-radio">
+                            <label for="children-yes" class="application-membership__form-label-radio">
+                                <input type="radio" id="children-yes" name="children" value="yes" required aria-required="true">
+                                <span class="application-membership__radio-mark"></span>
+                                <span class="application-membership__radio-text">yes</span>
+                            </label>
+                            <label for="children-no" class="application-membership__form-label-radio">
+                                <input type="radio" id="children-no" name="children" value="no">
+                                <span class="application-membership__radio-mark"></span>
+                                <span class="application-membership__radio-text">no</span>
+                            </label>
+                        </div>
+                    </fieldset>
+                    <div class="application-membership__form-group">
+                        <label for="children-ages" class="application-membership__form-label">IF YES, AGE(S)
+                            <input type="text" id="children-ages" name="childrenAges"
+                                class="application-membership__form-input" placeholder="enter age(s)" required aria-required="true">
+                        </label>
+                        <label for="education" class="application-membership__form-label">Education
+                            <input type="text" id="education" name="education"
+                                class="application-membership__form-input" placeholder="enter your education" required aria-required="true">
+                        </label>
+                    </div>
+                    <div class="application-membership__form-group">
+                        <label for="languages" class="application-membership__form-label">List languages you speak
+                            <input type="text" id="languages" name="languages"
+                                class="application-membership__form-input" placeholder="languages you speak" required aria-required="true">
+                        </label>
+                        <label for="religious-preference" class="application-membership__form-label">RELIGIOUS
+                            PREFERENCE
+                            <input type="text" id="religious-preference" name="religiousPreference"
+                                class="application-membership__form-input"
+                                placeholder="enter your RELIGIOUS PREFERENCE" required aria-required="true">
+                        </label>
+                    </div>
+                    <div class="application-membership__form-group">
+                        <label for="occupation" class="application-membership__form-label">Occupation
+                            <input type="text" id="occupation" name="occupation"
+                                class="application-membership__form-input" placeholder="enter your OCCUPATION" required aria-required="true">
+                        </label>
+                        <label for="employer" class="application-membership__form-label">Employer
+                            <input type="text" id="employer" name="employer" class="application-membership__form-input"
+                                placeholder="enter your company name" required aria-required="true">
+                        </label>
+                    </div>
+                    <div class="application-membership__form-group">
+                        <label for="job-title" class="application-membership__form-label">Job title
+                            <input type="text" id="job-title" name="jobTitle" class="application-membership__form-input"
+                                placeholder="enter your job title" required aria-required="true">
+                        </label>
+                        <label for="years-at-job" class="application-membership__form-label">Years at job
+                            <input type="text" id="years-at-job" name="yearsAtJob"
+                                class="application-membership__form-input" placeholder="enter your years at job" required aria-required="true">
+                        </label>
+                    </div>
+                    <label for="qualifications" class="application-membership__form-label">
+                        SPECIAL SCIENTIFIC/SPIRITUAL/ARTISTIC/PHILOSOPHICAL/RELIGIOUS/TECHNOLOGICAL QUALIFICATIONS
+                        <textarea name="qualifications" id="qualifications"
+                            class="application-membership__form-textarea"
+                            placeholder="SPECIAL SCIENTIFIC/SPIRITUAL/ARTISTIC/PHILOSOPHICAL/RELIGIOUS/TECHNOLOGICAL QUALIFICATIONS"
+                            rows="4" required aria-required="true"></textarea>
+                    </label>
+                    <label for="special-interests" class="application-membership__form-label">
+                        LIST ANY SPECIAL INTERESTS/HOBBIES/SKILLS THAT MAY BE OF USE TO THE WORK OF THE INSTITUTE
+                        <textarea name="specialInterests" id="special-interests"
+                            class="application-membership__form-textarea"
+                            placeholder="LIST ANY SPECIAL INTERESTS/HOBBIES/SKILLS THAT MAY BE OF USE TO THE WORK OF THE INSTITUTE"
+                            rows="4" required aria-required="true"></textarea>
+                    </label>
+                    <label for="other-memberships" class="application-membership__form-label">
+                        LIST MEMBERSHIP IN OTHER ORGANIZATIONS/CLUBS/FRATERNITIES/SOCIETIES
+                        <textarea name="otherMemberships" id="other-memberships"
+                            class="application-membership__form-textarea"
+                            placeholder="LIST MEMBERSHIP IN OTHER ORGANIZATIONS/CLUBS/FRATERNITIES/SOCIETIES"
+                            rows="4" required aria-required="true"></textarea>
+                    </label>
+                    <label for="position-held" class="application-membership__form-label">
+                        POSITION HELD THEREIN
+                        <input type="text" id="position-held" name="positionHeld"
+                            class="application-membership__form-input" placeholder="enter your POSITION HELD THEREIN" required aria-required="true">
+                    </label>
+                    <fieldset class="application-membership__form-group radio-group"
+                        aria-labelledby="legend-local-participation">
+                        <legend id="legend-local-participation" class="application-membership__form-label">Would you be
+                            interested in local
+                            participation in the work of the Institute?</legend>
+                        <div class="application-membership__form-group-radio">
+                            <label for="local-participation-yes" class="application-membership__form-label-radio">
+                                <input type="radio" id="local-participation-yes" name="localParticipation" value="yes" required aria-required="true">
+                                <span class="application-membership__radio-mark"></span>
+                                <span class="application-membership__radio-text">yes</span>
+                            </label>
+                            <label for="local-participation-no" class="application-membership__form-label-radio">
+                                <input type="radio" id="local-participation-no" name="localParticipation" value="no">
+                                <span class="application-membership__radio-mark"></span>
+                                <span class="application-membership__radio-text">no</span>
+                            </label>
+                        </div>
+                    </fieldset>
+                    <label for="additional-comments" class="application-membership__form-label">
+                        ADDITIONAL COMMENTS (optional)
+                        <textarea name="additionalComments" id="additional-comments"
+                            class="application-membership__form-textarea" placeholder="ADDITIONAL COMMENTS (optional)"
+                            rows="4"></textarea>
+                    </label>
+                    <div class="application-membership__form-group">
+                        <label for="print-name" class="application-membership__form-label">Print name
+                            <input type="text" id="print-name" name="printName"
+                                class="application-membership__form-input" placeholder="enter print name"
+                                autocomplete="name" required aria-required="true">
+                        </label>
+                        <label for="signature-date" class="application-membership__form-label">Date
+                            <input type="date" id="signature-date" name="signatureDate"
+                                class="application-membership__form-input" placeholder="MM/DD/YYYY" required aria-required="true">
+                        </label>
+                    </div>
+                    <div class="application-membership__form-agree-wrapper">
+                        <label for="agree" class="application-membership__form-agree">
+                            <input type="checkbox" id="agree" name="agree" value="agree" required aria-required="true">
+                            <span class="application-membership__checkbox-mark" aria-hidden="true"></span>
+                            <span class="application-membership__checkbox-text">
+                                I have read Volume 1 of The Phenomenology of Culture-Systems and the operational
+                                documents of
+                                the Noödynamics Institute and hereby apply for membership. I categorically pledge and
+                                swear upon
+                                my name and honor to abide by the established principles and practices of the Institute,
+                                to
+                                faithfully support and promote its message and mission, to comply with the Code of
+                                Ethics and
+                                all Policies, and to perform all of the duties and obligations of membership. If at any
+                                time I
+                                feel compelled to do otherwise, I will immediately notify Institute headquarters in
+                                writing. I
+                                understand that any violation of these guidelines and strictures on my part will result
+                                in the
+                                termination of my membership.
+                            </span>
+                        </label>
+                        <span id="agree-error" class="application-membership__form-error"></span>
+                    </div>
+                    <button type="submit" class="application-membership__form-button btn btn--secondary">Continue to
+                        membership options</button>
+                </form>
+                <div class="application-membership__form-level" data-step="2" hidden>
+                    <h3 class="application-membership__form-level-title">Choose your membership level</h3>
+                    <div class="application-membership__form-level-items">
+                        <div class="application-membership__form-level-item">
+                            <div class="application-membership__form-level-item-header">
+                                <h4 class="application-membership__form-level-item-title">Student</h4>
+                                <span class="application-membership__form-level-item-price">$50</span>
+                            </div>
+                            <button type="button" class="application-membership__form-level-item-button btn btn--primary">Select</button>
+                        </div>
+                        <div class="application-membership__form-level-item">
+                            <div class="application-membership__form-level-item-header">
+                                <h4 class="application-membership__form-level-item-title">Scholar</h4>
+                                <span class="application-membership__form-level-item-price">$50</span>
+                            </div>
+                            <button type="button" class="application-membership__form-level-item-button btn btn--primary">Select</button>
+                        </div>
+                        <div class="application-membership__form-level-item">
+                            <div class="application-membership__form-level-item-header">
+                                <h4 class="application-membership__form-level-item-title">Estate (Family)</h4>
+                                <span class="application-membership__form-level-item-price">$100</span>
+                            </div>
+                            <button type="button" class="application-membership__form-level-item-button btn btn--primary">Select</button>
+                        </div>
+                        <div class="application-membership__form-level-item">
+                            <div class="application-membership__form-level-item-header">
+                                <h4 class="application-membership__form-level-item-title">Supporting Member</h4>
+                                <span class="application-membership__form-level-item-price">$250</span>
+                            </div>
+                            <button type="button" class="application-membership__form-level-item-button btn btn--primary">Select</button>
+                        </div>
+                        <div class="application-membership__form-level-item">
+                            <div class="application-membership__form-level-item-header">
+                                <h4 class="application-membership__form-level-item-title">Contribution Member</h4>
+                                <span class="application-membership__form-level-item-price">$500</span>
+                            </div>
+                            <button type="button" class="application-membership__form-level-item-button btn btn--primary">Select</button>
+                        </div>
+                        <div class="application-membership__form-level-item">
+                            <div class="application-membership__form-level-item-header">
+                                <h4 class="application-membership__form-level-item-title">Sustaining Member</h4>
+                                <span class="application-membership__form-level-item-price">$1000</span>
+                            </div>
+                            <button type="button" class="application-membership__form-level-item-button btn btn--primary">Select</button>
+                        </div>
+                        <div class="application-membership__form-level-item">
+                            <div class="application-membership__form-level-item-header">
+                                <h4 class="application-membership__form-level-item-title">Culture-bearing Statum</h4>
+                                <span class="application-membership__form-level-item-price">$5000</span>
+                            </div>
+                            <button type="button" class="application-membership__form-level-item-button btn btn--primary">Select</button>
+                        </div>
+                    </div>
+                    <button type="button" class="application-membership__form-level-btn btn btn--secondary">become a member & continue to payment</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    {{> footer }}
+    <script type="module" src="/js/main.js"></script>
+</body>
+
+</html>

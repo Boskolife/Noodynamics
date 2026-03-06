@@ -12,9 +12,29 @@
                 research, writing,
                 and outreach.
             </p>
-            <button class="member__btn btn btn--primary">
+            <div class="member__selector select">
+                <button type="button" class="member__selector-trigger select__trigger" aria-expanded="false"
+                    aria-haspopup="listbox" aria-label="Select membership type">
+                    <span class="member__selector-value select__value">Select membership type</span>
+                    <span class="member__selector-arrow select__arrow" aria-hidden="true">
+                        <img src="/icons/arrow-down.svg" alt="Toggle membership type list">
+                    </span>
+                </button>
+                <ul class="member__selector-dropdown select__dropdown" role="listbox" hidden>
+                    <li class="member__selector-option select__option" role="option" data-value="individual">
+                        Individual membership
+                    </li>
+                    <li class="member__selector-option select__option" role="option" data-value="institutional">
+                        Institutional membership
+                    </li>
+                    <li class="member__selector-option select__option" role="option" data-value="student">
+                        Student membership
+                    </li>
+                </ul>
+            </div>
+            <a href="application-membership.html" class="member__btn btn btn--primary">
                 find out more
-            </button>
+            </a>
         </div>
     </div>
 </section>

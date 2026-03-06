@@ -1,0 +1,383 @@
+.application-membership {
+  &__title {
+    font-size: 80px;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+
+  &__steps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 20px;
+  }
+
+  &__step {
+    font-size: 14px;
+    color: $color-white-80;
+    font-weight: 500;
+    text-transform: uppercase;
+
+    &--active {
+      color: $color-white-100;
+    }
+  }
+
+  &__separator {
+    width: 88px;
+    height: 1px;
+    background: linear-gradient(90deg, #ffffff 0%, #333333 100%);
+  }
+
+  &__steps-counter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    margin-bottom: 60px;
+
+    &-separator,
+    &-total {
+      color: $color-white-40 !important;
+    }
+
+    &-label {
+      margin-right: 4px;
+    }
+
+    span {
+      font-size: 14px;
+      font-weight: 500;
+      color: $color-white-80;
+      text-transform: uppercase;
+    }
+  }
+
+  //Form Start
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    padding: 40px;
+    border: 1px solid $color-white-60;
+    border-radius: 12px;
+    max-width: 965px;
+    width: 100%;
+    margin: 0 auto;
+
+    &-group {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 44px;
+
+      &-radio {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+
+    &-label {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+
+      font-size: 14px;
+      text-transform: uppercase;
+
+      &-radio {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        cursor: pointer;
+
+        font-size: 14px;
+        color: $color-white-80;
+        text-transform: uppercase;
+      }
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      background-color: transparent;
+      border: 1px solid $color-white-20;
+      color: $color-white-100;
+      border-radius: 4px;
+      padding: 12px 14px;
+      font-size: 14px;
+
+      @include placeholder {
+        color: $color-white-60;
+        text-transform: uppercase;
+      }
+
+      &:focus {
+        border-color: $color-white-100;
+      }
+
+      &.is-invalid {
+        border-color: $color-red;
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      &-error {
+        border-color: $color-red;
+      }
+    }
+
+    &-error {
+      display: block;
+      font-size: 14px;
+      color: $color-red;
+      text-transform: uppercase;
+
+      &:empty {
+        display: none;
+      }
+    }
+
+    textarea {
+      height: 120px;
+    }
+
+    .select__trigger {
+      border: 1px solid $color-white-20;
+      color: $color-white-100;
+      border-radius: 4px;
+      padding: 12px 14px;
+    }
+
+    .application-membership__select.is-invalid .select__trigger {
+      border-color: $color-red;
+    }
+
+    .select__dropdown {
+      border-radius: 4px;
+      border: 1px solid $color-white-20;
+    }
+
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    fieldset.radio-group {
+      margin: 0;
+      padding: 0;
+      border: none;
+      min-width: 0;
+      width: 100%;
+    }
+
+    fieldset.radio-group .application-membership__form-label {
+      margin-bottom: 12px;
+    }
+
+    &-label-radio {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      font-size: 14px;
+      color: $color-white-80;
+      text-transform: uppercase;
+      position: relative;
+
+      input[type='radio'] {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+
+    .application-membership__radio-mark {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 1px solid $color-white-40;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease;
+
+      &::after {
+        content: '';
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: $color-white-100;
+        transform: scale(0);
+        transition: transform 0.15s ease;
+      }
+    }
+
+    .application-membership__form-label-radio:hover
+      .application-membership__radio-mark {
+      border-color: $color-white-80;
+    }
+
+    .application-membership__form-label-radio
+      input[type='radio']:checked
+      + .application-membership__radio-mark {
+      border-color: $color-white-100;
+
+      &::after {
+        transform: scale(1);
+      }
+    }
+
+    .application-membership__form-label-radio
+      input.is-invalid
+      + .application-membership__radio-mark {
+      border-color: $color-red;
+    }
+
+    &-agree-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    &-agree {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 16px;
+      color: $color-white-80;
+      line-height: calc(20 / 16);
+      cursor: pointer;
+
+      input[type='checkbox'] {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+
+    .application-membership__checkbox-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 4px;
+      border: 1px solid $color-white-40;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+      transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease;
+
+      &::after {
+        content: '';
+        width: 20px;
+        height: 20px;
+        border-radius: 2px;
+        background-color: $color-white-100;
+        opacity: 0;
+        transform: scale(0.8);
+        transition:
+          opacity 0.15s ease,
+          transform 0.15s ease;
+      }
+    }
+
+    .application-membership__checkbox-text {
+      display: inline-block;
+    }
+
+    .application-membership__form-agree:hover
+      .application-membership__checkbox-mark {
+      border-color: $color-white-80;
+    }
+
+    .application-membership__form-agree
+      input[type='checkbox']:checked
+      + .application-membership__checkbox-mark {
+      border-color: $color-white-100;
+      background-color: $color-white-20;
+
+      &::after {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .application-membership__form-agree
+      input.is-invalid
+      + .application-membership__checkbox-mark {
+      border-color: $color-red;
+    }
+  }
+
+  //Form End
+
+  //Level Form Start
+
+  &__form-level {
+    max-width: 965px;
+    width: 100%;
+    margin: 0 auto;
+
+    &-title {
+      font-size: 32px;
+      margin-bottom: 44px;
+      text-align: center;
+    }
+
+    &-items {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 36px 44px;
+      margin-bottom: 52px;
+    }
+
+    &-item {
+      display: flex;
+      flex-direction: column;
+      gap: 44px;
+      padding: 24px;
+      border: 1px solid $color-white-20;
+      border-radius: 4px;
+
+      &:last-child {
+        grid-column: span 2;
+      }
+
+      &-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      &-title {
+        font-size: 32px;
+      }
+
+      &-price {
+        font-size: 24px;
+        font-weight: 500;
+      }
+    }
+
+    &-btn {
+      width: 100%;
+    }
+  }
+}

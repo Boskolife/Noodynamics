@@ -29,10 +29,12 @@ export function initMainSlider() {
       prev: {
         translate: [0, 0, -100],
         opacity: 0,
+        pointerEvents: 'none',
       },
       next: {
         translate: [0, 0, 100],
         opacity: 0,
+        pointerEvents: 'none',
       },
     },
   });

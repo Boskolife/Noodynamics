@@ -135,12 +135,11 @@
     }
 
     &-text {
-      font-size: 14px;
+      font-size: 18px;
       font-weight: 500;
       line-height: calc(25 / 18);
       letter-spacing: -0.02em;
       color: $color-white-80;
-      text-transform: uppercase;
       max-width: 275px;
       width: 100%;
       margin-left: auto;

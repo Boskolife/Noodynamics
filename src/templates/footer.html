@@ -14,13 +14,13 @@
                 <h2 id="footer-contact-heading" class="footer__col-title">
                     contact us
                 </h2>
-                <form action="#" class="footer__col-form short-form" aria-labelledby="footer-contact-heading">
+                <form action="#" class="footer__col-form short-form" aria-labelledby="footer-contact-heading" novalidate>
                     <label for="footer-email" class="visually-hidden">Email</label>
-                    <input type="email" id="footer-email" name="email" placeholder="Email" autocomplete="email">
+                    <input type="email" id="footer-email" name="email" placeholder="Email" autocomplete="email" required>
                     <label for="footer-name" class="visually-hidden">Name</label>
-                    <input type="text" id="footer-name" name="name" placeholder="Name" autocomplete="name">
+                    <input type="text" id="footer-name" name="name" placeholder="Name" autocomplete="name" required minlength="2">
                     <label for="footer-message" class="visually-hidden">Message</label>
-                    <textarea id="footer-message" name="message" placeholder="Message"></textarea>
+                    <textarea id="footer-message" name="message" placeholder="Message" required minlength="10"></textarea>
                     <button type="submit" class="footer__col-form-btn btn btn--primary">
                         submit
                     </button>

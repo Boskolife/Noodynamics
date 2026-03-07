@@ -11,6 +11,7 @@ import { initTabs } from './tabs.js';
 import { initEventsFilter } from './events-filter.js';
 import { initFormSelects } from './custom-select-form.js';
 import { initApplicationFormValidation } from './application-form-validation.js';
+import { initFooterForm } from './footer-form.js';
 import { initAuthPopup } from './auth-popup.js';
 import { initHeaderNavActive } from './header-nav-active.js';
 
@@ -35,6 +36,7 @@ function initApp() {
   initEventsFilter();
   initFormSelects();
   initApplicationFormValidation();
+  initFooterForm();
   initAuthPopup();
   initHeaderNavActive();
 }

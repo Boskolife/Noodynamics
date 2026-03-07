@@ -36,12 +36,14 @@
       margin: 0;
       width: 310px;
       text-align: center;
-
+      
       p {
+        color: $color-white-80;
         line-height: calc(25 / 18);
       }
-
+      
       cite {
+        color: $color-white-80;
         font-family: $base-font-serif;
         font-size: 18px;
         font-weight: 500;
@@ -89,6 +91,18 @@
     height: 100%;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, #000000 100%);
     z-index: 1;
+  }
+
+  &__shadow-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 55%;
+    height: 65%;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0) 40%, #000000 100%);
+    z-index: 1;
+    filter: blur(200px);
   }
 
   &__bg {

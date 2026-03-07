@@ -89,6 +89,29 @@
       font-family: $base-font-sans-serif;
     }
 
+    &-form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    &-form input.is-invalid,
+    &-form textarea.is-invalid {
+      border-bottom-color: $color-red;
+    }
+
+    &-form-error {
+      display: none;
+      font-size: 12px;
+      line-height: 1.3;
+      color: $color-red;
+      text-transform: uppercase;
+
+      &:not(:empty) {
+        display: block;
+      }
+    }
+
     &-list {
       max-width: 400px;
       width: 100%;

@@ -16,6 +16,18 @@ import {
 } from './validation.js';
 
 const FORM_SELECTOR = '.make-donation__form';
+const THANKS_POPUP_ID = 'thanks-support-popup-backdrop';
+
+function openThanksSupportPopup() {
+  const backdrop = document.getElementById(THANKS_POPUP_ID);
+  if (!backdrop) return;
+  backdrop.classList.add('is-open');
+  backdrop.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  const focusTarget = backdrop.querySelector('button:not(.popup__close), [href], input');
+  focusTarget?.focus();
+}
+
 const {
   required,
   email: emailMsg,
@@ -197,6 +209,7 @@ export function initMakeDonationForm() {
     form.reset();
     updateAmountDueState(form);
     clearAllFormErrors(form);
+    openThanksSupportPopup();
   });
 
   form.addEventListener('input', (e) => {

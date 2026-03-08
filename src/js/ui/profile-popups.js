@@ -12,6 +12,7 @@ import { closePopup } from './auth-popup.js';
 import {
   MESSAGES,
   validateEmail,
+  validatePasswordStrength,
   setInvalid,
   setValid,
   getInputValue,
@@ -26,6 +27,7 @@ const PROFILE_BTN_SELECTOR = '.js-header-profile';
 const IDS = {
   membership: 'membership-popup-backdrop',
   accountDetails: 'account-details-popup-backdrop',
+  accountChangePassword: 'account-change-password-popup-backdrop',
   changeMembership: 'change-membership-popup-backdrop',
   changeMembershipDetails: 'change-membership-details-popup-backdrop',
   cancelConfirm: 'cancel-membership-confirm-popup-backdrop',
@@ -120,6 +122,15 @@ export function initProfilePopups() {
     });
   }
 
+  const openChangePasswordBtn = document.querySelector('.js-open-account-change-password-popup');
+  if (openChangePasswordBtn) {
+    openChangePasswordBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeProfileDropdown();
+      openProfilePopup(IDS.accountChangePassword);
+    });
+  }
+
   const accountDetailsForm = document.querySelector('.js-account-details-form');
   const accountDetailsBackdrop = document.getElementById(IDS.accountDetails);
   if (accountDetailsForm && accountDetailsBackdrop) {
@@ -163,6 +174,53 @@ export function initProfilePopups() {
       closeProfilePopup(accountDetailsBackdrop);
     });
     accountDetailsForm.addEventListener('input', (e) => {
+      if (e.target.matches('input, select, textarea') && e.target.id) {
+        setValid(e.target, `${e.target.id}-error`);
+      }
+    });
+  }
+
+  const changePasswordForm = document.querySelector('.js-account-change-password-form');
+  const changePasswordBackdrop = document.getElementById(IDS.accountChangePassword);
+  if (changePasswordForm && changePasswordBackdrop) {
+    const { required, passwordStrength: passwordStrengthMsg } = MESSAGES;
+    const currentInput = changePasswordForm.querySelector('#account-change-password-current');
+    const newInput = changePasswordForm.querySelector('#account-change-password-new');
+    const validate = () => {
+      let firstInvalid = null;
+      const current = getInputValue(currentInput);
+      const newVal = getInputValue(newInput);
+      if (!current) {
+        setInvalid(currentInput, required, 'account-change-password-current-error');
+        if (!firstInvalid) firstInvalid = currentInput;
+      } else {
+        setValid(currentInput, 'account-change-password-current-error');
+      }
+      if (!newVal) {
+        setInvalid(newInput, required, 'account-change-password-new-error');
+        if (!firstInvalid) firstInvalid = newInput;
+      } else if (!validatePasswordStrength(newVal)) {
+        setInvalid(newInput, passwordStrengthMsg, 'account-change-password-new-error');
+        if (!firstInvalid) firstInvalid = newInput;
+      } else {
+        setValid(newInput, 'account-change-password-new-error');
+      }
+      return firstInvalid;
+    };
+    changePasswordForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const firstInvalid = validate();
+      if (firstInvalid) {
+        firstInvalid.focus();
+        return;
+      }
+      const data = Object.fromEntries(new FormData(changePasswordForm).entries());
+      console.log('Change password form data:', data);
+      changePasswordForm.reset();
+      clearAllFormErrors(changePasswordForm);
+      closeProfilePopup(changePasswordBackdrop);
+    });
+    changePasswordForm.addEventListener('input', (e) => {
       if (e.target.matches('input, select, textarea') && e.target.id) {
         setValid(e.target, `${e.target.id}-error`);
       }

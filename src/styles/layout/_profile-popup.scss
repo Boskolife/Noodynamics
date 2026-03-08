@@ -124,7 +124,8 @@
     }
   }
 
-  &--account-details {
+  &--account-details,
+  &--account-change-password {
     .profile-popup__window {
       max-width: 600px;
     }
@@ -136,7 +137,7 @@
       gap: 24px;
     }
 
-    .profile-popup__button{
+    .profile-popup__button {
       margin-top: 8px;
     }
   }

@@ -6,9 +6,9 @@ const NAV_LINK_SELECTOR = '.header__nav-link';
 const ACTIVE_CLASS = 'header__nav-link--active';
 
 function getCurrentPageKey() {
-  const pathname = window.location.pathname;
+  const { pathname } = window.location;
   const segments = pathname.split('/').filter(Boolean);
-  const last = segments.length ? segments[segments.length - 1] : '';
+  const last = segments[segments.length - 1];
   return last || 'index.html';
 }
 
@@ -20,12 +20,9 @@ export function initHeaderNavActive() {
     const href = link.getAttribute('href');
     if (!href) return;
     const linkPage = href.split('/').pop() || 'index.html';
-    if (linkPage === currentPage) {
-      link.classList.add(ACTIVE_CLASS);
-      link.setAttribute('aria-current', 'page');
-    } else {
-      link.classList.remove(ACTIVE_CLASS);
-      link.removeAttribute('aria-current');
-    }
+    const isActive = linkPage === currentPage;
+    link.classList.toggle(ACTIVE_CLASS, isActive);
+    if (isActive) link.setAttribute('aria-current', 'page');
+    else link.removeAttribute('aria-current');
   });
 }

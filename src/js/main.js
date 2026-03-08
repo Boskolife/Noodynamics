@@ -1,29 +1,36 @@
-// Swiper global styles
+/**
+ * App entry: init sliders, forms, UI, events. Desktop-only.
+ */
+
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
-
 import { isDesktopDevice } from './utils/device.js';
-import { showDesktopOnlyMessage } from './ui/desktop-only-message.js';
+import {
+  showDesktopOnlyMessage,
+  initAuthPopup,
+  initHeaderNavActive,
+  initTabs,
+} from './ui/index.js';
 import { initMainSlider } from './slider/main-slider.js';
-import { initTabs } from './tabs.js';
-import { initEventsFilter } from './events-filter.js';
-import { initFormSelects } from './custom-select-form.js';
-import { initApplicationFormValidation } from './application-form-validation.js';
-import { initFooterForm } from './footer-form.js';
-import { initJournalForm } from './journal-form.js';
-import { initMakeDonationForm } from './make-donation-form.js';
-import { initAuthPopup } from './auth-popup.js';
-import { initHeaderNavActive } from './header-nav-active.js';
+import {
+  initFormSelects,
+  initApplicationFormValidation,
+  initFooterForm,
+  initJournalForm,
+  initMakeDonationForm,
+} from './forms/index.js';
+import { initEventsFilter } from './events/index.js';
+
+const FOOTER_YEAR_SELECTOR = '.footer__bottom-year';
 
 function initFooterYear() {
-  const yearEl = document.querySelector('.footer__bottom-year');
-  if (yearEl) {
-    const year = String(new Date().getFullYear());
-    yearEl.textContent = year;
-    yearEl.setAttribute('datetime', year);
-  }
+  const yearEl = document.querySelector(FOOTER_YEAR_SELECTOR);
+  if (!yearEl) return;
+  const year = String(new Date().getFullYear());
+  yearEl.textContent = year;
+  yearEl.setAttribute('datetime', year);
 }
 
 function initApp() {
@@ -47,7 +54,6 @@ function initApp() {
 
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {
   const { readyState } = document;
-
   if (readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initApp);
   } else {

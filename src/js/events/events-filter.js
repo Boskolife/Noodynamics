@@ -1,16 +1,19 @@
 /**
- * Events page: custom event type selector and calendar with filtering
+ * Events page: custom event type selector and calendar with filtering.
  */
 
 const DAY_NAMES = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const MONTH_NAMES_SHORT = [
   'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
 ];
 const MONTH_NAMES = [
   'January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December'
+  'July', 'August', 'September', 'October', 'November', 'December',
 ];
+
+/** Single document click handler for events section; reused so we can remove before re-adding. */
+let eventsDocClickHandler = null;
 
 function getEventDates() {
   const items = document.querySelectorAll('.events__inner-item[data-event-date]');
@@ -23,18 +26,15 @@ function getEventDates() {
 }
 
 function filterEvents(typeFilter, dateFilter) {
-  const sections = document.querySelectorAll('.events__inner[data-event-type]');
-  sections.forEach((section) => {
+  document.querySelectorAll('.events__inner[data-event-type]').forEach((section) => {
     const sectionType = section.getAttribute('data-event-type');
     const typeMatch = !typeFilter || typeFilter === 'all' || sectionType === typeFilter;
     section.style.display = typeMatch ? '' : 'none';
   });
 
-  const items = document.querySelectorAll('.events__inner-item[data-event-date]');
-  items.forEach((item) => {
+  document.querySelectorAll('.events__inner-item[data-event-date]').forEach((item) => {
     const itemDate = item.getAttribute('data-event-date');
-    const itemSection = item.closest('.events__inner');
-    const sectionType = itemSection?.getAttribute('data-event-type');
+    const sectionType = item.closest('.events__inner')?.getAttribute('data-event-type');
     const typeMatch = !typeFilter || typeFilter === 'all' || sectionType === typeFilter;
     const dateMatch = !dateFilter || itemDate === dateFilter;
     item.style.display = typeMatch && dateMatch ? '' : 'none';
@@ -46,37 +46,27 @@ function initEventSelector(container, eventDates, state) {
   const dropdown = container.querySelector('.events__selector-dropdown');
   const valueEl = container.querySelector('.events__selector-value');
   const options = container.querySelectorAll('.events__selector-option');
-
   if (!trigger || !dropdown || !valueEl) return;
 
-  function closeDropdown() {
+  const closeDropdown = () => {
     trigger.setAttribute('aria-expanded', 'false');
     dropdown.hidden = true;
-  }
-
-  function openDropdown() {
+  };
+  const openDropdown = () => {
     trigger.setAttribute('aria-expanded', 'true');
     dropdown.hidden = false;
-  }
-
-  function setValue(value, label) {
+  };
+  const setValue = (value, label) => {
     state.typeFilter = value;
     valueEl.textContent = label;
-    options.forEach((opt) => {
-      opt.setAttribute('aria-selected', opt.getAttribute('data-value') === value);
-    });
+    options.forEach((opt) => opt.setAttribute('aria-selected', opt.getAttribute('data-value') === value));
     filterEvents(state.typeFilter, state.dateFilter);
-  }
+  };
 
   trigger.addEventListener('click', (e) => {
     e.stopPropagation();
-    if (dropdown.hidden) {
-      openDropdown();
-    } else {
-      closeDropdown();
-    }
+    dropdown.hidden ? openDropdown() : closeDropdown();
   });
-
   options.forEach((option) => {
     option.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -86,8 +76,6 @@ function initEventSelector(container, eventDates, state) {
       closeDropdown();
     });
   });
-
-  document.addEventListener('click', () => closeDropdown());
 }
 
 function formatDateDisplay(date) {
@@ -108,18 +96,7 @@ function initCalendar(container, eventDates, state) {
   const headerPrevBtn = container.querySelector('.events__calendar-header-nav--prev');
   const headerNextBtn = container.querySelector('.events__calendar-header-nav--next');
 
-  if (
-    !dateTextEl ||
-    !dateBtn ||
-    !daysEl ||
-    !prevBtn ||
-    !nextBtn ||
-    !headerTitleEl ||
-    !headerPrevBtn ||
-    !headerNextBtn
-  ) {
-    return;
-  }
+  if (!dateTextEl || !dateBtn || !daysEl || !prevBtn || !nextBtn || !headerTitleEl || !headerPrevBtn || !headerNextBtn) return;
 
   let currentDate = new Date();
   if (state.dateFilter) {
@@ -127,44 +104,33 @@ function initCalendar(container, eventDates, state) {
     currentDate = new Date(y, m - 1, d);
   }
 
-  function formatDateKey(date) {
+  const formatDateKey = (date) => {
     const y = date.getFullYear();
     const m = String(date.getMonth() + 1).padStart(2, '0');
     const d = String(date.getDate()).padStart(2, '0');
     return `${y}-${m}-${d}`;
-  }
+  };
 
-  function updateDateDisplay() {
-    const displayDate = state.dateFilter
-      ? new Date(state.dateFilter + 'T12:00:00')
-      : currentDate;
+  const updateDateDisplay = () => {
+    const displayDate = state.dateFilter ? new Date(state.dateFilter + 'T12:00:00') : currentDate;
     dateTextEl.textContent = formatDateDisplay(displayDate);
-  }
+  };
 
-  function toggleDropdown() {
-    if (!dropdown) return;
-    const willOpen = dropdown.hidden;
-    dropdown.hidden = !dropdown.hidden;
-    dateBtn.setAttribute('aria-expanded', String(willOpen));
-  }
-
-  function closeDropdown() {
+  const closeDropdown = () => {
     if (dropdown) dropdown.hidden = true;
     dateBtn.setAttribute('aria-expanded', 'false');
-  }
+  };
 
-  dateBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    toggleDropdown();
-  });
+  const toggleDropdown = () => {
+    if (!dropdown) return;
+    const willOpen = dropdown.hidden;
+    dropdown.hidden = !willOpen;
+    dateBtn.setAttribute('aria-expanded', String(willOpen));
+  };
 
-  document.addEventListener('click', (e) => {
-    if (dropdown && !container.contains(e.target)) {
-      closeDropdown();
-    }
-  });
+  dateBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleDropdown(); });
 
-  function renderCalendar() {
+  const renderCalendar = () => {
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
     headerTitleEl.textContent = `${MONTH_NAMES[month]} ${year}`;
@@ -181,8 +147,7 @@ function initCalendar(container, eventDates, state) {
       const cell = document.createElement('button');
       cell.type = 'button';
       cell.className = 'events__calendar-day events__calendar-day--other events__calendar-day--empty';
-      const dayNumber = prevMonthLastDay - i + 1;
-      cell.textContent = dayNumber;
+      cell.textContent = prevMonthLastDay - i + 1;
       cell.disabled = true;
       daysEl.appendChild(cell);
     }
@@ -201,15 +166,12 @@ function initCalendar(container, eventDates, state) {
       cell.className = 'events__calendar-day';
       cell.textContent = d;
       cell.setAttribute('data-date', dateKey);
-
       if (isSelected) cell.classList.add('events__calendar-day--selected');
       else if (hasEvents) cell.classList.add('events__calendar-day--has-events');
       else if (isToday) cell.classList.add('events__calendar-day--today');
 
       cell.addEventListener('click', () => {
-        document.querySelectorAll('.events__calendar-day--selected').forEach((el) => {
-          el.classList.remove('events__calendar-day--selected');
-        });
+        document.querySelectorAll('.events__calendar-day--selected').forEach((el) => el.classList.remove('events__calendar-day--selected'));
         if (state.dateFilter === dateKey) {
           state.dateFilter = null;
           filterEvents(state.typeFilter, null);
@@ -222,10 +184,9 @@ function initCalendar(container, eventDates, state) {
         updateDateDisplay();
         closeDropdown();
       });
-
       daysEl.appendChild(cell);
     }
-  }
+  };
 
   prevBtn.addEventListener('click', (e) => {
     e.stopPropagation();
@@ -235,7 +196,6 @@ function initCalendar(container, eventDates, state) {
     updateDateDisplay();
     renderCalendar();
   });
-
   nextBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     currentDate.setDate(currentDate.getDate() + 1);
@@ -253,12 +213,30 @@ function initCalendar(container, eventDates, state) {
     currentDate.setMonth(currentDate.getMonth() - 1);
     renderCalendar();
   });
-
   headerNextBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     currentDate.setMonth(currentDate.getMonth() + 1);
     renderCalendar();
   });
+}
+
+function handleEventsDocumentClick(e, selector, calendar) {
+  if (selector && !selector.contains(e.target)) {
+    const dropdown = selector.querySelector('.events__selector-dropdown');
+    const trigger = selector.querySelector('.events__selector-trigger');
+    if (dropdown?.hidden === false) {
+      dropdown.hidden = true;
+      trigger?.setAttribute('aria-expanded', 'false');
+    }
+  }
+  if (calendar && !calendar.contains(e.target)) {
+    const dropdown = calendar.querySelector('.events__calendar-dropdown');
+    const dateBtn = calendar.querySelector('.events__calendar-date');
+    if (dropdown?.hidden === false) {
+      dropdown.hidden = true;
+      dateBtn?.setAttribute('aria-expanded', 'false');
+    }
+  }
 }
 
 export function initEventsFilter() {
@@ -272,4 +250,10 @@ export function initEventsFilter() {
 
   if (selector) initEventSelector(selector, eventDates, state);
   if (calendar) initCalendar(calendar, eventDates, state);
+
+  if (eventsDocClickHandler) {
+    document.removeEventListener('click', eventsDocClickHandler);
+  }
+  eventsDocClickHandler = (e) => handleEventsDocumentClick(e, selector, calendar);
+  document.addEventListener('click', eventsDocClickHandler);
 }

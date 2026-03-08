@@ -1,0 +1,21 @@
+<div class="popup popup--reset-pass" id="reset-pass-popup-backdrop" aria-hidden="true">
+    <div class="popup__overlay" aria-hidden="true"></div>
+    <div class="popup__window" role="dialog" aria-modal="true" aria-labelledby="reset-pass-popup-title" aria-describedby="reset-pass-popup-desc">
+        <div class="popup__header">
+            <img src="/images/logo-text.png" alt="Noodynamics" class="popup__logo">
+        </div>
+        <div class="popup__inner">
+            <h2 id="reset-pass-popup-title" class="popup__title">Password reset</h2>
+            <p id="reset-pass-popup-desc" class="popup__text">Please enter your email address.<br>We will send you a verification code to issue a new password.</p>
+            <form class="popup__form form-card js-reset-pass-form" novalidate>
+                <div class="form-card__group">
+                    <label class="form-card__label" for="reset-pass-email">email
+                        <input class="form-card__input" type="email" id="reset-pass-email" name="email" placeholder="Enter your email" required autocomplete="email">
+                        <span id="reset-pass-email-error" class="popup__form-error" role="alert"></span>
+                    </label>
+                </div>
+                <button type="submit" class="popup__form-button btn btn--black">Send email</button>
+            </form>
+        </div>
+    </div>
+</div>

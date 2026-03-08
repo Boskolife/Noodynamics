@@ -1,0 +1,55 @@
+<div class="popup popup--signup" id="signup-popup-backdrop" aria-hidden="true">
+    <div class="popup__overlay" aria-hidden="true"></div>
+    <div class="popup__window" role="dialog" aria-modal="true" aria-labelledby="signup-popup-title" aria-describedby="signup-popup-desc">
+        <div class="popup__header">
+            <img src="/images/logo-text.png" alt="Noodynamics" class="popup__logo">
+        </div>
+        <div class="popup__inner">
+            <h2 id="signup-popup-title" class="popup__title">Sign up</h2>
+            <p id="signup-popup-desc" class="visually-hidden">Create an account with your details.</p>
+            <form class="popup__form form-card js-signup-form" novalidate>
+                <div class="form-card__group form-card__group--row">
+                    <label class="form-card__label" for="signup-first-name">first name
+                        <input class="form-card__input" type="text" id="signup-first-name" name="firstName" placeholder="Enter your first name" required minlength="2" autocomplete="given-name">
+                        <span id="signup-first-name-error" class="popup__form-error" role="alert"></span>
+                    </label>
+                    <label class="form-card__label" for="signup-last-name">last name
+                        <input class="form-card__input" type="text" id="signup-last-name" name="lastName" placeholder="Enter your last name" required minlength="2" autocomplete="family-name">
+                        <span id="signup-last-name-error" class="popup__form-error" role="alert"></span>
+                    </label>
+                </div>
+                <div class="form-card__group">
+                    <label class="form-card__label" for="signup-email">email
+                        <input class="form-card__input" type="email" id="signup-email" name="email" placeholder="Enter your email" required autocomplete="email">
+                        <span id="signup-email-error" class="popup__form-error" role="alert"></span>
+                    </label>
+                </div>
+                <div class="form-card__group">
+                    <label class="form-card__label" for="signup-password">create password
+                        <input class="form-card__input" type="password" id="signup-password" name="password" placeholder="Create your password" required autocomplete="new-password">
+                        <span id="signup-password-error" class="popup__form-error" role="alert"></span>
+                    </label>
+                    <label class="form-card__label" for="signup-password-confirm">confirm password
+                        <input class="form-card__input" type="password" id="signup-password-confirm" name="passwordConfirm" placeholder="Confirm your password" required autocomplete="new-password">
+                        <span id="signup-password-confirm-error" class="popup__form-error" role="alert"></span>
+                    </label>
+                </div>
+                <button type="submit" class="popup__form-button btn btn--black">Sign up</button>
+            </form>
+            <p class="popup__text popup__text-social">or sign up with</p>
+            <div class="popup__form-social">
+                <a href="#" class="popup__form-social-link btn btn--black">
+                    <img src="/icons/google.svg" alt="">
+                    Google
+                </a>
+                <a href="#" class="popup__form-social-link btn btn--black">
+                    <img src="/icons/apple.svg" alt="">
+                    Apple
+                </a>
+            </div>
+            <p class="popup__text popup__text-signup">already have an account?
+                <a href="#" class="popup__link js-open-login">log in</a>
+            </p>
+        </div>
+    </div>
+</div>

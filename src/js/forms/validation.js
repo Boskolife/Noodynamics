@@ -15,12 +15,28 @@ export const MESSAGES = {
   agreeTerms: 'You must agree to the membership terms to continue.',
   /** Donation form: agree to create an account. */
   agreeCreateAccount: 'You must agree to create an account to continue.',
+  /** Password strength: 8+ chars, upper, lower, number. */
+  passwordStrength: 'Password must be at least 8 characters with one uppercase, one lowercase, and one number.',
+  /** Password and confirm must match. */
+  passwordMismatch: 'Passwords do not match.',
+  /** Verification code: 6 digits. */
+  verificationCodeInvalid: 'Please enter a valid 6-digit code.',
 };
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export function validateEmail(value) {
   return EMAIL_REGEX.test(value ?? '');
+}
+
+/** Password: min 8 chars, at least one upper, one lower, one number. */
+export function validatePasswordStrength(value) {
+  const v = value ?? '';
+  if (v.length < 8) return false;
+  if (!/[A-Z]/.test(v)) return false;
+  if (!/[a-z]/.test(v)) return false;
+  if (!/[0-9]/.test(v)) return false;
+  return true;
 }
 
 export function getErrorElement(idOrInput) {

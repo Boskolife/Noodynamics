@@ -26,6 +26,29 @@
     opacity: 1;
     pointer-events: auto;
   }
+
+  /* Form button: no bottom margin in all popups except login (auth). */
+  &:not(&--auth) .popup__form-button {
+    margin-bottom: 0;
+    margin-top: 20px;
+  }
+
+  &--thanks-support {
+    .popup__header {
+      padding: 24px 40px;
+    }
+  }
+
+  &--enter-new-password,
+  &--reset-complete,
+  &--reset-pass,
+  &--verify-code {
+    .popup__text {
+      text-align: center;
+      font-weight: 300;
+      font-size: 16px;
+    }
+  }
 }
 
 .popup__overlay {
@@ -81,7 +104,7 @@
   align-items: center;
   justify-content: center;
   background-color: $color-black-100;
-  padding: 12px;
+  padding: 12px 40px;
 
   .popup__title {
     margin-top: 12px;
@@ -124,6 +147,12 @@
   color: $color-black-80;
   text-align: center;
   margin-bottom: 24px;
+
+  &-hint {
+    font-size: 14px;
+    text-align: left;
+    margin-bottom: 16px;
+  }
 
   &-social,
   &-signup {
@@ -175,6 +204,11 @@
     margin-left: auto;
     width: max-content;
     margin-bottom: 32px;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-family: inherit;
 
     &:hover {
       text-decoration: none;
@@ -182,8 +216,24 @@
     }
   }
 
+  &-resend-link {
+    margin: 0 0 0 auto;
+  }
+
+  &-error {
+    display: none;
+    font-size: 12px;
+    color: #c00;
+    margin-top: 4px;
+
+    &:not(:empty) {
+      display: block;
+    }
+  }
+
   &-button {
     margin-bottom: 40px;
+    width: 100%;
   }
 
   &-social {
@@ -205,6 +255,11 @@
   flex-direction: column;
   gap: 20px;
   margin-bottom: 12px;
+
+  &--row {
+    flex-direction: row;
+    gap: 16px;
+  }
 }
 
 .popup__window .form-card__label {

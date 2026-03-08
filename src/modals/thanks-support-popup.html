@@ -1,9 +1,6 @@
 <div class="popup popup--thanks-support" id="thanks-support-popup-backdrop" aria-hidden="true">
     <div class="popup__overlay" aria-hidden="true"></div>
     <div class="popup__window" role="dialog" aria-modal="true" aria-labelledby="thanks-support-popup-title" aria-describedby="thanks-support-popup-desc">
-        <button type="button" class="popup__close" aria-label="Close popup">
-            <img src="/icons/cross.svg" alt="" width="24" height="24">
-        </button>
         <div class="popup__header">
             <img src="/images/logo-text.png" alt="Noodynamics" class="popup__logo">
             <h3 class="popup__title">Thank you for your support!</h3>
@@ -13,7 +10,7 @@
         <div class="popup__inner">
             <h3 id="thanks-support-popup-title" class="popup__title">Create your password</h3>
             <p id="thanks-support-popup-desc" class="popup__text">Set a password to access your account.</p>
-            <form class="popup__form form-card">
+            <form class="popup__form form-card" novalidate>
                 <div class="form-card__group">
                     <label class="form-card__label" for="thanks-password">create password
                         <input class="form-card__input" type="password" id="thanks-password" name="password" placeholder="create your password"

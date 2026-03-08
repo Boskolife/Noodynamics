@@ -1,16 +1,13 @@
 <div class="popup popup--auth" id="auth-popup-backdrop" aria-hidden="true">
     <div class="popup__overlay" aria-hidden="true"></div>
     <div class="popup__window" role="dialog" aria-modal="true" aria-labelledby="auth-popup-title" aria-describedby="auth-popup-desc">
-        <button type="button" class="popup__close" aria-label="Close login popup">
-            <img src="/icons/cross.svg" alt="" width="24" height="24">
-        </button>
         <div class="popup__header">
             <img src="/images/logo-text.png" alt="Noodynamics" class="popup__logo">
         </div>
         <div class="popup__inner">
             <h2 id="auth-popup-title" class="popup__title">Log In or create an account <br> to continue</h2>
             <p id="auth-popup-desc" class="popup__text">Log In or create an account to easily manage your membership in one place.</p>
-            <form class="popup__form form-card">
+            <form class="popup__form form-card" novalidate>
                 <div class="form-card__group">
                     <label class="form-card__label" for="auth-name">name
                         <input class="form-card__input" type="text" id="auth-name" name="name" placeholder="Enter your name"

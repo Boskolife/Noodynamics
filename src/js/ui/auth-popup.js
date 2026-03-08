@@ -7,7 +7,7 @@ const OPEN_CLASS = 'is-open';
 const AUTH_BACKDROP_ID = 'auth-popup-backdrop';
 const OPEN_BTN_SELECTOR = '.js-open-auth-popup';
 
-function closePopup(backdrop) {
+export function closePopup(backdrop) {
   backdrop.classList.remove(OPEN_CLASS);
   backdrop.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';

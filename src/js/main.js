@@ -10,6 +10,7 @@ import { isDesktopDevice } from './utils/device.js';
 import {
   showDesktopOnlyMessage,
   initAuthPopup,
+  initPopupFlows,
   initHeaderNavActive,
   initTabs,
 } from './ui/index.js';
@@ -49,6 +50,7 @@ function initApp() {
   initJournalForm();
   initMakeDonationForm();
   initAuthPopup();
+  initPopupFlows();
   initHeaderNavActive();
 }
 

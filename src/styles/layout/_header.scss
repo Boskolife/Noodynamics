@@ -59,7 +59,16 @@
 
   &__actions {
     display: flex;
+    align-items: center;
     gap: 32px;
+
+    .is-auth-hidden {
+      display: none;
+    }
+
+    .btn {
+      height: 52px;
+    }
   }
 
   &__action {
@@ -82,5 +91,9 @@
         text-transform: uppercase;
       }
     }
+  }
+
+  &__profile {
+    padding: 14px;
   }
 }

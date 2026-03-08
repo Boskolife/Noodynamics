@@ -1,0 +1,49 @@
+/**
+ * Legal/static content pages: Privacy Policy, Terms & Conditions.
+ */
+
+.legal-page {
+  &__section {
+    padding: 60px 0 80px;
+  }
+
+  &__title {
+    margin-bottom: 8px;
+  }
+
+  &__updated {
+    font-size: 14px;
+    color: $color-white-60;
+    margin-bottom: 32px;
+  }
+
+  &__content {
+    max-width: 720px;
+
+    p {
+      margin-bottom: 20px;
+      line-height: 1.6;
+      color: $color-white-80;
+    }
+
+    h2 {
+      font-size: 1.25rem;
+      margin-top: 32px;
+      margin-bottom: 12px;
+    }
+
+    h2:first-child {
+      margin-top: 0;
+    }
+
+    a.legal-page__link {
+      color: $color-white-100;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+
+      &:hover {
+        color: $color-white-60;
+      }
+    }
+  }
+}

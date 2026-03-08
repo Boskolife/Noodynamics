@@ -1,0 +1,163 @@
+<section class="make-donation" id="make-donation">
+    <div class="container">
+        <h2 class="make-donation__title">
+            Make Donation
+        </h2>
+        <form action="" class="make-donation__form form-card" novalidate>
+            <div class="make-donation__input-group make-donation__input-group--radio form-card__group-radio">
+                <span class="make-donation__label form-card__label">Select donation type</span>
+                <label for="one-time" class="make-donation__group-label form-card__label-radio">
+                    <input type="radio" id="one-time" name="type" value="one-time">
+                    <span class="make-donation__radio-mark form-card__radio-mark" aria-hidden="true"></span>
+                    One-time donation
+                </label>
+                <label for="recurring" class="make-donation__group-label form-card__label-radio">
+                    <input type="radio" id="recurring" name="type" value="monthly">
+                    <span class="make-donation__radio-mark form-card__radio-mark" aria-hidden="true"></span>
+                    Monthly donation
+                </label>
+                <span id="donation-type-error" class="make-donation__form-error form-card__error" role="alert"></span>
+            </div>
+            <div class="make-donation__amount-group-wrapper">
+                <span id="donation-amount-label" class="make-donation__label form-card__label">Select donation amount</span>
+                <div class="make-donation__amount-group form-card__group-amount" role="group" aria-labelledby="donation-amount-label">
+                    <label class="make-donation__amount-option">
+                        <input type="radio" name="donationAmount" value="20" class="make-donation__amount-input">
+                        <span class="make-donation__amount-button">$20</span>
+                    </label>
+                    <label class="make-donation__amount-option">
+                        <input type="radio" name="donationAmount" value="50" class="make-donation__amount-input">
+                        <span class="make-donation__amount-button">$50</span>
+                    </label>
+                    <label class="make-donation__amount-option">
+                        <input type="radio" name="donationAmount" value="100" class="make-donation__amount-input">
+                        <span class="make-donation__amount-button">$100</span>
+                    </label>
+                    <label class="make-donation__amount-option">
+                        <input type="radio" name="donationAmount" value="500" class="make-donation__amount-input">
+                        <span class="make-donation__amount-button">$500</span>
+                    </label>
+                    <label class="make-donation__amount-option">
+                        <input type="radio" name="donationAmount" value="1000" class="make-donation__amount-input">
+                        <span class="make-donation__amount-button">$1000</span>
+                    </label>
+                    <label class="make-donation__amount-option">
+                        <input type="radio" name="donationAmount" value="other" class="make-donation__amount-input">
+                        <span class="make-donation__amount-button">Other</span>
+                    </label>
+                </div>
+                <span id="donation-amount-error" class="make-donation__form-error form-card__error" role="alert"></span>
+            </div>
+            <label for="donation-amount-due" class="make-donation__form-label form-card__label">amount due
+                <input type="text" id="donation-amount-due" name="amountDue" class="make-donation__form-input"
+                    placeholder="enter amount" inputmode="decimal" autocomplete="off" disabled>
+                <span id="donation-amount-due-error" class="make-donation__form-error form-card__error" role="alert"></span>
+            </label>
+            <label for="donation-comment" class="make-donation__form-label form-card__label">
+                leave a comment (optional)
+                <textarea name="comment" id="donation-comment" class="make-donation__form-textarea"
+                    placeholder="ADDITIONAL COMMENTS" rows="4"></textarea>
+            </label>
+            <h3 class="make-donation__subtitle">Billing Address</h3>
+            <div class="make-donation__form-group form-card__group">
+                <label for="donation-first-name" class="make-donation__form-label form-card__label">first name
+                    <input type="text" id="donation-first-name" name="firstName"
+                        class="make-donation__form-input form-card__input" placeholder="enter your first name" required
+                        aria-required="true" autocomplete="given-name">
+                    <span id="donation-first-name-error" class="make-donation__form-error form-card__error" role="alert"></span>
+                </label>
+                <label for="donation-last-name" class="make-donation__form-label form-card__label">last name
+                    <input type="text" id="donation-last-name" name="lastName"
+                        class="make-donation__form-input form-card__input" placeholder="enter your last name"
+                        required aria-required="true" autocomplete="family-name">
+                    <span id="donation-last-name-error" class="make-donation__form-error form-card__error" role="alert"></span>
+                </label>
+            </div>
+            <div class="make-donation__form-group form-card__group">
+                <label for="donation-email" class="make-donation__form-label form-card__label">email
+                    <input type="email" id="donation-email" name="email"
+                        class="make-donation__form-input form-card__input" placeholder="enter your email" required
+                        aria-required="true" autocomplete="email">
+                    <span id="donation-email-error" class="make-donation__form-error form-card__error" role="alert"></span>
+                </label>
+                <label for="donation-phone" class="make-donation__form-label form-card__label">Phone number
+                    (optional)
+                    <input type="tel" id="donation-phone" name="phone"
+                        class="make-donation__form-input form-card__input" placeholder="enter your phone number"
+                        autocomplete="tel" inputmode="numeric" data-numeric="phone">
+                </label>
+            </div>
+            <div class="make-donation__form-group form-card__group">
+                <label for="donation-country" class="make-donation__form-label form-card__label">country
+                    <select id="donation-country" name="country" class="make-donation__form-input" hidden required
+                        aria-required="true">
+                        <option value="">Select country</option>
+                        <option value="US">United States</option>
+                        <option value="CA">Canada</option>
+                        <option value="GB">United Kingdom</option>
+                        <option value="AU">Australia</option>
+                        <option value="DE">Germany</option>
+                        <option value="FR">France</option>
+                        <option value="NL">Netherlands</option>
+                        <option value="IE">Ireland</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <div class="make-donation__select select" data-select-native-id="donation-country">
+                        <button type="button" class="select__trigger" aria-expanded="false"
+                            aria-haspopup="listbox" aria-label="Select country">
+                            <span class="select__value">Select country</span>
+                            <span class="select__arrow" aria-hidden="true">
+                                <img src="/icons/arrow-down.svg" alt="">
+                            </span>
+                        </button>
+                        <ul class="select__dropdown" role="listbox" hidden>
+                            <li class="select__option" role="option" data-value="US">United States</li>
+                            <li class="select__option" role="option" data-value="CA">Canada</li>
+                            <li class="select__option" role="option" data-value="GB">United Kingdom</li>
+                            <li class="select__option" role="option" data-value="AU">Australia</li>
+                            <li class="select__option" role="option" data-value="DE">Germany</li>
+                            <li class="select__option" role="option" data-value="FR">France</li>
+                            <li class="select__option" role="option" data-value="NL">Netherlands</li>
+                            <li class="select__option" role="option" data-value="IE">Ireland</li>
+                            <li class="select__option" role="option" data-value="other">Other</li>
+                        </ul>
+                    </div>
+                    <span id="donation-country-error" class="make-donation__form-error form-card__error" role="alert"></span>
+                </label>
+                <label for="donation-city" class="make-donation__form-label form-card__label">city
+                    <input type="text" id="donation-city" name="city"
+                        class="make-donation__form-input form-card__input" placeholder="enter your city"
+                        required aria-required="true" autocomplete="address-level2">
+                    <span id="donation-city-error" class="make-donation__form-error form-card__error" role="alert"></span>
+                </label>
+            </div>
+            <div class="make-donation__form-group form-card__group">
+                <label for="donation-address" class="make-donation__form-label form-card__label">address
+                    <input type="text" id="donation-address" name="address"
+                        class="make-donation__form-input form-card__input" placeholder="enter your address" required
+                        aria-required="true" autocomplete="street-address">
+                    <span id="donation-address-error" class="make-donation__form-error form-card__error" role="alert"></span>
+                </label>
+                <label for="donation-postcode" class="make-donation__form-label form-card__label">postcode
+                    <input type="text" id="donation-postcode" name="postcode"
+                        class="make-donation__form-input form-card__input" placeholder="enter your postcode"
+                        required aria-required="true" autocomplete="postal-code">
+                    <span id="donation-postcode-error" class="make-donation__form-error form-card__error" role="alert"></span>
+                </label>
+            </div>
+            <div class="make-donation__form-agree-wrapper form-card__agree-wrapper">
+                <label for="donation-agree" class="make-donation__form-agree form-card__agree">
+                    <input type="checkbox" id="donation-agree" name="agree" value="agree" required aria-required="true">
+                    <span class="make-donation__checkbox-mark form-card__checkbox-mark"
+                        aria-hidden="true"></span>
+                    <span class="make-donation__checkbox-text form-card__checkbox-text">
+                        Create an account to track my donations
+                    </span>
+                </label>
+                <span id="donation-agree-error" class="make-donation__form-error form-card__error" role="alert"></span>
+            </div>
+            <button type="submit" class="make-donation__form-button btn btn--primary">continue to secure
+                payment</button>
+        </form>
+    </div>
+</section>

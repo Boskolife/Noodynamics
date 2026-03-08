@@ -13,6 +13,7 @@ import { initFormSelects } from './custom-select-form.js';
 import { initApplicationFormValidation } from './application-form-validation.js';
 import { initFooterForm } from './footer-form.js';
 import { initJournalForm } from './journal-form.js';
+import { initMakeDonationForm } from './make-donation-form.js';
 import { initAuthPopup } from './auth-popup.js';
 import { initHeaderNavActive } from './header-nav-active.js';
 
@@ -39,6 +40,7 @@ function initApp() {
   initApplicationFormValidation();
   initFooterForm();
   initJournalForm();
+  initMakeDonationForm();
   initAuthPopup();
   initHeaderNavActive();
 }

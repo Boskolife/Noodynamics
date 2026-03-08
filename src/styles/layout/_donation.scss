@@ -46,3 +46,148 @@
     background-color: $color-black-50;
   }
 }
+
+.make-donation {
+  &__title {
+    text-align: center;
+    font-size: 80px;
+    margin-bottom: 60px;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    padding: 0;
+    border: none;
+    max-width: 750px;
+    width: 100%;
+    margin: 0 auto;
+
+    &-group {
+      width: 100%;
+    }
+
+    &-agree-wrapper {
+      width: 100%;
+      align-items: flex-start;
+    }
+
+    &-agree{
+      align-items: center;
+    }
+
+    &-button {
+      margin-top: 68px;
+      width: 100%;
+    }
+  }
+
+  &__subtitle {
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
+
+  &__label {
+    text-align: center;
+  }
+
+  &__input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 9px;
+
+    &--radio {
+      max-width: 165px;
+      width: 100%;
+      margin: 0 auto;
+      margin-bottom: 16px;
+    }
+  }
+
+  &__group-label {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    color: $color-white-80;
+    text-transform: uppercase;
+    position: relative;
+  }
+
+  &__amount-group-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  &__amount-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    width: 100%;
+  }
+
+  &__amount-option {
+    cursor: pointer;
+    display: inline-block;
+
+    .make-donation__amount-input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  }
+
+  &__amount-button {
+    display: block;
+    background-color: transparent;
+    border: none;
+    padding: 12px 20px;
+    margin: 0;
+    font-size: 32px;
+    color: $color-white-100;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  &__amount-option input:focus-visible + &__amount-button {
+    outline: 2px solid $color-white-100;
+    outline-offset: 2px;
+  }
+
+  &__amount-option input:checked + &__amount-button {
+    background-color: $color-brown;
+  }
+
+  &__amount-option input.is-invalid + &__amount-button {
+    outline: 2px solid $color-red;
+    outline-offset: 2px;
+  }
+
+  &__form-error {
+    display: block;
+    font-size: 14px;
+    color: $color-red;
+    text-transform: uppercase;
+
+    &:empty {
+      display: none;
+    }
+  }
+}

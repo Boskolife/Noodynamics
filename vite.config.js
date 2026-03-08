@@ -91,7 +91,8 @@ const handlebarsReloadPlugin = () => {
       // Check if changed file is a partial (template or section)
       if (
         normalizedPath.includes('/templates/') ||
-        normalizedPath.includes('/sections/')
+        normalizedPath.includes('/sections/') ||
+        normalizedPath.includes('/modals/')
       ) {
         // Force full page reload when partials change
         server.ws.send({
@@ -104,9 +105,10 @@ const handlebarsReloadPlugin = () => {
     configureServer(server) {
       const templatesDir = resolve(__dirname, 'src/templates');
       const sectionsDir = resolve(__dirname, 'src/sections');
+      const modalsDir = resolve(__dirname, 'src/modals');
 
-      // Explicitly watch templates and sections directories
-      server.watcher.add([templatesDir, sectionsDir]);
+      // Explicitly watch templates, sections and modals directories
+      server.watcher.add([templatesDir, sectionsDir, modalsDir]);
     },
   };
 };
@@ -120,6 +122,7 @@ export default defineConfig({
       partialDirectory: [
         resolve(__dirname, 'src/templates'),
         resolve(__dirname, 'src/sections'),
+        resolve(__dirname, 'src/modals'),
       ],
       reloadOnPartialChange: true,
       helpers: {

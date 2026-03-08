@@ -69,8 +69,8 @@ $media-expressions: (
 // Application Membership Pages
 @import 'layout/application-form';
 
-// Auth Popup Pages
-@import 'layout/auth-popup';
+// Modals (shared popup styles)
+@import 'layout/popup';
 
 // Donation Pages
 @import 'layout/donation';

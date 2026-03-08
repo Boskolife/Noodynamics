@@ -93,7 +93,58 @@
     }
   }
 
+  &__profile-wrap {
+    position: relative;
+  }
+
   &__profile {
     padding: 14px;
+  }
+
+  &__profile-dropdown {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 0;
+    min-width: 220px;
+    margin: 0;
+    padding: 16px;
+    list-style: none;
+    background-color: $color-black-100;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+    border: 1px solid $color-white-100;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  &__profile-dropdown-link {
+    display: block;
+    width: 100%;
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: uppercase;
+    text-align: left;
+    color: $color-white-100;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+
+    &:hover {
+      color: $color-white-60;
+    }
+
+    &--logout {
+      margin-top: 8px;
+      padding: 0;
+      color: $color-red;
+    }
   }
 }

@@ -8,6 +8,8 @@ const OPEN_CLASS = 'is-open';
 const AUTH_BACKDROP_ID = 'auth-popup-backdrop';
 const OPEN_BTN_SELECTOR = '.js-open-auth-popup';
 const PROFILE_BTN_SELECTOR = '.js-header-profile';
+const PROFILE_DROPDOWN_ID = 'header-profile-dropdown';
+const PROFILE_WRAP_SELECTOR = '.header__profile-wrap';
 const AUTH_STORAGE_KEY = 'auth_logged_in';
 
 function getAuthState() {
@@ -112,4 +114,53 @@ export function initAuthPopup() {
     e.preventDefault();
     open();
   }));
+
+  initProfileDropdown();
+}
+
+function initProfileDropdown() {
+  const profileBtn = document.querySelector(PROFILE_BTN_SELECTOR);
+  const dropdown = document.getElementById(PROFILE_DROPDOWN_ID);
+  const wrap = document.querySelector(PROFILE_WRAP_SELECTOR);
+  if (!profileBtn || !dropdown || !wrap) return;
+
+  const closeDropdown = () => {
+    dropdown.hidden = true;
+    profileBtn.setAttribute('aria-expanded', 'false');
+  };
+
+  const openDropdown = () => {
+    dropdown.hidden = false;
+    profileBtn.setAttribute('aria-expanded', 'true');
+  };
+
+  profileBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (dropdown.hidden) {
+      openDropdown();
+    } else {
+      closeDropdown();
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    if (dropdown.hidden) return;
+    if (!wrap.contains(e.target)) closeDropdown();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape' || dropdown.hidden) return;
+    closeDropdown();
+    profileBtn.focus();
+  });
+
+  const logoutBtn = dropdown.querySelector('.js-logout');
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      setAuthState(false);
+      updateHeaderAuthUI(false);
+      closeDropdown();
+    });
+  }
 }

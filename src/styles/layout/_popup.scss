@@ -49,6 +49,14 @@
       font-size: 16px;
     }
   }
+
+  &--cancel-membership-confirm {
+    .popup__form-button {
+      margin-top: 0 !important;
+    }
+  }
+
+
 }
 
 .popup__overlay {
@@ -154,6 +162,11 @@
     margin-bottom: 16px;
   }
 
+  &-highlight {
+    font-weight: 700;
+    color: $color-black-100;
+  }
+
   &-social,
   &-signup {
     font-size: 14px;
@@ -234,8 +247,27 @@
   &-button {
     margin-bottom: 40px;
     width: 100%;
-  }
 
+    &--outline {
+      background-color: $color-white-100;
+      color: $color-black-100;
+      border: 1px solid $color-black-100;
+
+      &:hover {
+        background-color: $color-white-20;
+      }
+    }
+  }
+}
+
+.popup__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.popup__form {
   &-social {
     display: flex;
     gap: 16px;

@@ -1,0 +1,32 @@
+<div class="profile-popup popup--membership" id="membership-popup-backdrop" aria-hidden="true">
+    <div class="profile-popup__overlay" aria-hidden="true"></div>
+    <div class="profile-popup__window" role="dialog" aria-modal="true" aria-labelledby="membership-popup-title">
+        <div class="profile-popup__header">
+            <h2 id="membership-popup-title" class="profile-popup__header-title">My membership</h2>
+            <button type="button" class="profile-popup__close" aria-label="Close popup">
+                <img src="/icons/cross.svg" alt="" width="24" height="24">
+            </button>
+        </div>
+        <div class="profile-popup__inner">
+            <div class="profile-popup__content">
+                <div class="profile-popup__content-top">
+                    <span class="profile-popup__content-top-label">Current level</span>
+                    <span class="profile-popup__content-top-status">Active</span>
+                </div>
+                <div class="profile-popup__content-middle">
+                    <h3 class="profile-popup__content-middle-name">Estate (Family)</h3>
+                    <span class="profile-popup__content-middle-price">$100/month</span>
+                </div>
+                <div class="profile-popup__content-bottom">
+                    <span class="profile-popup__content-bottom-next-billing">Next billing date: February 15, 2026</span>
+                </div>
+            </div>
+            <button type="button" class="profile-popup__button profile-popup__button--change btn btn--primary js-open-change-membership">Change
+                membership level</button>
+            <div class="profile-popup__footer">
+                <button type="button" class="profile-popup__button profile-popup__button--cancel js-open-cancel-membership-confirm">Cancel
+                    membership</button>
+            </div>
+        </div>
+    </div>
+</div>

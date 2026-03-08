@@ -11,6 +11,7 @@ import {
   showDesktopOnlyMessage,
   initAuthPopup,
   initPopupFlows,
+  initProfilePopups,
   initHeaderNavActive,
   initTabs,
 } from './ui/index.js';
@@ -51,6 +52,7 @@ function initApp() {
   initMakeDonationForm();
   initAuthPopup();
   initPopupFlows();
+  initProfilePopups();
   initHeaderNavActive();
 }
 

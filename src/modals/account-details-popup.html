@@ -1,0 +1,37 @@
+<div class="profile-popup profile-popup--account-details" id="account-details-popup-backdrop" aria-hidden="true">
+    <div class="profile-popup__overlay" aria-hidden="true"></div>
+    <div class="profile-popup__window" role="dialog" aria-modal="true" aria-labelledby="account-details-popup-title">
+        <div class="profile-popup__header">
+            <h2 id="account-details-popup-title" class="profile-popup__header-title">Account details</h2>
+            <button type="button" class="profile-popup__close" aria-label="Close popup">
+                <img src="/icons/cross.svg" alt="" width="24" height="24">
+            </button>
+        </div>
+        <div class="profile-popup__inner">
+            <form action="" class="profile-popup__form form-card js-account-details-form" novalidate>
+                <div class="form-card__group">
+                    <label class="form-card__label" for="account-details-first-name">First name
+                        <input class="form-card__input" type="text" id="account-details-first-name" name="firstName"
+                            placeholder="First name" required minlength="2" autocomplete="given-name">
+                        <span id="account-details-first-name-error" class="form-card__error" role="alert"></span>
+                    </label>
+                </div>
+                <div class="form-card__group">
+                    <label class="form-card__label" for="account-details-last-name">Last name
+                        <input class="form-card__input" type="text" id="account-details-last-name" name="lastName"
+                            placeholder="Last name" required minlength="2" autocomplete="family-name">
+                        <span id="account-details-last-name-error" class="form-card__error" role="alert"></span>
+                    </label>
+                </div>
+                <div class="form-card__group">
+                    <label class="form-card__label" for="account-details-email">Email
+                        <input class="form-card__input" type="email" id="account-details-email" name="email"
+                            placeholder="Email" required autocomplete="email">
+                        <span id="account-details-email-error" class="form-card__error" role="alert"></span>
+                    </label>
+                </div>
+                <button type="submit" class="profile-popup__button profile-popup__button--save btn btn--primary">Save changes</button>
+            </form>
+        </div>
+    </div>
+</div>

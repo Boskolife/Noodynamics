@@ -1,0 +1,46 @@
+<div class="profile-popup profile-popup--change-membership-details" id="change-membership-details-popup-backdrop"
+    aria-hidden="true">
+    <div class="profile-popup__overlay" aria-hidden="true"></div>
+    <div class="profile-popup__window" role="dialog" aria-modal="true"
+        aria-labelledby="change-membership-details-popup-title">
+        <div class="profile-popup__header">
+            <h2 id="change-membership-details-popup-title" class="profile-popup__header-title">
+                <button type="button" class="profile-popup__header-icon js-back-to-change-membership" aria-label="Back">
+                    <img src="/icons/arrow-back.svg" alt="" width="24" height="24">
+                </button>
+                review details
+            </h2>
+            <button type="button" class="profile-popup__close" aria-label="Close popup">
+                <img src="/icons/cross.svg" alt="" width="24" height="24">
+            </button>
+        </div>
+        <div class="profile-popup__inner">
+            <h3 class="profile-popup__inner-title">Review the Details <br>
+                Before Confirming Your Level Change.</h3>
+            <div class="profile-popup__content">
+                <div class="profile-popup__content-items">
+                    <div class="profile-popup__content-item current-level">
+                        <span class="profile-popup__content-item-label">current membership level</span>
+                        <div class="profile-popup__content-item-content">
+                            <h4 class="profile-popup__content-item-title">Estate (Family)</h4>
+                            <p class="profile-popup__content-item-price">$100</p>
+                        </div>
+                    </div>
+                    <div class="profile-popup__content-item new-level">
+                        <span class="profile-popup__content-item-label">new membership level</span>
+                        <div class="profile-popup__content-item-content">
+                            <h4 class="profile-popup__content-item-title">Sustaining Member</h4>
+                            <p class="profile-popup__content-item-price">$1000</p>
+                            <button type="button"
+                                class="profile-popup__content-item-button btn btn--primary">select</button>
+                        </div>
+                    </div>
+                </div>
+                <p class="profile-popup__content-description">Your level will change on March 24, 2026. <br>
+                    You won’t be charged today.</p>
+            </div>
+            <button type="button" class="profile-popup__button profile-popup__button--confirm btn btn--secondary js-confirm-level-change">Confirm
+                my membership level change</button>
+        </div>
+    </div>
+</div>

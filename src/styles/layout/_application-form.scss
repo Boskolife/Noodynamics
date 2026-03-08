@@ -1,5 +1,5 @@
 .application-membership {
-    overflow: hidden;
+  overflow: hidden;
   &__title {
     font-size: 80px;
     margin-bottom: 24px;
@@ -107,6 +107,14 @@
       &-price {
         font-size: 24px;
         font-weight: 500;
+      }
+
+      &-button {
+        &.current-level {
+          border-color: transparent;
+          background-color: $color-white-40;
+          box-shadow: 0px 0px 2px 0px rgba(255, 255, 255, 1) inset;
+        }
       }
     }
 

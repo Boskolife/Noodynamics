@@ -1,0 +1,78 @@
+<div class="profile-popup profile-popup--change-membership" id="change-membership-popup-backdrop" aria-hidden="true">
+    <div class="profile-popup__overlay" aria-hidden="true"></div>
+    <div class="profile-popup__window" role="dialog" aria-modal="true" aria-labelledby="change-membership-popup-title">
+        <div class="profile-popup__header">
+            <h2 id="change-membership-popup-title" class="profile-popup__header-title">
+                <button type="button" class="profile-popup__header-icon js-back-to-membership" aria-label="Back">
+                    <img src="/icons/arrow-back.svg" alt="" width="24" height="24">
+                </button>
+                Change membership level
+            </h2>
+            <button type="button" class="profile-popup__close" aria-label="Close popup">
+                <img src="/icons/cross.svg" alt="" width="24" height="24">
+            </button>
+        </div>
+        <div class="profile-popup__inner">
+            <h3 class="profile-popup__inner-title">Choose Your New Membership Level</h3>
+            <div class="application-membership__form-level-items">
+                <div class="application-membership__form-level-item" data-level="student">
+                    <div class="application-membership__form-level-item-header">
+                        <h4 class="application-membership__form-level-item-title">Student</h4>
+                        <span class="application-membership__form-level-item-price">$50</span>
+                    </div>
+                    <button type="button"
+                        class="application-membership__form-level-item-button btn btn--primary js-select-level">Select</button>
+                </div>
+                <div class="application-membership__form-level-item" data-level="scholar">
+                    <div class="application-membership__form-level-item-header">
+                        <h4 class="application-membership__form-level-item-title">Scholar</h4>
+                        <span class="application-membership__form-level-item-price">$50</span>
+                    </div>
+                    <button type="button"
+                        class="application-membership__form-level-item-button btn btn--primary js-select-level">Select</button>
+                </div>
+                <div class="application-membership__form-level-item" data-level="estate-family">
+                    <div class="application-membership__form-level-item-header">
+                        <h4 class="application-membership__form-level-item-title">Estate (Family)</h4>
+                        <span class="application-membership__form-level-item-price">$100</span>
+                    </div>
+                    <button type="button"
+                        class="application-membership__form-level-item-button btn btn--primary current-level" disabled>Your active membership level</button>
+                </div>
+                <div class="application-membership__form-level-item" data-level="supporting-member">
+                    <div class="application-membership__form-level-item-header">
+                        <h4 class="application-membership__form-level-item-title">Supporting Member</h4>
+                        <span class="application-membership__form-level-item-price">$250</span>
+                    </div>
+                    <button type="button"
+                        class="application-membership__form-level-item-button btn btn--primary js-select-level">Select</button>
+                </div>
+                <div class="application-membership__form-level-item" data-level="contribution-member">
+                    <div class="application-membership__form-level-item-header">
+                        <h4 class="application-membership__form-level-item-title">Contribution Member</h4>
+                        <span class="application-membership__form-level-item-price">$500</span>
+                    </div>
+                    <button type="button"
+                        class="application-membership__form-level-item-button btn btn--primary js-select-level">Select</button>
+                </div>
+                <div class="application-membership__form-level-item" data-level="sustaining-member">
+                    <div class="application-membership__form-level-item-header">
+                        <h4 class="application-membership__form-level-item-title">Sustaining Member</h4>
+                        <span class="application-membership__form-level-item-price">$1000</span>
+                    </div>
+                    <button type="button"
+                        class="application-membership__form-level-item-button btn btn--primary js-select-level">Select</button>
+                </div>
+                <div class="application-membership__form-level-item" data-level="culture-bearing-statum">
+                    <div class="application-membership__form-level-item-header">
+                        <h4 class="application-membership__form-level-item-title">Culture-bearing Statum</h4>
+                        <span class="application-membership__form-level-item-price">$5000</span>
+                    </div>
+                    <button type="button"
+                        class="application-membership__form-level-item-button btn btn--primary js-select-level">Select</button>
+                </div>
+            </div>
+            <button type="button" class="profile-popup__button profile-popup__button--change btn btn--secondary js-open-change-membership-details">Continue</button>
+        </div>
+    </div>
+</div>

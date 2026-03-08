@@ -10,13 +10,9 @@
 
 import { closePopup } from './auth-popup.js';
 import {
-  MESSAGES,
-  validateEmail,
-  validatePasswordStrength,
-  setInvalid,
-  setValid,
-  getInputValue,
+  validateFormWithRules,
   clearAllFormErrors,
+  clearFieldErrorByTarget,
 } from '../forms/validation.js';
 
 const OPEN_CLASS = 'is-open';
@@ -131,38 +127,23 @@ export function initProfilePopups() {
     });
   }
 
+  const ACCOUNT_DETAILS_RULES = [
+    { id: 'account-details-first-name', required: true, minLength: 2 },
+    { id: 'account-details-last-name', required: true, minLength: 2 },
+    { id: 'account-details-email', required: true, email: true },
+  ];
+
+  const CHANGE_PASSWORD_RULES = [
+    { id: 'account-change-password-current', required: true },
+    { id: 'account-change-password-new', required: true, passwordStrength: true },
+  ];
+
   const accountDetailsForm = document.querySelector('.js-account-details-form');
   const accountDetailsBackdrop = document.getElementById(IDS.accountDetails);
   if (accountDetailsForm && accountDetailsBackdrop) {
-    const { required, email: emailMsg, nameMinLength } = MESSAGES;
-    const fields = [
-      { id: 'account-details-first-name', errorId: 'account-details-first-name-error', minLength: 2 },
-      { id: 'account-details-last-name', errorId: 'account-details-last-name-error', minLength: 2 },
-      { id: 'account-details-email', errorId: 'account-details-email-error', email: true },
-    ];
-    const validate = () => {
-      let firstInvalid = null;
-      for (const { id, errorId, minLength, email } of fields) {
-        const input = accountDetailsForm.querySelector(`#${id}`);
-        const value = getInputValue(input);
-        if (!value) {
-          setInvalid(input, required, errorId);
-          if (!firstInvalid) firstInvalid = input;
-        } else if (minLength && value.length < minLength) {
-          setInvalid(input, nameMinLength, errorId);
-          if (!firstInvalid) firstInvalid = input;
-        } else if (email && !validateEmail(value)) {
-          setInvalid(input, emailMsg, errorId);
-          if (!firstInvalid) firstInvalid = input;
-        } else {
-          setValid(input, errorId);
-        }
-      }
-      return firstInvalid;
-    };
     accountDetailsForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      const firstInvalid = validate();
+      const firstInvalid = validateFormWithRules(accountDetailsForm, ACCOUNT_DETAILS_RULES);
       if (firstInvalid) {
         firstInvalid.focus();
         return;
@@ -174,42 +155,16 @@ export function initProfilePopups() {
       closeProfilePopup(accountDetailsBackdrop);
     });
     accountDetailsForm.addEventListener('input', (e) => {
-      if (e.target.matches('input, select, textarea') && e.target.id) {
-        setValid(e.target, `${e.target.id}-error`);
-      }
+      if (e.target.matches('input, select, textarea')) clearFieldErrorByTarget(accountDetailsForm, e.target);
     });
   }
 
   const changePasswordForm = document.querySelector('.js-account-change-password-form');
   const changePasswordBackdrop = document.getElementById(IDS.accountChangePassword);
   if (changePasswordForm && changePasswordBackdrop) {
-    const { required, passwordStrength: passwordStrengthMsg } = MESSAGES;
-    const currentInput = changePasswordForm.querySelector('#account-change-password-current');
-    const newInput = changePasswordForm.querySelector('#account-change-password-new');
-    const validate = () => {
-      let firstInvalid = null;
-      const current = getInputValue(currentInput);
-      const newVal = getInputValue(newInput);
-      if (!current) {
-        setInvalid(currentInput, required, 'account-change-password-current-error');
-        if (!firstInvalid) firstInvalid = currentInput;
-      } else {
-        setValid(currentInput, 'account-change-password-current-error');
-      }
-      if (!newVal) {
-        setInvalid(newInput, required, 'account-change-password-new-error');
-        if (!firstInvalid) firstInvalid = newInput;
-      } else if (!validatePasswordStrength(newVal)) {
-        setInvalid(newInput, passwordStrengthMsg, 'account-change-password-new-error');
-        if (!firstInvalid) firstInvalid = newInput;
-      } else {
-        setValid(newInput, 'account-change-password-new-error');
-      }
-      return firstInvalid;
-    };
     changePasswordForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      const firstInvalid = validate();
+      const firstInvalid = validateFormWithRules(changePasswordForm, CHANGE_PASSWORD_RULES);
       if (firstInvalid) {
         firstInvalid.focus();
         return;
@@ -221,9 +176,7 @@ export function initProfilePopups() {
       closeProfilePopup(changePasswordBackdrop);
     });
     changePasswordForm.addEventListener('input', (e) => {
-      if (e.target.matches('input, select, textarea') && e.target.id) {
-        setValid(e.target, `${e.target.id}-error`);
-      }
+      if (e.target.matches('input, select, textarea')) clearFieldErrorByTarget(changePasswordForm, e.target);
     });
   }
 

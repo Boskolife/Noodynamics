@@ -5,10 +5,7 @@
 
 import { closePopup } from './auth-popup.js';
 import {
-  MESSAGES,
-  validateEmail,
-  validatePasswordStrength,
-  setInvalid,
+  validateFormWithRules,
   setValid,
   getInputValue,
 } from '../forms/validation.js';
@@ -24,11 +21,31 @@ const POPUP_IDS = {
   signup: 'signup-popup-backdrop',
 };
 
+const RESET_PASS_RULES = [
+  { id: 'reset-pass-email', required: true, email: true },
+];
+
+const VERIFY_CODE_RULES = [
+  { id: 'verify-code-input', errorId: 'verify-code-error', required: true, verificationCode: true },
+];
+
+const ENTER_NEW_PASSWORD_RULES = [
+  { id: 'new-password', required: true, passwordStrength: true },
+  { id: 'confirm-new-password', required: true, matchId: 'new-password' },
+];
+
+const SIGNUP_RULES = [
+  { id: 'signup-first-name', required: true, minLength: 2 },
+  { id: 'signup-last-name', required: true, minLength: 2 },
+  { id: 'signup-email', required: true, email: true },
+  { id: 'signup-password', required: true, passwordStrength: true },
+  { id: 'signup-password-confirm', required: true, matchId: 'signup-password' },
+];
+
 function getOpenPopup() {
   return document.querySelector('.popup.is-open');
 }
 
-/** Error id for popup form inputs (matches setInvalid usage). */
 function getPopupErrorId(input) {
   if (!input?.id) return null;
   return input.id === 'verify-code-input' ? 'verify-code-error' : `${input.id}-error`;
@@ -48,113 +65,6 @@ function openPopupById(id) {
   document.body.style.overflow = 'hidden';
   const focusTarget = backdrop.querySelector('button:not(.popup__close), [href], input');
   focusTarget?.focus();
-}
-
-/** Returns null if valid, or the first invalid input element. */
-function validateResetPassForm(form) {
-  const emailInput = form.querySelector('#reset-pass-email');
-  const email = getInputValue(emailInput);
-  if (!email) {
-    setInvalid(emailInput, MESSAGES.required, 'reset-pass-email-error');
-    return emailInput;
-  }
-  if (!validateEmail(email)) {
-    setInvalid(emailInput, MESSAGES.email, 'reset-pass-email-error');
-    return emailInput;
-  }
-  setValid(emailInput, 'reset-pass-email-error');
-  return null;
-}
-
-/** Returns null if valid, or the first invalid input element. */
-function validateVerifyCodeForm(form) {
-  const input = form.querySelector('#verify-code-input');
-  const value = getInputValue(input);
-  if (!value) {
-    setInvalid(input, MESSAGES.required, 'verify-code-error');
-    return input;
-  }
-  if (!/^\d{6}$/.test(value)) {
-    setInvalid(input, MESSAGES.verificationCodeInvalid, 'verify-code-error');
-    return input;
-  }
-  setValid(input, 'verify-code-error');
-  return null;
-}
-
-/** Returns null if valid, or the first invalid input element. */
-function validateEnterNewPasswordForm(form) {
-  const newInput = form.querySelector('#new-password');
-  const confirmInput = form.querySelector('#confirm-new-password');
-  const newVal = getInputValue(newInput);
-  const confirmVal = getInputValue(confirmInput);
-  let firstInvalid = null;
-
-  if (!newVal) {
-    setInvalid(newInput, MESSAGES.required, 'new-password-error');
-    if (!firstInvalid) firstInvalid = newInput;
-  } else if (!validatePasswordStrength(newVal)) {
-    setInvalid(newInput, MESSAGES.passwordStrength, 'new-password-error');
-    if (!firstInvalid) firstInvalid = newInput;
-  } else {
-    setValid(newInput, 'new-password-error');
-  }
-
-  if (!confirmVal) {
-    setInvalid(confirmInput, MESSAGES.required, 'confirm-new-password-error');
-    if (!firstInvalid) firstInvalid = confirmInput;
-  } else if (newVal !== confirmVal) {
-    setInvalid(confirmInput, MESSAGES.passwordMismatch, 'confirm-new-password-error');
-    if (!firstInvalid) firstInvalid = confirmInput;
-  } else {
-    setValid(confirmInput, 'confirm-new-password-error');
-  }
-  return firstInvalid;
-}
-
-/** Returns null if valid, or the first invalid input element. */
-function validateSignupForm(form) {
-  const fields = [
-    { id: 'signup-first-name', errorId: 'signup-first-name-error', minLength: 2 },
-    { id: 'signup-last-name', errorId: 'signup-last-name-error', minLength: 2 },
-    { id: 'signup-email', errorId: 'signup-email-error', email: true },
-    { id: 'signup-password', errorId: 'signup-password-error', passwordStrength: true },
-  ];
-  let firstInvalid = null;
-
-  for (const { id, errorId, minLength, email, passwordStrength } of fields) {
-    const input = form.querySelector(`#${id}`);
-    const value = getInputValue(input);
-    if (!value) {
-      setInvalid(input, MESSAGES.required, errorId);
-      if (!firstInvalid) firstInvalid = input;
-    } else if (minLength && value.length < minLength) {
-      setInvalid(input, MESSAGES.nameMinLength, errorId);
-      if (!firstInvalid) firstInvalid = input;
-    } else if (email && !validateEmail(value)) {
-      setInvalid(input, MESSAGES.email, errorId);
-      if (!firstInvalid) firstInvalid = input;
-    } else if (passwordStrength && !validatePasswordStrength(value)) {
-      setInvalid(input, MESSAGES.passwordStrength, errorId);
-      if (!firstInvalid) firstInvalid = input;
-    } else {
-      setValid(input, errorId);
-    }
-  }
-
-  const confirmInput = form.querySelector('#signup-password-confirm');
-  const passVal = getInputValue(form.querySelector('#signup-password'));
-  const confirmVal = getInputValue(confirmInput);
-  if (!confirmVal) {
-    setInvalid(confirmInput, MESSAGES.required, 'signup-password-confirm-error');
-    if (!firstInvalid) firstInvalid = confirmInput;
-  } else if (passVal !== confirmVal) {
-    setInvalid(confirmInput, MESSAGES.passwordMismatch, 'signup-password-confirm-error');
-    if (!firstInvalid) firstInvalid = confirmInput;
-  } else {
-    setValid(confirmInput, 'signup-password-confirm-error');
-  }
-  return firstInvalid;
 }
 
 export function initPopupFlows() {
@@ -194,7 +104,7 @@ export function initPopupFlows() {
     if (signupForm) {
       signupForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        const firstInvalid = validateSignupForm(signupForm);
+        const firstInvalid = validateFormWithRules(signupForm, SIGNUP_RULES);
         if (firstInvalid) {
           firstInvalid.focus();
           return;
@@ -214,7 +124,7 @@ export function initPopupFlows() {
   if (resetPassForm) {
     resetPassForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      const firstInvalid = validateResetPassForm(resetPassForm);
+      const firstInvalid = validateFormWithRules(resetPassForm, RESET_PASS_RULES);
       if (firstInvalid) {
         firstInvalid.focus();
         return;
@@ -234,7 +144,7 @@ export function initPopupFlows() {
   if (verifyCodeForm) {
     verifyCodeForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      const firstInvalid = validateVerifyCodeForm(verifyCodeForm);
+      const firstInvalid = validateFormWithRules(verifyCodeForm, VERIFY_CODE_RULES);
       if (firstInvalid) {
         firstInvalid.focus();
         return;
@@ -259,7 +169,7 @@ export function initPopupFlows() {
   if (enterNewPasswordForm) {
     enterNewPasswordForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      const firstInvalid = validateEnterNewPasswordForm(enterNewPasswordForm);
+      const firstInvalid = validateFormWithRules(enterNewPasswordForm, ENTER_NEW_PASSWORD_RULES);
       if (firstInvalid) {
         firstInvalid.focus();
         return;

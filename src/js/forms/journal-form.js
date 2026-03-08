@@ -3,48 +3,14 @@
  * Logs form data to console on valid submit.
  */
 
-import {
-  MESSAGES,
-  validateEmail,
-  setInvalid,
-  setValid,
-  getInputValue,
-  clearAllFormErrors,
-} from './validation.js';
+import { validateFormWithRules, clearAllFormErrors, clearFieldErrorByTarget } from './validation.js';
 
 const FORM_SELECTOR = '.journal__top-form';
-const { required, email: emailMsg, nameMinLength } = MESSAGES;
 
-function validateForm(form) {
-  const nameInput = form.querySelector('#journal-name');
-  const emailInput = form.querySelector('#journal-email');
-
-  let firstInvalid = null;
-  const name = getInputValue(nameInput);
-  const email = getInputValue(emailInput);
-
-  if (!name) {
-    setInvalid(nameInput, required, 'journal-name-error');
-    if (!firstInvalid) firstInvalid = nameInput;
-  } else if (name.length < 2) {
-    setInvalid(nameInput, nameMinLength, 'journal-name-error');
-    if (!firstInvalid) firstInvalid = nameInput;
-  } else {
-    setValid(nameInput, 'journal-name-error');
-  }
-
-  if (!email) {
-    setInvalid(emailInput, required, 'journal-email-error');
-    if (!firstInvalid) firstInvalid = emailInput;
-  } else if (!validateEmail(email)) {
-    setInvalid(emailInput, emailMsg, 'journal-email-error');
-    if (!firstInvalid) firstInvalid = emailInput;
-  } else {
-    setValid(emailInput, 'journal-email-error');
-  }
-
-  return firstInvalid;
-}
+const JOURNAL_RULES = [
+  { id: 'journal-name', required: true, minLength: 2 },
+  { id: 'journal-email', required: true, email: true },
+];
 
 export function initJournalForm() {
   if (typeof document === 'undefined') return;
@@ -54,7 +20,7 @@ export function initJournalForm() {
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const firstInvalid = validateForm(form);
+    const firstInvalid = validateFormWithRules(form, JOURNAL_RULES);
     if (firstInvalid) {
       firstInvalid.focus();
       return;
@@ -66,7 +32,7 @@ export function initJournalForm() {
   });
 
   const clearOnChange = ({ target }) => {
-    if (target.matches('input')) setValid(target, target.id ? `${target.id}-error` : null);
+    if (target.matches('input')) clearFieldErrorByTarget(form, target);
   };
   form.addEventListener('input', clearOnChange);
   form.addEventListener('change', clearOnChange);

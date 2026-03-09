@@ -1,8 +1,19 @@
 /**
- * Profile / membership popup flow.
- * - "My membership" in header dropdown -> open membership-popup.
+ * Profile / membership and My Donations popup flows.
+ *
+ * MY DONATIONS FLOW (entry: header dropdown "My donations" -> donations-popup):
+ * - Donations (hub): "Change monthly donation amount" -> change-monthly-donation-popup;
+ *   "Set up monthly donation" -> monthly-donation-setup-popup;
+ *   "Cancel" (on active monthly) -> cancel-monthly-donation-confirm (.popup).
+ * - Change monthly donation: "Back" -> donations; form submit (valid) -> monthly-donation-updated (.popup).
+ * - Monthly donation updated: "Done" -> donations.
+ * - Monthly donation setup: "Back" -> donations; form submit (valid) -> donations.
+ * - Cancel monthly donation confirm: "Keep monthly donation" -> donations; "Cancel monthly donation" -> monthly-donation-canceled (.popup).
+ * - Monthly donation canceled: "Done" -> close and open donations (return to hub).
+ *
+ * MEMBERSHIP FLOW (entry: header dropdown "My membership" -> membership-popup):
  * - Membership: "Change membership level" -> change-membership-popup; "Cancel membership" -> cancel-membership-confirm (.popup).
- * - Change-membership: "Select" on a level -> open change-membership-details; "Back" -> membership-popup; "Continue" -> details (if level selected).
+ * - Change-membership: "Select" on a level -> change-membership-details; "Back" -> membership-popup; "Continue" -> details (if level selected).
  * - Change-membership-details: "Confirm" -> membership-level-updated (.popup); "Back" -> change-membership-popup.
  * - Cancel-membership-confirm: "Keep" -> close; "Cancel my membership" -> membership-canceled (.popup).
  * - Membership-canceled / membership-level-updated: "Done" -> close.
@@ -13,6 +24,9 @@ import {
   validateFormWithRules,
   clearAllFormErrors,
   clearFieldErrorByTarget,
+  setRadioGroupValid,
+  setValid,
+  clearErrorById,
 } from '../forms/validation.js';
 
 const OPEN_CLASS = 'is-open';
@@ -22,6 +36,9 @@ const PROFILE_BTN_SELECTOR = '.js-header-profile';
 
 const IDS = {
   membership: 'membership-popup-backdrop',
+  donations: 'donations-popup-backdrop',
+  changeMonthlyDonation: 'change-monthly-donation-popup-backdrop',
+  monthlyDonationSetup: 'monthly-donation-setup-popup-backdrop',
   accountDetails: 'account-details-popup-backdrop',
   accountChangePassword: 'account-change-password-popup-backdrop',
   changeMembership: 'change-membership-popup-backdrop',
@@ -29,6 +46,9 @@ const IDS = {
   cancelConfirm: 'cancel-membership-confirm-popup-backdrop',
   membershipCanceled: 'membership-canceled-popup-backdrop',
   levelUpdated: 'membership-level-updated-popup-backdrop',
+  cancelMonthlyDonationConfirm: 'cancel-monthly-donation-confirm-popup-backdrop',
+  monthlyDonationCanceled: 'monthly-donation-canceled-popup-backdrop',
+  monthlyDonationUpdated: 'monthly-donation-updated-popup-backdrop',
 };
 
 function closeProfilePopup(backdrop) {
@@ -127,6 +147,104 @@ export function initProfilePopups() {
     });
   }
 
+  // --- My Donations flow: hub = donations-popup; sub-flows = change amount, setup, cancel confirm/canceled ---
+  const openDonationsBtn = document.querySelector('.js-open-donations-popup');
+  if (openDonationsBtn) {
+    openDonationsBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeProfileDropdown();
+      openProfilePopup(IDS.donations);
+    });
+  }
+
+  const donationsPopup = document.getElementById(IDS.donations);
+  const changeMonthlyPopup = document.getElementById(IDS.changeMonthlyDonation);
+  const monthlySetupPopup = document.getElementById(IDS.monthlyDonationSetup);
+  if (donationsPopup) {
+    donationsPopup.querySelector('.js-open-change-monthly-donation')?.addEventListener('click', () => {
+      closeProfilePopup(donationsPopup);
+      openProfilePopup(IDS.changeMonthlyDonation);
+    });
+    donationsPopup.querySelector('.js-open-monthly-donation-setup')?.addEventListener('click', () => {
+      closeProfilePopup(donationsPopup);
+      openProfilePopup(IDS.monthlyDonationSetup);
+    });
+    donationsPopup.querySelector('.js-cancel-monthly-donation')?.addEventListener('click', () => {
+      closeProfilePopup(donationsPopup);
+      openSharedPopup(IDS.cancelMonthlyDonationConfirm);
+    });
+  }
+  if (changeMonthlyPopup) {
+    changeMonthlyPopup.querySelector('.js-back-to-donations')?.addEventListener('click', () => {
+      closeProfilePopup(changeMonthlyPopup);
+      openProfilePopup(IDS.donations);
+    });
+  }
+  if (monthlySetupPopup) {
+    monthlySetupPopup.querySelector('.js-back-to-donations')?.addEventListener('click', () => {
+      closeProfilePopup(monthlySetupPopup);
+      openProfilePopup(IDS.donations);
+    });
+  }
+
+  const changeMonthlyForm = document.querySelector('.js-change-monthly-donation-form');
+  if (changeMonthlyForm && changeMonthlyPopup) {
+    updateAmountDueState(changeMonthlyForm, 'changeMonthlyAmount', 'change-monthly-amount-due', 'change-monthly-amount-due-error');
+    changeMonthlyForm.addEventListener('change', (e) => {
+      if (e.target.matches('input[name="changeMonthlyAmount"]')) {
+        updateAmountDueState(changeMonthlyForm, 'changeMonthlyAmount', 'change-monthly-amount-due', 'change-monthly-amount-due-error');
+      } else if (e.target.matches('input, select, textarea')) {
+        clearFieldErrorByTarget(changeMonthlyForm, e.target);
+      }
+    });
+    changeMonthlyForm.addEventListener('input', (e) => {
+      if (e.target.matches('input, select, textarea')) clearFieldErrorByTarget(changeMonthlyForm, e.target);
+    });
+    changeMonthlyForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const firstInvalid = validateFormWithRules(changeMonthlyForm, CHANGE_MONTHLY_DONATION_RULES);
+      if (firstInvalid) {
+        firstInvalid.focus();
+        return;
+      }
+      console.log('Change monthly donation form data:', Object.fromEntries(new FormData(changeMonthlyForm).entries()));
+      changeMonthlyForm.reset();
+      clearAllFormErrors(changeMonthlyForm);
+      updateAmountDueState(changeMonthlyForm, 'changeMonthlyAmount', 'change-monthly-amount-due', 'change-monthly-amount-due-error');
+      closeProfilePopup(changeMonthlyPopup);
+      openSharedPopup(IDS.monthlyDonationUpdated);
+    });
+  }
+
+  const monthlySetupForm = document.querySelector('.js-monthly-donation-setup-form');
+  if (monthlySetupForm && monthlySetupPopup) {
+    updateAmountDueState(monthlySetupForm, 'monthlySetupAmount', 'monthly-setup-amount-due', 'monthly-setup-amount-due-error');
+    monthlySetupForm.addEventListener('change', (e) => {
+      if (e.target.matches('input[name="monthlySetupAmount"]')) {
+        updateAmountDueState(monthlySetupForm, 'monthlySetupAmount', 'monthly-setup-amount-due', 'monthly-setup-amount-due-error');
+      } else if (e.target.matches('input, select, textarea')) {
+        clearFieldErrorByTarget(monthlySetupForm, e.target);
+      }
+    });
+    monthlySetupForm.addEventListener('input', (e) => {
+      if (e.target.matches('input, select, textarea')) clearFieldErrorByTarget(monthlySetupForm, e.target);
+    });
+    monthlySetupForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const firstInvalid = validateFormWithRules(monthlySetupForm, MONTHLY_SETUP_RULES);
+      if (firstInvalid) {
+        firstInvalid.focus();
+        return;
+      }
+      console.log('Monthly donation setup form data:', Object.fromEntries(new FormData(monthlySetupForm).entries()));
+      monthlySetupForm.reset();
+      clearAllFormErrors(monthlySetupForm);
+      updateAmountDueState(monthlySetupForm, 'monthlySetupAmount', 'monthly-setup-amount-due', 'monthly-setup-amount-due-error');
+      closeProfilePopup(monthlySetupPopup);
+      openProfilePopup(IDS.donations);
+    });
+  }
+
   const ACCOUNT_DETAILS_RULES = [
     { id: 'account-details-first-name', required: true, minLength: 2 },
     { id: 'account-details-last-name', required: true, minLength: 2 },
@@ -137,6 +255,58 @@ export function initProfilePopups() {
     { id: 'account-change-password-current', required: true },
     { id: 'account-change-password-new', required: true, passwordStrength: true },
   ];
+
+  const CHANGE_MONTHLY_DONATION_RULES = [
+    { type: 'radio', name: 'changeMonthlyAmount', errorId: 'changeMonthlyAmount-error' },
+    {
+      id: 'change-monthly-amount-due',
+      errorId: 'change-monthly-amount-due-error',
+      required: true,
+      amount: true,
+      when: (form) => form.querySelector('input[name="changeMonthlyAmount"]:checked')?.value === 'other',
+    },
+  ];
+
+  const MONTHLY_SETUP_RULES = [
+    { type: 'radio', name: 'monthlySetupAmount', errorId: 'monthlySetupAmount-error' },
+    {
+      id: 'monthly-setup-amount-due',
+      errorId: 'monthly-setup-amount-due-error',
+      required: true,
+      amount: true,
+      when: (form) => form.querySelector('input[name="monthlySetupAmount"]:checked')?.value === 'other',
+    },
+    { id: 'monthly-setup-first-name', required: true, minLength: 2 },
+    { id: 'monthly-setup-last-name', required: true, minLength: 2 },
+    { id: 'monthly-setup-email', required: true, email: true },
+    {
+      type: 'select',
+      id: 'monthly-setup-country',
+      errorId: 'monthly-setup-country-error',
+      wrapperSelector: '[data-select-native-id="monthly-setup-country"]',
+    },
+    { id: 'monthly-setup-city', required: true },
+    { id: 'monthly-setup-address', required: true },
+    { id: 'monthly-setup-postcode', required: true },
+  ];
+
+  function updateAmountDueState(form, radioName, amountDueId, errorId) {
+    const amountDueInput = form.querySelector(`#${amountDueId}`);
+    const isOther = form.querySelector(`input[name="${radioName}"][value="other"]`)?.checked ?? false;
+    if (!amountDueInput) return;
+    if (isOther) {
+      amountDueInput.removeAttribute('disabled');
+      amountDueInput.setAttribute('required', '');
+      amountDueInput.setAttribute('aria-required', 'true');
+    } else {
+      amountDueInput.setAttribute('disabled', '');
+      amountDueInput.removeAttribute('required');
+      amountDueInput.removeAttribute('aria-required');
+      amountDueInput.value = '';
+      clearErrorById(errorId);
+      setValid(amountDueInput, errorId);
+    }
+  }
 
   const accountDetailsForm = document.querySelector('.js-account-details-form');
   const accountDetailsBackdrop = document.getElementById(IDS.accountDetails);
@@ -243,5 +413,34 @@ export function initProfilePopups() {
   const levelUpdatedPopup = document.getElementById(IDS.levelUpdated);
   if (levelUpdatedPopup) {
     levelUpdatedPopup.querySelector('.js-membership-level-updated-done')?.addEventListener('click', () => closePopup(levelUpdatedPopup));
+  }
+
+  // My Donations: cancel confirm and canceled success (.popup)
+  const cancelMonthlyDonationConfirmPopup = document.getElementById(IDS.cancelMonthlyDonationConfirm);
+  if (cancelMonthlyDonationConfirmPopup) {
+    cancelMonthlyDonationConfirmPopup.querySelector('.js-keep-monthly-donation')?.addEventListener('click', () => {
+      closePopup(cancelMonthlyDonationConfirmPopup);
+      openProfilePopup(IDS.donations);
+    });
+    cancelMonthlyDonationConfirmPopup.querySelector('.js-cancel-monthly-donation-confirm')?.addEventListener('click', () => {
+      closePopup(cancelMonthlyDonationConfirmPopup);
+      openSharedPopup(IDS.monthlyDonationCanceled);
+    });
+  }
+
+  const monthlyDonationCanceledPopup = document.getElementById(IDS.monthlyDonationCanceled);
+  if (monthlyDonationCanceledPopup) {
+    monthlyDonationCanceledPopup.querySelector('.js-monthly-donation-canceled-done')?.addEventListener('click', () => {
+      closePopup(monthlyDonationCanceledPopup);
+      openProfilePopup(IDS.donations);
+    });
+  }
+
+  const monthlyDonationUpdatedPopup = document.getElementById(IDS.monthlyDonationUpdated);
+  if (monthlyDonationUpdatedPopup) {
+    monthlyDonationUpdatedPopup.querySelector('.js-monthly-donation-updated-done')?.addEventListener('click', () => {
+      closePopup(monthlyDonationUpdatedPopup);
+      openProfilePopup(IDS.donations);
+    });
   }
 }

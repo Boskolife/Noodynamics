@@ -71,7 +71,7 @@ input[type='submit'] {
     color: $color-white-100;
     padding-bottom: 4px;
     height: 26px;
-    
+
     @include placeholder {
       color: $color-white-80;
       text-transform: uppercase;
@@ -146,7 +146,7 @@ input[type='submit'] {
     border: 1px solid $color-white-20;
     color: $color-white-100;
     border-radius: 4px;
-    padding: 12px 14px;
+    padding: 12px 14px 14px 14px;
     font-size: 14px;
 
     @include placeholder {
@@ -177,6 +177,34 @@ input[type='submit'] {
     &:empty {
       display: none;
     }
+  }
+
+  #monthlySetupAmount-error{
+    margin-top: 8px;
+  }
+
+  // Amount due: always show $ at the start of the input
+  &__input-with-prefix {
+    position: relative;
+    display: block;
+    width: 100%;
+  }
+
+  &__input-prefix {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: $color-white-100;
+    z-index: 1;
+  }
+
+  &__input-with-prefix input {
+    padding-left: 28px;
   }
 
   textarea {

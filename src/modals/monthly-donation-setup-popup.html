@@ -1,0 +1,128 @@
+<div class="profile-popup profile-popup--monthly-donation-setup" id="monthly-donation-setup-popup-backdrop" aria-hidden="true">
+    <div class="profile-popup__overlay" aria-hidden="true"></div>
+    <div class="profile-popup__window" role="dialog" aria-modal="true" aria-labelledby="monthly-donation-setup-popup-title">
+        <div class="profile-popup__header">
+            <h2 id="monthly-donation-setup-popup-title" class="profile-popup__header-title">
+                <button type="button" class="profile-popup__header-icon js-back-to-donations" aria-label="Back">
+                    <img src="/icons/arrow-back.svg" alt="" width="24" height="24">
+                </button>
+                Monthly donation
+            </h2>
+            <button type="button" class="profile-popup__close" aria-label="Close popup">
+                <img src="/icons/cross.svg" alt="" width="24" height="24">
+            </button>
+        </div>
+        <div class="profile-popup__inner">
+            <h3 class="profile-popup__inner-title">Set Up Monthly Donation</h3>
+            <form class="profile-popup__form form-card js-monthly-donation-setup-form" novalidate>
+                <span id="monthly-setup-amount-label" class="form-card__label">Select donation amount</span>
+                <div class="make-donation__amount-group form-card__group-amount profile-popup__amount-group" role="group" aria-labelledby="monthly-setup-amount-label">
+                    <label class="make-donation__amount-option">
+                        <input type="radio" name="monthlySetupAmount" value="20" class="make-donation__amount-input">
+                        <span class="make-donation__amount-button">$20</span>
+                    </label>
+                    <label class="make-donation__amount-option">
+                        <input type="radio" name="monthlySetupAmount" value="50" class="make-donation__amount-input">
+                        <span class="make-donation__amount-button">$50</span>
+                    </label>
+                    <label class="make-donation__amount-option">
+                        <input type="radio" name="monthlySetupAmount" value="100" class="make-donation__amount-input">
+                        <span class="make-donation__amount-button">$100</span>
+                    </label>
+                    <label class="make-donation__amount-option">
+                        <input type="radio" name="monthlySetupAmount" value="500" class="make-donation__amount-input">
+                        <span class="make-donation__amount-button">$500</span>
+                    </label>
+                    <label class="make-donation__amount-option">
+                        <input type="radio" name="monthlySetupAmount" value="1000" class="make-donation__amount-input">
+                        <span class="make-donation__amount-button">$1000</span>
+                    </label>
+                    <label class="make-donation__amount-option">
+                        <input type="radio" name="monthlySetupAmount" value="other" class="make-donation__amount-input">
+                        <span class="make-donation__amount-button">Other</span>
+                    </label>
+                </div>
+                <span id="monthlySetupAmount-error" class="form-card__error" role="alert"></span>
+                <div class="form-card__group">
+                    <label class="form-card__label" for="monthly-setup-amount-due">Amount due
+                        <span class="form-card__input-with-prefix">
+                            <span class="form-card__input-prefix" aria-hidden="true">$</span>
+                            <input type="text" id="monthly-setup-amount-due" name="amountDue" class="form-card__input make-donation__form-input" placeholder="0" inputmode="decimal" disabled>
+                        </span>
+                        <span id="monthly-setup-amount-due-error" class="form-card__error" role="alert"></span>
+                    </label>
+                </div>
+                <div class="form-card__group">
+                    <label class="form-card__label form-card__label--left" for="monthly-setup-comment">Leave a comment (optional)
+                        <textarea id="monthly-setup-comment" name="comment" class="form-card__input make-donation__form-textarea" placeholder="Additional comments" rows="3"></textarea>
+                    </label>
+                </div>
+                <h3 class="profile-popup__inner-title profile-popup__inner-title--section">Billing Address</h3>
+                <div class="form-card__group form-card__group--row">
+                    <label class="form-card__label form-card__label--left" for="monthly-setup-first-name">First name
+                        <input type="text" id="monthly-setup-first-name" name="firstName" class="form-card__input" placeholder="Enter your first name" required autocomplete="given-name">
+                        <span id="monthly-setup-first-name-error" class="form-card__error" role="alert"></span>
+                    </label>
+                    <label class="form-card__label form-card__label--left" for="monthly-setup-last-name">Last name
+                        <input type="text" id="monthly-setup-last-name" name="lastName" class="form-card__input" placeholder="Enter your last name" required autocomplete="family-name">
+                        <span id="monthly-setup-last-name-error" class="form-card__error" role="alert"></span>
+                    </label>
+                </div>
+                <div class="form-card__group form-card__group--row">
+                    <label class="form-card__label form-card__label--left" for="monthly-setup-email">Email
+                        <input type="email" id="monthly-setup-email" name="email" class="form-card__input" placeholder="Enter your email" required autocomplete="email">
+                        <span id="monthly-setup-email-error" class="form-card__error" role="alert"></span>
+                    </label>
+                    <label class="form-card__label form-card__label--left" for="monthly-setup-phone">Phone number (optional)
+                        <input type="tel" id="monthly-setup-phone" name="phone" class="form-card__input" placeholder="Enter your phone number" autocomplete="tel">
+                    </label>
+                </div>
+                <div class="form-card__group form-card__group--row">
+                    <label class="form-card__label form-card__label--left" for="monthly-setup-country">Country
+                        <select id="monthly-setup-country" name="country" class="form-card__input" hidden required>
+                            <option value="">Select country</option>
+                            <option value="US">United States</option>
+                            <option value="CA">Canada</option>
+                            <option value="GB">United Kingdom</option>
+                            <option value="AU">Australia</option>
+                            <option value="DE">Germany</option>
+                            <option value="FR">France</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <div class="make-donation__select select" data-select-native-id="monthly-setup-country">
+                            <button type="button" class="select__trigger" aria-expanded="false" aria-haspopup="listbox" aria-label="Select country">
+                                <span class="select__value">Select country</span>
+                                <span class="select__arrow" aria-hidden="true"><img src="/icons/arrow-down.svg" alt=""></span>
+                            </button>
+                            <ul class="select__dropdown" role="listbox" hidden>
+                                <li class="select__option" role="option" data-value="US">United States</li>
+                                <li class="select__option" role="option" data-value="CA">Canada</li>
+                                <li class="select__option" role="option" data-value="GB">United Kingdom</li>
+                                <li class="select__option" role="option" data-value="AU">Australia</li>
+                                <li class="select__option" role="option" data-value="DE">Germany</li>
+                                <li class="select__option" role="option" data-value="FR">France</li>
+                                <li class="select__option" role="option" data-value="other">Other</li>
+                            </ul>
+                        </div>
+                        <span id="monthly-setup-country-error" class="form-card__error" role="alert"></span>
+                    </label>
+                    <label class="form-card__label form-card__label--left" for="monthly-setup-city">City
+                        <input type="text" id="monthly-setup-city" name="city" class="form-card__input" placeholder="Enter your city" required autocomplete="address-level2">
+                        <span id="monthly-setup-city-error" class="form-card__error" role="alert"></span>
+                    </label>
+                </div>
+                <div class="form-card__group form-card__group--row">
+                    <label class="form-card__label form-card__label--left" for="monthly-setup-address">Address
+                        <input type="text" id="monthly-setup-address" name="address" class="form-card__input" placeholder="Enter your address" required autocomplete="street-address">
+                        <span id="monthly-setup-address-error" class="form-card__error" role="alert"></span>
+                    </label>
+                    <label class="form-card__label form-card__label--left" for="monthly-setup-postcode">Postcode
+                        <input type="text" id="monthly-setup-postcode" name="postcode" class="form-card__input" placeholder="Enter your postcode" required autocomplete="postal-code">
+                        <span id="monthly-setup-postcode-error" class="form-card__error" role="alert"></span>
+                    </label>
+                </div>
+                <button type="submit" class="profile-popup__button profile-popup__button--save btn btn--secondary">Continue to secure payment</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,89 @@
+<div class="profile-popup profile-popup--donations" id="donations-popup-backdrop" aria-hidden="true">
+    <div class="profile-popup__overlay" aria-hidden="true"></div>
+    <div class="profile-popup__window" role="dialog" aria-modal="true" aria-labelledby="donations-popup-title">
+        <div class="profile-popup__header">
+            <h2 id="donations-popup-title" class="profile-popup__header-title">My donations</h2>
+            <button type="button" class="profile-popup__close" aria-label="Close popup">
+                <img src="/icons/cross.svg" alt="" width="24" height="24">
+            </button>
+        </div>
+        <div class="profile-popup__inner">
+            <div class="profile-popup__donations-summary">
+                <div class="profile-popup__donations-card">
+                    <div class="profile-popup__donations-card-icon-wrap">
+                        <img src="/icons/coin.svg" alt="" class="profile-popup__donations-card-icon" width="20"
+                            height="20">
+                        <span class="profile-popup__donations-card-label">Total donated</span>
+                    </div>
+                    <span class="profile-popup__donations-card-amount">$225.00</span>
+                </div>
+                <div class="profile-popup__donations-card">
+                    <div class="profile-popup__donations-card-icon-wrap">
+                        <img src="/icons/calendar-gray.svg" alt="" class="profile-popup__donations-card-icon" width="20"
+                            height="20">
+                        <span class="profile-popup__donations-card-label">Monthly donation</span>
+                    </div>
+                    <span class="profile-popup__donations-card-amount">$25.00 <i>per month</i></span>
+                    <span class="profile-popup__donations-card-status">Active</span>
+                </div>
+            </div>
+            <div class="profile-popup__content profile-popup__content--active-donation">
+                <span class="profile-popup__content-label">Active monthly donation</span>
+                <span class="profile-popup__content-price">$25/month</span>
+                <span class="profile-popup__content-next-billing">Next donation: February 15, 2026</span>
+                <button type="button"
+                    class="profile-popup__button profile-popup__button--cancel js-cancel-monthly-donation">Cancel</button>
+            </div>
+            <button type="button"
+                class="profile-popup__button profile-popup__button--change btn btn--primary js-open-change-monthly-donation">Change
+                monthly donation amount</button>
+            <div class="profile-popup__donations-promo">
+                {{{ picture "/images/donation-bg.png" alt="Description" class="profile-popup__donations-promo-img"}}}
+                <div class="profile-popup__donations-promo-content">
+                    <h3 class="profile-popup__donations-promo-title">Make a Bigger Impact with Monthly Giving</h3>
+                    <p class="profile-popup__donations-promo-text">Set up a recurring monthly donation to provide sustained support for our mission. <br> 
+                        Monthly donations help us plan long-term projects and create lasting change.</p>
+                    <button type="button" class="profile-popup__donations-promo-btn btn btn--primary js-open-monthly-donation-setup">Set Up Monthly Donation</button>
+                </div>
+            </div>
+            <h3 class="profile-popup__donations-history-title">Donation history</h3>
+            <ul class="profile-popup__donations-history" aria-label="Donation history">
+                <li class="profile-popup__donations-history-item">
+                    <div class="profile-popup__donations-history-item-col">
+                        <div class="profile-popup__donations-history-item-info-wrap">
+                            <span class="profile-popup__donations-history-amount">$25.00</span>
+                            <span class="profile-popup__donations-history-type">Monthly</span>
+                        </div>
+                        <time class="profile-popup__donations-history-date" datetime="2025-11-15">November 15, 2025</time>
+                    </div>
+                    <span class="profile-popup__donations-history-status">Completed</span>
+                </li>
+                <li class="profile-popup__donations-history-item">
+                    <div class="profile-popup__donations-history-item-col">
+                        <div class="profile-popup__donations-history-item-info-wrap">
+                            <span class="profile-popup__donations-history-amount">$25.00</span>
+                            <span class="profile-popup__donations-history-type">Monthly</span>
+                        </div>
+                        <time class="profile-popup__donations-history-date" datetime="2025-11-15">November 15, 2025</time>
+                    </div>
+                    <span class="profile-popup__donations-history-status">Completed</span>
+                </li>
+                <li class="profile-popup__donations-history-item">
+                    <div class="profile-popup__donations-history-item-col">
+                        <div class="profile-popup__donations-history-item-info-wrap">
+                            <span class="profile-popup__donations-history-amount">$25.00</span>
+                            <span class="profile-popup__donations-history-type">Monthly</span>
+                        </div>
+                        <time class="profile-popup__donations-history-date" datetime="2025-11-15">November 15, 2025</time>
+                    </div>
+                    <span class="profile-popup__donations-history-status">Completed</span>
+                </li>
+            </ul>
+            <div class="profile-popup__donations-thankyou">
+                <h3 class="profile-popup__donations-thankyou-title">Thank you for your generous support!</h3>
+                <p class="profile-popup__donations-thankyou-text">Your contributions help us continue our mission to
+                    explore the deep structures of cultural evolution.</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -49,8 +49,11 @@
                 <span id="donation-amount-error" class="make-donation__form-error form-card__error" role="alert"></span>
             </div>
             <label for="donation-amount-due" class="make-donation__form-label form-card__label">amount due
-                <input type="text" id="donation-amount-due" name="amountDue" class="make-donation__form-input"
-                    placeholder="enter amount" inputmode="decimal" autocomplete="off" disabled>
+                <span class="form-card__input-with-prefix">
+                    <span class="form-card__input-prefix" aria-hidden="true">$</span>
+                    <input type="text" id="donation-amount-due" name="amountDue" class="make-donation__form-input"
+                        placeholder="0" inputmode="decimal" autocomplete="off" disabled>
+                </span>
                 <span id="donation-amount-due-error" class="make-donation__form-error form-card__error" role="alert"></span>
             </label>
             <label for="donation-comment" class="make-donation__form-label form-card__label">

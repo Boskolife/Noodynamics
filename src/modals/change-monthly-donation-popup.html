@@ -1,0 +1,83 @@
+<div class="profile-popup profile-popup--change-monthly-donation" id="change-monthly-donation-popup-backdrop"
+    aria-hidden="true">
+    <div class="profile-popup__overlay" aria-hidden="true"></div>
+    <div class="profile-popup__window" role="dialog" aria-modal="true"
+        aria-labelledby="change-monthly-donation-popup-title">
+        <div class="profile-popup__header">
+            <h2 id="change-monthly-donation-popup-title" class="profile-popup__header-title">
+                <button type="button" class="profile-popup__header-icon js-back-to-donations" aria-label="Back">
+                    <img src="/icons/arrow-back.svg" alt="" width="24" height="24">
+                </button>
+                Change monthly donation amount
+            </h2>
+            <button type="button" class="profile-popup__close" aria-label="Close popup">
+                <img src="/icons/cross.svg" alt="" width="24" height="24">
+            </button>
+        </div>
+        <div class="profile-popup__inner">
+            <h3 class="profile-popup__inner-subtitle">Select New Monthly Donation Amount</h3>
+            <div class="profile-popup__content profile-popup__content--current-monthly">
+                <div class="profile-popup__content-icon-wrap">
+                    <img src="/icons/calendar-gray.svg" alt="" class="profile-popup__content-icon" width="20"
+                        height="20">
+                    <span class="profile-popup__content-label">Current monthly donation</span>
+                </div>
+                <span class="profile-popup__content-price">$25.00 <i>per month</i></span>
+            </div>
+            <form class="profile-popup__form form-card js-change-monthly-donation-form" novalidate>
+                <span id="change-monthly-amount-label" class="form-card__label">Select donation amount</span>
+                <div class="make-donation__amount-group form-card__group-amount profile-popup__amount-group"
+                    role="group" aria-labelledby="change-monthly-amount-label">
+                    <label class="make-donation__amount-option">
+                        <input type="radio" name="changeMonthlyAmount" value="20" class="make-donation__amount-input">
+                        <span class="make-donation__amount-button">$20</span>
+                    </label>
+                    <label class="make-donation__amount-option">
+                        <input type="radio" name="changeMonthlyAmount" value="50" class="make-donation__amount-input">
+                        <span class="make-donation__amount-button">$50</span>
+                    </label>
+                    <label class="make-donation__amount-option">
+                        <input type="radio" name="changeMonthlyAmount" value="100" class="make-donation__amount-input">
+                        <span class="make-donation__amount-button">$100</span>
+                    </label>
+                    <label class="make-donation__amount-option">
+                        <input type="radio" name="changeMonthlyAmount" value="500" class="make-donation__amount-input">
+                        <span class="make-donation__amount-button">$500</span>
+                    </label>
+                    <label class="make-donation__amount-option">
+                        <input type="radio" name="changeMonthlyAmount" value="1000" class="make-donation__amount-input">
+                        <span class="make-donation__amount-button">$1000</span>
+                    </label>
+                    <label class="make-donation__amount-option">
+                        <input type="radio" name="changeMonthlyAmount" value="other"
+                            class="make-donation__amount-input">
+                        <span class="make-donation__amount-button">Other</span>
+                    </label>
+                </div>
+                <span id="changeMonthlyAmount-error" class="form-card__error" role="alert"></span>
+                <div class="form-card__group">
+                    <label class="form-card__label form-card__label--left" for="change-monthly-amount-due">Amount due
+                        <span class="form-card__input-with-prefix">
+                            <span class="form-card__input-prefix" aria-hidden="true">$</span>
+                            <input type="text" id="change-monthly-amount-due" name="amountDue"
+                                class="form-card__input make-donation__form-input" placeholder="0" inputmode="decimal"
+                                disabled>
+                        </span>
+                        <span id="change-monthly-amount-due-error" class="form-card__error" role="alert"></span>
+                    </label>
+                </div>
+                <div class="form-card__group">
+                    <label class="form-card__label form-card__label--left" for="change-monthly-comment">Leave a comment
+                        (optional)
+                        <textarea id="change-monthly-comment" name="comment"
+                            class="form-card__input make-donation__form-textarea" placeholder="Additional comments"
+                            rows="3"></textarea>
+                    </label>
+                </div>
+                <p class="profile-popup__form-note">Your monthly donation amount will change on March 24, 2026. <br> You won't be charged today.
+                </p>
+                <button type="submit" class="profile-popup__button profile-popup__button--save btn btn--secondary">update monthly donation amount</button>
+            </form>
+        </div>
+    </div>
+</div>

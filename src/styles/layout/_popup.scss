@@ -42,21 +42,25 @@
   &--enter-new-password,
   &--reset-complete,
   &--reset-pass,
-  &--verify-code {
+  &--verify-code,
+  &--cancel-membership-confirm,
+  &--cancel-monthly-donation-confirm,
+  &--monthly-donation-canceled,
+  &--monthly-donation-updated {
     .popup__text {
       text-align: center;
       font-weight: 300;
       font-size: 16px;
+      margin-bottom: 0;
     }
   }
 
-  &--cancel-membership-confirm {
+  &--cancel-membership-confirm,
+  &--cancel-monthly-donation-confirm {
     .popup__form-button {
       margin-top: 0 !important;
     }
   }
-
-
 }
 
 .popup__overlay {
@@ -245,6 +249,7 @@
   }
 
   &-button {
+    padding: 13px;
     margin-bottom: 40px;
     width: 100%;
 

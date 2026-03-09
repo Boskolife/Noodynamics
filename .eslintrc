@@ -1,9 +1,13 @@
 {
-  "env":[
-    "browser",
-    "node",
-    "es6"
-  ],
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2020": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2022,
+    "sourceType": "module"
+  },
   "extends": [
     "eslint:recommended",
     "plugin:import/recommended",
@@ -13,11 +17,18 @@
     "import/resolver": {
       "node": {
         "paths": ["src"],
-        "extensions": [".js"]
+        "extensions": [".js", ".css"]
       }
     }
   },
   "rules": {
+    "import/no-unresolved": [
+      "error",
+      {
+        "ignore": ["^swiper/"]
+      }
+    ],
+  
     "no-unused-vars": [
       "error",
       {

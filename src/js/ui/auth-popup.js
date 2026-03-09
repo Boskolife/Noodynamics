@@ -6,7 +6,6 @@
 
 import { initModalManager, openModalById, closeModal } from './modal-manager.js';
 
-const OPEN_CLASS = 'is-open';
 const AUTH_BACKDROP_ID = 'auth-popup-backdrop';
 const OPEN_BTN_SELECTOR = '.js-open-auth-popup';
 const PROFILE_BTN_SELECTOR = '.js-header-profile';

@@ -1,6 +1,6 @@
 /**
  * Shared modal (popup) styles.
- * Use .popup for backdrop, .popup__window for dialog, .popup__close, .popup__overlay.
+ * Use .popup for backdrop, .popup__window for dialog, .popup__overlay.
  * Content: .popup__header, .popup__inner, .popup__title, .popup__text, .popup__form.
  * Add modifier on backdrop for modal-specific overrides: .popup--auth, .popup--thanks-support.
  */
@@ -81,33 +81,6 @@
   border: 1px solid $color-white-60;
   overflow: auto;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-}
-
-.popup__close {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  padding: 0;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  color: $color-white-100;
-  transition: opacity 0.2s ease;
-
-  &:hover {
-    opacity: 0.8;
-  }
-
-  img {
-    display: block;
-    filter: invert(1) brightness(2);
-  }
 }
 
 .popup__header {

@@ -25,12 +25,10 @@ import {
   validateFormWithRules,
   clearAllFormErrors,
   clearFieldErrorByTarget,
-  setRadioGroupValid,
   setValid,
   clearErrorById,
 } from '../forms/validation.js';
 
-const PROFILE_POPUP_SELECTOR = '.profile-popup';
 const PROFILE_DROPDOWN_ID = 'header-profile-dropdown';
 const PROFILE_BTN_SELECTOR = '.js-header-profile';
 

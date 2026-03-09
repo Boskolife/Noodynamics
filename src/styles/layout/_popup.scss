@@ -40,7 +40,8 @@
   &--cancel-membership-confirm,
   &--cancel-monthly-donation-confirm,
   &--monthly-donation-canceled,
-  &--monthly-donation-updated {
+  &--monthly-donation-updated,
+  &--membership-canceled {
     .popup__text {
       text-align: center;
       font-weight: 300;

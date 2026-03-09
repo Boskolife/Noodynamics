@@ -20,6 +20,7 @@
  */
 
 import { closePopup } from './auth-popup.js';
+import { initModalManager, openModalById, closeModalById } from './modal-manager.js';
 import {
   validateFormWithRules,
   clearAllFormErrors,
@@ -29,7 +30,6 @@ import {
   clearErrorById,
 } from '../forms/validation.js';
 
-const OPEN_CLASS = 'is-open';
 const PROFILE_POPUP_SELECTOR = '.profile-popup';
 const PROFILE_DROPDOWN_ID = 'header-profile-dropdown';
 const PROFILE_BTN_SELECTOR = '.js-header-profile';
@@ -51,47 +51,17 @@ const IDS = {
   monthlyDonationUpdated: 'monthly-donation-updated-popup-backdrop',
 };
 
-function closeProfilePopup(backdrop) {
-  if (!backdrop) return;
-  if (backdrop.contains(document.activeElement)) {
-    (document.activeElement instanceof HTMLElement) && document.activeElement.blur();
-  }
-  backdrop.classList.remove(OPEN_CLASS);
-  backdrop.setAttribute('aria-hidden', 'true');
-  document.body.style.overflow = '';
-}
-
-function closeOpenProfilePopups() {
-  document.querySelectorAll(`${PROFILE_POPUP_SELECTOR}.${OPEN_CLASS}`).forEach(closeProfilePopup);
-}
-
-function closeOpenAuthPopups() {
-  const open = document.querySelector('.popup.is-open');
-  if (open) closePopup(open);
-}
-
 function openProfilePopup(id) {
-  closeOpenAuthPopups();
-  closeOpenProfilePopups();
-  const backdrop = document.getElementById(id);
-  if (!backdrop) return;
-  backdrop.classList.add(OPEN_CLASS);
-  backdrop.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
-  const focusTarget = backdrop.querySelector('button:not(.profile-popup__close), [href], input');
-  focusTarget?.focus();
+  openModalById(id);
 }
 
 function openSharedPopup(id) {
-  closeOpenProfilePopups();
-  closeOpenAuthPopups();
-  const backdrop = document.getElementById(id);
-  if (!backdrop) return;
-  backdrop.classList.add(OPEN_CLASS);
-  backdrop.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
-  const focusTarget = backdrop.querySelector('button:not(.popup__close), [href], input');
-  focusTarget?.focus();
+  openModalById(id);
+}
+
+function closeProfilePopup(backdrop) {
+  if (!backdrop?.id) return;
+  closeModalById(backdrop.id);
 }
 
 function closeProfileDropdown() {
@@ -102,23 +72,11 @@ function closeProfileDropdown() {
 }
 
 export function initProfilePopups() {
+  initModalManager();
   const membershipPopup = document.getElementById(IDS.membership);
   const changeMembershipPopup = document.getElementById(IDS.changeMembership);
   const changeDetailsPopup = document.getElementById(IDS.changeMembershipDetails);
-
-  document.querySelectorAll(PROFILE_POPUP_SELECTOR).forEach((backdrop) => {
-    backdrop.querySelector('.profile-popup__overlay')?.addEventListener('click', () => closeProfilePopup(backdrop));
-    backdrop.querySelector('.profile-popup__close')?.addEventListener('click', () => closeProfilePopup(backdrop));
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key !== 'Escape') return;
-    const openProfile = document.querySelector(`${PROFILE_POPUP_SELECTOR}.${OPEN_CLASS}`);
-    if (openProfile) {
-      e.preventDefault();
-      closeProfilePopup(openProfile);
-    }
-  });
+  // Close logic (overlay/close/Escape) is handled by modal-manager.
 
   const openMembershipBtn = document.querySelector('.js-open-membership-popup');
   if (openMembershipBtn) {

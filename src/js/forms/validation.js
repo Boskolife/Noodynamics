@@ -288,3 +288,31 @@ export function clearFieldErrorByTarget(form, target) {
   }
   if (id) setValid(target, `${id}-error`);
 }
+
+function attachDigitsOnlyMask(input) {
+  if (!input) return;
+  input.addEventListener('input', () => {
+    const raw = input.value;
+    const cleaned = raw.replace(/\D+/g, '');
+    if (raw === cleaned) return;
+    const start = input.selectionStart;
+    const diff = raw.length - cleaned.length;
+    input.value = cleaned;
+    if (typeof start === 'number' && input === document.activeElement) {
+      const newPos = Math.max(0, start - diff);
+      try {
+        input.setSelectionRange(newPos, newPos);
+      } catch {
+        // ignore selection errors
+      }
+    }
+  });
+}
+
+/** Apply “digits only” mask to all amount-due inputs. */
+export function initAmountDueNumericMask() {
+  if (typeof document === 'undefined') return;
+  const inputs = document.querySelectorAll('input[id$="amount-due"]');
+  inputs.forEach((input) => attachDigitsOnlyMask(input));
+}
+

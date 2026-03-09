@@ -22,6 +22,7 @@ import {
   initJournalForm,
   initMakeDonationForm,
 } from './forms/index.js';
+import { initAmountDueNumericMask } from './forms/validation.js';
 import { initEventsFilter } from './events/index.js';
 
 const FOOTER_YEAR_SELECTOR = '.footer__bottom-year';
@@ -49,6 +50,7 @@ function initApp() {
   initFooterForm();
   initJournalForm();
   initMakeDonationForm();
+  initAmountDueNumericMask();
   initAuthPopup();
   initPopupFlows();
   initProfilePopups();

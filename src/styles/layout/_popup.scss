@@ -27,12 +27,6 @@
     pointer-events: auto;
   }
 
-  /* Form button: no bottom margin in all popups except login (auth). */
-  &:not(&--auth) .popup__form-button {
-    margin-bottom: 0;
-    margin-top: 20px;
-  }
-
   &--thanks-support {
     .popup__header {
       padding: 24px 40px;
@@ -51,7 +45,18 @@
       text-align: center;
       font-weight: 300;
       font-size: 16px;
-      margin-bottom: 0;
+    }
+  }
+
+  &--reset-complete {
+    .popup__text {
+      margin-bottom: 4px;
+    }
+  }
+
+  &--signup {
+    .popup__title{
+      margin-bottom: 24px;
     }
   }
 
@@ -136,12 +141,16 @@
   &-hint {
     font-size: 14px;
     text-align: left;
-    margin-bottom: 16px;
+    margin-bottom: 24px;
   }
 
   &-highlight {
     font-weight: 700;
     color: $color-black-100;
+  }
+
+  &-social{
+    margin: 40px 0 24px 0;
   }
 
   &-social,
@@ -223,7 +232,6 @@
 
   &-button {
     padding: 13px;
-    margin-bottom: 40px;
     width: 100%;
 
     &--outline {

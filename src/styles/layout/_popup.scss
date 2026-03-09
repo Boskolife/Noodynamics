@@ -48,12 +48,6 @@
     }
   }
 
-  &--reset-complete {
-    .popup__text {
-      margin-bottom: 4px;
-    }
-  }
-
   &--signup {
     .popup__title{
       margin-bottom: 24px;
@@ -216,7 +210,7 @@
   }
 
   &-resend-link {
-    margin: 0 0 0 auto;
+    margin: 0 0 32px auto;
   }
 
   &-error {

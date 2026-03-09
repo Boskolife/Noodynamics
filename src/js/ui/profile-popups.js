@@ -144,6 +144,8 @@ export function initProfilePopups() {
   }
 
   const changeMonthlyForm = document.querySelector('.js-change-monthly-donation-form');
+  const monthlyDonationUpdatedPopup = document.getElementById(IDS.monthlyDonationUpdated);
+  const monthlyDonationUpdatedAmountEl = monthlyDonationUpdatedPopup?.querySelector('.js-monthly-updated-amount');
   if (changeMonthlyForm && changeMonthlyPopup) {
     updateAmountDueState(changeMonthlyForm, 'changeMonthlyAmount', 'change-monthly-amount-due', 'change-monthly-amount-due-error');
     changeMonthlyForm.addEventListener('change', (e) => {
@@ -163,7 +165,32 @@ export function initProfilePopups() {
         firstInvalid.focus();
         return;
       }
-      console.log('Change monthly donation form data:', Object.fromEntries(new FormData(changeMonthlyForm).entries()));
+
+      const formData = new FormData(changeMonthlyForm);
+      const selectedAmountValue = formData.get('changeMonthlyAmount');
+      let displayAmount = '';
+
+      if (selectedAmountValue === 'other') {
+        const amountInput = changeMonthlyForm.querySelector('#change-monthly-amount-due');
+        const raw = amountInput?.value?.trim();
+        if (raw) {
+          displayAmount = `$${raw}`;
+        }
+      } else if (typeof selectedAmountValue === 'string' && selectedAmountValue) {
+        const checked = changeMonthlyForm.querySelector('input[name="changeMonthlyAmount"]:checked');
+        const labelText = checked
+          ?.closest('.make-donation__amount-option')
+          ?.querySelector('.make-donation__amount-button')
+          ?.textContent
+          ?.trim();
+        displayAmount = labelText || `$${selectedAmountValue}`;
+      }
+
+      if (monthlyDonationUpdatedAmountEl && displayAmount) {
+        monthlyDonationUpdatedAmountEl.textContent = displayAmount;
+      }
+
+      console.log('Change monthly donation form data:', Object.fromEntries(formData.entries()));
       changeMonthlyForm.reset();
       clearAllFormErrors(changeMonthlyForm);
       updateAmountDueState(changeMonthlyForm, 'changeMonthlyAmount', 'change-monthly-amount-due', 'change-monthly-amount-due-error');
@@ -392,7 +419,6 @@ export function initProfilePopups() {
     });
   }
 
-  const monthlyDonationUpdatedPopup = document.getElementById(IDS.monthlyDonationUpdated);
   if (monthlyDonationUpdatedPopup) {
     monthlyDonationUpdatedPopup.querySelector('.js-monthly-donation-updated-done')?.addEventListener('click', () => {
       closePopup(monthlyDonationUpdatedPopup);

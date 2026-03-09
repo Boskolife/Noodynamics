@@ -12,18 +12,13 @@ import {
   clearErrorById,
   clearAllFormErrors,
 } from './validation.js';
+import { openModalById } from '../ui/modal-manager.js';
 
 const FORM_SELECTOR = '.make-donation__form';
 const THANKS_POPUP_ID = 'thanks-support-popup-backdrop';
 
 function openThanksSupportPopup() {
-  const backdrop = document.getElementById(THANKS_POPUP_ID);
-  if (!backdrop) return;
-  backdrop.classList.add('is-open');
-  backdrop.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
-  const focusTarget = backdrop.querySelector('button:not(.popup__close), [href], input');
-  focusTarget?.focus();
+  openModalById(THANKS_POPUP_ID);
 }
 
 const MAKE_DONATION_RULES = [

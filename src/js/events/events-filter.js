@@ -169,24 +169,33 @@ function initCalendar(container, eventDates, state) {
       if (isSelected) cell.classList.add('events__calendar-day--selected');
       else if (hasEvents) cell.classList.add('events__calendar-day--has-events');
       else if (isToday) cell.classList.add('events__calendar-day--today');
-
-      cell.addEventListener('click', () => {
-        document.querySelectorAll('.events__calendar-day--selected').forEach((el) => el.classList.remove('events__calendar-day--selected'));
-        if (state.dateFilter === dateKey) {
-          state.dateFilter = null;
-          filterEvents(state.typeFilter, null);
-        } else {
-          state.dateFilter = dateKey;
-          cell.classList.add('events__calendar-day--selected');
-          filterEvents(state.typeFilter, dateKey);
-        }
-        currentDate = new Date(dateKey + 'T12:00:00');
-        updateDateDisplay();
-        closeDropdown();
-      });
       daysEl.appendChild(cell);
     }
   };
+
+  daysEl.addEventListener('click', (e) => {
+    const btn = e.target.closest('.events__calendar-day[data-date]');
+    if (!btn || !daysEl.contains(btn) || btn.disabled) return;
+
+    const dateKey = btn.getAttribute('data-date');
+    if (!dateKey) return;
+
+    const prevSelected = daysEl.querySelector('.events__calendar-day--selected');
+    prevSelected?.classList.remove('events__calendar-day--selected');
+
+    if (state.dateFilter === dateKey) {
+      state.dateFilter = null;
+      filterEvents(state.typeFilter, null);
+    } else {
+      state.dateFilter = dateKey;
+      btn.classList.add('events__calendar-day--selected');
+      filterEvents(state.typeFilter, dateKey);
+    }
+
+    currentDate = new Date(dateKey + 'T12:00:00');
+    updateDateDisplay();
+    closeDropdown();
+  });
 
   prevBtn.addEventListener('click', (e) => {
     e.stopPropagation();

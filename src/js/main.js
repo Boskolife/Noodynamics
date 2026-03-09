@@ -3,7 +3,6 @@
  */
 
 import 'swiper/css';
-import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 import { isDesktopDevice } from './utils/device.js';

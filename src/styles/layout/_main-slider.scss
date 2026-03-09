@@ -170,6 +170,7 @@
   }
 
   .swiper-pagination {
+    position: absolute;
     right: auto !important;
     left: 40px !important;
     top: 40px !important;
@@ -186,12 +187,18 @@
   }
 
   .swiper-pagination-bullet {
+    display: block;
     width: 2px;
     height: 100%;
     border-radius: 0;
     background: $color-white-20;
     margin: 0 !important;
     opacity: 1 !important;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    appearance: none;
+    cursor: pointer;
   }
 
   .swiper-pagination-bullet-active {

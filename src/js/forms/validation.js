@@ -60,6 +60,14 @@ export function setInvalid(input, message, errorId) {
   if (input) {
     input.classList.add(ERROR_CLASS);
     input.setAttribute('aria-invalid', 'true');
+    if (errorId) {
+      const describedBy = (input.getAttribute('aria-describedby') ?? '').trim();
+      const tokens = describedBy ? describedBy.split(/\s+/) : [];
+      if (!tokens.includes(errorId)) {
+        tokens.push(errorId);
+        input.setAttribute('aria-describedby', tokens.join(' ').trim());
+      }
+    }
   }
   if (errorId) setErrorById(errorId, message);
 }
@@ -74,6 +82,19 @@ export function setValid(input, errorId) {
 
 export function getInputValue(input) {
   return (input?.value ?? '').trim();
+}
+
+export function parseAmount(value) {
+  const raw = String(value ?? '').trim();
+  if (!raw) return null;
+  // Keep digits, comma and dot only; allow users to paste "$ 10.50".
+  const cleaned = raw.replace(/[^\d.,]/g, '');
+  if (!cleaned) return null;
+  // If only comma is used, treat it as decimal separator.
+  const normalized = cleaned.includes('.') ? cleaned.replace(/,/g, '') : cleaned.replace(/,/g, '.');
+  const num = Number.parseFloat(normalized);
+  if (!Number.isFinite(num) || num <= 0) return null;
+  return num;
 }
 
 export function clearAllFormErrors(form) {
@@ -93,6 +114,12 @@ export function setRadioGroupInvalid(form, name, errorId, message) {
   form.querySelectorAll(`input[name="${name}"]`).forEach((r) => {
     r.classList.add(ERROR_CLASS);
     r.setAttribute('aria-invalid', 'true');
+    const describedBy = (r.getAttribute('aria-describedby') ?? '').trim();
+    const tokens = describedBy ? describedBy.split(/\s+/) : [];
+    if (!tokens.includes(errorId)) {
+      tokens.push(errorId);
+      r.setAttribute('aria-describedby', tokens.join(' ').trim());
+    }
   });
   setErrorById(errorId, message);
 }
@@ -237,8 +264,8 @@ export function validateFormWithRules(form, rules) {
     }
 
     if (rule.amount) {
-      const num = parseFloat(String(value).replace(/,/g, '.'));
-      if (Number.isNaN(num) || num <= 0) {
+      const num = parseAmount(value);
+      if (num == null) {
         setInvalid(input, msg.amountInvalid, errorId);
         if (!firstInvalid) firstInvalid = input;
         continue;

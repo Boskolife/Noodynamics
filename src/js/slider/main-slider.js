@@ -55,6 +55,9 @@ export function initMainSlider() {
   if (!mainSliderSection || typeof window === 'undefined') return;
   if (!swiper.mousewheel) return;
 
+  let isSnappingToTop = false;
+  let canSnapToTop = true;
+
   // Enable Swiper's own mousewheel handling only when the slider
   // is prominently in view (its center is in the middle band of the viewport).
   const updateMousewheelState = () => {
@@ -67,14 +70,49 @@ export function initMainSlider() {
     const centered =
       center >= viewportHeight * 0.25 && center <= viewportHeight * 0.75;
 
-    if (partiallyVisible && centered) {
+    if (partiallyVisible && centered && !isSnappingToTop) {
       swiper.mousewheel.enable();
     } else {
       swiper.mousewheel.disable();
+    }
+
+    // When section leaves the viewport, allow snap behavior next time user reaches it.
+    if (!partiallyVisible) {
+      canSnapToTop = true;
     }
   };
 
   window.addEventListener('scroll', updateMousewheelState, { passive: true });
   window.addEventListener('resize', updateMousewheelState);
   updateMousewheelState();
+
+  // When user starts scrolling with mouse wheel / touchpad while the section is visible
+  // but not yet aligned with the top of the viewport, scroll the page to align it
+  // (anchor-like behavior), then let Swiper's mousewheel take over.
+  mainSliderSection.addEventListener(
+    'wheel',
+    (event) => {
+      if (isSnappingToTop || !canSnapToTop) return;
+
+      const rect = mainSliderSection.getBoundingClientRect();
+      const viewportHeight =
+        window.innerHeight || document.documentElement.clientHeight || 0;
+
+      const partiallyVisible = rect.top < viewportHeight && rect.bottom > 0;
+      const topAligned = Math.abs(rect.top) <= 1;
+      if (!partiallyVisible || topAligned) return;
+
+      event.preventDefault();
+      isSnappingToTop = true;
+      canSnapToTop = false;
+      const targetTop = window.scrollY + rect.top;
+      window.scrollTo({ top: targetTop, behavior: 'smooth' });
+
+      window.setTimeout(() => {
+        isSnappingToTop = false;
+        updateMousewheelState();
+      }, 500);
+    },
+    { passive: false },
+  );
 }

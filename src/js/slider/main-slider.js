@@ -47,34 +47,86 @@ export function initMainSlider() {
     });
   }
 
-  // Enable mousewheel only when the top of the slider
-  // reaches (or passes) the top edge of the viewport.
-  const mainSliderSection = document.querySelector('.main-slider');
+  const mainSliderSection = document.getElementById('main-slider');
+  if (!mainSliderSection || typeof window === 'undefined') return;
 
-  if (mainSliderSection && swiper.mousewheel && typeof window !== 'undefined') {
-    const updateMousewheelState = () => {
+  let isLocked = false;
+  let wheelLockHandler = null;
+
+  const enableWheelLock = () => {
+    if (wheelLockHandler) return;
+    wheelLockHandler = (event) => {
+      const target = event.target;
+      if (!(target instanceof HTMLElement)) return;
+      // Block page scroll while slider is locked, but allow events inside slider.
+      if (!target.closest('.main-slider')) {
+        event.preventDefault();
+      }
+    };
+    window.addEventListener('wheel', wheelLockHandler, { passive: false });
+  };
+
+  const disableWheelLock = () => {
+    if (!wheelLockHandler) return;
+    window.removeEventListener('wheel', wheelLockHandler);
+    wheelLockHandler = null;
+  };
+
+  const lockSliderScroll = () => {
+    if (isLocked) return;
+    isLocked = true;
+    enableWheelLock();
+  };
+
+  const unlockSliderScroll = () => {
+    if (!isLocked) return;
+    isLocked = false;
+    disableWheelLock();
+  };
+
+  // Scrolling внутри слайдера: быстрый переход по слайдам.
+  // Логику включаем, когда секция заметно в центре вьюпорта (центр секции в центральной «полосе» окна).
+  container.addEventListener(
+    'wheel',
+    (event) => {
       const rect = mainSliderSection.getBoundingClientRect();
       const viewportHeight =
         window.innerHeight || document.documentElement.clientHeight || 0;
 
-      // Enable only when the section fully covers the viewport:
-      // its top is at or above the top edge, and its bottom is
-      // at or below the bottom edge of the viewport.
+      const partiallyVisible = rect.top < viewportHeight && rect.bottom > 0;
       const center = rect.top + rect.height / 2;
-      const shouldEnable =
-        center >= viewportHeight * 0.25 && center <= viewportHeight * 0.8;
+      const centered =
+        center >= viewportHeight * 0.25 && center <= viewportHeight * 0.75;
 
-      if (shouldEnable) {
-        swiper.mousewheel.enable();
-      } else {
-        swiper.mousewheel.disable();
+      if (!partiallyVisible || !centered) {
+        // Если секция ушла из центральной зоны, разблокируем скролл.
+        if (isLocked) unlockSliderScroll();
+        return;
       }
-    };
 
-    window.addEventListener('scroll', updateMousewheelState, { passive: true });
-    window.addEventListener('resize', updateMousewheelState);
+      if (!isLocked) {
+        lockSliderScroll();
+      }
 
-    // Initial check on load
-    updateMousewheelState();
-  }
+      const delta = event.deltaY;
+      if (delta === 0) return;
+
+      const direction = delta > 0 ? 1 : -1;
+      const maxIndex = swiper.slides.length - 1;
+      let nextIndex = swiper.activeIndex + direction;
+
+      if (nextIndex < 0) {
+        unlockSliderScroll();
+        return;
+      }
+      if (nextIndex > maxIndex) {
+        unlockSliderScroll();
+        return;
+      }
+
+      event.preventDefault();
+      swiper.slideTo(nextIndex, 0);
+    },
+    { passive: false },
+  );
 }

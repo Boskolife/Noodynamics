@@ -15,7 +15,7 @@
 <body class="application-membership-page">
     {{> header }}
     <main id="main">
-        <nav class="breadcrumbs">
+        <nav class="breadcrumbs wow animate__animated animate__fadeInUp" data-wow-delay="0.1s">
             <div class="container">
                 <ul class="breadcrumbs__list">
                     <li class="breadcrumbs__item">
@@ -32,10 +32,10 @@
         </nav>
         <section class="application-membership">
             <div class="container">
-                <h2 class="application-membership__title">
+                <h2 class="application-membership__title wow animate__animated animate__fadeInDown" data-wow-delay="0.15s">
                     Application for <br> Membership
                 </h2>
-                <div class="application-membership__steps">
+                <div class="application-membership__steps wow animate__animated animate__fadeInUp" data-wow-delay="0.2s">
                     <span class="application-membership__step application-membership__step--active">1. Complete the application form</span>
                     <span class="application-membership__separator"></span>
                     <span class="application-membership__step">2. Choose your membership level</span>
@@ -46,7 +46,7 @@
                     <span class="application-membership__steps-counter-separator">/</span>
                     <span class="application-membership__steps-counter-total">2</span>
                 </div>
-                <form action="#" class="application-membership__form form-card wide-form" method="post" novalidate data-step="1">
+                <form action="#" class="application-membership__form form-card wide-form wow animate__animated animate__fadeInUp" data-wow-delay="0.25s" method="post" novalidate data-step="1">
                     <div class="application-membership__form-group form-card__group">
                         <label for="applicant-name" class="application-membership__form-label form-card__label">Name
                             <input type="text" id="applicant-name" name="applicantName"
@@ -256,49 +256,49 @@
                 <div class="application-membership__form-level" data-step="2" hidden>
                     <h3 class="application-membership__form-level-title">Choose your membership level</h3>
                     <div class="application-membership__form-level-items">
-                        <div class="application-membership__form-level-item" data-level="student">
+                        <div class="application-membership__form-level-item wow animate__animated animate__fadeInUp" data-wow-delay="0.1s" data-level="student">
                             <div class="application-membership__form-level-item-header">
                                 <h4 class="application-membership__form-level-item-title">Student</h4>
                                 <span class="application-membership__form-level-item-price">$50</span>
                             </div>
                             <button type="button" class="application-membership__form-level-item-button btn btn--primary">Select</button>
                         </div>
-                        <div class="application-membership__form-level-item" data-level="scholar">
+                        <div class="application-membership__form-level-item wow animate__animated animate__fadeInUp" data-wow-delay="0.15s" data-level="scholar">
                             <div class="application-membership__form-level-item-header">
                                 <h4 class="application-membership__form-level-item-title">Scholar</h4>
                                 <span class="application-membership__form-level-item-price">$50</span>
                             </div>
                             <button type="button" class="application-membership__form-level-item-button btn btn--primary">Select</button>
                         </div>
-                        <div class="application-membership__form-level-item" data-level="estate-family">
+                        <div class="application-membership__form-level-item wow animate__animated animate__fadeInUp" data-wow-delay="0.2s" data-level="estate-family">
                             <div class="application-membership__form-level-item-header">
                                 <h4 class="application-membership__form-level-item-title">Estate (Family)</h4>
                                 <span class="application-membership__form-level-item-price">$100</span>
                             </div>
                             <button type="button" class="application-membership__form-level-item-button btn btn--primary">Select</button>
                         </div>
-                        <div class="application-membership__form-level-item" data-level="supporting-member">
+                        <div class="application-membership__form-level-item wow animate__animated animate__fadeInUp" data-wow-delay="0.25s" data-level="supporting-member">
                             <div class="application-membership__form-level-item-header">
                                 <h4 class="application-membership__form-level-item-title">Supporting Member</h4>
                                 <span class="application-membership__form-level-item-price">$250</span>
                             </div>
                             <button type="button" class="application-membership__form-level-item-button btn btn--primary">Select</button>
                         </div>
-                        <div class="application-membership__form-level-item" data-level="contribution-member">
+                        <div class="application-membership__form-level-item wow animate__animated animate__fadeInUp" data-wow-delay="0.3s" data-level="contribution-member">
                             <div class="application-membership__form-level-item-header">
                                 <h4 class="application-membership__form-level-item-title">Contribution Member</h4>
                                 <span class="application-membership__form-level-item-price">$500</span>
                             </div>
                             <button type="button" class="application-membership__form-level-item-button btn btn--primary">Select</button>
                         </div>
-                        <div class="application-membership__form-level-item" data-level="sustaining-member">
+                        <div class="application-membership__form-level-item wow animate__animated animate__fadeInUp" data-wow-delay="0.35s" data-level="sustaining-member">
                             <div class="application-membership__form-level-item-header">
                                 <h4 class="application-membership__form-level-item-title">Sustaining Member</h4>
                                 <span class="application-membership__form-level-item-price">$1000</span>
                             </div>
                             <button type="button" class="application-membership__form-level-item-button btn btn--primary">Select</button>
                         </div>
-                        <div class="application-membership__form-level-item" data-level="culture-bearing-statum">
+                        <div class="application-membership__form-level-item wow animate__animated animate__fadeInUp" data-wow-delay="0.4s" data-level="culture-bearing-statum">
                             <div class="application-membership__form-level-item-header">
                                 <h4 class="application-membership__form-level-item-title">Culture-bearing Statum</h4>
                                 <span class="application-membership__form-level-item-price">$5000</span>

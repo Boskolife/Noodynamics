@@ -24,6 +24,9 @@ import {
 } from './forms/index.js';
 import { initAmountDueNumericMask } from './forms/validation.js';
 import { initEventsFilter } from './events/index.js';
+import WOW from 'wow.js/src/WOW.js';
+
+new WOW().init();
 
 const FOOTER_YEAR_SELECTOR = '.footer__bottom-year';
 

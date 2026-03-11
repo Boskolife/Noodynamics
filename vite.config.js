@@ -11,7 +11,7 @@ import {
 /**
  * Renders <picture> with WebP source and PNG/JPEG fallback.
  * Usage: {{{picture "/images/photo.png" alt="Description"}}} (triple braces for raw HTML)
- * Optional hash: alt, class, loading (default "lazy"), width, height, sources (array of objects with media and srcset)
+ * Optional hash: alt, class, loading (default "lazy"), width, height, sources, data-* (pass-through)
  *
  * Example with media queries:
  * {{{picture "/images/hero.png" alt="Hero" sources=(array (object media="(max-width: 768px)" srcset="/images/hero-mobile.png") (object media="(min-width: 769px)" srcset="/images/hero-desktop.png"))}}}
@@ -25,6 +25,12 @@ function pictureHelper(pathOrSrc, options = {}) {
   const width = hash.width != null ? ` width="${Number(hash.width)}"` : '';
   const height = hash.height != null ? ` height="${Number(hash.height)}"` : '';
   const sources = hash.sources || [];
+
+  // Pass through data-* attributes (e.g. data-wow-delay for WOW.js)
+  const dataAttrs = Object.keys(hash)
+    .filter((k) => k.startsWith('data-'))
+    .map((k) => ` ${k}="${String(hash[k]).replace(/"/g, '&quot;')}"`)
+    .join('');
 
   // Use relative path so browser resolves once with document <base href="/WacthCash/"> (avoids /WacthCash/WacthCash/...)
   const normalized = src.replace(/^\//, '');
@@ -54,7 +60,7 @@ function pictureHelper(pathOrSrc, options = {}) {
   }
 
   return (
-    `<picture${className}>` +
+    `<picture${className}${dataAttrs}>` +
     sourcesHtml +
     `<source srcset="${webpPath}" type="image/webp">` +
     `<img src="${imgPath}" alt="${alt.replace(

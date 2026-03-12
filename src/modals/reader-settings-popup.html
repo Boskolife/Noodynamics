@@ -1,0 +1,130 @@
+<div class="reader-panel" id="reader-settings-panel-root" aria-hidden="true" hidden>
+    <div class="reader-panel__window" role="dialog" aria-modal="true" aria-labelledby="reader-settings-title">
+        <div class="reader__settings-panel reader__panel-content" id="reader-settings-panel">
+            <div class="reader-settings__row reader-settings__row--top">
+                <div class="reader-settings__font-size">
+                    <span class="reader-settings__font-label">Aa</span>
+                    <div class="reader-settings__font-controls">
+                        <button type="button" class="reader-settings__icon-btn js-font-size-dec"
+                            aria-label="Decrease font size">
+                            <img src="/icons/minus.svg" alt="image not found">
+                        </button>
+                        <button type="button" class="reader-settings__icon-btn js-font-size-inc"
+                            aria-label="Increase font size">
+                            <img src="/icons/plus.svg" alt="image not found">
+                        </button>
+                    </div>
+                </div>
+                <div class="reader-settings__font-align">
+                    <button type="button" class="reader-settings__icon-btn js-font-align-center"
+                        aria-label="Center align">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M21 5.25H3C2.59 5.25 2.25 4.91 2.25 4.5C2.25 4.09 2.59 3.75 3 3.75H21C21.41 3.75 21.75 4.09 21.75 4.5C21.75 4.91 21.41 5.25 21 5.25Z"
+                                fill="currentColor" />
+                            <path
+                                d="M21 10.25H3C2.59 10.25 2.25 9.91 2.25 9.5C2.25 9.09 2.59 8.75 3 8.75H21C21.41 8.75 21.75 9.09 21.75 9.5C21.75 9.91 21.41 10.25 21 10.25Z"
+                                fill="currentColor" />
+                            <path
+                                d="M21 15.25H3C2.59 15.25 2.25 14.91 2.25 14.5C2.25 14.09 2.59 13.75 3 13.75H21C21.41 13.75 21.75 14.09 21.75 14.5C21.75 14.91 21.41 15.25 21 15.25Z"
+                                fill="currentColor" />
+                            <path
+                                d="M21 20.25H3C2.59 20.25 2.25 19.91 2.25 19.5C2.25 19.09 2.59 18.75 3 18.75H21C21.41 18.75 21.75 19.09 21.75 19.5C21.75 19.91 21.41 20.25 21 20.25Z"
+                                fill="currentColor" />
+                        </svg>
+                        /button>
+                    </button>
+                    <button type="button" class="reader-settings__icon-btn  js-font-align-left" aria-label="Left align">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M21 5.25H3C2.59 5.25 2.25 4.91 2.25 4.5C2.25 4.09 2.59 3.75 3 3.75H21C21.41 3.75 21.75 4.09 21.75 4.5C21.75 4.91 21.41 5.25 21 5.25Z"
+                                fill="currentColor" />
+                            <path
+                                d="M12.47 10.25H3C2.59 10.25 2.25 9.91 2.25 9.5C2.25 9.09 2.59 8.75 3 8.75H12.47C12.88 8.75 13.22 9.09 13.22 9.5C13.22 9.91 12.89 10.25 12.47 10.25Z"
+                                fill="currentColor" />
+                            <path
+                                d="M21 15.25H3C2.59 15.25 2.25 14.91 2.25 14.5C2.25 14.09 2.59 13.75 3 13.75H21C21.41 13.75 21.75 14.09 21.75 14.5C21.75 14.91 21.41 15.25 21 15.25Z"
+                                fill="currentColor" />
+                            <path
+                                d="M12.47 20.25H3C2.59 20.25 2.25 19.91 2.25 19.5C2.25 19.09 2.59 18.75 3 18.75H12.47C12.88 18.75 13.22 19.09 13.22 19.5C13.22 19.91 12.89 20.25 12.47 20.25Z"
+                                fill="currentColor" />
+                        </svg>
+                    </button>
+                    </button>
+                </div>
+            </div>
+            <div class="reader-settings__row reader-settings__row--color">
+                <div class="reader-settings__bg-and-night">
+                    <div class="reader-settings__bg-colors" aria-label="Background color">
+                        <button type="button" class="reader-settings__bg-dot js-bg-color" data-bg="white"
+                            aria-label="White background"></button>
+                        <button type="button"
+                            class="reader-settings__bg-dot reader-settings__bg-dot--accent js-bg-color" data-bg="yellow"
+                            aria-label="Yellow background"></button>
+                    </div>
+                    <button type="button" class="reader-settings__night-toggle js-night-toggle" aria-pressed="false"
+                        role="switch">
+                        <span class="reader-settings__night-label">Night Reading</span>
+                        <span class="reader-settings__night-switch"></span>
+                    </button>
+                </div>
+            </div>
+            <div class="reader-settings__controls">
+                <div class="reader-settings__control">
+                    <span class="reader-settings__control-label">Text Brightness</span>
+                    <div class="reader-settings__control-right">
+                        <span class="reader-settings__control-value" id="reader-brightness-value">100</span>
+                        <div class="reader-settings__stepper">
+                            <button type="button" class="reader-settings__stepper-btn js-brightness-dec"
+                                aria-label="Decrease text brightness">
+                                <img src="/icons/minus.svg" alt="image not found">
+                            </button>
+                            <button type="button" class="reader-settings__stepper-btn js-brightness-inc"
+                                aria-label="Increase text brightness">
+                                <img src="/icons/plus.svg" alt="image not found">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reader-settings__control">
+                    <span class="reader-settings__control-label">Letter Spacing</span>
+                    <div class="reader-settings__control-right">
+                        <span class="reader-settings__control-value" id="reader-letter-spacing-value">0</span>
+                        <div class="reader-settings__stepper">
+                            <button type="button" class="reader-settings__stepper-btn js-letter-spacing-dec"
+                                aria-label="Decrease letter spacing">
+                                <img src="/icons/minus.svg" alt="image not found">
+                            </button>
+                            <button type="button" class="reader-settings__stepper-btn js-letter-spacing-inc"
+                                aria-label="Increase letter spacing">
+                                <img src="/icons/plus.svg" alt="image not found">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reader-settings__control">
+                    <span class="reader-settings__control-label">Line Spacing</span>
+                    <div class="reader-settings__control-right">
+                        <span class="reader-settings__control-value" id="reader-line-spacing-value">1.5</span>
+                        <div class="reader-settings__stepper">
+                            <button type="button" class="reader-settings__stepper-btn js-line-spacing-dec"
+                                aria-label="Decrease line spacing">
+                                <img src="/icons/minus.svg" alt="image not found">
+                            </button>
+                            <button type="button" class="reader-settings__stepper-btn js-line-spacing-inc"
+                                aria-label="Increase line spacing">
+                                <img src="/icons/plus.svg" alt="image not found">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="reader-settings__actions">
+                <button type="button" class="reader-settings__primary js-settings-apply">Apply changes</button>
+                <button type="button" class="reader-settings__secondary js-settings-reset">Reset default</button>
+            </div>
+        </div>
+    </div>
+</div>

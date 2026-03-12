@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Noodynamics - E-book Reader</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+    <link rel="stylesheet" href="/styles/main.scss">
+</head>
+
+<body class="reader-page">
+    {{> header-ebook }}
+    <main id="main" class="reader-main">
+        <div class="reader" id="reader-root">
+            <aside class="reader__sidebar reader__sidebar--left" id="reader-toc">
+                <div class="reader__sidebar-header">
+                    <span class="reader__sidebar-title">Content</span>
+                </div>
+                <nav class="reader__toc" id="reader-toc-list" aria-label="Chapters"></nav>
+            </aside>
+
+            <div class="reader__center">
+                <div class="reader__action-bar">
+                    <div class="reader__action-bar-left">
+                        <button type="button" class="reader__action js-toggle-focus" aria-label="Focus mode toggle"
+                            title="Focus mode">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M17.7084 7.62506C15.7834 4.60006 12.9667 2.8584 10.0001 2.8584C8.51675 2.8584 7.07508 3.29173 5.75841 4.10007C4.44175 4.91673 3.25841 6.1084 2.29175 7.62506C1.45841 8.9334 1.45841 11.0584 2.29175 12.3667C4.21675 15.4001 7.03341 17.1334 10.0001 17.1334C11.4834 17.1334 12.9251 16.7001 14.2417 15.8917C15.5584 15.0751 16.7417 13.8834 17.7084 12.3667C18.5417 11.0667 18.5417 8.9334 17.7084 7.62506ZM10.0001 13.3667C8.13341 13.3667 6.63341 11.8584 6.63341 10.0001C6.63341 8.14173 8.13341 6.6334 10.0001 6.6334C11.8667 6.6334 13.3667 8.14173 13.3667 10.0001C13.3667 11.8584 11.8667 13.3667 10.0001 13.3667Z"
+                                    fill="currentColor" />
+                                <path
+                                    d="M10 7.6167C8.69167 7.6167 7.625 8.68337 7.625 10C7.625 11.3084 8.69167 12.375 10 12.375C11.3083 12.375 12.3833 11.3084 12.3833 10C12.3833 8.6917 11.3083 7.6167 10 7.6167Z"
+                                    fill="currentColor" />
+                            </svg>
+                        </button>
+                        <button type="button" class="reader__action js-toggle-highlights" aria-pressed="false"
+                            aria-label="Highlights panel" title="Highlights">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12.4417 2.08317V6.99984C12.4417 7.3665 12.0083 7.54984 11.7417 7.30817L10.2833 5.9665C10.125 5.8165 9.87502 5.8165 9.71668 5.9665L8.25835 7.29984C7.99168 7.54984 7.55835 7.35817 7.55835 6.99984V2.08317C7.55835 1.84984 7.74168 1.6665 7.97502 1.6665H12.025C12.2583 1.6665 12.4417 1.84984 12.4417 2.08317Z"
+                                    fill="currentColor" />
+                                <path
+                                    d="M14.15 1.7169C13.9083 1.68357 13.6917 1.8919 13.6917 2.13357V7.15023C13.6917 7.78357 13.3167 8.35857 12.7333 8.6169C12.15 8.8669 11.475 8.75856 11.0083 8.32523L10.2833 7.65857C10.125 7.50856 9.88333 7.50856 9.71667 7.65857L8.99167 8.32523C8.69167 8.60857 8.3 8.75023 7.90833 8.75023C7.69167 8.75023 7.475 8.70857 7.26667 8.6169C6.68333 8.35857 6.30833 7.78357 6.30833 7.15023V2.13357C6.30833 1.8919 6.09167 1.68357 5.85 1.7169C3.51667 2.00857 2.5 3.58357 2.5 5.83357V14.1669C2.5 16.6669 3.75 18.3336 6.66667 18.3336H13.3333C16.25 18.3336 17.5 16.6669 17.5 14.1669V5.83357C17.5 3.58357 16.4833 2.00857 14.15 1.7169ZM14.5833 15.6252H7.5C7.15833 15.6252 6.875 15.3419 6.875 15.0002C6.875 14.6586 7.15833 14.3752 7.5 14.3752H14.5833C14.925 14.3752 15.2083 14.6586 15.2083 15.0002C15.2083 15.3419 14.925 15.6252 14.5833 15.6252ZM14.5833 12.2919H11.0417C10.7 12.2919 10.4167 12.0086 10.4167 11.6669C10.4167 11.3252 10.7 11.0419 11.0417 11.0419H14.5833C14.925 11.0419 15.2083 11.3252 15.2083 11.6669C15.2083 12.0086 14.925 12.2919 14.5833 12.2919Z"
+                                    fill="currentColor" />
+                            </svg>
+                        </button>
+                        <button type="button" class="reader__action js-toggle-bookmarks" aria-pressed="false"
+                            aria-label="Bookmarks panel" title="Bookmarks">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M13.3333 1.6665H6.66667C3.75 1.6665 2.5 3.33317 2.5 5.83317V14.1665C2.5 16.6665 3.75 18.3332 6.66667 18.3332H13.3333C16.25 18.3332 17.5 16.6665 17.5 14.1665V5.83317C17.5 3.33317 16.25 1.6665 13.3333 1.6665ZM6.66667 10.2082H10C10.3417 10.2082 10.625 10.4915 10.625 10.8332C10.625 11.1748 10.3417 11.4582 10 11.4582H6.66667C6.325 11.4582 6.04167 11.1748 6.04167 10.8332C6.04167 10.4915 6.325 10.2082 6.66667 10.2082ZM13.3333 14.7915H6.66667C6.325 14.7915 6.04167 14.5082 6.04167 14.1665C6.04167 13.8248 6.325 13.5415 6.66667 13.5415H13.3333C13.675 13.5415 13.9583 13.8248 13.9583 14.1665C13.9583 14.5082 13.675 14.7915 13.3333 14.7915ZM15.4167 7.70817H13.75C12.4833 7.70817 11.4583 6.68317 11.4583 5.4165V3.74984C11.4583 3.40817 11.7417 3.12484 12.0833 3.12484C12.425 3.12484 12.7083 3.40817 12.7083 3.74984V5.4165C12.7083 5.9915 13.175 6.45817 13.75 6.45817H15.4167C15.7583 6.45817 16.0417 6.7415 16.0417 7.08317C16.0417 7.42484 15.7583 7.70817 15.4167 7.70817Z"
+                                    fill="currentColor" />
+                            </svg>
+
+                        </button>
+                    </div>
+                    <div class="reader__action-bar-right">
+                        <button type="button" class="reader__action js-toggle-settings" aria-pressed="false"
+                            aria-label="Reading settings" title="Settings">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M17.4582 3.4415C17.2165 3.0915 16.9082 2.78317 16.5582 2.5415C15.7665 1.9665 14.7332 1.6665 13.4915 1.6665H6.50817C6.3415 1.6665 6.17484 1.67484 6.0165 1.6915C3.28317 1.8665 1.6665 3.6415 1.6665 6.50817V13.4915C1.6665 14.7332 1.9665 15.7665 2.5415 16.5582C2.78317 16.9082 3.0915 17.2165 3.4415 17.4582C4.12484 17.9582 4.9915 18.2498 6.0165 18.3165C6.17484 18.3248 6.3415 18.3332 6.50817 18.3332H13.4915C16.5248 18.3332 18.3332 16.5248 18.3332 13.4915V6.50817C18.3332 5.2665 18.0332 4.23317 17.4582 3.4415ZM9.4915 13.2332H7.09984C6.75817 13.2332 6.47484 12.9498 6.47484 12.6082C6.47484 12.2665 6.75817 11.9832 7.09984 11.9832H7.93317V6.5915H5.7915C5.69984 6.5915 5.62484 6.6665 5.62484 6.75817V7.40817C5.62484 7.74984 5.3415 8.02484 4.99984 8.02484C4.65817 8.02484 4.37484 7.74984 4.37484 7.39984V6.74984C4.37484 5.9665 5.00817 5.33317 5.7915 5.33317H11.3248C12.1082 5.33317 12.7415 5.9665 12.7415 6.74984V7.39984C12.7415 7.7415 12.4582 8.02484 12.1165 8.02484C11.7748 8.02484 11.4915 7.7415 11.4915 7.39984V6.74984C11.4915 6.65817 11.4165 6.58317 11.3248 6.58317H9.18317V11.9832H9.4915C9.83317 11.9832 10.1165 12.2665 10.1165 12.6082C10.1165 12.9498 9.83317 13.2332 9.4915 13.2332ZM15.6248 10.1915C15.6248 10.5332 15.3415 10.8165 14.9998 10.8165C14.6582 10.8165 14.3748 10.5332 14.3748 10.1915V9.9165H13.0832V13.4165H13.3748C13.7165 13.4165 13.9998 13.6998 13.9998 14.0415C13.9998 14.3832 13.7165 14.6665 13.3748 14.6665H11.5415C11.1998 14.6665 10.9165 14.3832 10.9165 14.0415C10.9165 13.6998 11.1998 13.4165 11.5415 13.4165H11.8332V9.9165H11.4332C11.0915 9.9165 10.8082 9.63317 10.8082 9.2915C10.8082 8.94984 11.0915 8.6665 11.4332 8.6665H14.4332C15.0915 8.6665 15.6248 9.19984 15.6248 9.85817V10.1915Z"
+                                    fill="currentColor" />
+                            </svg>
+                        </button>
+                        <button type="button" class="reader__action js-open-save-reading-popup"
+                            aria-label="Save reading process" title="Save progress">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M14.0166 1.6665H5.98327C4.20827 1.6665 2.7666 3.1165 2.7666 4.88317V16.6248C2.7666 18.1248 3.8416 18.7582 5.15827 18.0332L9.22493 15.7748C9.65827 15.5332 10.3583 15.5332 10.7833 15.7748L14.8499 18.0332C16.1666 18.7665 17.2416 18.1332 17.2416 16.6248V4.88317C17.2333 3.1165 15.7916 1.6665 14.0166 1.6665ZM12.5083 8.12484C11.6999 8.4165 10.8499 8.5665 9.99994 8.5665C9.14994 8.5665 8.29993 8.4165 7.4916 8.12484C7.1666 8.00817 6.99994 7.64984 7.1166 7.32484C7.2416 6.99984 7.59994 6.83317 7.92494 6.94984C9.2666 7.43317 10.7416 7.43317 12.0833 6.94984C12.4083 6.83317 12.7666 6.99984 12.8833 7.32484C12.9999 7.64984 12.8333 8.00817 12.5083 8.12484Z"
+                                    fill="currentColor" />
+                            </svg>
+                        </button>
+                        <button type=" button" class="reader__action js-toggle-search" aria-pressed="false"
+                            aria-label="Search" title="Search">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M9.17508 16.6832C13.3218 16.6832 16.6834 13.3216 16.6834 9.17484C16.6834 5.0281 13.3218 1.6665 9.17508 1.6665C5.02834 1.6665 1.66675 5.0281 1.66675 9.17484C1.66675 13.3216 5.02834 16.6832 9.17508 16.6832Z"
+                                    fill="currentColor" />
+                                <path
+                                    d="M18.325 15.7917C18.05 15.2833 17.4666 15 16.6833 15C16.0916 15 15.5833 15.2417 15.2833 15.6583C14.9833 16.075 14.9166 16.6333 15.1 17.1917C15.4583 18.275 16.0833 18.5167 16.425 18.5583C16.475 18.5667 16.525 18.5667 16.5833 18.5667C16.95 18.5667 17.5166 18.4083 18.0666 17.5833C18.5083 16.9417 18.5916 16.3 18.325 15.7917Z"
+                                    fill="currentColor" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="reader__content-area">
+                    <div class="reader__text-wrapper">
+                        <h1 class="reader__book-title" id="reader-book-title"></h1>
+                        <div class="reader__text js-reader-text" id="reader-text" tabindex="0"></div>
+                    </div>
+                    <div class="reader__highlight-tooltip js-highlight-tooltip" hidden>
+                        <button type="button" class="reader__highlight-btn">HIGHLIGHT</button>
+                    </div>
+                    <div class="reader__bottom-bar">
+                        <div class="reader__progress">
+                            <span class="reader__progress-text reader__progress-text--page">
+                                Page <span id="reader-page-label">1</span>
+                            </span>
+                            <div class="reader__progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                                aria-valuemax="100">
+                                <div class="reader__progress-fill" id="reader-progress-fill"></div>
+                            </div>
+                            <span class="reader__progress-text "><span id="reader-percent-read">0</span>% READ</span>
+                        </div>
+                        <div class="reader__pagination">
+                            <button type="button" class="reader__page-nav js-prev-page" aria-label="Previous page">
+                                <svg width="7" height="13" viewBox="0 0 7 13" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M5.48169 0.750059L1.13502 5.09673C0.621689 5.61006 0.621689 6.45006 1.13502 6.96339L5.48169 11.3101"
+                                        stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                            <span class="reader__page-info">
+                                <span class="reader__page-info-current" id="reader-page-current">1</span>
+                                <span class="reader__page-info-separator">/</span>
+                                <span id="reader-page-total" class="reader__page-info-total">1</span>
+                            </span>
+                            <button type="button" class="reader__page-nav js-next-page" aria-label="Next page">
+                                <svg width="7" height="13" viewBox="0 0 7 13" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M0.75 0.750059L5.09667 5.09673C5.61 5.61006 5.61 6.45006 5.09667 6.96339L0.75 11.3101"
+                                        stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="reader__sidebar reader__sidebar--right" id="reader-context">
+                <div class="reader__sidebar-header">
+                    <span class="reader__sidebar-title js-context-panel-title">Comments</span>
+                </div>
+                <div class="reader__panel-content js-context-panel-content">
+                    <p class="reader__panel-empty">No comments yet.</p>
+                </div>
+            </aside>
+        </div>
+    </main>
+    {{> reader-save-popup }}
+    {{> reader-search-popup }}
+    {{> reader-bookmarks-popup }}
+    {{> reader-highlights-popup }}
+    {{> reader-settings-popup }}
+    {{> auth-popup }}
+    <script type="module" src="/js/reader/index.js"></script>
+</body>
+
+</html>

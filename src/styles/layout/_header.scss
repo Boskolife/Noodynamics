@@ -1,6 +1,62 @@
 .header {
   padding: 30px 0;
 
+  &--ebook {
+    padding: 20px;
+    border-bottom: 1px solid $color-black-10;
+    background-color: $color-white-100;
+
+    .header__logo {
+      width: 145px;
+      height: auto;
+
+      svg {
+        width: 100%;
+        height: 100%;
+
+        path {
+          fill: $color-black-100;
+        }
+      }
+    }
+
+    .header__ebook-close {
+      width: 30px;
+      height: 30px;
+
+      padding: 0;
+      border: none;
+      background: none;
+      cursor: pointer;
+      color: $color-black-100;
+    }
+  }
+
+  &--ebook-accent {
+    background-color: $color-lightbeige-100;
+
+    .header__logo svg path {
+      fill: $color-brown;
+    }
+
+    .header__ebook-close {
+      color: $color-brown;
+    }
+  }
+
+  &--ebook-night {
+    background-color: $color-neutral-800;
+    border-bottom-color: $color-white-10;
+
+    .header__logo svg path {
+      fill: $color-white-100;
+    }
+
+    .header__ebook-close {
+      color: $color-white-100;
+    }
+  }
+
   &__inner {
     display: flex;
     justify-content: space-between;

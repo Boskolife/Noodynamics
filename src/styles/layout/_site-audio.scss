@@ -3,6 +3,17 @@
   left: 24px;
   bottom: 24px;
   z-index: 500;
+  transition:
+    opacity 0.25s ease,
+    visibility 0.25s ease,
+    transform 0.25s ease;
+
+  &--footer-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(8px);
+  }
 
   &__media {
     display: none;

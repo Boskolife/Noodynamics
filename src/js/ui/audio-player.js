@@ -5,6 +5,12 @@
 const AUDIO_SELECTOR = '#site-audio';
 const TOGGLE_SELECTOR = '.js-site-audio-toggle';
 const MEDIA_SELECTOR = '.js-site-audio-media';
+const AUDIO_FILE = 'audio/noodynamics-audio.mp3';
+
+function getAudioUrl() {
+  const base = import.meta.env.BASE_URL || '/';
+  return `${base}${AUDIO_FILE}`;
+}
 
 function setPlayingState(toggle, isPlaying) {
   toggle.setAttribute('aria-pressed', String(isPlaying));
@@ -18,6 +24,8 @@ export function initAudioPlayer() {
   const toggle = root.querySelector(TOGGLE_SELECTOR);
   const media = root.querySelector(MEDIA_SELECTOR);
   if (!toggle || !media) return;
+
+  media.src = getAudioUrl();
 
   toggle.addEventListener('click', async () => {
     if (media.paused) {

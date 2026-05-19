@@ -9,7 +9,8 @@ const AUDIO_FILE = 'audio/noodynamics-audio.mp3';
 
 function getAudioUrl() {
   const base = import.meta.env.BASE_URL || '/';
-  return `${base}${AUDIO_FILE}`;
+  const normalizedBase = base.endsWith('/') ? base : `${base}/`;
+  return `${normalizedBase}${AUDIO_FILE}`;
 }
 
 function setPlayingState(toggle, isPlaying) {

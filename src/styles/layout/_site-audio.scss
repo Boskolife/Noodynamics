@@ -1,0 +1,73 @@
+.site-audio {
+  position: fixed;
+  left: 24px;
+  bottom: 24px;
+  z-index: 500;
+
+  &__media {
+    display: none;
+  }
+
+  &__toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    padding: 0;
+    border: 1px solid $color-white-100;
+    border-radius: 50%;
+    background-color: transparent;
+    color: $color-white-100;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba($color-black-100, 0.2);
+    transition:
+      background-color 0.2s ease,
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+
+    &:hover {
+      background-color: $color-dark-brown;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba($color-black-100, 0.25);
+    }
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      display: block;
+    }
+
+    &--pause {
+      display: none;
+    }
+  }
+
+  &__toggle[aria-pressed='true'] {
+    .site-audio__icon--play {
+      display: none;
+    }
+
+    .site-audio__icon--pause {
+      display: flex;
+    }
+  }
+}
+
+.reader-page .site-audio__toggle {
+  border-color: $color-black-10;
+  box-shadow: 0 4px 16px rgba($color-black-100, 0.12);
+}
+
+.reader-page:has(.reader--night) .site-audio__toggle {
+  border-color: $color-neutral-400;
+
+  &:hover,
+  &[aria-pressed='true'] {
+    background-color: $color-neutral-600;
+  }
+}

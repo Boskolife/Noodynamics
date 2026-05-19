@@ -1,0 +1,48 @@
+/**
+ * Global ambient audio toggle (bottom-left on all pages).
+ */
+
+const AUDIO_SELECTOR = '#site-audio';
+const TOGGLE_SELECTOR = '.js-site-audio-toggle';
+const MEDIA_SELECTOR = '.js-site-audio-media';
+
+function setPlayingState(toggle, isPlaying) {
+  toggle.setAttribute('aria-pressed', String(isPlaying));
+  toggle.setAttribute('aria-label', isPlaying ? 'Pause ambient audio' : 'Play ambient audio');
+}
+
+export function initAudioPlayer() {
+  const root = document.querySelector(AUDIO_SELECTOR);
+  if (!root) return;
+
+  const toggle = root.querySelector(TOGGLE_SELECTOR);
+  const media = root.querySelector(MEDIA_SELECTOR);
+  if (!toggle || !media) return;
+
+  toggle.addEventListener('click', async () => {
+    if (media.paused) {
+      try {
+        await media.play();
+        setPlayingState(toggle, true);
+      } catch {
+        setPlayingState(toggle, false);
+      }
+      return;
+    }
+
+    media.pause();
+    setPlayingState(toggle, false);
+  });
+
+  media.addEventListener('ended', () => {
+    if (!media.loop) setPlayingState(toggle, false);
+  });
+
+  media.addEventListener('pause', () => {
+    if (!media.ended) setPlayingState(toggle, false);
+  });
+
+  media.addEventListener('play', () => {
+    setPlayingState(toggle, true);
+  });
+}

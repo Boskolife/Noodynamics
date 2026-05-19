@@ -13,6 +13,7 @@ import {
   initProfilePopups,
   initHeaderNavActive,
   initTabs,
+  initAudioPlayer,
 } from './ui/index.js';
 import { initMainSlider } from './slider/main-slider.js';
 import {
@@ -39,6 +40,8 @@ function initFooterYear() {
 }
 
 function initApp() {
+  initAudioPlayer();
+
   if (!isDesktopDevice()) {
     showDesktopOnlyMessage();
     return;

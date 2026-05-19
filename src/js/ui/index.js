@@ -8,3 +8,4 @@ export { initProfilePopups } from './profile-popups.js';
 export { initHeaderNavActive } from './header-nav.js';
 export { initTabs } from './tabs.js';
 export { showDesktopOnlyMessage } from './desktop-only-message.js';
+export { initAudioPlayer } from './audio-player.js';

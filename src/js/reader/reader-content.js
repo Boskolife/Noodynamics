@@ -3,6 +3,8 @@
  * Each chapter has an array of page texts. Pages are shown one at a time.
  */
 
+import { INSTITUTE_CHAPTERS } from './reader-institute-chapters.js';
+
 export const BOOK_ID = 'phenomenology-culture-systems-v1';
 export const BOOK_TITLE = 'The Phenomenology of Culture-Systems';
 export const BOOK_SUBTITLE =
@@ -60,4 +62,5 @@ export const CHAPTERS = [
       `We conclude with a reflection on the role of the Noödynamics Institute in this broader project. Our mission is to sustain the conditions for serious inquiry into these questions—inquiry that is rigorous, open, and responsive to the challenges of our time.`,
     ],
   },
+  ...INSTITUTE_CHAPTERS,
 ];

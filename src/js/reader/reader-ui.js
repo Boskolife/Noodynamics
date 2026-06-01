@@ -4,6 +4,7 @@
 
 import { initModalManager, openModalById, closeModal } from '../ui/modal-manager.js';
 import { CHAPTERS, BOOK_TITLE } from './reader-content.js';
+import { formatReaderPageText } from './reader-text-format.js';
 import { readerState, getReaderLoggedIn, setReaderLoggedIn } from './reader-state.js';
 
 const FOCUS_CLASS = 'reader--focus';
@@ -20,7 +21,8 @@ function getChapterInfoForPage(page) {
   const entry = readerState.pageMap[idx];
   if (!entry) return { chapter: null, pageText: '', chapterTitle: '' };
   const ch = CHAPTERS[entry.chapterIndex];
-  const pageText = ch.pages[entry.pageIndex] ?? '';
+  const rawPageText = ch.pages[entry.pageIndex] ?? '';
+  const pageText = formatReaderPageText(rawPageText, ch.title);
   return {
     chapter: ch,
     pageText,
@@ -508,7 +510,8 @@ function searchBook(query) {
   CHAPTERS.forEach((ch, chIdx) => {
     let pageNum = 1;
     for (let i = 0; i < chIdx; i++) pageNum += CHAPTERS[i].pages.length;
-    ch.pages.forEach((text, pIdx) => {
+    ch.pages.forEach((rawText, pIdx) => {
+      const text = formatReaderPageText(rawText, ch.title);
       const idx = text.toLowerCase().indexOf(q);
       if (idx >= 0) {
         const excerpt = text.slice(Math.max(0, idx - 40), idx + q.length + 60);

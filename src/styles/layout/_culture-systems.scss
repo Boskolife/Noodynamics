@@ -98,6 +98,16 @@
     margin-bottom: 24px;
   }
 
+  &__note {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: calc(22 / 18);
+    letter-spacing: -0.02em;
+    color: $color-white-80;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+
   &__title {
     width: 100%;
     font-size: 80px;

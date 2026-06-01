@@ -64,6 +64,7 @@
     letter-spacing: -0.02em;
     font-weight: 500;
     line-height: calc(120 / 120);
+    text-wrap: balance;
 
     span {
       &:first-child {

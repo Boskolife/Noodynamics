@@ -35,6 +35,10 @@
   .about-contacts__inner {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .organization-staff__list {
+    grid-template-columns: 1fr;
+  }
 }
 
 @include media('<tablet') {

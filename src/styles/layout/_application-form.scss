@@ -27,6 +27,7 @@
     color: $color-white-80;
     font-weight: 500;
     text-transform: uppercase;
+    white-space: nowrap;
 
     &--active {
       color: $color-white-100;
@@ -37,6 +38,7 @@
     width: 88px;
     height: 1px;
     background: linear-gradient(90deg, #ffffff 0%, #333333 100%);
+    flex-shrink: 0;
   }
 
   &__steps-counter {

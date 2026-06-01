@@ -17,12 +17,15 @@
   max-width: $content-text-max-width;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: $paragraph-margin-bottom;
-  color: $color-white-80;
-  line-height: calc(25 / 18);
 
-  &:last-child {
-    margin-bottom: 0;
+  p {
+    margin-bottom: $paragraph-margin-bottom;
+    color: $color-white-80;
+    line-height: calc(25 / 18);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
   h2,
@@ -37,28 +40,9 @@
   margin-right: auto;
 }
 
-@mixin content-heading-with-subtitle {
-  margin-bottom: $heading-subtitle-gap;
-
-  + p,
-  + .content-subtitle,
-  + [class*='__subtitle'],
-  + [class*='__text'] {
-    margin-top: 0;
-  }
-}
-
 @mixin content-divider-block {
   padding-top: $divider-padding-y;
   padding-bottom: $divider-padding-y;
-}
-
-.content-prose {
-  @include content-prose;
-}
-
-.content-prose--wide {
-  @include content-prose-wide;
 }
 
 // Standard format for parenthetical subtitles: "(Associate Directors)"

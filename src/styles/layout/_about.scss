@@ -15,45 +15,6 @@
       object-fit: contain;
     }
   }
-
-  & + .organization-staff {
-    padding-top: 0;
-  }
-}
-
-.organization-staff {
-  padding: 0 0 80px;
-
-  &__inner {
-    width: 100%;
-    text-align: center;
-  }
-
-  &__heading {
-    font-size: 32px;
-    @include content-section-heading;
-    text-align: center;
-  }
-
-  &__list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px 40px;
-    text-align: left;
-  }
-
-  &__item-title {
-    font-size: 22px;
-    font-weight: 500;
-    margin: 0;
-    font-family: $base-font-sans-serif;
-    color: $color-white-100;
-    background: none;
-    -webkit-text-fill-color: $color-white-100;
-  }
 }
 
 .about-how {

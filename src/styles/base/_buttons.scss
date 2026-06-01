@@ -41,14 +41,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 32px;
-  margin: 80px 0 40px 0;
+  margin: $page-content-offset-top 0 $page-tabs-margin-bottom;
 }
 
 .tabs__button {
   background: transparent;
   border: none;
-  padding: 0;
+  padding: 8px 4px;
   font-weight: 500;
   font-size: 14px;
   color: $color-white-100;

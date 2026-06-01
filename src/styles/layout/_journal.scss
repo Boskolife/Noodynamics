@@ -57,12 +57,16 @@
     }
 
     &-title {
+      @include content-page-title;
+      text-align: left;
       font-size: 80px;
-      margin-bottom: 24px;
+      margin-bottom: $section-heading-margin-bottom;
     }
 
     &-text {
+      @include content-prose;
       margin-bottom: 44px;
+      text-align: left;
     }
 
     &-form-field {
@@ -84,6 +88,7 @@
 
       &:not(:empty) {
         display: block;
+        margin-top: 4px;
       }
     }
   }
@@ -106,13 +111,15 @@
       width: 60%;
     }
 
-    &-title{
+    &-title {
       font-size: 32px;
-      margin-bottom: 24px;
+      @include content-section-heading;
     }
 
     &-text {
-      color: $color-white-80;
+      @include content-prose;
+      max-width: 905px;
+      margin: 0;
     }
   }
 }

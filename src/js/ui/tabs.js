@@ -18,6 +18,30 @@ export function initTabs(options = {}) {
   const panels = Array.from(root.querySelectorAll(panelSelector));
   if (!buttons.length || !panels.length) return;
 
+  const syncTabAria = () => {
+    buttons.forEach((btn) => {
+      const isActive = btn.classList.contains(activeClass);
+      btn.setAttribute('aria-selected', String(isActive));
+    });
+  };
+
+  buttons.forEach((btn) => {
+    const targetId = btn.getAttribute('data-tab');
+    if (!targetId) return;
+    if (!btn.id) btn.id = `tab-${targetId}`;
+    const panel = document.getElementById(targetId);
+    if (panel) {
+      panel.setAttribute('role', 'tabpanel');
+      panel.setAttribute('aria-labelledby', btn.id);
+    }
+    btn.setAttribute('role', 'tab');
+    if (!btn.hasAttribute('aria-controls')) {
+      btn.setAttribute('aria-controls', targetId);
+    }
+  });
+
+  syncTabAria();
+
   const handleButtonClick = (e) => {
     const button = e.currentTarget;
     const targetId = button.getAttribute('data-tab');
@@ -34,6 +58,7 @@ export function initTabs(options = {}) {
     activePanel?.classList.remove(activeClass);
     button.classList.add(activeClass);
     targetPanel.classList.add(activeClass);
+    syncTabAria();
 
     if (scrollOnChange && container && typeof window !== 'undefined') {
       const { top } = container.getBoundingClientRect();

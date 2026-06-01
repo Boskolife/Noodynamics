@@ -1,0 +1,116 @@
+// Responsive adjustments for content layout consistency (desktop-first site).
+
+@include media('<widescreen') {
+  .organization-chart__title,
+  .journal__top-title,
+  .blog__title,
+  .single-article__title,
+  .legal-page__title,
+  .application-membership__title,
+  .membership-benefits__title,
+  .donation__title,
+  .radio__title,
+  .culture-systems__title,
+  .member__title,
+  .events__title {
+    font-size: clamp(40px, 6vw, 80px);
+  }
+
+  .code-of-ethics__title {
+    font-size: clamp(36px, 5vw, 80px);
+  }
+
+  .about-how__item-content {
+    width: 100%;
+  }
+
+  .about-how__item-img {
+    position: relative;
+    top: auto;
+    transform: none;
+    width: 100% !important;
+    margin-top: 24px;
+  }
+
+  .about-contacts__inner {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@include media('<tablet') {
+  .tabs__buttons {
+    gap: 16px 24px;
+  }
+
+  .header__nav-list {
+    gap: 16px;
+  }
+
+  .blog__filter {
+    flex-wrap: wrap;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .blog__item {
+    flex-direction: column;
+
+    &-img,
+    &-content {
+      width: 100%;
+    }
+  }
+
+  .about-contacts__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .about-contacts__item {
+    height: auto;
+    min-height: 320px;
+  }
+
+  .journal__top {
+    flex-direction: column;
+
+    &-img,
+    &-content {
+      width: 100%;
+    }
+  }
+
+  .journal__bottom {
+    &-bg {
+      position: relative;
+      top: auto;
+      transform: none;
+      width: 100%;
+      margin-bottom: 24px;
+    }
+
+    &-content {
+      width: 100%;
+    }
+  }
+
+  .code-of-ethics__inner {
+    padding: 0;
+  }
+
+  .main-slider {
+    padding: 0 16px;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .cta-button {
+    right: 12px;
+    bottom: 12px;
+    padding: 10px 24px;
+  }
+
+  .site-audio {
+    left: 12px;
+    bottom: 12px;
+  }
+}

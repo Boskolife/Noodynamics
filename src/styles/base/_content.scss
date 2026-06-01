@@ -1,0 +1,67 @@
+// Shared layout and typography for informational / essay content pages.
+
+@mixin content-page-title {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: $section-title-margin-bottom;
+  text-align: center;
+  letter-spacing: -0.02em;
+}
+
+@mixin content-section-heading {
+  margin-bottom: $section-heading-margin-bottom;
+}
+
+@mixin content-prose {
+  max-width: $content-text-max-width;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: $paragraph-margin-bottom;
+  color: $color-white-80;
+  line-height: calc(25 / 18);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  h2,
+  h3 {
+    @include content-section-heading;
+  }
+}
+
+@mixin content-prose-wide {
+  max-width: $content-text-max-width-wide;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@mixin content-heading-with-subtitle {
+  margin-bottom: $heading-subtitle-gap;
+
+  + p,
+  + .content-subtitle,
+  + [class*='__subtitle'],
+  + [class*='__text'] {
+    margin-top: 0;
+  }
+}
+
+@mixin content-divider-block {
+  padding-top: $divider-padding-y;
+  padding-bottom: $divider-padding-y;
+}
+
+.content-prose {
+  @include content-prose;
+}
+
+.content-prose--wide {
+  @include content-prose-wide;
+}
+
+// Standard format for parenthetical subtitles: "(Associate Directors)"
+.content-parenthetical {
+  font-style: italic;
+}

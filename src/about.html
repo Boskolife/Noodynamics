@@ -12,25 +12,25 @@
   <link rel="stylesheet" href="/styles/main.scss">
 </head>
 
-<body>
+<body class="about-page">
   {{> header }}
   <main id="main">
-    <div class="tabs__buttons wow animate__animated animate__fadeInDown" data-wow-delay="0.1s">
-      <button class="tabs__button active" data-tab="organization-administration">organization & administration</button>
-      <button class="tabs__button" data-tab="code-of-ethics">code of ethics</button>
-      <button class="tabs__button" data-tab="contacts">contacts</button>
+    <div class="tabs__buttons wow animate__animated animate__fadeInDown" data-wow-delay="0.1s" role="tablist" aria-label="About sections">
+      <button type="button" class="tabs__button active" id="tab-organization-administration" data-tab="organization-administration" role="tab" aria-selected="true" aria-controls="organization-administration">organization & administration</button>
+      <button type="button" class="tabs__button" id="tab-code-of-ethics" data-tab="code-of-ethics" role="tab" aria-selected="false" aria-controls="code-of-ethics">code of ethics</button>
+      <button type="button" class="tabs__button" id="tab-contacts" data-tab="contacts" role="tab" aria-selected="false" aria-controls="contacts">contacts</button>
     </div>
     <div class="tab-panels">
-      <div class="tab-panel active" id="organization-administration">
+      <div class="tab-panel active" id="organization-administration" role="tabpanel" aria-labelledby="tab-organization-administration">
         {{> section-organization-chart }}
         {{> section-about-how }}
         {{> section-member }}
       </div>
-      <div class="tab-panel" id="code-of-ethics">
+      <div class="tab-panel" id="code-of-ethics" role="tabpanel" aria-labelledby="tab-code-of-ethics">
         {{> section-code-of-ethics }}
         {{> section-member }} 
       </div>
-      <div class="tab-panel" id="contacts">
+      <div class="tab-panel" id="contacts" role="tabpanel" aria-labelledby="tab-contacts">
         {{> section-about-contacts }}
       </div>
     </div>

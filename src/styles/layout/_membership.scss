@@ -9,8 +9,16 @@
   }
 
   &__text-wrapper {
-    max-width: 800px;
+    max-width: $content-text-max-width-wide;
     width: 100%;
+
+    p {
+      margin-bottom: $paragraph-margin-bottom;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
   }
 
   &__text {
@@ -33,20 +41,25 @@
 
     blockquote {
       padding: 0;
-      margin: 0;
-      width: 310px;
+      margin: 0 auto;
+      max-width: 100%;
       text-align: center;
-      
+      text-wrap: balance;
+
       p {
         color: $color-white-80;
         line-height: calc(25 / 18);
+        margin-bottom: $heading-subtitle-gap;
       }
-      
+
       cite {
+        display: block;
+        margin-top: $heading-subtitle-gap;
         color: $color-white-80;
         font-family: $base-font-serif;
         font-size: 18px;
         font-weight: 500;
+        font-style: normal;
       }
     }
   }
@@ -133,9 +146,8 @@
   }
 
   &__title {
-    text-align: center;
+    @include content-page-title;
     font-size: 80px;
-    margin-bottom: 40px;
     width: 100%;
   }
 

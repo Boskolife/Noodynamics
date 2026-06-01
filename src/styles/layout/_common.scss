@@ -17,3 +17,20 @@
     z-index: 100;
   }
 }
+
+// Inner pages: consistent space below header before first section
+.journal-page #main > section:first-child,
+.books-page #main > section:first-child,
+.membership-page #main > section:first-child,
+.legal-page #main > section:first-child,
+.donation-page #main > section:first-child,
+.make-donation-page #main > section:first-child,
+.single-article-page #main > section:first-child,
+.single-event-page #main > section:first-child {
+  padding-top: $page-content-offset-top;
+}
+
+.extras-page .tabs__buttons {
+  margin-top: $page-hero-offset-top;
+  margin-bottom: $page-tabs-margin-bottom;
+}

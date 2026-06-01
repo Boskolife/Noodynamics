@@ -4,32 +4,29 @@
 
 .legal-page {
   &__section {
-    padding: 60px 0 80px;
+    padding: 0 0 80px;
   }
 
   &__title {
-    margin-bottom: 8px;
+    @include content-page-title;
+    font-size: 80px;
+    margin-bottom: $heading-subtitle-gap;
   }
 
   &__updated {
     font-size: 14px;
     color: $color-white-60;
-    margin-bottom: 32px;
+    margin-bottom: $section-heading-margin-bottom;
+    text-align: center;
   }
 
   &__content {
-    max-width: 720px;
-
-    p {
-      margin-bottom: 20px;
-      line-height: 1.6;
-      color: $color-white-80;
-    }
+    @include content-prose;
 
     h2 {
       font-size: 1.25rem;
       margin-top: 32px;
-      margin-bottom: 12px;
+      margin-bottom: $heading-subtitle-gap;
     }
 
     h2:first-child {

@@ -1,9 +1,17 @@
 .application-membership {
   overflow: hidden;
+  padding-bottom: 80px;
+
   &__title {
+    @include content-page-title;
     font-size: 80px;
-    margin-bottom: 24px;
-    text-align: center;
+    margin-bottom: $section-heading-margin-bottom;
+  }
+
+  &__form {
+    .form-card__label {
+      gap: $form-label-field-gap;
+    }
   }
 
   &__steps {

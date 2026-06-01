@@ -1,5 +1,10 @@
 .breadcrumbs {
-  margin: 80px 40px;
+  margin: $page-content-offset-top 0 $page-tabs-margin-bottom;
+
+  .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
 
   &__list {
     list-style: none;

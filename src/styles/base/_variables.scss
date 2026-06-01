@@ -106,3 +106,16 @@ $headings-font-family: $base-font-sans-serif;
 $headings-color: inherit !default;
 
 $animation-speed: all 0.3s ease 0s;
+
+// Content layout (sitewide consistency)
+$content-text-max-width: 720px;
+$content-text-max-width-wide: 1100px;
+$page-content-offset-top: 80px;
+$page-hero-offset-top: 150px;
+$page-tabs-margin-bottom: 40px;
+$section-title-margin-bottom: 40px;
+$section-heading-margin-bottom: 24px;
+$heading-subtitle-gap: 12px;
+$paragraph-margin-bottom: 20px;
+$divider-padding-y: 24px;
+$form-label-field-gap: 12px;

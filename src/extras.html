@@ -15,19 +15,19 @@
 <body class="extras-page">
     {{> header }}
     <main id="main">
-        <div class="tabs__buttons extras__tabs-buttons wow animate__animated animate__fadeInDown" data-wow-delay="0.1s">
-            <button class="tabs__button active" data-tab="blog">blog</button>
-            <button class="tabs__button" data-tab="online-radio-station">online radio station</button>
-            <button class="tabs__button" data-tab="links">links</button>
+        <div class="tabs__buttons extras__tabs-buttons wow animate__animated animate__fadeInDown" data-wow-delay="0.1s" role="tablist" aria-label="Extras sections">
+            <button type="button" class="tabs__button active" id="tab-blog" data-tab="blog" role="tab" aria-selected="true" aria-controls="blog">blog</button>
+            <button type="button" class="tabs__button" id="tab-online-radio-station" data-tab="online-radio-station" role="tab" aria-selected="false" aria-controls="online-radio-station">online radio station</button>
+            <button type="button" class="tabs__button" id="tab-links" data-tab="links" role="tab" aria-selected="false" aria-controls="links">links</button>
         </div>
         <div class="tab-panels">
-            <div class="tab-panel active" id="blog">
+            <div class="tab-panel active" id="blog" role="tabpanel" aria-labelledby="tab-blog">
                 {{> section-blog }}
             </div>
-            <div class="tab-panel" id="online-radio-station">
+            <div class="tab-panel" id="online-radio-station" role="tabpanel" aria-labelledby="tab-online-radio-station">
                 {{> section-radio }}
             </div>
-            <div class="tab-panel" id="links">
+            <div class="tab-panel" id="links" role="tabpanel" aria-labelledby="tab-links">
                 {{> section-links }}
             </div>
         </div>

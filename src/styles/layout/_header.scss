@@ -1,5 +1,5 @@
 .header {
-  padding: 30px 0;
+  padding: 30px 0 0 0;
 
   &--ebook {
     padding: 20px;
@@ -86,6 +86,8 @@
   }
 
   &__nav-link {
+    display: inline-block;
+    padding: 8px 4px;
     font-weight: 500;
     font-size: 14px;
     text-transform: uppercase;

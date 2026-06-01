@@ -1,8 +1,7 @@
 .organization-chart {
   &__title {
-    text-align: center;
+    @include content-page-title;
     font-size: 80px;
-    margin-bottom: 40px;
   }
 
   &__img {
@@ -109,27 +108,38 @@
       display: block;
       font-size: 14px;
       font-weight: 500;
-      margin-bottom: 40px;
+      margin-bottom: $heading-subtitle-gap;
       text-transform: uppercase;
+    }
+
+    &-label + &-title {
+      margin-top: 0;
     }
 
     &-title {
       font-size: 32px;
-      margin-bottom: 24px;
+      @include content-section-heading;
     }
 
     &-text {
       color: $color-white-80;
+      line-height: calc(25 / 18);
+
+      p {
+        margin-bottom: $paragraph-margin-bottom;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
     }
   }
 }
 
 .code-of-ethics {
   &__inner {
-    max-width: 1100px;
+    @include content-prose-wide;
     width: 100%;
-    margin: 0 auto;
-    padding: 0 40px;
     text-align: center;
 
     &:not(:last-child) {
@@ -142,13 +152,14 @@
   }
 
   &__title {
+    @include content-page-title;
     font-size: 80px;
-    margin-bottom: 24px;
-    letter-spacing: -0.02em;
+    margin-bottom: $section-heading-margin-bottom;
   }
 
   &__text {
-    color: $color-white-80;
+    @include content-prose;
+    text-align: center;
   }
 
   &__slider {

@@ -31,6 +31,7 @@ $media-expressions: (
 @import 'base/helpers';
 @import 'base/reset';
 @import 'base/typography';
+@import 'base/content';
 @import 'base/forms';
 @import 'base/buttons';
 @import 'base/breadcrumbs';
@@ -82,5 +83,7 @@ $media-expressions: (
 
 // Reader page (E-book)
 @import 'layout/reader';
+
+@import 'layout/layout-responsive';
 
 @import 'animate.css';

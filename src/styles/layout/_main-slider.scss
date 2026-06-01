@@ -74,6 +74,12 @@
     }
   }
 
+  &__slide-col.col-1 {
+    .main-slider__slide-title {
+      margin-top: $heading-subtitle-gap;
+    }
+  }
+
   &__label {
     position: absolute;
     top: 40px;

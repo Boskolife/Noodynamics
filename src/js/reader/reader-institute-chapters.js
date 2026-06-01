@@ -14,7 +14,7 @@ export const INSTITUTE_CHAPTERS = [
     id: 'inst-home-millennium',
     title: 'Experience of the New Millennium',
     pages: [
-      `The opening decades of the new millennium have intensified the need for integrative scholarship. The Institute addresses that need through coordinated research, writing, and public engagement grounded in the phenomenology of culture-systems.`,
+      `The opening decades of the new millennium have intensified the need for integrative scholarship. The Institute addresses that need through a multilayered educational forum, coordinated research, writing, and public engagement grounded in the phenomenology of culture-systems.`,
     ],
   },
   {
@@ -56,7 +56,7 @@ export const INSTITUTE_CHAPTERS = [
     id: 'inst-contacts',
     title: 'Contacts',
     pages: [
-      `For Institute email, departmental contacts, and subscription information, refer to the Contacts directory maintained on the About page of this website.`,
+      `For Institute email, departmental contacts, and subscription information, refer to the Contacts directory maintained on the About page of this website. For a specific external issue, use the address that best matches your inquiry.`,
     ],
   },
   {
@@ -77,7 +77,7 @@ export const INSTITUTE_CHAPTERS = [
     id: 'inst-etiquette',
     title: 'The Five Basic Principles of Organization Etiquette',
     pages: [
-      `These principles govern conduct within the Institute: respect for scholarly integrity, clarity in communication, fidelity to the mission, confidentiality where required, and collegial resolve in pursuit of cultural renewal.`,
+      `These principles govern conduct within the Institute: respect for scholarly integrity, clarity in communication, fidelity to the mission, and collegial resolve in pursuit of cultural renewal. We must follow ‘trends’ – but we must nevertheless exercise independent judgment. Integrity is often only noticeable by its absence. Be discreet. This means keeping confidences.`,
     ],
   },
 ];

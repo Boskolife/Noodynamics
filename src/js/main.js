@@ -14,6 +14,7 @@ import {
   initHeaderNavActive,
   initTabs,
   initAudioPlayer,
+  initCtaButton,
 } from './ui/index.js';
 import { initMainSlider } from './slider/main-slider.js';
 import {
@@ -41,6 +42,7 @@ function initFooterYear() {
 
 function initApp() {
   initAudioPlayer();
+  initCtaButton();
 
   if (!isDesktopDevice()) {
     showDesktopOnlyMessage();

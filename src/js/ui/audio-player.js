@@ -2,10 +2,11 @@
  * Global ambient audio toggle (bottom-left on all pages).
  */
 
+import { initFooterFixedHide } from '../utils/footer-fixed-hide.js';
+
 const AUDIO_SELECTOR = '#site-audio';
 const TOGGLE_SELECTOR = '.js-site-audio-toggle';
 const MEDIA_SELECTOR = '.js-site-audio-media';
-const FOOTER_SELECTOR = '#footer';
 const FOOTER_HIDDEN_CLASS = 'site-audio--footer-hidden';
 const AUDIO_FILE = 'audio/noodynamics-audio.mp3';
 const STORAGE_KEY = 'noodynamics-site-audio';
@@ -136,32 +137,6 @@ function initAudioPersistence(media) {
   window.addEventListener('pagehide', persist);
 }
 
-function initAudioFooterHide(root) {
-  const footer = document.querySelector(FOOTER_SELECTOR);
-  if (!footer) return;
-
-  const update = () => {
-    const footerTop = footer.getBoundingClientRect().top;
-    const audioTop = root.getBoundingClientRect().top;
-    const shouldHide = footerTop <= audioTop + 8;
-    root.classList.toggle(FOOTER_HIDDEN_CLASS, shouldHide);
-  };
-
-  let ticking = false;
-  const scheduleUpdate = () => {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(() => {
-      update();
-      ticking = false;
-    });
-  };
-
-  update();
-  window.addEventListener('scroll', scheduleUpdate, { passive: true });
-  window.addEventListener('resize', scheduleUpdate);
-}
-
 export function initAudioPlayer() {
   const root = document.querySelector(AUDIO_SELECTOR);
   if (!root) return;
@@ -173,7 +148,7 @@ export function initAudioPlayer() {
   const saved = loadAudioState();
 
   media.src = getAudioUrl();
-  initAudioFooterHide(root);
+  initFooterFixedHide(root, FOOTER_HIDDEN_CLASS);
   initAudioPersistence(media);
   initAutoplay(media, toggle, {
     shouldAutoplay: !saved.paused,

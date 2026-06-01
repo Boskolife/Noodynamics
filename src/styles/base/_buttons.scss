@@ -71,6 +71,18 @@
   z-index: 100;
   bottom: 20px;
   right: 20px;
+  transition:
+    opacity 0.25s ease,
+    visibility 0.25s ease,
+    transform 0.25s ease;
+
+  &--footer-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(8px);
+  }
+
   background-image: url(/images/cta-button-bg.png);
   background-size: cover;
   background-position: center;

@@ -9,3 +9,4 @@ export { initHeaderNavActive } from './header-nav.js';
 export { initTabs } from './tabs.js';
 export { showDesktopOnlyMessage } from './desktop-only-message.js';
 export { initAudioPlayer } from './audio-player.js';
+export { initCtaButton } from './cta-button.js';

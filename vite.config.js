@@ -71,7 +71,10 @@ function pictureHelper(pathOrSrc, options = {}) {
   );
 }
 
-const input = { main: resolve(__dirname, 'src/index.html') };
+const input = {
+  main: resolve(__dirname, 'src/index.html'),
+  'site-audio': resolve(__dirname, 'src/js/site-audio-entry.js'),
+};
 htmlFiles.forEach((file) => {
   input[file.replace('.html', '')] = resolve(__dirname, 'src', file);
 });
@@ -149,8 +152,13 @@ export default defineConfig({
     webpPlugin(),
   ],
   build: {
+    // One stylesheet for shared SCSS across HTML entries (avoids naming CSS after incidental JS shared chunks).
+    cssCodeSplit: false,
     rollupOptions: {
       input,
+      output: {
+        assetFileNames: 'assets/[name]-[hash][extname]',
+      },
     },
     outDir: '../dist/',
     emptyOutDir: true,

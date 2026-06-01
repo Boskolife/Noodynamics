@@ -2,6 +2,7 @@
  * App entry: init sliders, forms, UI, events. Desktop-only.
  */
 
+import '../styles/main.scss';
 import 'swiper/css';
 import 'swiper/css/scrollbar';
 
@@ -13,7 +14,6 @@ import {
   initProfilePopups,
   initHeaderNavActive,
   initTabs,
-  initAudioPlayer,
   initCtaButton,
 } from './ui/index.js';
 import { initMainSlider } from './slider/main-slider.js';
@@ -41,7 +41,6 @@ function initFooterYear() {
 }
 
 function initApp() {
-  initAudioPlayer();
   initCtaButton();
 
   if (!isDesktopDevice()) {

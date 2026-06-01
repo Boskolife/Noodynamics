@@ -3,12 +3,11 @@
  * Initializes reader UI, state, and panels.
  */
 
+import '../../styles/main.scss';
 import { initReaderUI } from './reader-ui.js';
-import { initAudioPlayer } from '../ui/audio-player.js';
 
 function initReader() {
   initReaderUI();
-  initAudioPlayer();
 }
 
 if (typeof document !== 'undefined') {

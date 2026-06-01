@@ -13,7 +13,7 @@
     border: 1px solid $color-white-100;
 
     &:hover {
-      background-color: $color-white-20;
+      background-color: $color-white-20; 
     }
   }
 
@@ -62,5 +62,50 @@
     color: $color-white-60;
     text-decoration: underline;
     text-underline-offset: 4px;
+  }
+}
+
+.cta-button {
+  position: fixed;
+  z-index: 100;
+  bottom: 20px;
+  right: 20px;
+  background-image: url(/images/cta-button-bg.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 12px 34px;
+  border-radius: 6px;
+  text-align: center;
+
+  &__link{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #494949;
+    font-size: 16px;
+    letter-spacing: -0.04em;
+
+    b{
+      font-weight: 500;
+    }
+  }
+
+  &__img{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+
+    &--left{
+      left: 10px;
+    }
+
+    &--right{
+      right: 10px;
+    }
   }
 }

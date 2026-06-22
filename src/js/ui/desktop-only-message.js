@@ -27,12 +27,6 @@ export function showDesktopOnlyMessage() {
       font-size: 18px;
       line-height: 1.5;
     }
-
-    .desktop-only-message strong {
-      display: block;
-      margin-bottom: 12px;
-      font-size: 20px;
-    }
   `;
   head.appendChild(styleEl);
 
@@ -42,8 +36,7 @@ export function showDesktopOnlyMessage() {
   const message = document.createElement('div');
   message.className = 'desktop-only-message';
   message.innerHTML =
-    '<strong>Desktop access only</strong>' +
-    '<span>This website contains important information. Please view it from a desktop or laptop computer.</span>';
+    '<span>This website was intentionally designed to not be accessible by phones. If this bothers you, that is probably a strong indication that you will find little or nothing of interest here anyway. <br/> You are advised to go elsewhere. <br/> Please. If it does not bother you, then we look forward to your visit from an appropriate device.</span>';
 
   wrapper.appendChild(message);
   body.appendChild(wrapper);

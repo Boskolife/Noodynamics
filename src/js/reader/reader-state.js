@@ -103,9 +103,6 @@ export const readerState = {
   getBookmarks() {
     return getBookmarksFromStorage();
   },
-  setBookmarks(bookmarks) {
-    saveBookmarks(bookmarks);
-  },
   addBookmark(bookmark) {
     const list = getBookmarksFromStorage();
     list.push(bookmark);
@@ -121,9 +118,6 @@ export const readerState = {
   getHighlights() {
     return getHighlightsFromStorage();
   },
-  setHighlights(highlights) {
-    saveHighlights(highlights);
-  },
   addHighlight(highlight) {
     const list = getHighlightsFromStorage();
     list.push(highlight);
@@ -133,12 +127,6 @@ export const readerState = {
   removeHighlight(index) {
     const list = getHighlightsFromStorage();
     list.splice(index, 1);
-    saveHighlights(list);
-    return list;
-  },
-  updateHighlight(index, updates) {
-    const list = getHighlightsFromStorage();
-    if (list[index]) Object.assign(list[index], updates);
     saveHighlights(list);
     return list;
   },

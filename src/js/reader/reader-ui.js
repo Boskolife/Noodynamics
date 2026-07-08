@@ -101,7 +101,7 @@ function renderContinuousBookHtml() {
   const highlights = readerState.getHighlights();
   const parts = [];
 
-  CHAPTERS.forEach((ch) => {
+  CHAPTERS.forEach((ch, chIdx) => {
     const groupTitle = GROUP_HEADERS[ch.id];
     if (groupTitle) {
       parts.push(
@@ -120,7 +120,10 @@ function renderContinuousBookHtml() {
     );
 
     const pageHighlights = highlights.filter(
-      (h) => h.pageId === ch.id || String(h.pageId).startsWith(`${ch.id}_`) || String(h.pageId).startsWith(`ch${CHAPTERS.indexOf(ch)}`),
+      (h) =>
+        h.pageId === ch.id ||
+        String(h.pageId).startsWith(`${ch.id}_`) ||
+        String(h.pageId).startsWith(`ch${chIdx}`),
     );
     parts.push(renderParagraphsHtml(getChapterBodyText(ch), pageHighlights));
   });
@@ -134,11 +137,9 @@ function updateContent({ restorePageScroll = false, forceRerender = false } = {}
   currentChapterIndex = info.chapterIndex;
 
   const bookTitleEl = document.getElementById('reader-book-title');
-  const chapterTitleEl = document.getElementById('reader-chapter-title');
   const textEl = document.getElementById('reader-text');
 
   if (bookTitleEl) bookTitleEl.textContent = BOOK_TITLE;
-  if (chapterTitleEl) chapterTitleEl.textContent = info.chapterTitle || '';
 
   if (textEl && (!bookHtmlRendered || forceRerender)) {
     const previousScrollTop = getReaderScrollContainer()?.scrollTop ?? 0;
@@ -251,7 +252,6 @@ function updateProgressFromScroll() {
   const percentEl = document.getElementById('reader-percent-read');
   const progressFill = document.getElementById('reader-progress-fill');
   const progressBar = document.querySelector('.reader__progress-bar');
-  const chapterTitleEl = document.getElementById('reader-chapter-title');
 
   currentChapterIndex = getChapterIndexFromScroll();
   const chapter = CHAPTERS[currentChapterIndex];
@@ -288,7 +288,6 @@ function updateProgressFromScroll() {
   currentPage = startPage + localPage - 1;
   readerState.currentPage = currentPage;
 
-  if (chapterTitleEl && chapter) chapterTitleEl.textContent = chapter.title;
   if (pageCurrentEl) pageCurrentEl.textContent = currentPage;
   if (pageLabelEl) pageLabelEl.textContent = currentPage;
   if (pageTotalEl) pageTotalEl.textContent = readerState.totalPages;
@@ -588,7 +587,6 @@ function applySettings() {
 }
 
 function closeSidebars() {
-  document.querySelectorAll('.reader__sidebar').forEach((sb) => sb.classList.remove('reader__sidebar--open'));
   document.getElementById('reader-root')?.classList.remove(FOCUS_CLASS);
 }
 
@@ -671,10 +669,6 @@ function initActionBar() {
 
   document.querySelector('.js-toggle-focus')?.addEventListener('click', () => {
     root?.classList.toggle(FOCUS_CLASS);
-  });
-
-  document.querySelectorAll('.js-close-sidebar').forEach((btn) => {
-    btn.addEventListener('click', closeSidebars);
   });
 
   bookmarksBtn?.addEventListener('click', () => {
@@ -829,21 +823,19 @@ function searchBook(query) {
   if (!q) return [];
   const results = [];
   CHAPTERS.forEach((ch, chIdx) => {
-    let pageNum = 1;
-    for (let i = 0; i < chIdx; i++) pageNum += CHAPTERS[i].pages.length;
+    const startPage = getChapterStartPage(chIdx);
     ch.pages.forEach((rawText, pIdx) => {
       const text = formatReaderPageText(rawText, ch.title);
       const idx = text.toLowerCase().indexOf(q);
       if (idx >= 0) {
         const excerpt = text.slice(Math.max(0, idx - 40), idx + q.length + 60);
         results.push({
-          page: pageNum + pIdx,
+          page: startPage + pIdx,
           chapterTitle: ch.title,
-          excerpt: '...' + excerpt + '...',
+          excerpt: `...${excerpt}...`,
           matchIndex: idx,
         });
       }
-      pageNum++;
     });
   });
   return results;

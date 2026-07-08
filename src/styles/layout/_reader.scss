@@ -24,10 +24,13 @@
 
   display: grid;
   grid-template-columns: 335px 1fr 355px;
-  min-height: 100vh;
+  height: 100vh;
+  min-height: 0;
+  overflow: hidden;
   transition: grid-template-columns 0.3s ease;
 
   &--focus {
+    grid-template-columns: 0 1fr 0px;
     .reader__sidebar {
       visibility: hidden;
       pointer-events: none;
@@ -53,7 +56,7 @@
       }
     }
 
-    .reader__text {
+    .reader__text p{
       color: rgba($color-neutral-100, var(--reader-text-opacity));
     }
 
@@ -107,6 +110,26 @@
     .reader__page-info-total,
     .reader__page-info-separator {
       color: $color-white-20;
+    }
+
+    .reader__toc-group,
+    .reader__toc-link {
+      color: $color-white-100;
+
+      &:hover,
+      &:focus,
+      &:focus-visible {
+        color: $color-lightbeige-500;
+        outline: none;
+      }
+    }
+
+    .reader__section-title {
+      color: #c1b1a0;
+
+      &--group {
+        color: $color-neutral-100;
+      }
     }
   }
 
@@ -180,26 +203,38 @@
 
   &__toc-item {
     margin: 0;
+
+    &--sub {
+      .reader__toc-link {
+        padding-left: 10px;
+        font-size: 13px;
+        text-transform: none;
+        font-weight: 400;
+      }
+    }
   }
 
+  &__toc-group,
   &__toc-link {
     display: block;
     width: 100%;
     text-align: left;
     background: none;
     border: none;
-    color: $color-darkbeige-500;
+    color: $color-black-100;
     font-size: 14px;
     font-weight: 500;
     text-transform: uppercase;
     font-family: inherit;
+    text-decoration: none;
     cursor: pointer;
-    transition:
-      color 0.2s,
-      background 0.2s;
+    transition: color 0.2s;
 
-    &:hover {
+    &:hover,
+    &:focus,
+    &:focus-visible {
       color: $color-brown;
+      outline: none;
     }
   }
 
@@ -208,6 +243,8 @@
     display: flex;
     flex-direction: column;
     min-width: 0;
+    min-height: 0;
+    overflow: hidden;
     border-left: 1px solid $color-black-10;
     border-right: 1px solid $color-black-10;
   }
@@ -341,6 +378,8 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
     background-color: var(--reader-bg-color);
   }
 
@@ -366,13 +405,23 @@
 
   &__text-wrapper {
     flex: 1;
+    min-height: 0;
+    overflow-x: hidden;
     overflow-y: auto;
+    overscroll-behavior: none;
     padding: 24px 40px 50px;
     background-color: $color-white-100;
+    // Scroll is driven by ArrowUp / ArrowDown only — hide native scrollbar UI.
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+      display: none;
+    }
   }
 
-  // Scrollbars for reader scrollable areas
-  &__text-wrapper,
+  // Scrollbars for reader side panels / search
   &__sidebar,
   &__search-results {
     scrollbar-width: thin;
@@ -393,7 +442,6 @@
   }
 
   &--night {
-    &__text-wrapper,
     &__sidebar,
     &__search-results {
       scrollbar-color: $color-neutral-400 $color-neutral-800;
@@ -409,7 +457,6 @@
   }
 
   &--accent {
-    &__text-wrapper,
     &__sidebar,
     &__search-results {
       scrollbar-color: $color-brown $color-lightbeige-200;
@@ -425,14 +472,53 @@
   }
 
   &__text {
-    font-size: calc(18px * var(--reader-font-scale));
-    line-height: var(--reader-line-height);
-    letter-spacing: var(--reader-letter-spacing);
-    color: rgba($color-black-100, var(--reader-text-opacity));
-    text-align: var(--reader-text-align);
-    width: 100%;
-    user-select: text;
-    outline: none;
+    p {
+      font-size: calc(18px * var(--reader-font-scale));
+      line-height: var(--reader-line-height);
+      letter-spacing: var(--reader-letter-spacing);
+      color: rgba($color-black-100, var(--reader-text-opacity));
+      text-align: var(--reader-text-align);
+      width: 100%;
+      user-select: text;
+      outline: none;
+      margin: 0 0 1em;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &__section-title {
+    margin: 2.2em 0 0.9em;
+    color: $color-brown;
+    font-family: $base-font-sans-serif;
+    font-size: calc(24px * var(--reader-font-scale));
+    font-weight: 600;
+    line-height: 1.3;
+    text-transform: uppercase;
+    scroll-margin-top: 24px;
+    background: none;
+    -webkit-text-fill-color: $color-brown;
+    background-clip: text;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &--group {
+      margin-top: 2.8em;
+      margin-bottom: 0.4em;
+      font-size: calc(26px * var(--reader-font-scale));
+      color: $color-dark-brown;
+    }
+
+    &--sub {
+      margin-top: 1.8em;
+      font-size: calc(20px * var(--reader-font-scale));
+      font-weight: 500;
+      text-transform: none;
+    }
   }
 
   &__highlight {

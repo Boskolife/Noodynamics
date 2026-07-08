@@ -1,0 +1,554 @@
+{
+  "entries": [
+    {
+      "dest": 8,
+      "title": "Proem: First Epistle to the Highbrows"
+    },
+    {
+      "dest": 58,
+      "title": "Grand Synthesis: Mythology of the 21st Century"
+    },
+    {
+      "dest": 58,
+      "title": "1. Introduction"
+    },
+    {
+      "dest": 92,
+      "title": "2. The Rhizomodality of High Culture"
+    },
+    {
+      "dest": 92,
+      "title": "2.1 Prelusion"
+    },
+    {
+      "dest": 100,
+      "title": "2.2 A New Philosophy of Culture"
+    },
+    {
+      "dest": 120,
+      "title": "2.3 A New Science of Culture-systems"
+    },
+    {
+      "dest": 150,
+      "title": "2.4 The Expressive Modality of Culture-systems"
+    },
+    {
+      "dest": 164,
+      "title": "2.5 Science as a Mode of Expression"
+    },
+    {
+      "dest": 173,
+      "title": "2.6 Secondary Modes of Expression"
+    },
+    {
+      "dest": 176,
+      "title": "2.7 Unitary Cultural Modality"
+    },
+    {
+      "dest": 185,
+      "title": "2.8 Enculturation"
+    },
+    {
+      "dest": 198,
+      "title": "3. Millennium Metalogue: A New Basis for Dialogue Between Science, Spirituality, and Art"
+    },
+    {
+      "dest": 198,
+      "title": "3.1 Prelusion"
+    },
+    {
+      "dest": 221,
+      "title": "3.2 The Scientific/Spiritual Arms Race: Mutually-Assured Deconstruction"
+    },
+    {
+      "dest": 245,
+      "title": "3.3 Piercing the Academic Iron Curtain"
+    },
+    {
+      "dest": 266,
+      "title": "3.4 The Culture-soul: Unbearable Lightness of Being-in-the-World"
+    },
+    {
+      "dest": 284,
+      "title": "3.5 Western World-feeling, Christianity, and Postmodern Metaphysics"
+    },
+    {
+      "dest": 313,
+      "title": "3.6 The Noödynamic Worldview"
+    },
+    {
+      "dest": 332,
+      "title": "3.7 The Culture-systemic Theory of Art"
+    },
+    {
+      "dest": 362,
+      "title": "3.8 From Pop-culture to Post-modern Aesthetics"
+    },
+    {
+      "dest": 394,
+      "title": "4. Ecology of Mind: Emergence of the Noödynamic Paradigm"
+    },
+    {
+      "dest": 394,
+      "title": "4.1 Prelusion"
+    },
+    {
+      "dest": 413,
+      "title": "4.2 Postmodern Paradigmatics"
+    },
+    {
+      "dest": 435,
+      "title": "4.3 The Nascent Science-based Nature-religion"
+    },
+    {
+      "dest": 456,
+      "title": "4.4 Empirical Spirituality"
+    },
+    {
+      "dest": 486,
+      "title": "4.5 Logical Faith"
+    },
+    {
+      "dest": 518,
+      "title": "5. Psychography: The Character of Western Culture"
+    },
+    {
+      "dest": 518,
+      "title": "5.1 Prelusion"
+    },
+    {
+      "dest": 552,
+      "title": "5.2 The Psychographical Paradigm"
+    },
+    {
+      "dest": 575,
+      "title": "5.3 The Faustian Mythologem"
+    },
+    {
+      "dest": 626,
+      "title": "5.4 Music and Mountains, Painting and Ruins"
+    },
+    {
+      "dest": 643,
+      "title": "5.5 Mathematics: Faustian Catechism"
+    },
+    {
+      "dest": 696,
+      "title": "5.6 Technology: Faustian Ritual"
+    },
+    {
+      "dest": 758,
+      "title": "5.7 Psychography in the New Millennium"
+    },
+    {
+      "dest": 784,
+      "title": "6. Remembrance of Things Past: The Second Religiosity"
+    },
+    {
+      "dest": 853,
+      "title": "Bibliography"
+    }
+  ],
+  "pageSample": [
+    {
+      "id": "pf1",
+      "pageNo": "1",
+      "index": 399761
+    },
+    {
+      "id": "pf2",
+      "pageNo": "2",
+      "index": 2607535
+    },
+    {
+      "id": "pf3",
+      "pageNo": "3",
+      "index": 2636532
+    },
+    {
+      "id": "pf4",
+      "pageNo": "4",
+      "index": 2695111
+    },
+    {
+      "id": "pf5",
+      "pageNo": "5",
+      "index": 2695553
+    },
+    {
+      "id": "pf6",
+      "pageNo": "6",
+      "index": 2719814
+    },
+    {
+      "id": "pf7",
+      "pageNo": "7",
+      "index": 2723919
+    },
+    {
+      "id": "pf8",
+      "pageNo": "8",
+      "index": 2727515
+    },
+    {
+      "id": "pf9",
+      "pageNo": "9",
+      "index": 2739258
+    },
+    {
+      "id": "pfa",
+      "pageNo": "a",
+      "index": 2851587
+    },
+    {
+      "id": "pfb",
+      "pageNo": "b",
+      "index": 2864332
+    },
+    {
+      "id": "pfc",
+      "pageNo": "c",
+      "index": 2876985
+    },
+    {
+      "id": "pfd",
+      "pageNo": "d",
+      "index": 2891037
+    },
+    {
+      "id": "pfe",
+      "pageNo": "e",
+      "index": 2903249
+    },
+    {
+      "id": "pff",
+      "pageNo": "f",
+      "index": 2916561
+    },
+    {
+      "id": "pf10",
+      "pageNo": "10",
+      "index": 2928089
+    },
+    {
+      "id": "pf11",
+      "pageNo": "11",
+      "index": 2940621
+    },
+    {
+      "id": "pf12",
+      "pageNo": "12",
+      "index": 2954162
+    },
+    {
+      "id": "pf13",
+      "pageNo": "13",
+      "index": 2966104
+    },
+    {
+      "id": "pf14",
+      "pageNo": "14",
+      "index": 2976647
+    },
+    {
+      "id": "pf15",
+      "pageNo": "15",
+      "index": 2987579
+    },
+    {
+      "id": "pf16",
+      "pageNo": "16",
+      "index": 3000495
+    },
+    {
+      "id": "pf17",
+      "pageNo": "17",
+      "index": 3012274
+    },
+    {
+      "id": "pf18",
+      "pageNo": "18",
+      "index": 3026209
+    },
+    {
+      "id": "pf19",
+      "pageNo": "19",
+      "index": 3150107
+    },
+    {
+      "id": "pf1a",
+      "pageNo": "1a",
+      "index": 3162566
+    },
+    {
+      "id": "pf1b",
+      "pageNo": "1b",
+      "index": 3176252
+    },
+    {
+      "id": "pf1c",
+      "pageNo": "1c",
+      "index": 3187046
+    },
+    {
+      "id": "pf1d",
+      "pageNo": "1d",
+      "index": 3200949
+    },
+    {
+      "id": "pf1e",
+      "pageNo": "1e",
+      "index": 3215237
+    },
+    {
+      "id": "pf1f",
+      "pageNo": "1f",
+      "index": 3228247
+    },
+    {
+      "id": "pf20",
+      "pageNo": "20",
+      "index": 3241271
+    },
+    {
+      "id": "pf21",
+      "pageNo": "21",
+      "index": 3252919
+    },
+    {
+      "id": "pf22",
+      "pageNo": "22",
+      "index": 3263497
+    },
+    {
+      "id": "pf23",
+      "pageNo": "23",
+      "index": 3274672
+    },
+    {
+      "id": "pf24",
+      "pageNo": "24",
+      "index": 3287570
+    },
+    {
+      "id": "pf25",
+      "pageNo": "25",
+      "index": 3298956
+    },
+    {
+      "id": "pf26",
+      "pageNo": "26",
+      "index": 3309246
+    },
+    {
+      "id": "pf27",
+      "pageNo": "27",
+      "index": 3318602
+    },
+    {
+      "id": "pf28",
+      "pageNo": "28",
+      "index": 3607187
+    },
+    {
+      "id": "pf29",
+      "pageNo": "29",
+      "index": 3620168
+    },
+    {
+      "id": "pf2a",
+      "pageNo": "2a",
+      "index": 3633041
+    },
+    {
+      "id": "pf2b",
+      "pageNo": "2b",
+      "index": 3644157
+    },
+    {
+      "id": "pf2c",
+      "pageNo": "2c",
+      "index": 3658436
+    },
+    {
+      "id": "pf2d",
+      "pageNo": "2d",
+      "index": 3671507
+    },
+    {
+      "id": "pf2e",
+      "pageNo": "2e",
+      "index": 3681947
+    },
+    {
+      "id": "pf2f",
+      "pageNo": "2f",
+      "index": 3695076
+    },
+    {
+      "id": "pf30",
+      "pageNo": "30",
+      "index": 3706124
+    },
+    {
+      "id": "pf31",
+      "pageNo": "31",
+      "index": 3718830
+    },
+    {
+      "id": "pf32",
+      "pageNo": "32",
+      "index": 3730202
+    },
+    {
+      "id": "pf33",
+      "pageNo": "33",
+      "index": 3742602
+    },
+    {
+      "id": "pf34",
+      "pageNo": "34",
+      "index": 3754300
+    },
+    {
+      "id": "pf35",
+      "pageNo": "35",
+      "index": 3764805
+    },
+    {
+      "id": "pf36",
+      "pageNo": "36",
+      "index": 3776892
+    },
+    {
+      "id": "pf37",
+      "pageNo": "37",
+      "index": 3789451
+    },
+    {
+      "id": "pf38",
+      "pageNo": "38",
+      "index": 4446650
+    },
+    {
+      "id": "pf39",
+      "pageNo": "39",
+      "index": 4466017
+    },
+    {
+      "id": "pf3a",
+      "pageNo": "3a",
+      "index": 6106252
+    },
+    {
+      "id": "pf3b",
+      "pageNo": "3b",
+      "index": 6116095
+    },
+    {
+      "id": "pf3c",
+      "pageNo": "3c",
+      "index": 6123225
+    },
+    {
+      "id": "pf3d",
+      "pageNo": "3d",
+      "index": 6370061
+    },
+    {
+      "id": "pf3e",
+      "pageNo": "3e",
+      "index": 6383494
+    },
+    {
+      "id": "pf3f",
+      "pageNo": "3f",
+      "index": 6396892
+    },
+    {
+      "id": "pf40",
+      "pageNo": "40",
+      "index": 6953681
+    },
+    {
+      "id": "pf41",
+      "pageNo": "41",
+      "index": 6965853
+    },
+    {
+      "id": "pf42",
+      "pageNo": "42",
+      "index": 6974717
+    },
+    {
+      "id": "pf43",
+      "pageNo": "43",
+      "index": 7528442
+    },
+    {
+      "id": "pf44",
+      "pageNo": "44",
+      "index": 7541060
+    },
+    {
+      "id": "pf45",
+      "pageNo": "45",
+      "index": 7552615
+    },
+    {
+      "id": "pf46",
+      "pageNo": "46",
+      "index": 7568360
+    },
+    {
+      "id": "pf47",
+      "pageNo": "47",
+      "index": 7574479
+    },
+    {
+      "id": "pf48",
+      "pageNo": "48",
+      "index": 8217385
+    },
+    {
+      "id": "pf49",
+      "pageNo": "49",
+      "index": 8230793
+    },
+    {
+      "id": "pf4a",
+      "pageNo": "4a",
+      "index": 8244878
+    },
+    {
+      "id": "pf4b",
+      "pageNo": "4b",
+      "index": 8619318
+    },
+    {
+      "id": "pf4c",
+      "pageNo": "4c",
+      "index": 8632570
+    },
+    {
+      "id": "pf4d",
+      "pageNo": "4d",
+      "index": 8649281
+    },
+    {
+      "id": "pf4e",
+      "pageNo": "4e",
+      "index": 8663415
+    },
+    {
+      "id": "pf4f",
+      "pageNo": "4f",
+      "index": 8670482
+    },
+    {
+      "id": "pf50",
+      "pageNo": "50",
+      "index": 9343751
+    }
+  ]
+}

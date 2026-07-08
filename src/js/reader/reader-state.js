@@ -141,7 +141,14 @@ export const readerState = {
       background: 'white',
       align: 'left',
     };
-    return { ...defaults, ...fromStorage };
+    const merged = { ...defaults, ...fromStorage };
+    const minScale = 14 / 18;
+    const maxScale = 32 / 18;
+    const scale = Number(merged.fontScale);
+    merged.fontScale = Number.isFinite(scale)
+      ? Math.min(maxScale, Math.max(minScale, scale))
+      : defaults.fontScale;
+    return merged;
   },
   saveSettings(settings) {
     saveSettings(settings);

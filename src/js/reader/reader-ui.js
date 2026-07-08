@@ -10,6 +10,10 @@ import { readerState, getReaderLoggedIn, setReaderLoggedIn } from './reader-stat
 const FOCUS_CLASS = 'reader--focus';
 const NIGHT_CLASS = 'reader--night';
 const HIGHLIGHT_CLASS = 'reader__highlight';
+/** Base paragraph font size in CSS (`calc(BASE * --reader-font-scale)`). */
+const BASE_FONT_SIZE_PX = 18;
+const MIN_FONT_SIZE_PX = 14;
+const MAX_FONT_SIZE_PX = 32;
 /** ArrowUp / ArrowDown scroll distance, in text lines. */
 const ARROW_SCROLL_LINES = 2;
 /** Bottom nav / PageUp / PageDown scroll distance, as a fraction of the viewport. */
@@ -218,7 +222,7 @@ function renderContinuousBookHtml() {
   const highlights = readerState.getHighlights();
   const parts = [];
 
-  CHAPTERS.forEach((ch, chIdx) => {
+  CHAPTERS.forEach((ch) => {
     const groupTitle = GROUP_HEADERS[ch.id];
     if (groupTitle) {
       parts.push(
@@ -436,9 +440,12 @@ function resetReaderScroll() {
 }
 
 function getReaderLineHeight(wrapper) {
-  const textEl = wrapper.querySelector('.reader__text') || wrapper;
-  const styles = getComputedStyle(textEl);
-  const fontSize = parseFloat(styles.fontSize) || 18;
+  const sample =
+    wrapper.querySelector('.reader__text p') ||
+    wrapper.querySelector('.reader__text') ||
+    wrapper;
+  const styles = getComputedStyle(sample);
+  const fontSize = parseFloat(styles.fontSize) || BASE_FONT_SIZE_PX;
 
   // Unitless/invalid CSS line-height ("1.5", "normal") must not be trusted as pixels.
   const rawLineHeight = styles.lineHeight;
@@ -496,11 +503,6 @@ function jumpToPage(page) {
   requestAnimationFrame(() => {
     scrollToPageInBook(nextPage);
   });
-}
-
-function getCurrentPageId() {
-  const chapter = CHAPTERS[currentChapterIndex];
-  return chapter?.id || `ch${currentChapterIndex}`;
 }
 
 function applyHighlightsToText(text, highlights) {
@@ -877,8 +879,23 @@ function initSettings() {
   const alignLeftBtn = document.querySelector('.js-font-align-left');
 
   function formatFontSizeLabel(fontScale) {
-    const px = Math.round(18 * (fontScale ?? 1));
+    const px = Math.round(BASE_FONT_SIZE_PX * (fontScale ?? 1));
     return `Aa ${px}px`;
+  }
+
+  function clampFontScale(fontScale) {
+    const minScale = MIN_FONT_SIZE_PX / BASE_FONT_SIZE_PX;
+    const maxScale = MAX_FONT_SIZE_PX / BASE_FONT_SIZE_PX;
+    return Math.min(maxScale, Math.max(minScale, Number(fontScale) || 1));
+  }
+
+  function stepFontScale(deltaPx) {
+    const currentPx = Math.round(BASE_FONT_SIZE_PX * (draft.fontScale ?? 1));
+    const nextPx = Math.min(
+      MAX_FONT_SIZE_PX,
+      Math.max(MIN_FONT_SIZE_PX, currentPx + deltaPx),
+    );
+    return parseFloat((nextPx / BASE_FONT_SIZE_PX).toFixed(4));
   }
 
   function updateValues() {
@@ -895,6 +912,7 @@ function initSettings() {
     alignLeftBtn?.classList.toggle('is-active', draft.align !== 'center');
   }
 
+  draft = { ...draft, fontScale: clampFontScale(draft.fontScale) };
   updateValues();
 
   if (nightBtn) {
@@ -950,11 +968,11 @@ function initSettings() {
   });
 
   document.querySelector('.js-font-size-dec')?.addEventListener('click', () => {
-    draft = { ...draft, fontScale: Math.max(0.8, parseFloat((draft.fontScale - 0.1).toFixed(2))) };
+    draft = { ...draft, fontScale: stepFontScale(-2) };
     updateValues();
   });
   document.querySelector('.js-font-size-inc')?.addEventListener('click', () => {
-    draft = { ...draft, fontScale: Math.min(32 / 18, parseFloat((draft.fontScale + 0.1).toFixed(2))) };
+    draft = { ...draft, fontScale: stepFontScale(2) };
     updateValues();
   });
 
@@ -979,10 +997,10 @@ function initSettings() {
 
 function initPagination() {
   document.querySelector('.js-prev-page')?.addEventListener('click', () => {
-    scrollReaderBy(-1);
+    scrollReaderBy(-1, { pageStep: true });
   });
   document.querySelector('.js-next-page')?.addEventListener('click', () => {
-    scrollReaderBy(1);
+    scrollReaderBy(1, { pageStep: true });
   });
 }
 
@@ -1058,6 +1076,27 @@ function initSearch() {
   });
 }
 
+function getVisibleTextExcerpt(maxLength = 100) {
+  const wrapper = getReaderScrollContainer();
+  const paragraphs = [...document.querySelectorAll('#reader-text p')];
+  if (!paragraphs.length) return '';
+
+  if (!wrapper) {
+    return paragraphs[0].textContent.slice(0, maxLength);
+  }
+
+  const markerY = wrapper.getBoundingClientRect().top + wrapper.clientHeight * 0.3;
+  const near =
+    paragraphs.find((p) => {
+      const rect = p.getBoundingClientRect();
+      return rect.bottom >= markerY && rect.top <= markerY;
+    }) ||
+    paragraphs.find((p) => p.getBoundingClientRect().top >= wrapper.getBoundingClientRect().top) ||
+    paragraphs[0];
+
+  return (near?.textContent || '').slice(0, maxLength);
+}
+
 function initBookmarkAdd() {
   // Add bookmark button in bookmarks panel - append to panel content
   const panel = document.getElementById('reader-bookmarks-panel');
@@ -1070,12 +1109,10 @@ function initBookmarkAdd() {
   addBtn.textContent = 'Add current page';
   addBtn.addEventListener('click', () => {
     const { chapterTitle } = getChapterInfoForPage(readerState.currentPage);
-    const textEl = document.getElementById('reader-text');
-    const excerpt = textEl ? textEl.textContent.slice(0, 100) : '';
     readerState.addBookmark({
       page: readerState.currentPage,
       chapterTitle,
-      excerpt,
+      excerpt: getVisibleTextExcerpt(),
       id: Date.now(),
     });
     renderBookmarksPanel();

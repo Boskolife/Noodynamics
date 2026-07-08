@@ -71,12 +71,129 @@ function getChapterBodyText(chapter) {
     .join('\n\n');
 }
 
-function renderParagraphsHtml(text, highlights = []) {
-  const paragraphs = String(text)
+/** Paragraphs with the same normalization used when rendering chapter HTML. */
+function getChapterParagraphs(chapter) {
+  return String(getChapterBodyText(chapter))
     .split(/\n\s*\n/)
     .map((p) => p.replace(/\s*\n\s*/g, ' ').trim())
     .filter(Boolean);
+}
 
+function getNormalizedChapterBody(chapter) {
+  return getChapterParagraphs(chapter).join('\n\n');
+}
+
+function getChapterById(chapterId) {
+  return CHAPTERS.find((ch) => ch.id === chapterId) || null;
+}
+
+function findChapterFromNode(node, textEl) {
+  let el = node?.nodeType === Node.TEXT_NODE ? node.parentElement : node;
+  while (el && el !== textEl) {
+    if (el.id?.startsWith('reader-section-')) {
+      return getChapterById(el.id.slice('reader-section-'.length));
+    }
+    el = el.parentElement;
+  }
+
+  // Walk previous siblings/ancestors to the nearest chapter heading.
+  el = node?.nodeType === Node.TEXT_NODE ? node.parentElement : node;
+  while (el && textEl.contains(el)) {
+    let sibling = el.previousElementSibling;
+    while (sibling) {
+      if (sibling.id?.startsWith('reader-section-')) {
+        return getChapterById(sibling.id.slice('reader-section-'.length));
+      }
+      sibling = sibling.previousElementSibling;
+    }
+    el = el.parentElement;
+  }
+
+  return CHAPTERS[currentChapterIndex] || null;
+}
+
+function getPointOffsetInChapter(chapter, container, offset) {
+  const heading = document.getElementById(getChapterAnchorId(chapter));
+  if (!heading) return -1;
+
+  let bodyOffset = 0;
+  let el = heading.nextElementSibling;
+  let isFirstParagraph = true;
+
+  while (el) {
+    if (
+      el.id?.startsWith('reader-section-') ||
+      el.id?.startsWith('reader-group-')
+    ) {
+      break;
+    }
+
+    if (el.tagName === 'P') {
+      if (!isFirstParagraph) bodyOffset += 2; // "\n\n" between normalized paragraphs
+      isFirstParagraph = false;
+
+      if (el === container || el.contains(container)) {
+        const preRange = document.createRange();
+        preRange.selectNodeContents(el);
+        preRange.setEnd(container, offset);
+        return bodyOffset + preRange.toString().length;
+      }
+
+      bodyOffset += el.textContent.length;
+    }
+
+    el = el.nextElementSibling;
+  }
+
+  return -1;
+}
+
+function estimatePageForHighlight(chapter, chapterIndex, startOffset) {
+  const body = getNormalizedChapterBody(chapter);
+  const ratio = body.length ? startOffset / body.length : 0;
+  const pageIndex = Math.min(
+    chapter.pages.length - 1,
+    Math.max(0, Math.floor(ratio * chapter.pages.length)),
+  );
+  return getChapterStartPage(chapterIndex) + pageIndex;
+}
+
+function createHighlightFromSelection(range, textEl) {
+  const selectedText = range.toString();
+  if (!selectedText.trim()) return null;
+
+  const chapter = findChapterFromNode(range.startContainer, textEl);
+  if (!chapter) return null;
+
+  const chapterIndex = CHAPTERS.indexOf(chapter);
+  const start = getPointOffsetInChapter(
+    chapter,
+    range.startContainer,
+    range.startOffset,
+  );
+  const end = getPointOffsetInChapter(
+    chapter,
+    range.endContainer,
+    range.endOffset,
+  );
+  if (start < 0 || end < 0 || end <= start) return null;
+
+  const bodyText = getNormalizedChapterBody(chapter);
+  const text = bodyText.slice(start, end);
+  if (!text.trim()) return null;
+
+  return {
+    id: `h${Date.now()}`,
+    pageId: chapter.id,
+    page: estimatePageForHighlight(chapter, chapterIndex, start),
+    chapterTitle: chapter.title,
+    start,
+    end,
+    text,
+  };
+}
+
+function renderParagraphsHtml(paragraphs, highlights = []) {
   if (!paragraphs.length) return '';
 
   let offset = 0;
@@ -119,13 +236,11 @@ function renderContinuousBookHtml() {
       `<${headingTag} class="${headingClass}" id="${getChapterAnchorId(ch)}">${escapeHtml(ch.title)}</${headingTag}>`,
     );
 
-    const pageHighlights = highlights.filter(
-      (h) =>
-        h.pageId === ch.id ||
-        String(h.pageId).startsWith(`${ch.id}_`) ||
-        String(h.pageId).startsWith(`ch${chIdx}`),
-    );
-    parts.push(renderParagraphsHtml(getChapterBodyText(ch), pageHighlights));
+    const pageHighlights = highlights.filter((h) => {
+      const pageId = String(h.pageId || '');
+      return pageId === ch.id || pageId.startsWith(`${ch.id}_`);
+    });
+    parts.push(renderParagraphsHtml(getChapterParagraphs(ch), pageHighlights));
   });
 
   return parts.join('');
@@ -539,9 +654,11 @@ function renderHighlightsPanel() {
     li.className = 'reader__list-item reader__highlight-item';
     li.innerHTML = `
       <div class="reader__highlight-content">
-        <p class="reader__highlight-text">${escapeHtml(h.text)}</p>
-        ${h.note ? `<p class="reader__highlight-note">${escapeHtml(h.note)}</p>` : ''}
-        <span class="reader__highlight-meta">PAGE ${h.page} (${escapeHtml(h.chapterTitle)})</span>
+        <button type="button" class="reader__highlight-goto js-goto-highlight" data-index="${idx}">
+          <p class="reader__highlight-text">${escapeHtml(h.text)}</p>
+          ${h.note ? `<p class="reader__highlight-note">${escapeHtml(h.note)}</p>` : ''}
+          <span class="reader__highlight-meta">PAGE ${h.page} (${escapeHtml(h.chapterTitle)})</span>
+        </button>
         <button type="button" class="reader__highlight-delete js-delete-highlight" data-index="${idx}" aria-label="Remove highlight">×</button>
       </div>
     `;
@@ -549,21 +666,56 @@ function renderHighlightsPanel() {
   });
 
   list.querySelectorAll('.js-delete-highlight').forEach((btn) => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
       readerState.removeHighlight(parseInt(btn.dataset.index, 10));
       renderHighlightsPanel();
       updateContent({ forceRerender: true });
     });
   });
 
-  list.querySelectorAll('.reader__highlight-text').forEach((el, idx) => {
-    el.addEventListener('click', () => {
-      const h = highlights[idx];
-      if (h) {
-        jumpToPage(h.page);
-        closeReaderPanel();
-      }
+  list.querySelectorAll('.js-goto-highlight').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const h = highlights[parseInt(btn.dataset.index, 10)];
+      if (!h) return;
+      closeReaderPanel();
+      jumpToHighlight(h);
     });
+  });
+}
+
+function findHighlightMark(highlightId) {
+  const id = String(highlightId);
+  const escaped =
+    typeof CSS !== 'undefined' && typeof CSS.escape === 'function'
+      ? CSS.escape(id)
+      : id.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+  return document.querySelector(`mark[data-highlight-id="${escaped}"]`);
+}
+
+function jumpToHighlight(highlight) {
+  if (!highlight) return;
+  if (!bookHtmlRendered) updateContent();
+
+  requestAnimationFrame(() => {
+    const mark = findHighlightMark(highlight.id);
+    const wrapper = getReaderScrollContainer();
+
+    if (mark && wrapper) {
+      isProgrammaticScroll = true;
+      const top =
+        wrapper.scrollTop +
+        (mark.getBoundingClientRect().top - wrapper.getBoundingClientRect().top) -
+        Math.round(wrapper.clientHeight * 0.25);
+      wrapper.scrollTop = Math.max(0, top);
+      updateProgressFromScroll();
+      requestAnimationFrame(() => {
+        isProgrammaticScroll = false;
+      });
+      return;
+    }
+
+    jumpToPage(highlight.page || 1);
   });
 }
 
@@ -941,7 +1093,7 @@ function initTextSelection() {
       selectedRange = null;
       return;
     }
-    selectedRange = range;
+    selectedRange = range.cloneRange();
     const rect = range.getBoundingClientRect();
     tooltip.style.left = `${rect.left + rect.width / 2 - 50}px`;
     tooltip.style.top = `${rect.top - 40}px`;
@@ -951,21 +1103,13 @@ function initTextSelection() {
 
   tooltip.querySelector('.reader__highlight-btn')?.addEventListener('click', () => {
     if (!selectedRange) return;
-    const text = selectedRange.toString();
-    const fullText = textEl.textContent;
-    const start = fullText.indexOf(text);
-    if (start < 0) return;
-    const pageId = getCurrentPageId();
-    const { chapterTitle } = getChapterInfoForPage(currentPage);
+
+    const draft = createHighlightFromSelection(selectedRange, textEl);
+    if (!draft) return;
+
     const note = window.prompt('Add a note (optional):', '') || '';
     readerState.addHighlight({
-      id: `h${Date.now()}`,
-      pageId,
-      page: currentPage,
-      chapterTitle,
-      start,
-      end: start + text.length,
-      text,
+      ...draft,
       note,
     });
     tooltip.hidden = true;

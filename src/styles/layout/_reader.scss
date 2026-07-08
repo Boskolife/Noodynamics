@@ -707,6 +707,19 @@
     padding-right: 32px;
   }
 
+  &__highlight-goto {
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+    color: inherit;
+    font: inherit;
+  }
+
   &__bookmark-title,
   &__highlight-text {
     font-size: 14px;

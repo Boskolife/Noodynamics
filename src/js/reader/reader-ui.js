@@ -3,17 +3,9 @@
  */
 
 import { initModalManager, openModalById, closeModal } from '../ui/modal-manager.js';
-import { CHAPTERS, BOOK_TITLE, getChapterText } from './reader-content.js';
+import { CHAPTERS, BOOK_TITLE } from './reader-content.js';
 import { formatReaderPageText } from './reader-text-format.js';
-import { paginateChapters } from './reader-pagination.js';
-import {
-  readerState,
-  getReaderLoggedIn,
-  setReaderLoggedIn,
-  setVirtualPages,
-  findPageByOffset,
-  getChapterStartPage,
-} from './reader-state.js';
+import { readerState, getReaderLoggedIn, setReaderLoggedIn } from './reader-state.js';
 
 const FOCUS_CLASS = 'reader--focus';
 const NIGHT_CLASS = 'reader--night';
@@ -23,142 +15,26 @@ let currentPage = 1;
 let selectedRange = null;
 let activeReaderPanel = null;
 let activeReaderTrigger = null;
-let resizeTimer = null;
-
-function getMeasureElement() {
-  let measureEl = document.getElementById('reader-text-measure');
-  if (measureEl) return measureEl;
-
-  const textWrapper = document.querySelector('.reader__text-viewport');
-  if (!textWrapper) return null;
-
-  measureEl = document.createElement('div');
-  measureEl.id = 'reader-text-measure';
-  measureEl.className = 'reader__text reader__text-measure';
-  measureEl.setAttribute('aria-hidden', 'true');
-  textWrapper.appendChild(measureEl);
-  return measureEl;
-}
-
-function getTextViewport(textEl) {
-  return textEl.closest('.reader__text-viewport');
-}
-
-function getTextColumnWidth(textEl) {
-  const viewport = getTextViewport(textEl);
-  if (!viewport) return textEl.clientWidth;
-  return viewport.clientWidth;
-}
-
-function getPaginationViewport(textEl) {
-  const viewport = getTextViewport(textEl);
-  if (!viewport) {
-    return {
-      width: textEl.clientWidth,
-      height: textEl.clientHeight,
-    };
-  }
-
-  return {
-    width: viewport.clientWidth,
-    height: viewport.clientHeight,
-  };
-}
-
-function syncMeasureElement(textEl, measureEl) {
-  const { width } = getPaginationViewport(textEl);
-  const styles = window.getComputedStyle(textEl);
-  measureEl.style.width = `${width}px`;
-  measureEl.style.fontSize = styles.fontSize;
-  measureEl.style.lineHeight = styles.lineHeight;
-  measureEl.style.letterSpacing = styles.letterSpacing;
-  measureEl.style.textAlign = styles.textAlign;
-  measureEl.style.fontFamily = styles.fontFamily;
-  measureEl.style.whiteSpace = 'pre-wrap';
-}
-
-function rebuildPagination(preservePosition = true) {
-  const textEl = document.getElementById('reader-text');
-  const measureEl = getMeasureElement();
-  if (!textEl || !measureEl) return false;
-
-  const { width, height: maxHeight } = getPaginationViewport(textEl);
-  if (width <= 0 || maxHeight <= 0) return false;
-
-  let anchor = null;
-  if (preservePosition) {
-    const entry = readerState.pageMap[readerState.currentPage - 1];
-    if (entry) {
-      anchor = { chapterIndex: entry.chapterIndex, offset: entry.start };
-    }
-  }
-
-  syncMeasureElement(textEl, measureEl);
-
-  const chapters = CHAPTERS.map((chapter) => ({
-    text: getChapterText(chapter),
-  }));
-  const pages = paginateChapters(chapters, measureEl, maxHeight);
-  setVirtualPages(pages);
-
-  if (anchor) {
-    readerState.currentPage = findPageByOffset(anchor.chapterIndex, anchor.offset);
-  } else {
-    readerState.currentPage = Math.min(readerState.currentPage, readerState.totalPages);
-  }
-
-  renderTOC();
-  updateContent();
-  return true;
-}
-
-let paginationRetryTimer = null;
-
-function schedulePaginationRebuild(preservePosition = true, attempt = 0) {
-  window.cancelAnimationFrame(paginationRetryTimer);
-  paginationRetryTimer = window.requestAnimationFrame(() => {
-    const didRebuild = rebuildPagination(preservePosition);
-    if (!didRebuild && attempt < 20) {
-      window.setTimeout(() => schedulePaginationRebuild(preservePosition, attempt + 1), 50);
-    }
-  });
-}
-
-function initPaginationReflow() {
-  const viewport = document.querySelector('.reader__text-viewport');
-  if (viewport && 'ResizeObserver' in window) {
-    const observer = new ResizeObserver(() => {
-      if (resizeTimer) window.clearTimeout(resizeTimer);
-      resizeTimer = window.setTimeout(() => rebuildPagination(true), 150);
-    });
-    observer.observe(viewport);
-  }
-
-  window.addEventListener('resize', () => {
-    if (resizeTimer) window.clearTimeout(resizeTimer);
-    resizeTimer = window.setTimeout(() => rebuildPagination(true), 200);
-  });
-}
 
 function getChapterInfoForPage(page) {
   const idx = Math.max(0, page - 1);
   const entry = readerState.pageMap[idx];
-  if (!entry) return { chapter: null, pageText: '', chapterTitle: '', chapterIndex: 0, start: 0, end: 0 };
+  if (!entry) return { chapter: null, pageText: '', chapterTitle: '' };
   const ch = CHAPTERS[entry.chapterIndex];
-  const pageText = formatReaderPageText(entry.text, ch.title);
+  const rawPageText = ch.pages[entry.pageIndex] ?? '';
+  const pageText = formatReaderPageText(rawPageText, ch.title);
   return {
     chapter: ch,
     pageText,
     chapterTitle: ch.title,
     chapterIndex: entry.chapterIndex,
-    start: entry.start,
-    end: entry.end,
+    pageIndex: entry.pageIndex,
   };
 }
 
 function updateContent() {
   currentPage = readerState.currentPage;
-  const { pageText, chapterTitle, chapterIndex, start, end } = getChapterInfoForPage(currentPage);
+  const { pageText, chapterTitle } = getChapterInfoForPage(currentPage);
 
   const bookTitleEl = document.getElementById('reader-book-title');
   const chapterTitleEl = document.getElementById('reader-chapter-title');
@@ -168,7 +44,8 @@ function updateContent() {
   if (chapterTitleEl) chapterTitleEl.textContent = chapterTitle;
   if (textEl) {
     const highlights = readerState.getHighlights();
-    const pageHighlights = getHighlightsForPage(highlights, chapterIndex, start, end, pageText.length);
+    const pageId = getCurrentPageId();
+    const pageHighlights = highlights.filter((h) => h.pageId === pageId);
     textEl.innerHTML = applyHighlightsToText(pageText, pageHighlights);
   }
 
@@ -188,30 +65,10 @@ function updateContent() {
   if (progressBar) progressBar.setAttribute('aria-valuenow', pct);
 }
 
-function getHighlightsForPage(highlights, chapterIndex, pageStart, pageEnd, pageLength) {
-  return highlights
-    .filter((highlight) => {
-      if (highlight.chapterIndex !== chapterIndex) return false;
-      const highlightStart = highlight.chapterStart ?? highlight.start ?? 0;
-      const highlightEnd = highlight.chapterEnd ?? highlight.end ?? 0;
-      return highlightStart < pageEnd && highlightEnd > pageStart;
-    })
-    .map((highlight) => {
-      const highlightStart = highlight.chapterStart ?? highlight.start ?? 0;
-      const highlightEnd = highlight.chapterEnd ?? highlight.end ?? 0;
-      return {
-        ...highlight,
-        start: Math.max(0, highlightStart - pageStart),
-        end: Math.min(pageLength, highlightEnd - pageStart),
-      };
-    })
-    .filter((highlight) => highlight.start < highlight.end);
-}
-
 function getCurrentPageId() {
   const entry = readerState.pageMap[currentPage - 1];
   if (!entry) return '';
-  return `ch${entry.chapterIndex}_o${entry.start}`;
+  return `ch${entry.chapterIndex}_p${entry.pageIndex}`;
 }
 
 function applyHighlightsToText(text, highlights) {
@@ -270,7 +127,8 @@ function renderTOC() {
   if (!list) return;
   list.innerHTML = '';
   CHAPTERS.forEach((ch, chIdx) => {
-    const startPage = getChapterStartPage(chIdx);
+    let startPage = 1;
+    for (let i = 0; i < chIdx; i++) startPage += CHAPTERS[i].pages.length;
     const li = document.createElement('li');
     li.className = 'reader__toc-item';
     const btn = document.createElement('button');
@@ -304,7 +162,7 @@ function renderBookmarksPanel() {
       <div class="reader__bookmark-content">
         <span class="reader__bookmark-title">${escapeHtml(b.chapterTitle)}</span>
         <p class="reader__bookmark-excerpt">${escapeHtml(b.excerpt || '')}</p>
-        <button type="button" class="reader__bookmark-link js-goto-bookmark" data-page="${b.page}" data-index="${idx}">PAGE ${b.page} (${escapeHtml(b.chapterTitle)})</button>
+        <button type="button" class="reader__bookmark-link js-goto-bookmark" data-page="${b.page}">PAGE ${b.page} (${escapeHtml(b.chapterTitle)})</button>
         <button type="button" class="reader__bookmark-delete js-delete-bookmark" data-index="${idx}" aria-label="Remove bookmark">×</button>
       </div>
     `;
@@ -313,13 +171,7 @@ function renderBookmarksPanel() {
 
   list.querySelectorAll('.js-goto-bookmark').forEach((btn) => {
     btn.addEventListener('click', () => {
-      const bookmarkIndex = parseInt(btn.dataset.index, 10);
-      const bookmark = bookmarks[bookmarkIndex];
-      if (bookmark?.chapterIndex != null && bookmark.offset != null) {
-        readerState.currentPage = findPageByOffset(bookmark.chapterIndex, bookmark.offset);
-      } else {
-        readerState.currentPage = parseInt(btn.dataset.page, 10);
-      }
+      readerState.currentPage = parseInt(btn.dataset.page, 10);
       updateContent();
       closeReaderPanel();
     });
@@ -373,20 +225,16 @@ function renderHighlightsPanel() {
   list.querySelectorAll('.reader__highlight-text').forEach((el, idx) => {
     el.addEventListener('click', () => {
       const h = highlights[idx];
-      if (!h) return;
-      if (h.chapterIndex != null && (h.chapterStart != null || h.start != null)) {
-        const offset = h.chapterStart ?? h.start ?? 0;
-        readerState.currentPage = findPageByOffset(h.chapterIndex, offset);
-      } else if (h.page) {
+      if (h) {
         readerState.currentPage = h.page;
+        updateContent();
+        closeReaderPanel();
       }
-      updateContent();
-      closeReaderPanel();
     });
   });
 }
 
-function applyReaderStyles() {
+function applySettings() {
   const s = readerState.getSettings();
   const root = document.getElementById('reader-root');
   const header = document.getElementById('header');
@@ -410,11 +258,6 @@ function applyReaderStyles() {
     header.classList.toggle('header--ebook-night', s.nightMode);
     header.classList.toggle('header--ebook-accent', useAccent);
   }
-}
-
-function applySettings() {
-  applyReaderStyles();
-  schedulePaginationRebuild(true);
 }
 
 function closeSidebars() {
@@ -501,7 +344,6 @@ function initActionBar() {
 
   document.querySelector('.js-toggle-focus')?.addEventListener('click', () => {
     root?.classList.toggle(FOCUS_CLASS);
-    window.setTimeout(() => rebuildPagination(true), 350);
   });
 
   document.querySelectorAll('.js-close-sidebar').forEach((btn) => {
@@ -665,26 +507,24 @@ function searchBook(query) {
   const q = query.trim().toLowerCase();
   if (!q) return [];
   const results = [];
-
   CHAPTERS.forEach((ch, chIdx) => {
-    const text = getChapterText(ch);
-    let searchFrom = 0;
-
-    while (searchFrom < text.length) {
-      const idx = text.toLowerCase().indexOf(q, searchFrom);
-      if (idx < 0) break;
-
-      const excerpt = text.slice(Math.max(0, idx - 40), idx + q.length + 60);
-      results.push({
-        page: findPageByOffset(chIdx, idx),
-        chapterTitle: ch.title,
-        excerpt: `...${excerpt}...`,
-        matchIndex: idx,
-      });
-      searchFrom = idx + 1;
-    }
+    let pageNum = 1;
+    for (let i = 0; i < chIdx; i++) pageNum += CHAPTERS[i].pages.length;
+    ch.pages.forEach((rawText, pIdx) => {
+      const text = formatReaderPageText(rawText, ch.title);
+      const idx = text.toLowerCase().indexOf(q);
+      if (idx >= 0) {
+        const excerpt = text.slice(Math.max(0, idx - 40), idx + q.length + 60);
+        results.push({
+          page: pageNum + pIdx,
+          chapterTitle: ch.title,
+          excerpt: '...' + excerpt + '...',
+          matchIndex: idx,
+        });
+      }
+      pageNum++;
+    });
   });
-
   return results;
 }
 
@@ -749,13 +589,11 @@ function initBookmarkAdd() {
   addBtn.className = 'reader__add-bookmark-btn js-add-bookmark';
   addBtn.textContent = 'Add current page';
   addBtn.addEventListener('click', () => {
-    const { chapterTitle, chapterIndex, start } = getChapterInfoForPage(readerState.currentPage);
+    const { chapterTitle } = getChapterInfoForPage(readerState.currentPage);
     const textEl = document.getElementById('reader-text');
     const excerpt = textEl ? textEl.textContent.slice(0, 100) : '';
     readerState.addBookmark({
       page: readerState.currentPage,
-      chapterIndex,
-      offset: start,
       chapterTitle,
       excerpt,
       id: Date.now(),
@@ -796,22 +634,18 @@ function initTextSelection() {
     if (!selectedRange) return;
     const text = selectedRange.toString();
     const fullText = textEl.textContent;
-    const localStart = fullText.indexOf(text);
-    if (localStart < 0) return;
-
-    const { chapterTitle, chapterIndex, start: pageStart } = getChapterInfoForPage(currentPage);
-    const chapterStart = pageStart + localStart;
-    const chapterEnd = chapterStart + text.length;
+    const start = fullText.indexOf(text);
+    if (start < 0) return;
     const pageId = getCurrentPageId();
+    const { chapterTitle } = getChapterInfoForPage(currentPage);
     const note = window.prompt('Add a note (optional):', '') || '';
     readerState.addHighlight({
       id: `h${Date.now()}`,
       pageId,
       page: currentPage,
-      chapterIndex,
-      chapterStart,
-      chapterEnd,
       chapterTitle,
+      start,
+      end: start + text.length,
       text,
       note,
     });
@@ -883,12 +717,10 @@ function initKeyboard() {
 
 export function initReaderUI() {
   initModalManager();
-  applyReaderStyles();
+  applySettings();
   initSettings();
-  renderTOC();
   updateContent();
-  initPaginationReflow();
-  schedulePaginationRebuild(false);
+  renderTOC();
   initReaderPanels();
   initActionBar();
   initPagination();

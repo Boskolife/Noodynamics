@@ -7,14 +7,10 @@
 .reader-page {
   background-color: $color-white-100;
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
 }
 
 .reader-main {
-  flex: 1;
-  min-height: 0;
+  height: 100%;
 }
 
 .reader {
@@ -28,8 +24,7 @@
 
   display: grid;
   grid-template-columns: 335px 1fr 355px;
-  height: 100%;
-  min-height: 0;
+  min-height: 100vh;
   transition: grid-template-columns 0.3s ease;
 
   &--focus {
@@ -213,8 +208,6 @@
     display: flex;
     flex-direction: column;
     min-width: 0;
-    min-height: 0;
-    height: 100%;
     border-left: 1px solid $color-black-10;
     border-right: 1px solid $color-black-10;
   }
@@ -346,14 +339,12 @@
   // Content area
   &__content-area {
     flex: 1;
-    min-height: 0;
     display: flex;
     flex-direction: column;
     background-color: var(--reader-bg-color);
   }
 
   &__book-title {
-    flex-shrink: 0;
     font-size: 28px;
     font-weight: 600;
     margin-bottom: 20px;
@@ -374,12 +365,8 @@
   }
 
   &__text-wrapper {
-    position: relative;
     flex: 1;
-    min-height: 0;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
+    overflow-y: auto;
     padding: 24px 40px 50px;
     background-color: $color-white-100;
   }
@@ -437,17 +424,7 @@
     }
   }
 
-  &__text-viewport {
-    position: relative;
-    flex: 1;
-    min-height: 0;
-    overflow: hidden;
-  }
-
   &__text {
-    height: 100%;
-    overflow: hidden;
-    white-space: pre-wrap;
     font-size: calc(18px * var(--reader-font-scale));
     line-height: var(--reader-line-height);
     letter-spacing: var(--reader-letter-spacing);
@@ -456,19 +433,6 @@
     width: 100%;
     user-select: text;
     outline: none;
-  }
-
-  &__text-measure {
-    position: absolute;
-    top: 0;
-    left: 0;
-    visibility: hidden;
-    pointer-events: none;
-    overflow: visible;
-    height: auto;
-    max-height: none;
-    flex: none;
-    z-index: -1;
   }
 
   &__highlight {

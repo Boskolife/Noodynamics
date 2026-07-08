@@ -3,7 +3,7 @@
  * Reads/writes from localStorage. Keyed by book ID.
  */
 
-import { BOOK_ID } from './reader-content.js';
+import { BOOK_ID, CHAPTERS } from './reader-content.js';
 
 const STORAGE_PREFIX = 'reader_';
 const KEY_PAGE = `${STORAGE_PREFIX}${BOOK_ID}_page`;
@@ -12,23 +12,28 @@ const KEY_HIGHLIGHTS = `${STORAGE_PREFIX}${BOOK_ID}_highlights`;
 const KEY_SETTINGS = `${STORAGE_PREFIX}settings`;
 const KEY_READER_LOGIN = `${STORAGE_PREFIX}logged_in`;
 
-/** @type {Array<{ chapterIndex: number, start: number, end: number, text: string }>} */
-let virtualPageMap = [{ chapterIndex: 0, start: 0, end: 0, text: '' }];
-let totalPages = 1;
-
-function clampPage(page) {
-  const maxPage = Math.max(1, totalPages);
-  return Math.min(Math.max(1, page), maxPage);
+// Flatten pages for page index: [{ chapterIndex, pageIndex }, ...]
+function buildPageMap() {
+  const pages = [];
+  CHAPTERS.forEach((ch, chIdx) => {
+    ch.pages.forEach((_, pageIdx) => {
+      pages.push({ chapterIndex: chIdx, pageIndex: pageIdx });
+    });
+  });
+  return pages;
 }
+
+const PAGE_MAP = buildPageMap();
+const TOTAL_PAGES = PAGE_MAP.length;
 
 function getPageFromStorage() {
   const stored = localStorage.getItem(KEY_PAGE);
   const page = stored ? parseInt(stored, 10) : 1;
-  return clampPage(page);
+  return Math.min(Math.max(1, page), TOTAL_PAGES);
 }
 
 function savePage(page) {
-  localStorage.setItem(KEY_PAGE, String(clampPage(page)));
+  localStorage.setItem(KEY_PAGE, String(page));
 }
 
 function getBookmarksFromStorage() {
@@ -82,40 +87,6 @@ export function setReaderLoggedIn(loggedIn) {
   }
 }
 
-/**
- * @param {Array<{ chapterIndex: number, start: number, end: number, text: string }>} pages
- */
-export function setVirtualPages(pages) {
-  virtualPageMap = pages.length
-    ? pages
-    : [{ chapterIndex: 0, start: 0, end: 0, text: '' }];
-  totalPages = virtualPageMap.length;
-}
-
-/**
- * @param {number} chapterIndex
- * @param {number} offset
- * @returns {number}
- */
-export function findPageByOffset(chapterIndex, offset) {
-  const idx = virtualPageMap.findIndex(
-    (page) => page.chapterIndex === chapterIndex && page.start <= offset && offset < page.end
-  );
-  if (idx >= 0) return idx + 1;
-
-  const firstChapterPage = virtualPageMap.findIndex((page) => page.chapterIndex === chapterIndex);
-  return firstChapterPage >= 0 ? firstChapterPage + 1 : 1;
-}
-
-/**
- * @param {number} chapterIndex
- * @returns {number}
- */
-export function getChapterStartPage(chapterIndex) {
-  const idx = virtualPageMap.findIndex((page) => page.chapterIndex === chapterIndex);
-  return idx >= 0 ? idx + 1 : 1;
-}
-
 export const readerState = {
   get currentPage() {
     return getPageFromStorage();
@@ -124,10 +95,10 @@ export const readerState = {
     savePage(v);
   },
   get totalPages() {
-    return totalPages;
+    return TOTAL_PAGES;
   },
   get pageMap() {
-    return virtualPageMap;
+    return PAGE_MAP;
   },
   getBookmarks() {
     return getBookmarksFromStorage();

@@ -154,7 +154,14 @@ function updateContent({ restorePageScroll = false, forceRerender = false } = {}
 
   if (restorePageScroll) {
     requestAnimationFrame(() => {
-      scrollToChapter(info.chapterIndex, { updateHash: false });
+      requestAnimationFrame(() => {
+        // Keep the book title visible when opening at the start of the book.
+        if (info.chapterIndex === 0 && (info.pageIndex ?? 0) === 0) {
+          resetReaderScroll();
+          return;
+        }
+        scrollToPageInBook(currentPage);
+      });
     });
   } else {
     updateProgressFromScroll();

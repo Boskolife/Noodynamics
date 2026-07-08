@@ -872,13 +872,20 @@ function initSettings() {
   const brightnessValue = document.getElementById('reader-brightness-value');
   const letterSpacingValue = document.getElementById('reader-letter-spacing-value');
   const lineSpacingValue = document.getElementById('reader-line-spacing-value');
+  const fontSizeTitle = document.getElementById('reader-settings-title');
   const alignCenterBtn = document.querySelector('.js-font-align-center');
   const alignLeftBtn = document.querySelector('.js-font-align-left');
+
+  function formatFontSizeLabel(fontScale) {
+    const px = Math.round(18 * (fontScale ?? 1));
+    return `Aa ${px}px`;
+  }
 
   function updateValues() {
     if (brightnessValue) brightnessValue.textContent = String(draft.brightness);
     if (letterSpacingValue) letterSpacingValue.textContent = String(draft.letterSpacing);
     if (lineSpacingValue) lineSpacingValue.textContent = String(draft.lineSpacing);
+    if (fontSizeTitle) fontSizeTitle.textContent = formatFontSizeLabel(draft.fontScale);
 
     if (nightBtn) nightBtn.setAttribute('aria-pressed', String(draft.nightMode));
     bgButtons.forEach((btn) => {
@@ -944,9 +951,11 @@ function initSettings() {
 
   document.querySelector('.js-font-size-dec')?.addEventListener('click', () => {
     draft = { ...draft, fontScale: Math.max(0.8, parseFloat((draft.fontScale - 0.1).toFixed(2))) };
+    updateValues();
   });
   document.querySelector('.js-font-size-inc')?.addEventListener('click', () => {
-    draft = { ...draft, fontScale: Math.min(1.4, parseFloat((draft.fontScale + 0.1).toFixed(2))) };
+    draft = { ...draft, fontScale: Math.min(32 / 18, parseFloat((draft.fontScale + 0.1).toFixed(2))) };
+    updateValues();
   });
 
   document.querySelector('.js-settings-reset')?.addEventListener('click', () => {

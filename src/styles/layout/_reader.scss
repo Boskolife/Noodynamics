@@ -4,13 +4,29 @@
  * Action bar, pagination, night mode.
  */
 
+html:has(.reader-page) {
+  height: 100%;
+  overflow: hidden;
+}
+
 .reader-page {
   background-color: $color-white-100;
   height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  > .header--ebook {
+    flex-shrink: 0;
+  }
 }
 
 .reader-main {
-  height: 100%;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .reader {
@@ -24,7 +40,7 @@
 
   display: grid;
   grid-template-columns: 335px 1fr 355px;
-  height: 100vh;
+  height: 100%;
   min-height: 0;
   overflow: hidden;
   transition: grid-template-columns 0.3s ease;
@@ -45,15 +61,6 @@
     .reader__content-area,
     .reader__text-wrapper {
       background-color: $color-neutral-800;
-      scrollbar-color: $color-neutral-400 $color-neutral-800;
-
-      &::-webkit-scrollbar-track {
-        background-color: $color-neutral-800;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        background-color: $color-neutral-400;
-      }
 
       h1,
       h2,
@@ -140,6 +147,18 @@
         color: $color-neutral-100;
       }
     }
+
+    .reader__text {
+      scrollbar-color: $color-neutral-400 $color-neutral-800;
+
+      &::-webkit-scrollbar-track {
+        background-color: $color-neutral-800;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: $color-neutral-400;
+      }
+    }
   }
 
   &--accent {
@@ -159,6 +178,13 @@
 
     .reader__text-wrapper {
       background-color: $color-lightbeige-100;
+    }
+
+    .reader__bottom-bar {
+      background-color: $color-lightbeige-100;
+    }
+
+    .reader__text {
       scrollbar-color: $color-brown $color-lightbeige-200;
 
       &::-webkit-scrollbar-track {
@@ -168,10 +194,6 @@
       &::-webkit-scrollbar-thumb {
         background-color: $color-dark-brown;
       }
-    }
-
-    .reader__bottom-bar {
-      background-color: $color-lightbeige-100;
     }
   }
 
@@ -275,6 +297,7 @@
     padding: 18px 40px;
     background-color: $color-white-100;
     border-bottom: 1px solid $color-black-10;
+    flex-shrink: 0;
 
     &-left,
     &-right {
@@ -425,26 +448,12 @@
   &__text-wrapper {
     flex: 1;
     min-height: 0;
-    overflow-x: hidden;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    padding: 24px 40px 50px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 24px 0 50px 40px;
     background-color: $color-white-100;
-    scrollbar-width: thin;
-    scrollbar-color: $color-brown $color-neutral-100;
-
-    &::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    &::-webkit-scrollbar-track {
-      background-color: $color-neutral-100;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: $color-brown;
-      border-radius: 999px;
-    }
   }
 
   // Scrollbars for reader side panels / search
@@ -498,7 +507,28 @@
   }
 
   &__text {
+    padding-right: 30px;
+    flex: 1;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
     transition: opacity 0.15s ease;
+    scrollbar-width: thin;
+    scrollbar-color: $color-brown $color-neutral-100;
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: $color-neutral-100;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $color-brown;
+      border-radius: 999px;
+    }
 
     &--turning {
       opacity: 0.55;
@@ -620,6 +650,7 @@
     padding: 16px 40px;
     border-top: 1px solid $color-black-10;
     margin-top: auto;
+    flex-shrink: 0;
   }
 
   &__pagination {

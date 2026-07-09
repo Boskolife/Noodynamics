@@ -276,15 +276,13 @@ function updateContent({ page = readerState.currentPage, updateHash = true } = {
   if (textEl) {
     textEl.classList.add('reader__text--turning');
     textEl.innerHTML = renderPageHtml(currentPage);
+    textEl.scrollTop = 0;
     requestAnimationFrame(() => {
       textEl.classList.remove('reader__text--turning');
     });
   }
 
   hideHighlightPreviewTooltip();
-
-  const textWrapper = document.querySelector('.reader__text-wrapper');
-  if (textWrapper) textWrapper.scrollTop = 0;
 
   updatePageUI(currentPage);
 

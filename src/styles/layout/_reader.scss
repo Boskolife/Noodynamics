@@ -45,6 +45,15 @@
     .reader__content-area,
     .reader__text-wrapper {
       background-color: $color-neutral-800;
+      scrollbar-color: $color-neutral-400 $color-neutral-800;
+
+      &::-webkit-scrollbar-track {
+        background-color: $color-neutral-800;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: $color-neutral-400;
+      }
 
       h1,
       h2,
@@ -150,6 +159,15 @@
 
     .reader__text-wrapper {
       background-color: $color-lightbeige-100;
+      scrollbar-color: $color-brown $color-lightbeige-200;
+
+      &::-webkit-scrollbar-track {
+        background-color: $color-lightbeige-200;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: $color-dark-brown;
+      }
     }
 
     .reader__bottom-bar {
@@ -394,6 +412,7 @@
     --webkit-background-clip: text;
     -webkit-text-fill-color: $color-brown;
     background-clip: text;
+    flex-shrink: 0;
   }
 
   &__chapter-title {
@@ -408,16 +427,23 @@
     min-height: 0;
     overflow-x: hidden;
     overflow-y: auto;
-    overscroll-behavior: none;
+    overscroll-behavior: contain;
     padding: 24px 40px 50px;
     background-color: $color-white-100;
-    // Scroll is driven by ArrowUp / ArrowDown only — hide native scrollbar UI.
-    scrollbar-width: none;
+    scrollbar-width: thin;
+    scrollbar-color: $color-brown $color-neutral-100;
 
     &::-webkit-scrollbar {
-      width: 0;
-      height: 0;
-      display: none;
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: $color-neutral-100;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $color-brown;
+      border-radius: 999px;
     }
   }
 
@@ -472,6 +498,12 @@
   }
 
   &__text {
+    transition: opacity 0.15s ease;
+
+    &--turning {
+      opacity: 0.55;
+    }
+
     p {
       font-size: calc(18px * var(--reader-font-scale));
       line-height: var(--reader-line-height);

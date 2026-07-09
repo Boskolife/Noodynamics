@@ -1,0 +1,1005 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Noodynamics - Donation</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/Noodynamics/preview/page-reader/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/Noodynamics/preview/page-reader/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/Noodynamics/preview/page-reader/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/Noodynamics/preview/page-reader/favicon/site.webmanifest">
+  <script type="module" crossorigin src="/Noodynamics/preview/page-reader/assets/modal-manager-0667896a.js"></script>
+  <script type="module" crossorigin src="/Noodynamics/preview/page-reader/assets/site-audio-d1be709f.js"></script>
+  <script type="module" crossorigin src="/Noodynamics/preview/page-reader/assets/main-fca1310d.js"></script>
+  <link rel="stylesheet" href="/Noodynamics/preview/page-reader/assets/style-026b4351.css">
+</head>
+
+<body class="donation-page">
+  <header id="header" class="header wow animate__animated animate__fadeInDown" data-wow-duration="0.9s">
+      <div class="container">
+          <div class="header__inner">
+              <a href="index.html" class="header__logo wow animate__animated animate__zoomIn" data-wow-delay="0.1s">
+                  <img src="/Noodynamics/preview/page-reader/images/logo-text.png" alt="Noodynamics">
+              </a>
+              <nav class="header__nav">
+                  <ul class="header__nav-list">
+                      <li class="header__nav-item"><a href="about.html" class="header__nav-link">About</a></li>
+                      <li class="header__nav-item"><a href="books.html" class="header__nav-link">books</a></li>
+                      <li class="header__nav-item"><a href="journal.html" class="header__nav-link">journal</a></li>
+                      <li class="header__nav-item"><a href="events.html" class="header__nav-link">Events</a></li>
+                      <li class="header__nav-item"><a href="extras.html" class="header__nav-link">Extras</a></li>
+                      <li class="header__nav-item"><a href="membership.html" class="header__nav-link">Membership</a></li>
+                  </ul>
+              </nav>
+              <div class="header__actions">
+                  <button type="button" class="header__action header__action--primary js-open-auth-popup"
+                      aria-haspopup="dialog" aria-expanded="false" aria-controls="auth-popup-backdrop">
+                      <span>login</span>
+                      <img src="/Noodynamics/preview/page-reader/icons/login.svg" alt="">
+                  </button>
+                  <div class="header__profile-wrap">
+                      <button type="button" class="btn btn--primary header__profile js-header-profile is-auth-hidden"
+                          aria-label="Profile menu" aria-haspopup="true" aria-expanded="false" aria-controls="header-profile-dropdown">
+                          <img src="/Noodynamics/preview/page-reader/icons/user.svg" alt="" width="24" height="24">
+                      </button>
+                      <ul id="header-profile-dropdown" class="header__profile-dropdown" role="menu" aria-label="Profile menu" hidden>
+                          <li role="none"><button type="button" class="header__profile-dropdown-link js-open-membership-popup" role="menuitem">My membership</button></li>
+                          <li role="none"><button type="button" class="header__profile-dropdown-link js-open-donations-popup" role="menuitem">My donations</button></li>
+                          <li role="none"><button type="button" class="header__profile-dropdown-link" role="menuitem">E-book</button></li>
+                          <li role="none"><button type="button" class="header__profile-dropdown-link js-open-account-details-popup" role="menuitem">Account details</button></li>
+                          <li role="none"><button type="button" class="header__profile-dropdown-link js-open-account-change-password-popup" role="menuitem">Update password</button></li>
+                          <li role="none"><button type="button" class="header__profile-dropdown-link header__profile-dropdown-link--logout js-logout" role="menuitem">Logout</button></li>
+                      </ul>
+                  </div>
+                  <a href="donation.html" class="btn btn--primary">donate now</a>
+              </div>
+          </div>
+      </div>
+  </header>  <main id="main">
+    <section class="donation" id="donation">
+        <picture class="donation__bg"><source srcset="images/donation-bg.webp" type="image/webp"><img src="images/donation-bg.png" alt="Description" loading="lazy"></picture>
+        <div class="container">
+            <div class="donation__inner wow animate__animated animate__fadeInUp" data-wow-delay="0.1s">
+                <h2 class="donation__title wow animate__animated animate__fadeInDown" data-wow-delay="0.15s">
+                    Donations
+                </h2>
+                <p class="donation__text wow animate__animated animate__fadeInUp" data-wow-delay="0.2s">
+                    Contributions to New Dynamics Institute enable the continuation of independent research and educational
+                    initiatives focused on the dynamics of change within complex systems.
+                    <br>
+                    <br>
+                    Donations support the development of research programs, educational efforts, and analytical tools that
+                    contribute to informed decision-making and long-term societal impact. Support may be provided through
+                    one-time or recurring contributions, each of which plays an essential role in sustaining the Institute’s
+                    work.
+                    <br>
+                    <br>
+                    We appreciate your support and commitment to advancing knowledge and understanding.
+                </p>
+                <a href="make-donation.html" class="donation__btn btn btn--primary wow animate__animated animate__bounceIn" data-wow-delay="0.25s">
+                    donate now
+                </a>
+            </div>
+        </div>
+    </section>  </main>
+  <div class="popup popup--thanks-support" id="thanks-support-popup-backdrop" aria-hidden="true">
+      <div class="popup__overlay" aria-hidden="true"></div>
+      <div class="popup__window" role="dialog" aria-modal="true" aria-labelledby="thanks-support-popup-title" aria-describedby="thanks-support-popup-desc">
+          <div class="popup__header">
+              <img src="/Noodynamics/preview/page-reader/images/logo-text.png" alt="Noodynamics" class="popup__logo">
+              <h3 class="popup__title">Thank you for your support!</h3>
+              <p class="popup__text">Your donation has been successfully received.
+                  We've created an account for you to help you track your donations and manage your membership.</p>
+          </div>
+          <div class="popup__inner">
+              <h3 id="thanks-support-popup-title" class="popup__title">Create your password</h3>
+              <p id="thanks-support-popup-desc" class="popup__text">Set a password to access your account.</p>
+              <form class="popup__form form-card" novalidate>
+                  <div class="form-card__group">
+                      <label class="form-card__label" for="thanks-password">create password
+                          <input class="form-card__input" type="password" id="thanks-password" name="password" placeholder="create your password"
+                              required>
+                      </label>
+                      <label class="form-card__label" for="thanks-password-confirm">confirm password
+                          <input class="form-card__input" type="password" id="thanks-password-confirm" name="passwordConfirm"
+                              placeholder="confirm your password" required>
+                      </label>
+                  </div>
+                  <button type="submit" class="popup__form-button btn btn--black">create password</button>
+              </form>
+          </div>
+      </div>
+  </div>
+  <div class="popup popup--reset-pass" id="reset-pass-popup-backdrop" aria-hidden="true">
+      <div class="popup__overlay" aria-hidden="true"></div>
+      <div class="popup__window" role="dialog" aria-modal="true" aria-labelledby="reset-pass-popup-title" aria-describedby="reset-pass-popup-desc">
+          <div class="popup__header">
+              <img src="/Noodynamics/preview/page-reader/images/logo-text.png" alt="Noodynamics" class="popup__logo">
+          </div>
+          <div class="popup__inner">
+              <h2 id="reset-pass-popup-title" class="popup__title">Password reset</h2>
+              <p id="reset-pass-popup-desc" class="popup__text">Please enter your email address.<br>We will send you a verification code to issue a new password.</p>
+              <form class="popup__form form-card js-reset-pass-form" novalidate>
+                  <div class="form-card__group">
+                      <label class="form-card__label" for="reset-pass-email">email
+                          <input class="form-card__input" type="email" id="reset-pass-email" name="email" placeholder="Enter your email" required autocomplete="email">
+                          <span id="reset-pass-email-error" class="popup__form-error" role="alert"></span>
+                      </label>
+                  </div>
+                  <button type="submit" class="popup__form-button btn btn--black">Send email</button>
+              </form>
+          </div>
+      </div>
+  </div>
+  <div class="popup popup--verify-code" id="verify-code-popup-backdrop" aria-hidden="true">
+      <div class="popup__overlay" aria-hidden="true"></div>
+      <div class="popup__window" role="dialog" aria-modal="true" aria-labelledby="verify-code-popup-title"
+          aria-describedby="verify-code-popup-desc">
+          <div class="popup__header">
+              <img src="/Noodynamics/preview/page-reader/images/logo-text.png" alt="Noodynamics" class="popup__logo">
+          </div>
+          <div class="popup__inner">
+              <h2 id="verify-code-popup-title" class="popup__title">Enter verification code</h2>
+              <p id="verify-code-popup-desc" class="popup__text popup__text-email">A verification code has been sent to
+                  <span class="js-verify-email">mail@sample.com</span>. <br> Please enter the verification code.</p>
+              <form class="popup__form form-card js-verify-code-form" novalidate>
+                  <div class="form-card__group">
+                      <label class="form-card__label" for="verify-code-input">verification code
+                          <input class="form-card__input" type="text" id="verify-code-input" name="code"
+                              placeholder="Please enter the 6-digit verification code" required inputmode="numeric"
+                              pattern="[0-9]*" maxlength="6" autocomplete="one-time-code">
+                          <span id="verify-code-error" class="popup__form-error" role="alert"></span>
+                      </label>
+                  </div>
+                  <p class="popup__form-resend">
+                      <button type="button" class="popup__form-link popup__form-resend-link js-resend-code">Resend
+                          code</button>
+                  </p>
+                  <button type="submit" class="popup__form-button btn btn--black">Verify</button>
+              </form>
+          </div>
+      </div>
+  </div>  <div class="popup popup--enter-new-password" id="enter-new-password-popup-backdrop" aria-hidden="true">
+      <div class="popup__overlay" aria-hidden="true"></div>
+      <div class="popup__window" role="dialog" aria-modal="true" aria-labelledby="enter-new-password-popup-title" aria-describedby="enter-new-password-popup-desc">
+          <div class="popup__header">
+              <img src="/Noodynamics/preview/page-reader/images/logo-text.png" alt="Noodynamics" class="popup__logo">
+          </div>
+          <div class="popup__inner">
+              <h2 id="enter-new-password-popup-title" class="popup__title">Enter new password</h2>
+              <p id="enter-new-password-popup-desc" class="popup__text popup__text-hint">* The password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, and one number.</p>
+              <form class="popup__form form-card js-enter-new-password-form" novalidate>
+                  <div class="form-card__group">
+                      <label class="form-card__label" for="new-password">new password
+                          <input class="form-card__input" type="password" id="new-password" name="newPassword" placeholder="Create your new password" required autocomplete="new-password">
+                          <span id="new-password-error" class="popup__form-error" role="alert"></span>
+                      </label>
+                      <label class="form-card__label" for="confirm-new-password">confirm new password
+                          <input class="form-card__input" type="password" id="confirm-new-password" name="confirmNewPassword" placeholder="Confirm your new password" required autocomplete="new-password">
+                          <span id="confirm-new-password-error" class="popup__form-error" role="alert"></span>
+                      </label>
+                  </div>
+                  <button type="submit" class="popup__form-button btn btn--black">Password reset</button>
+              </form>
+          </div>
+      </div>
+  </div>
+  <div class="popup popup--reset-complete" id="reset-complete-popup-backdrop" aria-hidden="true">
+      <div class="popup__overlay" aria-hidden="true"></div>
+      <div class="popup__window" role="dialog" aria-modal="true" aria-labelledby="reset-complete-popup-title" aria-describedby="reset-complete-popup-desc">
+          <div class="popup__header">
+              <img src="/Noodynamics/preview/page-reader/images/logo-text.png" alt="Noodynamics" class="popup__logo">
+          </div>
+          <div class="popup__inner">
+              <h2 id="reset-complete-popup-title" class="popup__title">Password reset has been completed</h2>
+              <p id="reset-complete-popup-desc" class="popup__text">Please log in with your new password.</p>
+              <button type="button" class="popup__form-button btn btn--black js-return-to-login">Return to login</button>
+          </div>
+      </div>
+  </div>
+  <div class="popup popup--signup" id="signup-popup-backdrop" aria-hidden="true">
+      <div class="popup__overlay" aria-hidden="true"></div>
+      <div class="popup__window" role="dialog" aria-modal="true" aria-labelledby="signup-popup-title" aria-describedby="signup-popup-desc">
+          <div class="popup__header">
+              <img src="/Noodynamics/preview/page-reader/images/logo-text.png" alt="Noodynamics" class="popup__logo">
+          </div>
+          <div class="popup__inner">
+              <h2 id="signup-popup-title" class="popup__title">Sign up</h2>
+              <p id="signup-popup-desc" class="visually-hidden">Create an account with your details.</p>
+              <form class="popup__form form-card js-signup-form" novalidate>
+                  <div class="form-card__group form-card__group--row">
+                      <label class="form-card__label" for="signup-first-name">first name
+                          <input class="form-card__input" type="text" id="signup-first-name" name="firstName" placeholder="Enter your first name" required minlength="2" autocomplete="given-name">
+                          <span id="signup-first-name-error" class="popup__form-error" role="alert"></span>
+                      </label>
+                      <label class="form-card__label" for="signup-last-name">last name
+                          <input class="form-card__input" type="text" id="signup-last-name" name="lastName" placeholder="Enter your last name" required minlength="2" autocomplete="family-name">
+                          <span id="signup-last-name-error" class="popup__form-error" role="alert"></span>
+                      </label>
+                  </div>
+                  <div class="form-card__group">
+                      <label class="form-card__label" for="signup-email">email
+                          <input class="form-card__input" type="email" id="signup-email" name="email" placeholder="Enter your email" required autocomplete="email">
+                          <span id="signup-email-error" class="popup__form-error" role="alert"></span>
+                      </label>
+                  </div>
+                  <div class="form-card__group">
+                      <label class="form-card__label" for="signup-password">create password
+                          <input class="form-card__input" type="password" id="signup-password" name="password" placeholder="Create your password" required autocomplete="new-password">
+                          <span id="signup-password-error" class="popup__form-error" role="alert"></span>
+                      </label>
+                      <label class="form-card__label" for="signup-password-confirm">confirm password
+                          <input class="form-card__input" type="password" id="signup-password-confirm" name="passwordConfirm" placeholder="Confirm your password" required autocomplete="new-password">
+                          <span id="signup-password-confirm-error" class="popup__form-error" role="alert"></span>
+                      </label>
+                  </div>
+                  <button type="submit" class="popup__form-button btn btn--black">Sign up</button>
+              </form>
+              <p class="popup__text popup__text-social">or sign up with</p>
+              <div class="popup__form-social">
+                  <a href="#" class="popup__form-social-link btn btn--black">
+                      <img src="/Noodynamics/preview/page-reader/icons/google.svg" alt="">
+                      Google
+                  </a>
+                  <a href="#" class="popup__form-social-link btn btn--black">
+                      <img src="/Noodynamics/preview/page-reader/icons/apple.svg" alt="">
+                      Apple
+                  </a>
+              </div>
+              <p class="popup__text popup__text-signup">already have an account?
+                  <a href="#" class="popup__link js-open-login">log in</a>
+              </p>
+          </div>
+      </div>
+  </div>
+  <div class="popup popup--auth" id="auth-popup-backdrop" aria-hidden="true">
+      <div class="popup__overlay" aria-hidden="true"></div>
+      <div class="popup__window" role="dialog" aria-modal="true" aria-labelledby="auth-popup-title" aria-describedby="auth-popup-desc">
+          <div class="popup__header">
+              <img src="/Noodynamics/preview/page-reader/images/logo-text.png" alt="Noodynamics" class="popup__logo">
+          </div>
+          <div class="popup__inner">
+              <h2 id="auth-popup-title" class="popup__title">Log In or create an account <br> to continue</h2>
+              <p id="auth-popup-desc" class="popup__text">Log In or create an account to easily manage your membership in one place.</p>
+              <form class="popup__form form-card" novalidate>
+                  <div class="form-card__group">
+                      <label class="form-card__label" for="auth-name">name
+                          <input class="form-card__input" type="text" id="auth-name" name="name" placeholder="Enter your name"
+                              required>
+                      </label>
+                      <label class="form-card__label" for="auth-password">password
+                          <input class="form-card__input" type="password" id="auth-password" name="password"
+                              placeholder="enter your password" required>
+                      </label>
+                  </div>
+                  <a href="#" class="popup__form-link">Forgot your password?</a>
+                  <button type="submit" class="popup__form-button btn btn--black">Log In</button>
+              </form>
+              <p class="popup__text popup__text-social">or log in with</p>
+              <div class="popup__form-social">
+                  <a href="#" class="popup__form-social-link btn btn--black">
+                      <img src="/Noodynamics/preview/page-reader/icons/google.svg" alt="">
+                      Google
+                  </a>
+                  <a href="#" class="popup__form-social-link btn btn--black">
+                      <img src="/Noodynamics/preview/page-reader/icons/apple.svg" alt="">
+                      Apple
+                  </a>
+              </div>
+              <p class="popup__text popup__text-signup">don't have an account?
+                  <a href="#" class="popup__link">sign up</a>
+              </p>
+          </div>
+      </div>
+  </div>
+  <div class="popup popup--cancel-membership-confirm" id="cancel-membership-confirm-popup-backdrop" aria-hidden="true">
+      <div class="popup__overlay" aria-hidden="true"></div>
+      <div class="popup__window" role="dialog" aria-modal="true" aria-labelledby="cancel-membership-confirm-title" aria-describedby="cancel-membership-confirm-desc">
+          <div class="popup__header">
+              <img src="/Noodynamics/preview/page-reader/images/logo-text.png" alt="Noodynamics" class="popup__logo">
+          </div>
+          <div class="popup__inner">
+              <h2 id="cancel-membership-confirm-title" class="popup__title">Cancel membership?</h2>
+              <p id="cancel-membership-confirm-desc" class="popup__text">Are you sure you want to cancel your membership? You'll lose access to all member benefits at the end of your current billing period.</p>
+              <div class="popup__actions">
+                  <button type="button" class="popup__form-button btn btn--black js-keep-membership">Keep my membership</button>
+                  <button type="button" class="popup__form-button popup__form-button--outline btn js-cancel-membership-confirm">Cancel my membership</button>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="popup popup--membership-canceled" id="membership-canceled-popup-backdrop" aria-hidden="true">
+      <div class="popup__overlay" aria-hidden="true"></div>
+      <div class="popup__window" role="dialog" aria-modal="true" aria-labelledby="membership-canceled-title" aria-describedby="membership-canceled-desc">
+          <div class="popup__header">
+              <img src="/Noodynamics/preview/page-reader/images/logo-text.png" alt="Noodynamics" class="popup__logo">
+          </div>
+          <div class="popup__inner">
+              <h2 id="membership-canceled-title" class="popup__title">Your membership has been canceled.</h2>
+              <p class="popup__text">You'll no longer be charged monthly. <br> You can make a one-time donation at any time, or start a new monthly donation whenever you want.</p>
+              <button type="button" class="popup__form-button btn btn--black js-membership-canceled-done">Done</button>
+          </div>
+      </div>
+  </div>
+  <div class="popup popup--membership-level-updated" id="membership-level-updated-popup-backdrop" aria-hidden="true">
+      <div class="popup__overlay" aria-hidden="true"></div>
+      <div class="popup__window" role="dialog" aria-modal="true" aria-labelledby="membership-level-updated-title" aria-describedby="membership-level-updated-desc">
+          <div class="popup__header">
+              <img src="/Noodynamics/preview/page-reader/images/logo-text.png" alt="Noodynamics" class="popup__logo">
+          </div>
+          <div class="popup__inner">
+              <h2 id="membership-level-updated-title" class="popup__title">Membership level updated successfully</h2>
+              <p id="membership-level-updated-desc" class="popup__text">Your membership level will switch to <strong class="popup__text-highlight">Sustaining Member</strong> on March 24, 2026.</p>
+              <button type="button" class="popup__form-button btn btn--black js-membership-level-updated-done">Done</button>
+          </div>
+      </div>
+  </div>
+  <div class="popup popup--cancel-monthly-donation-confirm" id="cancel-monthly-donation-confirm-popup-backdrop" aria-hidden="true">
+      <div class="popup__overlay" aria-hidden="true"></div>
+      <div class="popup__window" role="dialog" aria-modal="true" aria-labelledby="cancel-monthly-donation-confirm-title" aria-describedby="cancel-monthly-donation-confirm-desc">
+          <div class="popup__header">
+              <img src="/Noodynamics/preview/page-reader/images/logo-text.png" alt="Noodynamics" class="popup__logo">
+          </div>
+          <div class="popup__inner">
+              <h2 id="cancel-monthly-donation-confirm-title" class="popup__title">Cancel monthly donation?</h2>
+              <p id="cancel-monthly-donation-confirm-desc" class="popup__text">Are you sure you want to cancel your monthly donation of <strong class="popup__text-highlight">$25.00</strong>? This will stop all future recurring donations.</p>
+              <div class="popup__actions">
+                  <button type="button" class="popup__form-button btn btn--black js-keep-monthly-donation">Keep monthly donation</button>
+                  <button type="button" class="popup__form-button popup__form-button--outline btn js-cancel-monthly-donation-confirm">Cancel monthly donation</button>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="popup popup--monthly-donation-canceled" id="monthly-donation-canceled-popup-backdrop" aria-hidden="true">
+      <div class="popup__overlay" aria-hidden="true"></div>
+      <div class="popup__window" role="dialog" aria-modal="true" aria-labelledby="monthly-donation-canceled-title"
+          aria-describedby="monthly-donation-canceled-desc">
+          <div class="popup__header">
+              <img src="/Noodynamics/preview/page-reader/images/logo-text.png" alt="Noodynamics" class="popup__logo">
+          </div>
+          <div class="popup__inner">
+              <h2 id="monthly-donation-canceled-title" class="popup__title">Your membership has been canceled.</h2>
+              <p class="popup__text">You're all set. Your membership stays active until March 24, 2026.No further charges will be made.</p>
+              <button type="button"
+                  class="popup__form-button btn btn--black js-monthly-donation-canceled-done">Done</button>
+          </div>
+      </div>
+  </div>  <div class="popup popup--monthly-donation-updated" id="monthly-donation-updated-popup-backdrop" aria-hidden="true">
+      <div class="popup__overlay" aria-hidden="true"></div>
+      <div class="popup__window" role="dialog" aria-modal="true" aria-labelledby="monthly-donation-updated-title" aria-describedby="monthly-donation-updated-desc">
+          <div class="popup__header">
+              <img src="/Noodynamics/preview/page-reader/images/logo-text.png" alt="Noodynamics" class="popup__logo">
+          </div>
+          <div class="popup__inner">
+              <h2 id="monthly-donation-updated-title" class="popup__title">Monthly donation amount updated successfully</h2>
+              <p id="monthly-donation-updated-desc" class="popup__text">Your monthly donation amount will switch to
+                  <span class="js-monthly-updated-amount">$200</span> on March 24, 2026.</p>
+              <button type="button" class="popup__form-button btn btn--black js-monthly-donation-updated-done">Done</button>
+          </div>
+      </div>
+  </div>
+  <div class="profile-popup profile-popup--membership" id="membership-popup-backdrop" aria-hidden="true">
+      <div class="profile-popup__overlay" aria-hidden="true"></div>
+      <div class="profile-popup__window" role="dialog" aria-modal="true" aria-labelledby="membership-popup-title">
+          <div class="profile-popup__header">
+              <h2 id="membership-popup-title" class="profile-popup__header-title">My membership</h2>
+              <button type="button" class="profile-popup__close" aria-label="Close popup">
+                  <img src="/Noodynamics/preview/page-reader/icons/cross.svg" alt="" width="24" height="24">
+              </button>
+          </div>
+          <div class="profile-popup__inner">
+              <div class="profile-popup__content">
+                  <div class="profile-popup__content-top">
+                      <span class="profile-popup__content-top-label">Current level</span>
+                      <span class="profile-popup__content-top-status">Active</span>
+                  </div>
+                  <div class="profile-popup__content-middle">
+                      <h3 class="profile-popup__content-middle-name">Estate (Family)</h3>
+                      <span class="profile-popup__content-middle-price">$100/month</span>
+                  </div>
+                  <div class="profile-popup__content-bottom">
+                      <span class="profile-popup__content-bottom-next-billing">Next billing date: February 15, 2026</span>
+                  </div>
+              </div>
+              <button type="button" class="profile-popup__button profile-popup__button--change btn btn--primary js-open-change-membership">Change
+                  membership level</button>
+              <div class="profile-popup__footer">
+                  <button type="button" class="profile-popup__button profile-popup__button--cancel js-open-cancel-membership-confirm">Cancel
+                      membership</button>
+              </div>
+          </div>
+      </div>
+  </div>  <div class="profile-popup profile-popup--change-membership" id="change-membership-popup-backdrop" aria-hidden="true">
+      <div class="profile-popup__overlay" aria-hidden="true"></div>
+      <div class="profile-popup__window" role="dialog" aria-modal="true" aria-labelledby="change-membership-popup-title">
+          <div class="profile-popup__header">
+              <h2 id="change-membership-popup-title" class="profile-popup__header-title">
+                  <button type="button" class="profile-popup__header-icon js-back-to-membership" aria-label="Back">
+                      <img src="/Noodynamics/preview/page-reader/icons/arrow-back.svg" alt="" width="24" height="24">
+                  </button>
+                  Change membership level
+              </h2>
+              <button type="button" class="profile-popup__close" aria-label="Close popup">
+                  <img src="/Noodynamics/preview/page-reader/icons/cross.svg" alt="" width="24" height="24">
+              </button>
+          </div>
+          <div class="profile-popup__inner">
+              <h3 class="profile-popup__inner-title">Choose Your New Membership Level</h3>
+              <div class="application-membership__form-level-items">
+                  <div class="application-membership__form-level-item" data-level="student">
+                      <div class="application-membership__form-level-item-header">
+                          <h4 class="application-membership__form-level-item-title">Student</h4>
+                          <span class="application-membership__form-level-item-price">$50</span>
+                      </div>
+                      <button type="button"
+                          class="application-membership__form-level-item-button btn btn--primary js-select-level">Select</button>
+                  </div>
+                  <div class="application-membership__form-level-item" data-level="scholar">
+                      <div class="application-membership__form-level-item-header">
+                          <h4 class="application-membership__form-level-item-title">Scholar</h4>
+                          <span class="application-membership__form-level-item-price">$50</span>
+                      </div>
+                      <button type="button"
+                          class="application-membership__form-level-item-button btn btn--primary js-select-level">Select</button>
+                  </div>
+                  <div class="application-membership__form-level-item" data-level="estate-family">
+                      <div class="application-membership__form-level-item-header">
+                          <h4 class="application-membership__form-level-item-title">Estate (Family)</h4>
+                          <span class="application-membership__form-level-item-price">$100</span>
+                      </div>
+                      <button type="button"
+                          class="application-membership__form-level-item-button btn btn--primary current-level" disabled>Your active membership level</button>
+                  </div>
+                  <div class="application-membership__form-level-item" data-level="supporting-member">
+                      <div class="application-membership__form-level-item-header">
+                          <h4 class="application-membership__form-level-item-title">Supporting Member</h4>
+                          <span class="application-membership__form-level-item-price">$250</span>
+                      </div>
+                      <button type="button"
+                          class="application-membership__form-level-item-button btn btn--primary js-select-level">Select</button>
+                  </div>
+                  <div class="application-membership__form-level-item" data-level="contribution-member">
+                      <div class="application-membership__form-level-item-header">
+                          <h4 class="application-membership__form-level-item-title">Contribution Member</h4>
+                          <span class="application-membership__form-level-item-price">$500</span>
+                      </div>
+                      <button type="button"
+                          class="application-membership__form-level-item-button btn btn--primary js-select-level">Select</button>
+                  </div>
+                  <div class="application-membership__form-level-item" data-level="sustaining-member">
+                      <div class="application-membership__form-level-item-header">
+                          <h4 class="application-membership__form-level-item-title">Sustaining Member</h4>
+                          <span class="application-membership__form-level-item-price">$1000</span>
+                      </div>
+                      <button type="button"
+                          class="application-membership__form-level-item-button btn btn--primary js-select-level">Select</button>
+                  </div>
+                  <div class="application-membership__form-level-item" data-level="culture-bearing-statum">
+                      <div class="application-membership__form-level-item-header">
+                          <h4 class="application-membership__form-level-item-title">Culture-bearing Statum</h4>
+                          <span class="application-membership__form-level-item-price">$5000</span>
+                      </div>
+                      <button type="button"
+                          class="application-membership__form-level-item-button btn btn--primary js-select-level">Select</button>
+                  </div>
+              </div>
+              <button type="button" class="profile-popup__button profile-popup__button--change btn btn--secondary js-open-change-membership-details">Continue</button>
+          </div>
+      </div>
+  </div>  <div class="profile-popup profile-popup--change-membership-details" id="change-membership-details-popup-backdrop"
+      aria-hidden="true">
+      <div class="profile-popup__overlay" aria-hidden="true"></div>
+      <div class="profile-popup__window" role="dialog" aria-modal="true"
+          aria-labelledby="change-membership-details-popup-title">
+          <div class="profile-popup__header">
+              <h2 id="change-membership-details-popup-title" class="profile-popup__header-title">
+                  <button type="button" class="profile-popup__header-icon js-back-to-change-membership" aria-label="Back">
+                      <img src="/Noodynamics/preview/page-reader/icons/arrow-back.svg" alt="" width="24" height="24">
+                  </button>
+                  review details
+              </h2>
+              <button type="button" class="profile-popup__close" aria-label="Close popup">
+                  <img src="/Noodynamics/preview/page-reader/icons/cross.svg" alt="" width="24" height="24">
+              </button>
+          </div>
+          <div class="profile-popup__inner">
+              <h3 class="profile-popup__inner-title">Review the Details <br>
+                  Before Confirming Your Level Change.</h3>
+              <div class="profile-popup__content">
+                  <div class="profile-popup__content-items">
+                      <div class="profile-popup__content-item current-level">
+                          <span class="profile-popup__content-item-label">current membership level</span>
+                          <div class="profile-popup__content-item-content">
+                              <h4 class="profile-popup__content-item-title">Estate (Family)</h4>
+                              <p class="profile-popup__content-item-price">$100</p>
+                          </div>
+                      </div>
+                      <div class="profile-popup__content-item new-level">
+                          <span class="profile-popup__content-item-label">new membership level</span>
+                          <div class="profile-popup__content-item-content">
+                              <h4 class="profile-popup__content-item-title">Sustaining Member</h4>
+                              <p class="profile-popup__content-item-price">$1000</p>
+                              <button type="button"
+                                  class="profile-popup__content-item-button btn btn--primary">select</button>
+                          </div>
+                      </div>
+                  </div>
+                  <p class="profile-popup__content-description">Your level will change on March 24, 2026. <br>
+                      You won’t be charged today.</p>
+              </div>
+              <button type="button" class="profile-popup__button profile-popup__button--confirm btn btn--secondary js-confirm-level-change">Confirm
+                  my membership level change</button>
+          </div>
+      </div>
+  </div>  <div class="profile-popup profile-popup--account-details" id="account-details-popup-backdrop" aria-hidden="true">
+      <div class="profile-popup__overlay" aria-hidden="true"></div>
+      <div class="profile-popup__window" role="dialog" aria-modal="true" aria-labelledby="account-details-popup-title">
+          <div class="profile-popup__header">
+              <h2 id="account-details-popup-title" class="profile-popup__header-title">Account details</h2>
+              <button type="button" class="profile-popup__close" aria-label="Close popup">
+                  <img src="/Noodynamics/preview/page-reader/icons/cross.svg" alt="" width="24" height="24">
+              </button>
+          </div>
+          <div class="profile-popup__inner">
+              <form action="" class="profile-popup__form form-card js-account-details-form" novalidate>
+                  <div class="form-card__group">
+                      <label class="form-card__label" for="account-details-first-name">First name
+                          <input class="form-card__input" type="text" id="account-details-first-name" name="firstName"
+                              placeholder="First name" required minlength="2" autocomplete="given-name">
+                          <span id="account-details-first-name-error" class="form-card__error" role="alert"></span>
+                      </label>
+                  </div>
+                  <div class="form-card__group">
+                      <label class="form-card__label" for="account-details-last-name">Last name
+                          <input class="form-card__input" type="text" id="account-details-last-name" name="lastName"
+                              placeholder="Last name" required minlength="2" autocomplete="family-name">
+                          <span id="account-details-last-name-error" class="form-card__error" role="alert"></span>
+                      </label>
+                  </div>
+                  <div class="form-card__group">
+                      <label class="form-card__label" for="account-details-email">Email
+                          <input class="form-card__input" type="email" id="account-details-email" name="email"
+                              placeholder="Email" required autocomplete="email">
+                          <span id="account-details-email-error" class="form-card__error" role="alert"></span>
+                      </label>
+                  </div>
+                  <button type="submit" class="profile-popup__button profile-popup__button--save btn btn--primary">Save changes</button>
+              </form>
+          </div>
+      </div>
+  </div>  <div class="profile-popup profile-popup--account-change-password" id="account-change-password-popup-backdrop" aria-hidden="true">
+      <div class="profile-popup__overlay" aria-hidden="true"></div>
+      <div class="profile-popup__window" role="dialog" aria-modal="true" aria-labelledby="account-change-password-popup-title">
+          <div class="profile-popup__header">
+              <h2 id="account-change-password-popup-title" class="profile-popup__header-title">Change password</h2>
+              <button type="button" class="profile-popup__close" aria-label="Close popup">
+                  <img src="/Noodynamics/preview/page-reader/icons/cross.svg" alt="" width="24" height="24">
+              </button>
+          </div>
+          <div class="profile-popup__inner">
+              <form action="" class="profile-popup__form form-card js-account-change-password-form" novalidate>
+                  <div class="form-card__group">
+                      <label class="form-card__label" for="account-change-password-current">Current password
+                          <input class="form-card__input" type="password" id="account-change-password-current" name="currentPassword"
+                              placeholder="Enter your current password" required minlength="8" autocomplete="current-password">
+                          <span id="account-change-password-current-error" class="form-card__error" role="alert"></span>
+                      </label>
+                  </div>
+                  <div class="form-card__group">
+                      <label class="form-card__label" for="account-change-password-new">New password
+                          <input class="form-card__input" type="password" id="account-change-password-new" name="newPassword"
+                              placeholder="Enter your new password" required minlength="8" autocomplete="new-password">
+                          <span id="account-change-password-new-error" class="form-card__error" role="alert"></span>
+                      </label>
+                  </div>
+                  <button type="submit" class="profile-popup__button profile-popup__button--save btn btn--primary">Save changes</button>
+              </form>
+          </div>
+      </div>
+  </div>  <div class="profile-popup profile-popup--donations" id="donations-popup-backdrop" aria-hidden="true">
+      <div class="profile-popup__overlay" aria-hidden="true"></div>
+      <div class="profile-popup__window" role="dialog" aria-modal="true" aria-labelledby="donations-popup-title">
+          <div class="profile-popup__header">
+              <h2 id="donations-popup-title" class="profile-popup__header-title">My donations</h2>
+              <button type="button" class="profile-popup__close" aria-label="Close popup">
+                  <img src="/Noodynamics/preview/page-reader/icons/cross.svg" alt="" width="24" height="24">
+              </button>
+          </div>
+          <div class="profile-popup__inner">
+              <div class="profile-popup__donations-summary">
+                  <div class="profile-popup__donations-card">
+                      <div class="profile-popup__donations-card-icon-wrap">
+                          <img src="/Noodynamics/preview/page-reader/icons/coin.svg" alt="" class="profile-popup__donations-card-icon" width="20"
+                              height="20">
+                          <span class="profile-popup__donations-card-label">Total donated</span>
+                      </div>
+                      <span class="profile-popup__donations-card-amount">$225.00</span>
+                  </div>
+                  <div class="profile-popup__donations-card">
+                      <div class="profile-popup__donations-card-icon-wrap">
+                          <img src="/Noodynamics/preview/page-reader/icons/calendar-gray.svg" alt="" class="profile-popup__donations-card-icon" width="20"
+                              height="20">
+                          <span class="profile-popup__donations-card-label">Monthly donation</span>
+                      </div>
+                      <span class="profile-popup__donations-card-amount">$25.00 <i>per month</i></span>
+                      <span class="profile-popup__donations-card-status">Active</span>
+                  </div>
+              </div>
+              <div class="profile-popup__content profile-popup__content--active-donation">
+                  <span class="profile-popup__content-label">Active monthly donation</span>
+                  <span class="profile-popup__content-price">$25/month</span>
+                  <span class="profile-popup__content-next-billing">Next donation: February 15, 2026</span>
+                  <button type="button"
+                      class="profile-popup__button profile-popup__button--cancel js-cancel-monthly-donation">Cancel</button>
+              </div>
+              <button type="button"
+                  class="profile-popup__button profile-popup__button--change btn btn--primary js-open-change-monthly-donation">Change
+                  monthly donation amount</button>
+              <div class="profile-popup__donations-promo">
+                  <picture class="profile-popup__donations-promo-img"><source srcset="images/donation-bg.webp" type="image/webp"><img src="images/donation-bg.png" alt="Description" loading="lazy"></picture>
+                  <div class="profile-popup__donations-promo-content">
+                      <h3 class="profile-popup__donations-promo-title">Make a Bigger Impact with Monthly Giving</h3>
+                      <p class="profile-popup__donations-promo-text">Set up a recurring monthly donation to provide sustained support for our mission. <br> 
+                          Monthly donations help us plan long-term projects and create lasting change.</p>
+                      <button type="button" class="profile-popup__donations-promo-btn btn btn--primary js-open-monthly-donation-setup">Set Up Monthly Donation</button>
+                  </div>
+              </div>
+              <h3 class="profile-popup__donations-history-title">Donation history</h3>
+              <ul class="profile-popup__donations-history" aria-label="Donation history">
+                  <li class="profile-popup__donations-history-item">
+                      <div class="profile-popup__donations-history-item-col">
+                          <div class="profile-popup__donations-history-item-info-wrap">
+                              <span class="profile-popup__donations-history-amount">$25.00</span>
+                              <span class="profile-popup__donations-history-type">Monthly</span>
+                          </div>
+                          <time class="profile-popup__donations-history-date" datetime="2025-11-15">November 15, 2025</time>
+                      </div>
+                      <span class="profile-popup__donations-history-status">Completed</span>
+                  </li>
+                  <li class="profile-popup__donations-history-item">
+                      <div class="profile-popup__donations-history-item-col">
+                          <div class="profile-popup__donations-history-item-info-wrap">
+                              <span class="profile-popup__donations-history-amount">$25.00</span>
+                              <span class="profile-popup__donations-history-type">Monthly</span>
+                          </div>
+                          <time class="profile-popup__donations-history-date" datetime="2025-11-15">November 15, 2025</time>
+                      </div>
+                      <span class="profile-popup__donations-history-status">Completed</span>
+                  </li>
+                  <li class="profile-popup__donations-history-item">
+                      <div class="profile-popup__donations-history-item-col">
+                          <div class="profile-popup__donations-history-item-info-wrap">
+                              <span class="profile-popup__donations-history-amount">$25.00</span>
+                              <span class="profile-popup__donations-history-type">Monthly</span>
+                          </div>
+                          <time class="profile-popup__donations-history-date" datetime="2025-11-15">November 15, 2025</time>
+                      </div>
+                      <span class="profile-popup__donations-history-status">Completed</span>
+                  </li>
+              </ul>
+              <div class="profile-popup__donations-thankyou">
+                  <h3 class="profile-popup__donations-thankyou-title">Thank you for your generous support!</h3>
+                  <p class="profile-popup__donations-thankyou-text">Your contributions help us continue our mission to
+                      explore the deep structures of cultural evolution.</p>
+              </div>
+          </div>
+      </div>
+  </div>  <div class="profile-popup profile-popup--change-monthly-donation" id="change-monthly-donation-popup-backdrop"
+      aria-hidden="true">
+      <div class="profile-popup__overlay" aria-hidden="true"></div>
+      <div class="profile-popup__window" role="dialog" aria-modal="true"
+          aria-labelledby="change-monthly-donation-popup-title">
+          <div class="profile-popup__header">
+              <h2 id="change-monthly-donation-popup-title" class="profile-popup__header-title">
+                  <button type="button" class="profile-popup__header-icon js-back-to-donations" aria-label="Back">
+                      <img src="/Noodynamics/preview/page-reader/icons/arrow-back.svg" alt="" width="24" height="24">
+                  </button>
+                  Change monthly donation amount
+              </h2>
+              <button type="button" class="profile-popup__close" aria-label="Close popup">
+                  <img src="/Noodynamics/preview/page-reader/icons/cross.svg" alt="" width="24" height="24">
+              </button>
+          </div>
+          <div class="profile-popup__inner">
+              <h3 class="profile-popup__inner-subtitle">Select New Monthly Donation Amount</h3>
+              <div class="profile-popup__content profile-popup__content--current-monthly">
+                  <div class="profile-popup__content-icon-wrap">
+                      <img src="/Noodynamics/preview/page-reader/icons/calendar-gray.svg" alt="" class="profile-popup__content-icon" width="20"
+                          height="20">
+                      <span class="profile-popup__content-label">Current monthly donation</span>
+                  </div>
+                  <span class="profile-popup__content-price">$25.00 <i>per month</i></span>
+              </div>
+              <form class="profile-popup__form form-card js-change-monthly-donation-form" novalidate>
+                  <span id="change-monthly-amount-label" class="form-card__label">Select donation amount</span>
+                  <div class="make-donation__amount-group form-card__group-amount profile-popup__amount-group"
+                      role="group" aria-labelledby="change-monthly-amount-label">
+                      <label class="make-donation__amount-option">
+                          <input type="radio" name="changeMonthlyAmount" value="20" class="make-donation__amount-input">
+                          <span class="make-donation__amount-button">$20</span>
+                      </label>
+                      <label class="make-donation__amount-option">
+                          <input type="radio" name="changeMonthlyAmount" value="50" class="make-donation__amount-input">
+                          <span class="make-donation__amount-button">$50</span>
+                      </label>
+                      <label class="make-donation__amount-option">
+                          <input type="radio" name="changeMonthlyAmount" value="100" class="make-donation__amount-input">
+                          <span class="make-donation__amount-button">$100</span>
+                      </label>
+                      <label class="make-donation__amount-option">
+                          <input type="radio" name="changeMonthlyAmount" value="500" class="make-donation__amount-input">
+                          <span class="make-donation__amount-button">$500</span>
+                      </label>
+                      <label class="make-donation__amount-option">
+                          <input type="radio" name="changeMonthlyAmount" value="1000" class="make-donation__amount-input">
+                          <span class="make-donation__amount-button">$1000</span>
+                      </label>
+                      <label class="make-donation__amount-option">
+                          <input type="radio" name="changeMonthlyAmount" value="other"
+                              class="make-donation__amount-input">
+                          <span class="make-donation__amount-button">Other</span>
+                      </label>
+                  </div>
+                  <span id="changeMonthlyAmount-error" class="form-card__error" role="alert"></span>
+                  <div class="form-card__group">
+                      <label class="form-card__label form-card__label--left" for="change-monthly-amount-due">Amount due
+                          <span class="form-card__input-with-prefix">
+                              <span class="form-card__input-prefix" aria-hidden="true">$</span>
+                              <input type="text" id="change-monthly-amount-due" name="amountDue"
+                                  class="form-card__input make-donation__form-input" placeholder="0" inputmode="decimal"
+                                  disabled>
+                          </span>
+                          <span id="change-monthly-amount-due-error" class="form-card__error" role="alert"></span>
+                      </label>
+                  </div>
+                  <div class="form-card__group">
+                      <label class="form-card__label form-card__label--left" for="change-monthly-comment">Leave a comment
+                          (optional)
+                          <textarea id="change-monthly-comment" name="comment"
+                              class="form-card__input make-donation__form-textarea" placeholder="Additional comments"
+                              rows="3"></textarea>
+                      </label>
+                  </div>
+                  <p class="profile-popup__form-note">Your monthly donation amount will change on March 24, 2026. <br> You won't be charged today.
+                  </p>
+                  <button type="submit" class="profile-popup__button profile-popup__button--save btn btn--secondary">update monthly donation amount</button>
+              </form>
+          </div>
+      </div>
+  </div>  <div class="profile-popup profile-popup--monthly-donation-setup" id="monthly-donation-setup-popup-backdrop" aria-hidden="true">
+      <div class="profile-popup__overlay" aria-hidden="true"></div>
+      <div class="profile-popup__window" role="dialog" aria-modal="true" aria-labelledby="monthly-donation-setup-popup-title">
+          <div class="profile-popup__header">
+              <h2 id="monthly-donation-setup-popup-title" class="profile-popup__header-title">
+                  <button type="button" class="profile-popup__header-icon js-back-to-donations" aria-label="Back">
+                      <img src="/Noodynamics/preview/page-reader/icons/arrow-back.svg" alt="" width="24" height="24">
+                  </button>
+                  Monthly donation
+              </h2>
+              <button type="button" class="profile-popup__close" aria-label="Close popup">
+                  <img src="/Noodynamics/preview/page-reader/icons/cross.svg" alt="" width="24" height="24">
+              </button>
+          </div>
+          <div class="profile-popup__inner">
+              <h3 class="profile-popup__inner-title">Set Up Monthly Donation</h3>
+              <form class="profile-popup__form form-card js-monthly-donation-setup-form" novalidate>
+                  <span id="monthly-setup-amount-label" class="form-card__label">Select donation amount</span>
+                  <div class="make-donation__amount-group form-card__group-amount profile-popup__amount-group" role="group" aria-labelledby="monthly-setup-amount-label">
+                      <label class="make-donation__amount-option">
+                          <input type="radio" name="monthlySetupAmount" value="20" class="make-donation__amount-input">
+                          <span class="make-donation__amount-button">$20</span>
+                      </label>
+                      <label class="make-donation__amount-option">
+                          <input type="radio" name="monthlySetupAmount" value="50" class="make-donation__amount-input">
+                          <span class="make-donation__amount-button">$50</span>
+                      </label>
+                      <label class="make-donation__amount-option">
+                          <input type="radio" name="monthlySetupAmount" value="100" class="make-donation__amount-input">
+                          <span class="make-donation__amount-button">$100</span>
+                      </label>
+                      <label class="make-donation__amount-option">
+                          <input type="radio" name="monthlySetupAmount" value="500" class="make-donation__amount-input">
+                          <span class="make-donation__amount-button">$500</span>
+                      </label>
+                      <label class="make-donation__amount-option">
+                          <input type="radio" name="monthlySetupAmount" value="1000" class="make-donation__amount-input">
+                          <span class="make-donation__amount-button">$1000</span>
+                      </label>
+                      <label class="make-donation__amount-option">
+                          <input type="radio" name="monthlySetupAmount" value="other" class="make-donation__amount-input">
+                          <span class="make-donation__amount-button">Other</span>
+                      </label>
+                  </div>
+                  <span id="monthlySetupAmount-error" class="form-card__error" role="alert"></span>
+                  <div class="form-card__group">
+                      <label class="form-card__label" for="monthly-setup-amount-due">Amount due
+                          <span class="form-card__input-with-prefix">
+                              <span class="form-card__input-prefix" aria-hidden="true">$</span>
+                              <input type="text" id="monthly-setup-amount-due" name="amountDue" class="form-card__input make-donation__form-input" placeholder="0" inputmode="decimal" disabled>
+                          </span>
+                          <span id="monthly-setup-amount-due-error" class="form-card__error" role="alert"></span>
+                      </label>
+                  </div>
+                  <div class="form-card__group">
+                      <label class="form-card__label form-card__label--left" for="monthly-setup-comment">Leave a comment (optional)
+                          <textarea id="monthly-setup-comment" name="comment" class="form-card__input make-donation__form-textarea" placeholder="Additional comments" rows="3"></textarea>
+                      </label>
+                  </div>
+                  <h3 class="profile-popup__inner-title profile-popup__inner-title--section">Billing Address</h3>
+                  <div class="form-card__group form-card__group--row">
+                      <label class="form-card__label form-card__label--left" for="monthly-setup-first-name">First name
+                          <input type="text" id="monthly-setup-first-name" name="firstName" class="form-card__input" placeholder="Enter your first name" required autocomplete="given-name">
+                          <span id="monthly-setup-first-name-error" class="form-card__error" role="alert"></span>
+                      </label>
+                      <label class="form-card__label form-card__label--left" for="monthly-setup-last-name">Last name
+                          <input type="text" id="monthly-setup-last-name" name="lastName" class="form-card__input" placeholder="Enter your last name" required autocomplete="family-name">
+                          <span id="monthly-setup-last-name-error" class="form-card__error" role="alert"></span>
+                      </label>
+                  </div>
+                  <div class="form-card__group form-card__group--row">
+                      <label class="form-card__label form-card__label--left" for="monthly-setup-email">Email
+                          <input type="email" id="monthly-setup-email" name="email" class="form-card__input" placeholder="Enter your email" required autocomplete="email">
+                          <span id="monthly-setup-email-error" class="form-card__error" role="alert"></span>
+                      </label>
+                      <label class="form-card__label form-card__label--left" for="monthly-setup-phone">Phone number (optional)
+                          <input type="tel" id="monthly-setup-phone" name="phone" class="form-card__input" placeholder="Enter your phone number" autocomplete="tel">
+                      </label>
+                  </div>
+                  <div class="form-card__group form-card__group--row">
+                      <label class="form-card__label form-card__label--left" for="monthly-setup-country">Country
+                          <select id="monthly-setup-country" name="country" class="form-card__input" hidden required>
+                              <option value="">Select country</option>
+                              <option value="US">United States</option>
+                              <option value="CA">Canada</option>
+                              <option value="GB">United Kingdom</option>
+                              <option value="AU">Australia</option>
+                              <option value="DE">Germany</option>
+                              <option value="FR">France</option>
+                              <option value="other">Other</option>
+                          </select>
+                          <div class="make-donation__select select" data-select-native-id="monthly-setup-country">
+                              <button type="button" class="select__trigger" aria-expanded="false" aria-haspopup="listbox" aria-label="Select country">
+                                  <span class="select__value">Select country</span>
+                                  <span class="select__arrow" aria-hidden="true"><img src="/Noodynamics/preview/page-reader/icons/arrow-down.svg" alt=""></span>
+                              </button>
+                              <ul class="select__dropdown" role="listbox" hidden>
+                                  <li class="select__option" role="option" data-value="US">United States</li>
+                                  <li class="select__option" role="option" data-value="CA">Canada</li>
+                                  <li class="select__option" role="option" data-value="GB">United Kingdom</li>
+                                  <li class="select__option" role="option" data-value="AU">Australia</li>
+                                  <li class="select__option" role="option" data-value="DE">Germany</li>
+                                  <li class="select__option" role="option" data-value="FR">France</li>
+                                  <li class="select__option" role="option" data-value="other">Other</li>
+                              </ul>
+                          </div>
+                          <span id="monthly-setup-country-error" class="form-card__error" role="alert"></span>
+                      </label>
+                      <label class="form-card__label form-card__label--left" for="monthly-setup-city">City
+                          <input type="text" id="monthly-setup-city" name="city" class="form-card__input" placeholder="Enter your city" required autocomplete="address-level2">
+                          <span id="monthly-setup-city-error" class="form-card__error" role="alert"></span>
+                      </label>
+                  </div>
+                  <div class="form-card__group form-card__group--row">
+                      <label class="form-card__label form-card__label--left" for="monthly-setup-address">Address
+                          <input type="text" id="monthly-setup-address" name="address" class="form-card__input" placeholder="Enter your address" required autocomplete="street-address">
+                          <span id="monthly-setup-address-error" class="form-card__error" role="alert"></span>
+                      </label>
+                      <label class="form-card__label form-card__label--left" for="monthly-setup-postcode">Postcode
+                          <input type="text" id="monthly-setup-postcode" name="postcode" class="form-card__input" placeholder="Enter your postcode" required autocomplete="postal-code">
+                          <span id="monthly-setup-postcode-error" class="form-card__error" role="alert"></span>
+                      </label>
+                  </div>
+                  <button type="submit" class="profile-popup__button profile-popup__button--save btn btn--secondary">Continue to secure payment</button>
+              </form>
+          </div>
+      </div>
+  </div>
+  <footer id="footer" class="footer wow animate__animated animate__fadeInUp" data-wow-duration="1s">
+      <picture class="footer__bg"><source srcset="images/footer-bg.webp" type="image/webp"><img src="images/footer-bg.png" alt="" loading="lazy"></picture>
+      <div class="container">
+          <picture class="footer__logo wow animate__animated animate__zoomIn" data-wow-delay="0.1s"><source srcset="images/footer-logo.webp" type="image/webp"><img src="images/footer-logo.png" alt="Noodynamics Institute" loading="lazy"></picture>
+          <div class="footer__inner">
+              <div class="footer__col wow animate__animated animate__fadeInUp" data-wow-delay="0.15s">
+                  <address class="footer__col-item">
+                      <span>Address:</span> P.O. Box 5565 Peoria, Illinois 61601
+                  </address>
+                  <a href="mailto:institute@noodynamics.org" class="footer__col-item"><span>Email:</span>
+                      institute@noodynamics.org</a>
+              </div>
+              <div class="footer__col wow animate__animated animate__fadeInUp" data-wow-delay="0.25s">
+                  <h2 id="footer-contact-heading" class="footer__col-title">
+                      contact us
+                  </h2>
+                  <form action="#" class="footer__col-form short-form" aria-labelledby="footer-contact-heading" novalidate>
+                      <div class="footer__col-form-field">
+                          <label for="footer-email" class="visually-hidden">Email</label>
+                          <input type="email" id="footer-email" name="email" placeholder="Email" autocomplete="email" required>
+                          <span id="footer-email-error" class="footer__col-form-error" role="alert"></span>
+                      </div>
+                      <div class="footer__col-form-field">
+                          <label for="footer-name" class="visually-hidden">Name</label>
+                          <input type="text" id="footer-name" name="name" placeholder="Name" autocomplete="name" required minlength="2">
+                          <span id="footer-name-error" class="footer__col-form-error" role="alert"></span>
+                      </div>
+                      <div class="footer__col-form-field">
+                          <label for="footer-message" class="visually-hidden">Message</label>
+                          <textarea id="footer-message" name="message" placeholder="Message"></textarea>
+                          <span id="footer-message-error" class="footer__col-form-error" role="alert"></span>
+                      </div>
+                      <button type="submit" class="footer__col-form-btn btn btn--primary">
+                          submit
+                      </button>
+                  </form>
+              </div>
+              <div class="footer__col wow animate__animated animate__fadeInUp" data-wow-delay="0.35s">
+                  <nav class="footer__col-nav" aria-label="Footer navigation">
+                      <ul class="footer__col-list">
+                          <li class="footer__col-item">
+                              <a href="about.html" class="footer__col-link">about</a>
+                          </li>
+                          <li class="footer__col-item">
+                              <a href="books.html" class="footer__col-link">books</a>
+                          </li>
+                          <li class="footer__col-item">
+                              <a href="journal.html" class="footer__col-link">journal</a>
+                          </li>
+                          <li class="footer__col-item">
+                              <a href="events.html" class="footer__col-link">events</a>
+                          </li>
+                          <li class="footer__col-item">
+                              <a href="extras.html" class="footer__col-link">extras</a>
+                          </li>
+                          <li class="footer__col-item">
+                              <a href="membership.html" class="footer__col-link">membership</a>
+                          </li>
+                      </ul>
+                  </nav>
+              </div>
+          </div>
+          <div class="footer__bottom wow animate__animated animate__fadeInUp" data-wow-delay="0.45s">
+              <a href="terms.html" class="footer__bottom-link">
+                  terms & conditions
+              </a>
+              <div class="footer__bottom-center">
+                  <p class="footer__bottom-text">
+                      © Noodynamics Institute <time datetime="2026" class="footer__bottom-year">2026</time>
+                  </p>
+                  <p class="footer__bottom-text">
+                      All rights reserved
+                  </p>
+              </div>
+              <a href="privacy.html" class="footer__bottom-link">
+                  privacy policy
+              </a>
+          </div>
+      </div>
+  </footer>
+  <div class="site-audio" id="site-audio">
+      <audio class="site-audio__media js-site-audio-media" preload="auto" loop></audio>
+      <button type="button" class="site-audio__toggle js-site-audio-toggle" aria-label="Play ambient audio"
+          aria-pressed="false">
+          <span class="site-audio__icon site-audio__icon--play" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                      d="M5.5 2.89978C5.50014 2.46871 5.95992 2.27708 6.24512 2.49646L6.25586 2.50525L6.26758 2.51306L19.5176 11.5629L19.5225 11.5658C19.8256 11.7679 19.8256 12.1821 19.5225 12.3842L19.5166 12.3881L6.2666 21.4877L6.24512 21.5033C5.95988 21.7227 5.5 21.5312 5.5 21.1V2.89978Z"
+                      fill="currentColor" stroke="currentColor" />
+              </svg>
+          </span>
+          <span class="site-audio__icon site-audio__icon--pause" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 5H10V19H8V5Z" fill="currentColor" />
+                  <path d="M14 5H16V19H14V5Z" fill="currentColor" />
+              </svg>
+          </span>
+      </button>
+  </div>
+  
+  <div class="cta-button">
+      <img class="cta-button__img cta-button__img--left" src="/Noodynamics/preview/page-reader/images/cta-button-img.png" alt= "image not found" class="cta-button__icon">
+      <a href="tel:73773410188" class="cta-button__link">Have questions about Nöodynamics or the Institute? <b>Call (737) 734-1018</b></a>
+      <img class="cta-button__img cta-button__img--right" src="/Noodynamics/preview/page-reader/images/cta-button-img.png" alt= "image not found" class="cta-button__icon">
+  </div>  
+</body>
+
+</html>

@@ -120,6 +120,18 @@ html:has(.reader-page) {
       background-color: #949494;
     }
 
+    .reader__note-ref {
+      color: $color-lightbeige-500;
+    }
+
+    .reader__contents-link {
+      &:hover,
+      &:focus,
+      &:focus-visible {
+        color: $color-lightbeige-500;
+      }
+    }
+
     .reader__sidebar {
       background-color: $color-neutral-800;
       border-color: $color-neutral-600;
@@ -503,6 +515,10 @@ html:has(.reader-page) {
       opacity: 0.55;
     }
 
+    > * {
+      max-width: min(100%, 860px);
+    }
+
     p {
       font-size: calc(18px * var(--reader-font-scale));
       line-height: var(--reader-line-height);
@@ -518,6 +534,63 @@ html:has(.reader-page) {
         margin-bottom: 0;
       }
     }
+  }
+
+  &__image-block {
+    margin: 0 0 1.4rem;
+    max-width: min(100%, 860px);
+
+    &--full-page {
+      max-width: min(100%, 920px);
+    }
+  }
+
+  &__image {
+    display: block;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  &__note-ref {
+    color: $color-brown;
+    text-decoration: none;
+    font-weight: 600;
+
+    &:hover,
+    &:focus,
+    &:focus-visible {
+      text-decoration: underline;
+      outline: none;
+    }
+
+    sup {
+      line-height: 0;
+    }
+  }
+
+  &__contents-link {
+    color: inherit;
+    text-decoration: none;
+    font: inherit;
+
+    &:hover,
+    &:focus,
+    &:focus-visible {
+      color: $color-brown;
+      text-decoration: underline;
+      outline: none;
+    }
+  }
+
+  p.is-note-target {
+    background-color: rgba($color-brown, 0.08);
+    border-radius: 8px;
+    box-shadow: 0 0 0 8px rgba($color-brown, 0.08);
+    transition:
+      background-color 0.25s ease,
+      box-shadow 0.25s ease;
   }
 
   &__section-title {

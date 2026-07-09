@@ -14,7 +14,7 @@ const HIGHLIGHT_CLASS = 'reader__highlight';
 const BASE_FONT_SIZE_PX = 18;
 const MIN_FONT_SIZE_PX = 14;
 const MAX_FONT_SIZE_PX = 32;
-const GROUP_HEADERS = {
+const LEGACY_GROUP_HEADERS = {
   'ch3-1': '2. The Rhizomodality of High Culture',
   'ch4-1':
     '3. Millennium Metalogue: A New Basis for Dialogue Between Science, Spirituality, and Art',
@@ -31,12 +31,82 @@ function getChapterAnchorId(chapter) {
   return `reader-section-${chapter.id}`;
 }
 
-function getGroupAnchorId(chapterId) {
-  return `reader-group-${chapterId}`;
+function getGroupAnchorId(groupId) {
+  return `reader-group-${groupId}`;
 }
 
 function isSubsectionTitle(title) {
   return /^\d+\.\d+/.test(title);
+}
+
+function getChapterGroupTitle(chapter) {
+  return chapter?.groupTitle || LEGACY_GROUP_HEADERS[chapter?.id] || '';
+}
+
+function getChapterGroupId(chapter) {
+  return chapter?.groupId || (LEGACY_GROUP_HEADERS[chapter?.id] ? chapter.id : '');
+}
+
+function normalizeLegacyPageText(rawPage, chapter) {
+  return formatReaderPageText(rawPage, chapter.title, chapter.id);
+}
+
+function createLegacyPageData(chapter, pageIndex, rawPage) {
+  const paragraphs = String(normalizeLegacyPageText(rawPage, chapter))
+    .split(/\n\s*\n/)
+    .map((paragraph) => paragraph.replace(/\s*\n\s*/g, ' ').trim())
+    .filter(Boolean);
+
+  return {
+    id: `${chapter.id}-page-${pageIndex + 1}`,
+    pageNo: pageIndex + 1,
+    showTitle: pageIndex === 0,
+    blocks: paragraphs.map((paragraph, paragraphIndex) => ({
+      type: 'paragraph',
+      id: `${chapter.id}-page-${pageIndex + 1}-paragraph-${paragraphIndex + 1}`,
+      html: `<p id="${chapter.id}-page-${pageIndex + 1}-paragraph-${paragraphIndex + 1}">${escapeHtml(
+        paragraph,
+      )}</p>`,
+      text: paragraph,
+    })),
+  };
+}
+
+function getPageData(chapter, pageIndex) {
+  const rawPage = chapter.pages[pageIndex];
+  if (!rawPage) return null;
+
+  if (typeof rawPage === 'object' && Array.isArray(rawPage.blocks)) {
+    return rawPage;
+  }
+
+  return createLegacyPageData(chapter, pageIndex, rawPage);
+}
+
+function getPageParagraphBlocks(chapter, pageIndex) {
+  const page = getPageData(chapter, pageIndex);
+  if (!page) return [];
+
+  return page.blocks.filter((block) => block.type === 'paragraph');
+}
+
+function getPageParagraphs(chapter, pageIndex) {
+  return getPageParagraphBlocks(chapter, pageIndex)
+    .map((block) => block.text || '')
+    .filter(Boolean);
+}
+
+function getPageText(chapter, pageIndex) {
+  return getPageParagraphs(chapter, pageIndex).join('\n\n');
+}
+
+function shouldRenderGroupTitle(chapterIndex) {
+  const chapter = CHAPTERS[chapterIndex];
+  const groupId = getChapterGroupId(chapter);
+  if (!groupId) return false;
+
+  const previousChapter = CHAPTERS[chapterIndex - 1];
+  return getChapterGroupId(previousChapter) !== groupId;
 }
 
 function getChapterStartPage(chapterIndex) {
@@ -62,7 +132,7 @@ function getChapterInfoForPage(page) {
 
 function getChapterBodyText(chapter) {
   return chapter.pages
-    .map((raw) => formatReaderPageText(raw, chapter.title, chapter.id))
+    .map((_, pageIndex) => getPageText(chapter, pageIndex))
     .filter(Boolean)
     .join('\n\n');
 }
@@ -70,16 +140,6 @@ function getChapterBodyText(chapter) {
 /** Paragraphs with the same normalization used when rendering chapter HTML. */
 function getChapterParagraphs(chapter) {
   return String(getChapterBodyText(chapter))
-    .split(/\n\s*\n/)
-    .map((p) => p.replace(/\s*\n\s*/g, ' ').trim())
-    .filter(Boolean);
-}
-
-function getPageParagraphs(chapter, pageIndex) {
-  const raw = chapter.pages[pageIndex];
-  if (!raw) return [];
-  const text = formatReaderPageText(raw, chapter.title, chapter.id);
-  return String(text)
     .split(/\n\s*\n/)
     .map((p) => p.replace(/\s*\n\s*/g, ' ').trim())
     .filter(Boolean);
@@ -163,23 +223,255 @@ function createHighlightFromSelection(range, textEl) {
   };
 }
 
-function renderParagraphsHtml(paragraphs, highlights = []) {
-  if (!paragraphs.length) return '';
+function applyHighlightsToParagraphHtml(paragraphHtml, highlights = []) {
+  if (!highlights.length) return paragraphHtml;
+
+  const template = document.createElement('template');
+  template.innerHTML = paragraphHtml.trim();
+  const root = template.content.firstElementChild;
+  if (!root) return paragraphHtml;
+
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  const textNodes = [];
+  while (walker.nextNode()) {
+    textNodes.push(walker.currentNode);
+  }
 
   let offset = 0;
-  return paragraphs
-    .map((paragraph) => {
-      const start = offset;
-      const end = start + paragraph.length;
-      offset = end + 2;
-      const localHighlights = highlights
-        .filter((h) => h.start < end && h.end > start)
-        .map((h) => ({
-          ...h,
-          start: Math.max(0, h.start - start),
-          end: Math.min(paragraph.length, h.end - start),
-        }));
-      return `<p>${applyHighlightsToText(paragraph, localHighlights)}</p>`;
+  textNodes.forEach((textNode) => {
+    const text = textNode.textContent || '';
+    if (!text) return;
+
+    const start = offset;
+    const end = start + text.length;
+    offset = end;
+
+    const localHighlights = highlights
+      .filter((highlight) => highlight.start < end && highlight.end > start)
+      .map((highlight) => ({
+        ...highlight,
+        start: Math.max(0, highlight.start - start),
+        end: Math.min(text.length, highlight.end - start),
+      }))
+      .sort((a, b) => a.start - b.start);
+
+    if (!localHighlights.length || !textNode.parentNode) {
+      return;
+    }
+
+    const fragment = document.createDocumentFragment();
+    let cursor = 0;
+
+    localHighlights.forEach((highlight) => {
+      if (highlight.start > cursor) {
+        fragment.append(document.createTextNode(text.slice(cursor, highlight.start)));
+      }
+
+      const mark = document.createElement('mark');
+      mark.className = HIGHLIGHT_CLASS;
+      mark.dataset.highlightId = String(highlight.id);
+      mark.textContent = text.slice(highlight.start, highlight.end);
+      fragment.append(mark);
+      cursor = Math.max(cursor, highlight.end);
+    });
+
+    if (cursor < text.length) {
+      fragment.append(document.createTextNode(text.slice(cursor)));
+    }
+
+    textNode.parentNode.replaceChild(fragment, textNode);
+  });
+
+  return root.outerHTML;
+}
+
+function normalizeContentsText(text) {
+  return String(text)
+    .replace(/\s+/g, ' ')
+    .trim()
+    .toLowerCase();
+}
+
+function buildContentsTargets() {
+  const chapterTargets = new Map();
+  const groupTargets = new Map();
+
+  CHAPTERS.forEach((chapter, chapterIndex) => {
+    const targetPage = getChapterStartPage(chapterIndex);
+
+    chapterTargets.set(normalizeContentsText(chapter.title), {
+      targetPage,
+      hashId: getChapterAnchorId(chapter),
+    });
+
+    const groupTitle = getChapterGroupTitle(chapter);
+    const groupId = getChapterGroupId(chapter);
+    if (groupTitle && groupId && !groupTargets.has(normalizeContentsText(groupTitle))) {
+      groupTargets.set(normalizeContentsText(groupTitle), {
+        targetPage,
+        hashId: getGroupAnchorId(groupId),
+      });
+    }
+  });
+
+  const titleChapterIndex = CHAPTERS.findIndex((chapter) => chapter.title === 'Title');
+  if (titleChapterIndex >= 0) {
+    chapterTargets.set(normalizeContentsText(BOOK_TITLE), {
+      targetPage: getChapterStartPage(titleChapterIndex),
+      hashId: getChapterAnchorId(CHAPTERS[titleChapterIndex]),
+    });
+  }
+
+  return {
+    chapterTargets,
+    groupTargets,
+  };
+}
+
+function findContentsTarget(blocks, index, contentsTargets) {
+  const block = blocks[index];
+  const previous = blocks[index - 1] ?? null;
+  const next = blocks[index + 1] ?? null;
+  const candidateTexts = [
+    block?.text || '',
+    previous ? `${previous.text} ${block.text}` : '',
+    next ? `${block.text} ${next.text}` : '',
+  ]
+    .map(normalizeContentsText)
+    .filter(Boolean);
+
+  for (const candidate of candidateTexts) {
+    if (contentsTargets.chapterTargets.has(candidate)) {
+      return contentsTargets.chapterTargets.get(candidate);
+    }
+  }
+
+  for (const candidate of candidateTexts) {
+    if (contentsTargets.groupTargets.has(candidate)) {
+      return contentsTargets.groupTargets.get(candidate);
+    }
+  }
+
+  const exactText = normalizeContentsText(block?.text || '');
+  if (!exactText) return null;
+
+  for (const [title, target] of contentsTargets.chapterTargets.entries()) {
+    if (exactText.includes(title)) {
+      return target;
+    }
+  }
+
+  for (const [title, target] of contentsTargets.groupTargets.entries()) {
+    if (exactText.includes(title)) {
+      return target;
+    }
+  }
+
+  return null;
+}
+
+function decorateContentsParagraphHtml(block, blocks, index, contentsTargets) {
+  const target = findContentsTarget(blocks, index, contentsTargets);
+  if (!target) return block.html;
+
+  const template = document.createElement('template');
+  template.innerHTML = block.html.trim();
+  const root = template.content.firstElementChild;
+  if (!root) return block.html;
+
+  const link = document.createElement('a');
+  link.className = 'reader__contents-link';
+  link.href = `#${target.hashId}`;
+  link.dataset.targetPage = String(target.targetPage);
+  link.dataset.readerHash = target.hashId;
+  link.textContent = root.textContent || block.text || '';
+
+  root.textContent = '';
+  root.append(link);
+
+  return root.outerHTML;
+}
+
+function renderParagraphBlockHtml(
+  block,
+  {
+    highlights = [],
+    chapter = null,
+    paragraphBlocks = [],
+    paragraphIndex = -1,
+    contentsTargets = null,
+  } = {},
+) {
+  let html = block.html;
+
+  if (chapter?.title === 'Contents' && contentsTargets) {
+    html = decorateContentsParagraphHtml(
+      block,
+      paragraphBlocks,
+      paragraphIndex,
+      contentsTargets,
+    );
+  }
+
+  return applyHighlightsToParagraphHtml(html, highlights);
+}
+
+function renderImageBlockHtml(block) {
+  const modifierClass = block.fullPage
+    ? ' reader__image-block--full-page'
+    : '';
+
+  return `
+    <figure class="reader__image-block${modifierClass}" data-image-id="${escapeHtml(String(block.id))}">
+      <img class="reader__image" src="${escapeHtml(block.src)}" alt="${escapeHtml(
+        block.alt || '',
+      )}" loading="lazy" />
+    </figure>
+  `;
+}
+
+function renderPageBlocksHtml(pageData, chapter, highlights = []) {
+  if (!pageData) return '';
+
+  const paragraphBlocks = pageData.blocks.filter((block) => block.type === 'paragraph');
+  const paragraphIndexMap = new Map(
+    paragraphBlocks.map((block, index) => [block.id, index]),
+  );
+  const contentsTargets =
+    chapter?.title === 'Contents' ? buildContentsTargets() : null;
+  const highlightMap = new Map();
+  let offset = 0;
+
+  paragraphBlocks.forEach((block) => {
+    const start = offset;
+    const end = start + (block.text || '').length;
+    offset = end + 2;
+
+    highlightMap.set(
+      block.id,
+      highlights
+        .filter((highlight) => highlight.start < end && highlight.end > start)
+        .map((highlight) => ({
+          ...highlight,
+          start: Math.max(0, highlight.start - start),
+          end: Math.min((block.text || '').length, highlight.end - start),
+        })),
+    );
+  });
+
+  return pageData.blocks
+    .map((block) => {
+      if (block.type === 'image') {
+        return renderImageBlockHtml(block);
+      }
+
+      return renderParagraphBlockHtml(block, {
+        highlights: highlightMap.get(block.id) || [],
+        chapter,
+        paragraphBlocks,
+        paragraphIndex: paragraphIndexMap.get(block.id) ?? -1,
+        contentsTargets,
+      });
     })
     .join('');
 }
@@ -190,16 +482,21 @@ function renderPageHtml(globalPage) {
 
   const chapter = CHAPTERS[entry.chapterIndex];
   const pageIndex = entry.pageIndex;
+  const pageData = getPageData(chapter, pageIndex);
   const highlights = readerState.getHighlights();
   const parts = [];
 
-  if (pageIndex === 0 && GROUP_HEADERS[chapter.id]) {
-    parts.push(
-      `<h2 class="reader__section-title reader__section-title--group" id="${getGroupAnchorId(chapter.id)}">${escapeHtml(GROUP_HEADERS[chapter.id])}</h2>`,
-    );
+  if (pageData?.showTitle && shouldRenderGroupTitle(entry.chapterIndex)) {
+    const groupTitle = getChapterGroupTitle(chapter);
+    const groupId = getChapterGroupId(chapter);
+    if (groupTitle && groupId) {
+      parts.push(
+        `<h2 class="reader__section-title reader__section-title--group" id="${getGroupAnchorId(groupId)}">${escapeHtml(groupTitle)}</h2>`,
+      );
+    }
   }
 
-  if (pageIndex === 0) {
+  if (pageData?.showTitle) {
     const isSub = isSubsectionTitle(chapter.title);
     const headingTag = isSub ? 'h3' : 'h2';
     const headingClass = isSub
@@ -229,7 +526,7 @@ function renderPageHtml(globalPage) {
       end: h.end - pageStart,
     }));
 
-  parts.push(renderParagraphsHtml(getPageParagraphs(chapter, pageIndex), pageHighlights));
+  parts.push(renderPageBlocksHtml(pageData, chapter, pageHighlights));
   return parts.join('');
 }
 
@@ -259,11 +556,31 @@ function updatePageUI(page) {
   if (nextBtn) nextBtn.disabled = page >= readerState.totalPages;
 }
 
-function updateContent({ page = readerState.currentPage, updateHash = true } = {}) {
+function revealReaderTarget(targetId) {
+  if (!targetId) return;
+
+  const textEl = document.getElementById('reader-text');
+  const target = document.getElementById(targetId);
+  if (!textEl || !target || !textEl.contains(target)) return;
+
+  textEl.scrollTop = Math.max(0, target.offsetTop - textEl.clientHeight * 0.18);
+  target.classList.add('is-note-target');
+  window.setTimeout(() => {
+    target.classList.remove('is-note-target');
+  }, 1800);
+}
+
+function updateContent({
+  page = readerState.currentPage,
+  updateHash = true,
+  targetId = '',
+  hashId = '',
+} = {}) {
   currentPage = Math.min(Math.max(1, page), readerState.totalPages);
   readerState.currentPage = currentPage;
 
   const info = getChapterInfoForPage(currentPage);
+  const pageData = info.chapter ? getPageData(info.chapter, info.pageIndex) : null;
 
   const bookTitleEl = document.getElementById('reader-book-title');
   const textEl = document.getElementById('reader-text');
@@ -279,6 +596,9 @@ function updateContent({ page = readerState.currentPage, updateHash = true } = {
     textEl.scrollTop = 0;
     requestAnimationFrame(() => {
       textEl.classList.remove('reader__text--turning');
+      if (targetId) {
+        revealReaderTarget(targetId);
+      }
     });
   }
 
@@ -287,8 +607,13 @@ function updateContent({ page = readerState.currentPage, updateHash = true } = {
   updatePageUI(currentPage);
   updateTocActiveState(info.chapterIndex);
 
-  if (updateHash && info.chapter && info.pageIndex === 0) {
-    history.replaceState(null, '', `#${getChapterAnchorId(info.chapter)}`);
+  if (updateHash) {
+    const nextHash =
+      hashId || (info.chapter && pageData?.showTitle ? getChapterAnchorId(info.chapter) : '');
+
+    if (nextHash) {
+      history.replaceState(null, '', `#${nextHash}`);
+    }
   }
 }
 
@@ -297,31 +622,17 @@ function goToChapter(chapterIndex) {
   jumpToPage(getChapterStartPage(chapterIndex));
 }
 
-function goToGroupAnchor(chapterId) {
-  const chapterIndex = CHAPTERS.findIndex((ch) => ch.id === chapterId);
+function goToGroupAnchor(groupId) {
+  const chapterIndex = CHAPTERS.findIndex(
+    (chapter) => getChapterGroupId(chapter) === groupId,
+  );
   if (chapterIndex >= 0) goToChapter(chapterIndex);
 }
 
-function jumpToPage(page) {
+function jumpToPage(page, options = {}) {
   const nextPage = Math.min(Math.max(1, page), readerState.totalPages);
-  updateContent({ page: nextPage });
+  updateContent({ page: nextPage, ...options });
   document.getElementById('reader-text')?.focus({ preventScroll: true });
-}
-
-function applyHighlightsToText(text, highlights) {
-  if (!highlights.length) return escapeHtml(text);
-  const parts = [];
-  let last = 0;
-  highlights
-    .slice()
-    .sort((a, b) => a.start - b.start)
-    .forEach((h) => {
-      if (h.start > last) parts.push(escapeHtml(text.slice(last, h.start)));
-      parts.push(`<mark class="${HIGHLIGHT_CLASS}" data-highlight-id="${escapeHtml(String(h.id))}">${escapeHtml(text.slice(h.start, h.end))}</mark>`);
-      last = h.end;
-    });
-  if (last < text.length) parts.push(escapeHtml(text.slice(last)));
-  return parts.join('');
 }
 
 function escapeHtml(str) {
@@ -360,10 +671,7 @@ function highlightSearchExcerpt(text, query) {
 }
 
 function getActiveGroupChapterId(chapterIndex) {
-  for (let i = chapterIndex; i >= 0; i -= 1) {
-    if (GROUP_HEADERS[CHAPTERS[i].id]) return CHAPTERS[i].id;
-  }
-  return null;
+  return getChapterGroupId(CHAPTERS[chapterIndex]) || null;
 }
 
 function updateTocActiveState(chapterIndex) {
@@ -380,7 +688,7 @@ function updateTocActiveState(chapterIndex) {
   });
 
   list.querySelectorAll('.reader__toc-group').forEach((link) => {
-    const groupId = link.dataset.chapterId || '';
+    const groupId = link.dataset.groupId || '';
     const isActive = Boolean(activeGroupId && groupId === activeGroupId);
     link.classList.toggle('is-active', isActive);
     link.setAttribute('aria-current', isActive ? 'location' : 'false');
@@ -391,20 +699,24 @@ function renderTOC() {
   const list = document.getElementById('reader-toc-list');
   if (!list) return;
   list.innerHTML = '';
+  const renderedGroupIds = new Set();
 
   CHAPTERS.forEach((ch, chIdx) => {
-    const groupTitle = GROUP_HEADERS[ch.id];
-    if (groupTitle) {
+    const groupTitle = getChapterGroupTitle(ch);
+    const groupId = getChapterGroupId(ch);
+
+    if (groupTitle && groupId && !renderedGroupIds.has(groupId)) {
+      renderedGroupIds.add(groupId);
       const groupLi = document.createElement('li');
       groupLi.className = 'reader__toc-item reader__toc-item--group';
       const groupLink = document.createElement('a');
       groupLink.className = 'reader__toc-group';
-      groupLink.href = `#${getGroupAnchorId(ch.id)}`;
-      groupLink.dataset.chapterId = ch.id;
+      groupLink.href = `#${getGroupAnchorId(groupId)}`;
+      groupLink.dataset.groupId = groupId;
       groupLink.textContent = groupTitle;
       groupLink.addEventListener('click', (e) => {
         e.preventDefault();
-        goToGroupAnchor(ch.id);
+        goToGroupAnchor(groupId);
         closeSidebars();
       });
       groupLi.appendChild(groupLink);
@@ -813,8 +1125,8 @@ function searchBook(query) {
   const results = [];
   CHAPTERS.forEach((ch, chIdx) => {
     const startPage = getChapterStartPage(chIdx);
-    ch.pages.forEach((rawText, pIdx) => {
-      const text = formatReaderPageText(rawText, ch.title, ch.id);
+    ch.pages.forEach((_, pIdx) => {
+      const text = getPageText(ch, pIdx);
       const idx = text.toLowerCase().indexOf(q);
       if (idx >= 0) {
         const excerpt = text.slice(Math.max(0, idx - 40), idx + q.length + 60);
@@ -1034,6 +1346,45 @@ function initTextSelection() {
   });
 }
 
+function findPageForBlockId(blockId) {
+  if (!blockId) return 0;
+
+  for (let globalPage = 1; globalPage <= readerState.totalPages; globalPage += 1) {
+    const entry = readerState.pageMap[globalPage - 1];
+    if (!entry) continue;
+
+    const chapter = CHAPTERS[entry.chapterIndex];
+    const pageData = getPageData(chapter, entry.pageIndex);
+    if (!pageData?.blocks?.some((block) => block.id === blockId)) continue;
+
+    return globalPage;
+  }
+
+  return 0;
+}
+
+function initNoteNavigation() {
+  const textEl = document.getElementById('reader-text');
+  if (!textEl) return;
+
+  textEl.addEventListener('click', (event) => {
+    const link = event.target.closest('.reader__note-ref, .reader__contents-link');
+    if (!link || !textEl.contains(link)) return;
+
+    const targetPage = parseInt(link.dataset.targetPage || '', 10);
+    const targetId = link.dataset.readerTarget || '';
+    const hashId = link.dataset.readerHash || '';
+    if (!targetPage) return;
+
+    event.preventDefault();
+    jumpToPage(targetPage, {
+      updateHash: true,
+      targetId,
+      hashId: hashId || targetId || '',
+    });
+  });
+}
+
 function initSaveReadingPopup() {
   const backdrop = document.getElementById('reader-save-popup-backdrop');
   const form = backdrop?.querySelector('.js-reader-save-form');
@@ -1110,15 +1461,29 @@ function initHashNavigation() {
 
     const chapterIdx = CHAPTERS.findIndex((ch) => getChapterAnchorId(ch) === hash);
     if (chapterIdx >= 0) {
-      goToChapter(chapterIdx);
+      jumpToPage(getChapterStartPage(chapterIdx), { updateHash: false });
       return;
     }
 
-    const groupEntry = Object.keys(GROUP_HEADERS).find(
-      (id) => getGroupAnchorId(id) === hash,
+    const groupId = CHAPTERS.map((chapter) => getChapterGroupId(chapter)).find(
+      (id) => id && getGroupAnchorId(id) === hash,
     );
-    if (groupEntry) {
-      goToGroupAnchor(groupEntry);
+    if (groupId) {
+      const chapterIndex = CHAPTERS.findIndex(
+        (chapter) => getChapterGroupId(chapter) === groupId,
+      );
+      if (chapterIndex >= 0) {
+        jumpToPage(getChapterStartPage(chapterIndex), { updateHash: false });
+      }
+      return;
+    }
+
+    const targetPage = findPageForBlockId(hash);
+    if (targetPage) {
+      jumpToPage(targetPage, {
+        updateHash: false,
+        targetId: hash,
+      });
     }
   };
 
@@ -1138,6 +1503,7 @@ export function initReaderUI() {
   initSearch();
   initBookmarkAdd();
   initTextSelection();
+  initNoteNavigation();
   initHighlightPreview();
   initSaveReadingPopup();
   initKeyboard();

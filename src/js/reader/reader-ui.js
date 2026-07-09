@@ -1,5 +1,5 @@
 /**
- * Reader UI: action bar, side panels, pagination, TOC, search, bookmarks, highlights, settings.
+ * Reader UI: action bar, side panels, page navigation, TOC, search, bookmarks, highlights, settings.
  */
 
 import { initModalManager, openModalById, closeModal } from '../ui/modal-manager.js';
@@ -14,11 +14,6 @@ const HIGHLIGHT_CLASS = 'reader__highlight';
 const BASE_FONT_SIZE_PX = 18;
 const MIN_FONT_SIZE_PX = 14;
 const MAX_FONT_SIZE_PX = 32;
-/** ArrowUp / ArrowDown scroll distance, in text lines. */
-const ARROW_SCROLL_LINES = 2;
-/** Bottom nav / PageUp / PageDown scroll distance, as a fraction of the viewport. */
-const PAGE_SCROLL_RATIO = 0.9;
-
 const GROUP_HEADERS = {
   'ch3-1': '2. The Rhizomodality of High Culture',
   'ch4-1':
@@ -28,12 +23,9 @@ const GROUP_HEADERS = {
 };
 
 let currentPage = 1;
-let currentChapterIndex = -1;
 let selectedRange = null;
 let activeReaderPanel = null;
 let activeReaderTrigger = null;
-let isProgrammaticScroll = false;
-let bookHtmlRendered = false;
 
 function getChapterAnchorId(chapter) {
   return `reader-section-${chapter.id}`;
@@ -83,104 +75,78 @@ function getChapterParagraphs(chapter) {
     .filter(Boolean);
 }
 
+function getPageParagraphs(chapter, pageIndex) {
+  const raw = chapter.pages[pageIndex];
+  if (!raw) return [];
+  const text = formatReaderPageText(raw, chapter.title);
+  return String(text)
+    .split(/\n\s*\n/)
+    .map((p) => p.replace(/\s*\n\s*/g, ' ').trim())
+    .filter(Boolean);
+}
+
+function getPageOffsetRangeInChapter(chapter, pageIndex) {
+  let start = 0;
+  for (let i = 0; i < pageIndex; i += 1) {
+    const paragraphs = getPageParagraphs(chapter, i);
+    if (!paragraphs.length) continue;
+    start += paragraphs.join('\n\n').length + 2;
+  }
+  const currentParagraphs = getPageParagraphs(chapter, pageIndex);
+  return {
+    start,
+    end: start + currentParagraphs.join('\n\n').length,
+  };
+}
+
 function getNormalizedChapterBody(chapter) {
   return getChapterParagraphs(chapter).join('\n\n');
 }
 
-function getChapterById(chapterId) {
-  return CHAPTERS.find((ch) => ch.id === chapterId) || null;
-}
-
-function findChapterFromNode(node, textEl) {
-  let el = node?.nodeType === Node.TEXT_NODE ? node.parentElement : node;
-  while (el && el !== textEl) {
-    if (el.id?.startsWith('reader-section-')) {
-      return getChapterById(el.id.slice('reader-section-'.length));
-    }
-    el = el.parentElement;
-  }
-
-  // Walk previous siblings/ancestors to the nearest chapter heading.
-  el = node?.nodeType === Node.TEXT_NODE ? node.parentElement : node;
-  while (el && textEl.contains(el)) {
-    let sibling = el.previousElementSibling;
-    while (sibling) {
-      if (sibling.id?.startsWith('reader-section-')) {
-        return getChapterById(sibling.id.slice('reader-section-'.length));
-      }
-      sibling = sibling.previousElementSibling;
-    }
-    el = el.parentElement;
-  }
-
-  return CHAPTERS[currentChapterIndex] || null;
-}
-
-function getPointOffsetInChapter(chapter, container, offset) {
-  const heading = document.getElementById(getChapterAnchorId(chapter));
-  if (!heading) return -1;
-
+function getPointOffsetInPage(container, offset, textEl) {
+  const paragraphs = [...textEl.querySelectorAll('p')];
   let bodyOffset = 0;
-  let el = heading.nextElementSibling;
   let isFirstParagraph = true;
 
-  while (el) {
-    if (
-      el.id?.startsWith('reader-section-') ||
-      el.id?.startsWith('reader-group-')
-    ) {
-      break;
+  for (const paragraph of paragraphs) {
+    if (!isFirstParagraph) bodyOffset += 2;
+    isFirstParagraph = false;
+
+    if (paragraph === container || paragraph.contains(container)) {
+      const preRange = document.createRange();
+      preRange.selectNodeContents(paragraph);
+      preRange.setEnd(container, offset);
+      return bodyOffset + preRange.toString().length;
     }
 
-    if (el.tagName === 'P') {
-      if (!isFirstParagraph) bodyOffset += 2; // "\n\n" between normalized paragraphs
-      isFirstParagraph = false;
-
-      if (el === container || el.contains(container)) {
-        const preRange = document.createRange();
-        preRange.selectNodeContents(el);
-        preRange.setEnd(container, offset);
-        return bodyOffset + preRange.toString().length;
-      }
-
-      bodyOffset += el.textContent.length;
-    }
-
-    el = el.nextElementSibling;
+    bodyOffset += paragraph.textContent.length;
   }
 
   return -1;
-}
-
-function estimatePageForHighlight(chapter, chapterIndex, startOffset) {
-  const body = getNormalizedChapterBody(chapter);
-  const ratio = body.length ? startOffset / body.length : 0;
-  const pageIndex = Math.min(
-    chapter.pages.length - 1,
-    Math.max(0, Math.floor(ratio * chapter.pages.length)),
-  );
-  return getChapterStartPage(chapterIndex) + pageIndex;
 }
 
 function createHighlightFromSelection(range, textEl) {
   const selectedText = range.toString();
   if (!selectedText.trim()) return null;
 
-  const chapter = findChapterFromNode(range.startContainer, textEl);
+  const { chapter, pageIndex } = getChapterInfoForPage(readerState.currentPage);
   if (!chapter) return null;
 
-  const chapterIndex = CHAPTERS.indexOf(chapter);
-  const start = getPointOffsetInChapter(
-    chapter,
+  const startInPage = getPointOffsetInPage(
     range.startContainer,
     range.startOffset,
+    textEl,
   );
-  const end = getPointOffsetInChapter(
-    chapter,
+  const endInPage = getPointOffsetInPage(
     range.endContainer,
     range.endOffset,
+    textEl,
   );
-  if (start < 0 || end < 0 || end <= start) return null;
+  if (startInPage < 0 || endInPage < 0 || endInPage <= startInPage) return null;
+
+  const { start: pageStart } = getPageOffsetRangeInChapter(chapter, pageIndex);
+  const start = pageStart + startInPage;
+  const end = pageStart + endInPage;
 
   const bodyText = getNormalizedChapterBody(chapter);
   const text = bodyText.slice(start, end);
@@ -189,7 +155,7 @@ function createHighlightFromSelection(range, textEl) {
   return {
     id: `h${Date.now()}`,
     pageId: chapter.id,
-    page: estimatePageForHighlight(chapter, chapterIndex, start),
+    page: readerState.currentPage,
     chapterTitle: chapter.title,
     start,
     end,
@@ -218,291 +184,127 @@ function renderParagraphsHtml(paragraphs, highlights = []) {
     .join('');
 }
 
-function renderContinuousBookHtml() {
+function renderPageHtml(globalPage) {
+  const entry = readerState.pageMap[globalPage - 1];
+  if (!entry) return '';
+
+  const chapter = CHAPTERS[entry.chapterIndex];
+  const pageIndex = entry.pageIndex;
   const highlights = readerState.getHighlights();
   const parts = [];
 
-  CHAPTERS.forEach((ch) => {
-    const groupTitle = GROUP_HEADERS[ch.id];
-    if (groupTitle) {
-      parts.push(
-        `<h2 class="reader__section-title reader__section-title--group" id="${getGroupAnchorId(ch.id)}">${escapeHtml(groupTitle)}</h2>`,
-      );
-    }
+  if (pageIndex === 0 && GROUP_HEADERS[chapter.id]) {
+    parts.push(
+      `<h2 class="reader__section-title reader__section-title--group" id="${getGroupAnchorId(chapter.id)}">${escapeHtml(GROUP_HEADERS[chapter.id])}</h2>`,
+    );
+  }
 
-    const isSub = isSubsectionTitle(ch.title);
+  if (pageIndex === 0) {
+    const isSub = isSubsectionTitle(chapter.title);
     const headingTag = isSub ? 'h3' : 'h2';
     const headingClass = isSub
       ? 'reader__section-title reader__section-title--sub'
       : 'reader__section-title';
 
     parts.push(
-      `<${headingTag} class="${headingClass}" id="${getChapterAnchorId(ch)}">${escapeHtml(ch.title)}</${headingTag}>`,
+      `<${headingTag} class="${headingClass}" id="${getChapterAnchorId(chapter)}">${escapeHtml(chapter.title)}</${headingTag}>`,
     );
+  }
 
-    const pageHighlights = highlights.filter((h) => {
+  const { start: pageStart, end: pageEnd } = getPageOffsetRangeInChapter(
+    chapter,
+    pageIndex,
+  );
+  const pageHighlights = highlights
+    .filter((h) => {
       const pageId = String(h.pageId || '');
-      return pageId === ch.id || pageId.startsWith(`${ch.id}_`);
-    });
-    parts.push(renderParagraphsHtml(getChapterParagraphs(ch), pageHighlights));
-  });
+      if (pageId !== chapter.id && !pageId.startsWith(`${chapter.id}_`)) {
+        return false;
+      }
+      return h.start < pageEnd && h.end > pageStart;
+    })
+    .map((h) => ({
+      ...h,
+      start: Math.max(0, h.start - pageStart),
+      end: h.end - pageStart,
+    }));
 
+  parts.push(renderParagraphsHtml(getPageParagraphs(chapter, pageIndex), pageHighlights));
   return parts.join('');
 }
 
-function updateContent({ restorePageScroll = false, forceRerender = false } = {}) {
-  currentPage = readerState.currentPage;
-  const info = getChapterInfoForPage(currentPage);
-  currentChapterIndex = info.chapterIndex;
-
-  const bookTitleEl = document.getElementById('reader-book-title');
-  const textEl = document.getElementById('reader-text');
-
-  if (bookTitleEl) bookTitleEl.textContent = BOOK_TITLE;
-
-  if (textEl && (!bookHtmlRendered || forceRerender)) {
-    const previousScrollTop = getReaderScrollContainer()?.scrollTop ?? 0;
-    textEl.innerHTML = renderContinuousBookHtml();
-    bookHtmlRendered = true;
-
-    if (!restorePageScroll) {
-      const wrapper = getReaderScrollContainer();
-      if (wrapper) wrapper.scrollTop = previousScrollTop;
-    }
-  }
-
-  if (restorePageScroll) {
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        // Keep the book title visible when opening at the start of the book.
-        if (info.chapterIndex === 0 && (info.pageIndex ?? 0) === 0) {
-          resetReaderScroll();
-          return;
-        }
-        scrollToPageInBook(currentPage);
-      });
-    });
-  } else {
-    updateProgressFromScroll();
-  }
-}
-
-function scrollToAnchor(anchorId, { updateHash = true } = {}) {
-  const wrapper = getReaderScrollContainer();
-  const target = document.getElementById(anchorId);
-  if (!wrapper || !target) return false;
-
-  const wrapperRect = wrapper.getBoundingClientRect();
-  const targetRect = target.getBoundingClientRect();
-  const nextTop = Math.max(
-    0,
-    wrapper.scrollTop + (targetRect.top - wrapperRect.top) - 16,
-  );
-
-  isProgrammaticScroll = true;
-  wrapper.scrollTop = nextTop;
-  isProgrammaticScroll = false;
-
-  if (updateHash) {
-    history.replaceState(null, '', `#${anchorId}`);
-  }
-
-  updateProgressFromScroll();
-  return true;
-}
-
-function scrollToChapter(chapterIndex, options = {}) {
-  if (chapterIndex < 0 || chapterIndex >= CHAPTERS.length) return false;
-  const chapter = CHAPTERS[chapterIndex];
-  readerState.currentPage = getChapterStartPage(chapterIndex);
-  currentChapterIndex = chapterIndex;
-  return scrollToAnchor(getChapterAnchorId(chapter), options);
-}
-
-function scrollToPageInBook(page) {
-  const entry = readerState.pageMap[Math.max(0, page - 1)];
-  if (!entry) {
-    resetReaderScroll();
-    return;
-  }
-
-  const chapter = CHAPTERS[entry.chapterIndex];
-  const section = document.getElementById(getChapterAnchorId(chapter));
-  const wrapper = getReaderScrollContainer();
-  if (!section || !wrapper) return;
-
-  const chapterPages = chapter.pages.length || 1;
-  const nextSection =
-    CHAPTERS[entry.chapterIndex + 1] &&
-    document.getElementById(getChapterAnchorId(CHAPTERS[entry.chapterIndex + 1]));
-
-  const sectionTop =
-    wrapper.scrollTop +
-    (section.getBoundingClientRect().top - wrapper.getBoundingClientRect().top);
-  const sectionEnd = nextSection
-    ? wrapper.scrollTop +
-      (nextSection.getBoundingClientRect().top - wrapper.getBoundingClientRect().top)
-    : wrapper.scrollHeight;
-  const span = Math.max(1, sectionEnd - sectionTop);
-  const ratio = entry.pageIndex / Math.max(1, chapterPages);
-
-  isProgrammaticScroll = true;
-  wrapper.scrollTop = Math.round(sectionTop + span * ratio);
-  isProgrammaticScroll = false;
-  updateProgressFromScroll();
-}
-
-function getChapterIndexFromScroll() {
-  const wrapper = getReaderScrollContainer();
-  if (!wrapper) return 0;
-
-  const markerY = wrapper.getBoundingClientRect().top + 48;
-  let activeIndex = 0;
-
-  CHAPTERS.forEach((ch, idx) => {
-    const el = document.getElementById(getChapterAnchorId(ch));
-    if (!el) return;
-    if (el.getBoundingClientRect().top <= markerY) {
-      activeIndex = idx;
-    }
-  });
-
-  return activeIndex;
-}
-
-function updateProgressFromScroll() {
-  const wrapper = getReaderScrollContainer();
+function updatePageUI(page) {
   const pageCurrentEl = document.getElementById('reader-page-current');
   const pageLabelEl = document.getElementById('reader-page-label');
   const pageTotalEl = document.getElementById('reader-page-total');
   const percentEl = document.getElementById('reader-percent-read');
   const progressFill = document.getElementById('reader-progress-fill');
   const progressBar = document.querySelector('.reader__progress-bar');
+  const prevBtn = document.querySelector('.js-prev-page');
+  const nextBtn = document.querySelector('.js-next-page');
 
-  currentChapterIndex = getChapterIndexFromScroll();
-  const chapter = CHAPTERS[currentChapterIndex];
-  const chapterPages = chapter?.pages.length || 1;
-  const startPage = getChapterStartPage(currentChapterIndex);
-  let localPage = 1;
-
-  if (wrapper && chapter) {
-    const section = document.getElementById(getChapterAnchorId(chapter));
-    const nextChapter = CHAPTERS[currentChapterIndex + 1];
-    const nextSection = nextChapter
-      ? document.getElementById(getChapterAnchorId(nextChapter))
-      : null;
-
-    if (section) {
-      const wrapperTop = wrapper.getBoundingClientRect().top;
-      const sectionTop =
-        wrapper.scrollTop + (section.getBoundingClientRect().top - wrapperTop);
-      const sectionEnd = nextSection
-        ? wrapper.scrollTop + (nextSection.getBoundingClientRect().top - wrapperTop)
-        : wrapper.scrollHeight;
-      const span = Math.max(1, sectionEnd - sectionTop);
-      const ratio = Math.min(
-        1,
-        Math.max(0, (wrapper.scrollTop - sectionTop) / span),
-      );
-      localPage = Math.min(
-        chapterPages,
-        Math.max(1, Math.floor(ratio * chapterPages) + 1),
-      );
-    }
-  }
-
-  currentPage = startPage + localPage - 1;
-  readerState.currentPage = currentPage;
-
-  if (pageCurrentEl) pageCurrentEl.textContent = currentPage;
-  if (pageLabelEl) pageLabelEl.textContent = currentPage;
+  if (pageCurrentEl) pageCurrentEl.textContent = page;
+  if (pageLabelEl) pageLabelEl.textContent = page;
   if (pageTotalEl) pageTotalEl.textContent = readerState.totalPages;
+
   const pct =
     readerState.totalPages <= 1
       ? 100
-      : Math.round(((currentPage - 1) / (readerState.totalPages - 1)) * 100) || 0;
+      : Math.round(((page - 1) / (readerState.totalPages - 1)) * 100) || 0;
   if (percentEl) percentEl.textContent = pct;
   if (progressFill) progressFill.style.width = `${pct}%`;
   if (progressBar) progressBar.setAttribute('aria-valuenow', pct);
+
+  if (prevBtn) prevBtn.disabled = page <= 1;
+  if (nextBtn) nextBtn.disabled = page >= readerState.totalPages;
 }
 
-function getReaderScrollContainer() {
-  return document.querySelector('.reader__text-wrapper');
-}
+function updateContent({ page = readerState.currentPage, updateHash = true } = {}) {
+  currentPage = Math.min(Math.max(1, page), readerState.totalPages);
+  readerState.currentPage = currentPage;
 
-function resetReaderScroll() {
-  const wrapper = getReaderScrollContainer();
-  if (!wrapper) return;
-  isProgrammaticScroll = true;
-  wrapper.scrollTop = 0;
-  isProgrammaticScroll = false;
-  updateProgressFromScroll();
-}
+  const info = getChapterInfoForPage(currentPage);
 
-function getReaderLineHeight(wrapper) {
-  const sample =
-    wrapper.querySelector('.reader__text p') ||
-    wrapper.querySelector('.reader__text') ||
-    wrapper;
-  const styles = getComputedStyle(sample);
-  const fontSize = parseFloat(styles.fontSize) || BASE_FONT_SIZE_PX;
+  const bookTitleEl = document.getElementById('reader-book-title');
+  const textEl = document.getElementById('reader-text');
 
-  // Unitless/invalid CSS line-height ("1.5", "normal") must not be trusted as pixels.
-  const rawLineHeight = styles.lineHeight;
-  const parsedLineHeight = parseFloat(rawLineHeight);
-  if (rawLineHeight.endsWith('px') && Number.isFinite(parsedLineHeight)) {
-    return parsedLineHeight;
+  if (bookTitleEl) {
+    bookTitleEl.textContent = BOOK_TITLE;
+    bookTitleEl.hidden = currentPage > 1;
   }
 
-  const root = document.getElementById('reader-root');
-  const cssMultiplier = parseFloat(
-    root ? getComputedStyle(root).getPropertyValue('--reader-line-height') : '',
-  );
-  const multiplier = Number.isFinite(cssMultiplier) && cssMultiplier > 0 ? cssMultiplier : 1.5;
-  return fontSize * multiplier;
-}
+  if (textEl) {
+    textEl.classList.add('reader__text--turning');
+    textEl.innerHTML = renderPageHtml(currentPage);
+    requestAnimationFrame(() => {
+      textEl.classList.remove('reader__text--turning');
+    });
+  }
 
-function getReaderScrollStep(wrapper, lines = ARROW_SCROLL_LINES) {
-  return Math.max(16, Math.round(getReaderLineHeight(wrapper) * lines));
-}
+  const textWrapper = document.querySelector('.reader__text-wrapper');
+  if (textWrapper) textWrapper.scrollTop = 0;
 
-function scrollReaderBy(direction, { pageStep = false } = {}) {
-  const wrapper = getReaderScrollContainer();
-  if (!wrapper) return false;
+  updatePageUI(currentPage);
 
-  const maxScroll = wrapper.scrollHeight - wrapper.clientHeight;
-  if (maxScroll <= 0) return false;
-
-  const step = pageStep
-    ? Math.max(120, Math.round(wrapper.clientHeight * PAGE_SCROLL_RATIO))
-    : getReaderScrollStep(wrapper, ARROW_SCROLL_LINES);
-
-  const nextTop = Math.min(maxScroll, Math.max(0, wrapper.scrollTop + direction * step));
-  const changed = nextTop !== wrapper.scrollTop;
-  if (!changed) return false;
-
-  isProgrammaticScroll = true;
-  wrapper.scrollTop = nextTop;
-  isProgrammaticScroll = false;
-  updateProgressFromScroll();
-  return true;
+  if (updateHash && info.chapter && info.pageIndex === 0) {
+    history.replaceState(null, '', `#${getChapterAnchorId(info.chapter)}`);
+  }
 }
 
 function goToChapter(chapterIndex) {
   if (chapterIndex < 0 || chapterIndex >= CHAPTERS.length) return;
-  if (!bookHtmlRendered) updateContent();
-  requestAnimationFrame(() => {
-    scrollToChapter(chapterIndex);
-  });
+  jumpToPage(getChapterStartPage(chapterIndex));
+}
+
+function goToGroupAnchor(chapterId) {
+  const chapterIndex = CHAPTERS.findIndex((ch) => ch.id === chapterId);
+  if (chapterIndex >= 0) goToChapter(chapterIndex);
 }
 
 function jumpToPage(page) {
   const nextPage = Math.min(Math.max(1, page), readerState.totalPages);
-  readerState.currentPage = nextPage;
-  if (!bookHtmlRendered) updateContent();
-  requestAnimationFrame(() => {
-    scrollToPageInBook(nextPage);
-  });
+  updateContent({ page: nextPage });
+  document.getElementById('reader-text')?.focus({ preventScroll: true });
 }
 
 function applyHighlightsToText(text, highlights) {
@@ -572,7 +374,7 @@ function renderTOC() {
       groupLink.textContent = groupTitle;
       groupLink.addEventListener('click', (e) => {
         e.preventDefault();
-        scrollToAnchor(getGroupAnchorId(ch.id));
+        goToGroupAnchor(ch.id);
         closeSidebars();
       });
       groupLi.appendChild(groupLink);
@@ -672,7 +474,7 @@ function renderHighlightsPanel() {
       e.stopPropagation();
       readerState.removeHighlight(parseInt(btn.dataset.index, 10));
       renderHighlightsPanel();
-      updateContent({ forceRerender: true });
+      updateContent();
     });
   });
 
@@ -686,39 +488,9 @@ function renderHighlightsPanel() {
   });
 }
 
-function findHighlightMark(highlightId) {
-  const id = String(highlightId);
-  const escaped =
-    typeof CSS !== 'undefined' && typeof CSS.escape === 'function'
-      ? CSS.escape(id)
-      : id.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
-  return document.querySelector(`mark[data-highlight-id="${escaped}"]`);
-}
-
 function jumpToHighlight(highlight) {
   if (!highlight) return;
-  if (!bookHtmlRendered) updateContent();
-
-  requestAnimationFrame(() => {
-    const mark = findHighlightMark(highlight.id);
-    const wrapper = getReaderScrollContainer();
-
-    if (mark && wrapper) {
-      isProgrammaticScroll = true;
-      const top =
-        wrapper.scrollTop +
-        (mark.getBoundingClientRect().top - wrapper.getBoundingClientRect().top) -
-        Math.round(wrapper.clientHeight * 0.25);
-      wrapper.scrollTop = Math.max(0, top);
-      updateProgressFromScroll();
-      requestAnimationFrame(() => {
-        isProgrammaticScroll = false;
-      });
-      return;
-    }
-
-    jumpToPage(highlight.page || 1);
-  });
+  jumpToPage(highlight.page || 1);
 }
 
 function applySettings() {
@@ -992,15 +764,16 @@ function initSettings() {
   document.querySelector('.js-settings-apply')?.addEventListener('click', () => {
     readerState.saveSettings(draft);
     applySettings();
+    updateContent();
   });
 }
 
 function initPagination() {
   document.querySelector('.js-prev-page')?.addEventListener('click', () => {
-    scrollReaderBy(-1, { pageStep: true });
+    if (currentPage > 1) jumpToPage(currentPage - 1);
   });
   document.querySelector('.js-next-page')?.addEventListener('click', () => {
-    scrollReaderBy(1, { pageStep: true });
+    if (currentPage < readerState.totalPages) jumpToPage(currentPage + 1);
   });
 }
 
@@ -1077,24 +850,12 @@ function initSearch() {
 }
 
 function getVisibleTextExcerpt(maxLength = 100) {
-  const wrapper = getReaderScrollContainer();
-  const paragraphs = [...document.querySelectorAll('#reader-text p')];
-  if (!paragraphs.length) return '';
+  const { chapter, pageIndex } = getChapterInfoForPage(readerState.currentPage);
+  if (!chapter) return '';
 
-  if (!wrapper) {
-    return paragraphs[0].textContent.slice(0, maxLength);
-  }
-
-  const markerY = wrapper.getBoundingClientRect().top + wrapper.clientHeight * 0.3;
-  const near =
-    paragraphs.find((p) => {
-      const rect = p.getBoundingClientRect();
-      return rect.bottom >= markerY && rect.top <= markerY;
-    }) ||
-    paragraphs.find((p) => p.getBoundingClientRect().top >= wrapper.getBoundingClientRect().top) ||
-    paragraphs[0];
-
-  return (near?.textContent || '').slice(0, maxLength);
+  const paragraphs = getPageParagraphs(chapter, pageIndex);
+  const text = paragraphs.join(' ');
+  return text.slice(0, maxLength);
 }
 
 function initBookmarkAdd() {
@@ -1161,7 +922,7 @@ function initTextSelection() {
     tooltip.hidden = true;
     selectedRange = null;
     window.getSelection()?.removeAllRanges();
-    updateContent({ forceRerender: true });
+    updateContent();
     renderHighlightsPanel();
   });
 
@@ -1205,58 +966,37 @@ function initSaveReadingPopup() {
   updateSaveLabel();
 }
 
-function initArrowScroll() {
-  const wrapper = getReaderScrollContainer();
-  if (!wrapper) return;
-
-  // Progress tracking only — never snap scroll position back to a "page".
-  wrapper.addEventListener(
-    'scroll',
-    () => {
-      if (isProgrammaticScroll) return;
-      updateProgressFromScroll();
-    },
-    { passive: true },
-  );
-}
-
 function initKeyboard() {
-  // Capture phase so browser native arrow-scroll on focused reader text cannot win.
   document.addEventListener(
     'keydown',
     (e) => {
       if (e.target.closest('input, textarea')) return;
       if (activeReaderPanel) return;
 
-      if (e.key === 'ArrowDown') {
+      const prevKeys = ['ArrowUp', 'ArrowLeft', 'PageUp'];
+      const nextKeys = ['ArrowDown', 'ArrowRight', 'PageDown', ' '];
+
+      if (prevKeys.includes(e.key)) {
         e.preventDefault();
-        e.stopPropagation();
-        scrollReaderBy(1);
+        if (currentPage > 1) jumpToPage(currentPage - 1);
         return;
       }
 
-      if (e.key === 'ArrowUp') {
+      if (nextKeys.includes(e.key)) {
         e.preventDefault();
-        e.stopPropagation();
-        scrollReaderBy(-1);
+        if (currentPage < readerState.totalPages) jumpToPage(currentPage + 1);
         return;
       }
 
-      // Keep book scrolling arrow-only: block other native scroll keys.
-      if (e.key === 'Home' || e.key === 'End' || e.key === ' ') {
+      if (e.key === 'Home') {
         e.preventDefault();
+        jumpToPage(1);
         return;
       }
 
-      if (e.key === 'PageDown') {
+      if (e.key === 'End') {
         e.preventDefault();
-        scrollReaderBy(1, { pageStep: true });
-        return;
-      }
-
-      if (e.key === 'PageUp') {
-        e.preventDefault();
-        scrollReaderBy(-1, { pageStep: true });
+        jumpToPage(readerState.totalPages);
       }
     },
     true,
@@ -1278,7 +1018,7 @@ function initHashNavigation() {
       (id) => getGroupAnchorId(id) === hash,
     );
     if (groupEntry) {
-      scrollToAnchor(getGroupAnchorId(groupEntry));
+      goToGroupAnchor(groupEntry);
     }
   };
 
@@ -1290,7 +1030,7 @@ export function initReaderUI() {
   initModalManager();
   applySettings();
   initSettings();
-  updateContent({ restorePageScroll: true });
+  updateContent({ updateHash: false });
   renderTOC();
   initReaderPanels();
   initActionBar();
@@ -1299,7 +1039,6 @@ export function initReaderUI() {
   initBookmarkAdd();
   initTextSelection();
   initSaveReadingPopup();
-  initArrowScroll();
   initKeyboard();
   initHashNavigation();
 }

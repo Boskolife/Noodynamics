@@ -123,7 +123,7 @@ const handlebarsReloadPlugin = () => {
 };
 
 export default defineConfig({
-  base: '/Noodynamics',
+  base: process.env.VITE_BASE || '/Noodynamics',
   root: 'src',
   publicDir: '../public',
   plugins: [

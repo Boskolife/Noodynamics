@@ -4,12 +4,34 @@
  * Action bar, pagination, night mode.
  */
 
+@mixin reader-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--reader-scrollbar-thumb) var(--reader-scrollbar-track);
+
+  &::-webkit-scrollbar {
+    width: var(--reader-scrollbar-size);
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: var(--reader-scrollbar-track);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--reader-scrollbar-thumb);
+    border-radius: 999px;
+  }
+}
+
 html:has(.reader-page) {
   height: 100%;
   overflow: hidden;
 }
 
 .reader-page {
+  --reader-scrollbar-size: 6px;
+  --reader-scrollbar-thumb: #{$color-brown};
+  --reader-scrollbar-track: #{$color-neutral-100};
+
   background-color: $color-white-100;
   height: 100vh;
   height: 100dvh;
@@ -17,6 +39,24 @@ html:has(.reader-page) {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+
+  &:has(.reader--night) {
+    --reader-scrollbar-thumb: #{$color-neutral-400};
+    --reader-scrollbar-track: #{$color-neutral-800};
+  }
+
+  &:has(.reader--accent) {
+    --reader-scrollbar-thumb: #{$color-dark-brown};
+    --reader-scrollbar-track: #{$color-lightbeige-200};
+  }
+
+  .reader__sidebar,
+  .reader__search-results,
+  .reader__text,
+  .reader__panel-content,
+  .reader-panel__window {
+    @include reader-scrollbar;
+  }
 
   > .header--ebook {
     flex-shrink: 0;
@@ -153,18 +193,6 @@ html:has(.reader-page) {
         color: $color-neutral-100;
       }
     }
-
-    .reader__text {
-      scrollbar-color: $color-neutral-400 $color-neutral-800;
-
-      &::-webkit-scrollbar-track {
-        background-color: $color-neutral-800;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        background-color: $color-neutral-400;
-      }
-    }
   }
 
   &--accent {
@@ -188,18 +216,6 @@ html:has(.reader-page) {
 
     .reader__bottom-bar {
       background-color: $color-lightbeige-100;
-    }
-
-    .reader__text {
-      scrollbar-color: $color-brown $color-lightbeige-200;
-
-      &::-webkit-scrollbar-track {
-        background-color: $color-lightbeige-200;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        background-color: $color-dark-brown;
-      }
     }
   }
 
@@ -291,7 +307,7 @@ html:has(.reader-page) {
 
     &.is-active {
       color: $color-brown;
-      font-weight: 700;
+      font-weight: 600;
       background-color: rgba($color-brown, 0.1);
     }
   }
@@ -474,56 +490,6 @@ html:has(.reader-page) {
     background-color: $color-white-100;
   }
 
-  // Scrollbars for reader side panels / search
-  &__sidebar,
-  &__search-results {
-    scrollbar-width: thin;
-    scrollbar-color: $color-brown $color-neutral-100;
-
-    &::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    &::-webkit-scrollbar-track {
-      background-color: $color-neutral-100;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: $color-brown;
-      border-radius: 999px;
-    }
-  }
-
-  &--night {
-    &__sidebar,
-    &__search-results {
-      scrollbar-color: $color-neutral-400 $color-neutral-800;
-
-      &::-webkit-scrollbar-track {
-        background-color: $color-neutral-800;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        background-color: $color-neutral-400;
-      }
-    }
-  }
-
-  &--accent {
-    &__sidebar,
-    &__search-results {
-      scrollbar-color: $color-brown $color-lightbeige-200;
-
-      &::-webkit-scrollbar-track {
-        background-color: $color-lightbeige-200;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        background-color: $color-dark-brown;
-      }
-    }
-  }
-
   &__text {
     padding-right: 30px;
     flex: 1;
@@ -532,21 +498,6 @@ html:has(.reader-page) {
     overflow-y: auto;
     overscroll-behavior: contain;
     transition: opacity 0.15s ease;
-    scrollbar-width: thin;
-    scrollbar-color: $color-brown $color-neutral-100;
-
-    &::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    &::-webkit-scrollbar-track {
-      background-color: $color-neutral-100;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: $color-brown;
-      border-radius: 999px;
-    }
 
     &--turning {
       opacity: 0.55;
@@ -770,6 +721,11 @@ html:has(.reader-page) {
     color: $color-darkbeige-400;
     text-transform: uppercase;
     text-align: center;
+  }
+
+  &__panel-content {
+    max-height: 100%;
+    overflow-y: auto;
   }
 
   &__panel-actions {
@@ -1152,6 +1108,9 @@ html:has(.reader-page) {
     position: absolute;
     transform: translateX(-50%);
     width: 365px;
+    max-height: calc(100dvh - 120px);
+    overflow-x: hidden;
+    overflow-y: auto;
     background-color: $color-white-100;
     border-radius: 12px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.16);

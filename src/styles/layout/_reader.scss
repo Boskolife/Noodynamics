@@ -555,6 +555,7 @@
 
   &__highlight {
     background-color: #381d0033;
+    cursor: help;
   }
 
   &__highlight-tooltip {
@@ -577,6 +578,36 @@
       cursor: pointer;
       border-radius: 4px;
     }
+  }
+
+  &__highlight-preview {
+    position: fixed;
+    z-index: 201;
+    max-width: min(360px, calc(100vw - 32px));
+    padding: 10px 14px;
+    background-color: $color-brown;
+    border: 4px solid #d3d3d3;
+    border-radius: 4px;
+    pointer-events: none;
+    box-shadow: 0 8px 24px rgba($color-black-100, 0.18);
+  }
+
+  &__highlight-preview-text {
+    margin: 0;
+    color: $color-white-100;
+    font-size: 14px;
+    line-height: 1.45;
+    font-weight: 500;
+  }
+
+  &__highlight-preview-note {
+    margin: 8px 0 0;
+    padding-top: 8px;
+    border-top: 1px solid rgba($color-white-100, 0.25);
+    color: rgba($color-white-100, 0.9);
+    font-size: 13px;
+    line-height: 1.4;
+    font-style: italic;
   }
 
   // Bottom bar

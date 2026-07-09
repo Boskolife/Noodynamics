@@ -281,6 +281,8 @@ function updateContent({ page = readerState.currentPage, updateHash = true } = {
     });
   }
 
+  hideHighlightPreviewTooltip();
+
   const textWrapper = document.querySelector('.reader__text-wrapper');
   if (textWrapper) textWrapper.scrollTop = 0;
 
@@ -881,6 +883,75 @@ function initBookmarkAdd() {
   header.appendChild(addBtn);
 }
 
+function hideHighlightPreviewTooltip() {
+  const tooltip = document.querySelector('.js-highlight-preview-tooltip');
+  if (tooltip) tooltip.hidden = true;
+}
+
+function findHighlightById(highlightId) {
+  const id = String(highlightId);
+  return readerState.getHighlights().find((h) => String(h.id) === id) || null;
+}
+
+function positionHighlightPreviewTooltip(tooltip, mark) {
+  const rect = mark.getBoundingClientRect();
+  tooltip.style.left = `${rect.left + rect.width / 2}px`;
+  tooltip.style.top = `${rect.top - 8}px`;
+  tooltip.style.transform = 'translate(-50%, -100%)';
+}
+
+function initHighlightPreview() {
+  const textEl = document.getElementById('reader-text');
+  const tooltip = document.querySelector('.js-highlight-preview-tooltip');
+  const previewText = tooltip?.querySelector('.js-highlight-preview-text');
+  const previewNote = tooltip?.querySelector('.js-highlight-preview-note');
+
+  if (!textEl || !tooltip || !previewText || !previewNote) return;
+
+  let activeMark = null;
+
+  const hidePreview = () => {
+    hideHighlightPreviewTooltip();
+    activeMark = null;
+  };
+
+  const showPreview = (mark) => {
+    const highlight = findHighlightById(mark.dataset.highlightId);
+    if (!highlight) return;
+
+    previewText.textContent = highlight.text;
+    if (highlight.note) {
+      previewNote.textContent = highlight.note;
+      previewNote.hidden = false;
+    } else {
+      previewNote.textContent = '';
+      previewNote.hidden = true;
+    }
+
+    activeMark = mark;
+    positionHighlightPreviewTooltip(tooltip, mark);
+    tooltip.hidden = false;
+  };
+
+  textEl.addEventListener('mouseover', (e) => {
+    const mark = e.target.closest(`mark.${HIGHLIGHT_CLASS}`);
+    if (!mark || !textEl.contains(mark) || mark === activeMark) return;
+    showPreview(mark);
+  });
+
+  textEl.addEventListener('mouseout', (e) => {
+    const mark = e.target.closest(`mark.${HIGHLIGHT_CLASS}`);
+    if (!mark || mark !== activeMark) return;
+
+    const related = e.relatedTarget;
+    if (related instanceof Node && mark.contains(related)) return;
+    hidePreview();
+  });
+
+  textEl.addEventListener('scroll', hidePreview, true);
+  window.addEventListener('blur', hidePreview);
+}
+
 function initTextSelection() {
   const textEl = document.getElementById('reader-text');
   const tooltip = document.querySelector('.js-highlight-tooltip');
@@ -901,6 +972,7 @@ function initTextSelection() {
       return;
     }
     selectedRange = range.cloneRange();
+    hideHighlightPreviewTooltip();
     const rect = range.getBoundingClientRect();
     tooltip.style.left = `${rect.left + rect.width / 2 - 50}px`;
     tooltip.style.top = `${rect.top - 40}px`;
@@ -1038,6 +1110,7 @@ export function initReaderUI() {
   initSearch();
   initBookmarkAdd();
   initTextSelection();
+  initHighlightPreview();
   initSaveReadingPopup();
   initKeyboard();
   initHashNavigation();

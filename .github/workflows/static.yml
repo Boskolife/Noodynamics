@@ -1,6 +1,8 @@
-# Deploy static site to GitHub Pages.
+# Deploy static site to GitHub Pages (GitHub Actions source).
 # main  -> https://<user>.github.io/<repo>/
 # other -> https://<user>.github.io/<repo>/preview/<branch>/
+#
+# Combined site state is kept on the gh-pages branch between runs.
 name: Deploy static content to Pages
 
 on:
@@ -11,16 +13,21 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 concurrency:
-  group: pages-${{ github.ref }}
-  cancel-in-progress: true
+  group: pages
+  cancel-in-progress: false
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Resolve deploy paths
@@ -35,11 +42,11 @@ jobs:
 
           if [ "$BRANCH" = "main" ]; then
             echo "vite_base=/${REPO_NAME}/" >> "$GITHUB_OUTPUT"
-            echo "destination_dir=." >> "$GITHUB_OUTPUT"
+            echo "deploy_path=." >> "$GITHUB_OUTPUT"
             echo "site_url=https://${{ github.repository_owner }}.github.io/${REPO_NAME}/" >> "$GITHUB_OUTPUT"
           else
             echo "vite_base=/${REPO_NAME}/preview/${SAFE_BRANCH}/" >> "$GITHUB_OUTPUT"
-            echo "destination_dir=preview/${SAFE_BRANCH}" >> "$GITHUB_OUTPUT"
+            echo "deploy_path=preview/${SAFE_BRANCH}" >> "$GITHUB_OUTPUT"
             echo "site_url=https://${{ github.repository_owner }}.github.io/${REPO_NAME}/preview/${SAFE_BRANCH}/" >> "$GITHUB_OUTPUT"
           fi
 
@@ -57,13 +64,53 @@ jobs:
         env:
           VITE_BASE: ${{ steps.paths.outputs.vite_base }}
 
+      - name: Fetch existing combined site
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: site
+        continue-on-error: true
+
+      - name: Merge build into combined site
+        run: |
+          mkdir -p site
+          touch site/.nojekyll
+
+          if [ "${{ steps.paths.outputs.deploy_path }}" = "." ]; then
+            rsync -av --delete dist/ site/
+          else
+            mkdir -p "site/${{ steps.paths.outputs.deploy_path }}"
+            rsync -av --delete dist/ "site/${{ steps.paths.outputs.deploy_path }}/"
+          fi
+
+          touch site/.nojekyll
+
+      - name: Verify combined site for preview deploys
+        if: steps.paths.outputs.deploy_path != '.'
+        run: |
+          if [ ! -f site/index.html ]; then
+            echo "::error::Main site is missing from the combined Pages artifact."
+            echo "Push to main (or run this workflow on main) once before preview branches can be published."
+            exit 1
+          fi
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload combined site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
       - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Sync gh-pages branch
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          destination_dir: ${{ steps.paths.outputs.destination_dir }}
-          keep_files: true
+          publish_dir: ./site
 
       - name: Deployment summary
         run: |

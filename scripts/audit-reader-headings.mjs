@@ -1,6 +1,8 @@
-/**
- * Normalize reader page text: remove duplicate markdown/plain headings and stray ## artifacts.
- */
+import fs from 'node:fs';
+import path from 'node:path';
+
+const bookPath = path.resolve('src/data/reader/phenomenology-culture-systems-v1.json');
+const book = JSON.parse(fs.readFileSync(bookPath, 'utf8'));
 
 const GROUP_HEADERS = {
   'ch3-1': '2. The Rhizomodality of High Culture',
@@ -30,7 +32,6 @@ function findHeadingPrefixLength(text, heading) {
 
 function stripLeadingHeading(text, heading) {
   if (!heading) return { text, stripped: false };
-
   let remaining = String(text).trimStart();
   if (!remaining) return { text: remaining, stripped: false };
 
@@ -72,17 +73,14 @@ function stripHeadingParagraphs(text, heading) {
   return { text: kept.join('\n\n'), stripped };
 }
 
-function cleanDuplicateHeadings(text, headings) {
+function cleanPageText(text, headings) {
   let cleaned = String(text);
   let changed = false;
 
   for (const heading of headings) {
-    if (!heading) continue;
-
     let passChanged = true;
     while (passChanged) {
       passChanged = false;
-
       const leading = stripLeadingHeading(cleaned, heading);
       if (leading.stripped) {
         cleaned = leading.text;
@@ -90,7 +88,6 @@ function cleanDuplicateHeadings(text, headings) {
         passChanged = true;
         continue;
       }
-
       const paragraphs = stripHeadingParagraphs(cleaned, heading);
       if (paragraphs.stripped) {
         cleaned = paragraphs.text;
@@ -100,49 +97,84 @@ function cleanDuplicateHeadings(text, headings) {
     }
   }
 
-  return changed ? cleaned.trim() : cleaned;
+  return { text: cleaned.trim(), changed };
 }
 
-/**
- * @param {string} text
- * @param {string} [chapterTitle]
- * @param {string} [chapterId]
- * @returns {string}
- */
-export function formatReaderPageText(text, chapterTitle = '', chapterId = '') {
-  const headings = [GROUP_HEADERS[chapterId], chapterTitle].filter(Boolean);
-  let normalized = cleanDuplicateHeadings(text, headings);
-  const lines = String(normalized).split('\n');
+function pageHasDuplicateHeading(text, heading) {
+  if (!heading) return false;
+  const normHeading = normalizeHeading(heading);
+  const raw = String(text).trim();
+  if (!raw) return false;
+  if (normalizeHeading(raw).startsWith(normHeading)) return true;
+  return raw
+    .split(/\n\s*\n/)
+    .some((part) => normalizeHeading(part.trim()).startsWith(normHeading));
+}
 
-  while (lines.length > 0) {
-    const line = lines[0].trim();
-    if (!line) {
-      lines.shift();
-      continue;
-    }
-
-    const headingMatch = line.match(/^#{1,6}\s+(.+)$/);
-    if (headingMatch) {
-      const heading = normalizeHeading(headingMatch[1]);
-      const isDuplicate = headings.some(
-        (title) => normalizeHeading(title) === heading,
-      );
-      if (isDuplicate) {
-        lines.shift();
-        continue;
+const issues = [];
+for (const chapter of book.chapters) {
+  const headings = [GROUP_HEADERS[chapter.id], chapter.title].filter(Boolean);
+  chapter.pages.forEach((page, pageIndex) => {
+    for (const heading of headings) {
+      if (pageHasDuplicateHeading(page, heading)) {
+        issues.push({
+          id: chapter.id,
+          chapterTitle: chapter.title,
+          pageIndex,
+          heading,
+        });
       }
     }
-
-    if (/^#{1,6}\s*$/.test(line)) {
-      lines.shift();
-      continue;
-    }
-
-    break;
-  }
-
-  return lines
-    .filter((line) => !/^\s*##\s*$/.test(line))
-    .join('\n')
-    .trim();
+  });
 }
+
+const reportPath = path.resolve('scripts/audit-reader-headings-report.json');
+fs.writeFileSync(reportPath, JSON.stringify(issues, null, 2));
+
+let changedPages = 0;
+for (const chapter of book.chapters) {
+  const headings = [GROUP_HEADERS[chapter.id], chapter.title].filter(Boolean);
+  chapter.pages = chapter.pages.map((page) => {
+    const result = cleanPageText(page, headings);
+    if (result.changed) changedPages += 1;
+    return result.text;
+  });
+}
+
+if (process.argv.includes('--fix')) {
+  fs.writeFileSync(bookPath, `${JSON.stringify(book, null, 2)}\n`, 'utf8');
+}
+
+const remaining = [];
+for (const chapter of book.chapters) {
+  const headings = [GROUP_HEADERS[chapter.id], chapter.title].filter(Boolean);
+  chapter.pages.forEach((page, pageIndex) => {
+    for (const heading of headings) {
+      if (pageHasDuplicateHeading(page, heading)) {
+        remaining.push({
+          id: chapter.id,
+          pageIndex,
+          heading,
+        });
+      }
+    }
+  });
+}
+
+fs.writeFileSync(
+  path.resolve('scripts/audit-reader-headings-summary.txt'),
+  [
+    `Before fix issues: ${issues.length}`,
+    ...issues.map(
+      (issue) =>
+        `- ${issue.id} p${issue.pageIndex + 1}: ${issue.heading.slice(0, 80)}`,
+    ),
+    `Changed pages: ${changedPages}`,
+    `Remaining issues: ${remaining.length}`,
+    ...remaining.map(
+      (issue) =>
+        `- ${issue.id} p${issue.pageIndex + 1}: ${issue.heading.slice(0, 80)}`,
+    ),
+  ].join('\n'),
+  'utf8',
+);

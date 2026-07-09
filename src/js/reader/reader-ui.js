@@ -62,7 +62,7 @@ function getChapterInfoForPage(page) {
 
 function getChapterBodyText(chapter) {
   return chapter.pages
-    .map((raw) => formatReaderPageText(raw, chapter.title))
+    .map((raw) => formatReaderPageText(raw, chapter.title, chapter.id))
     .filter(Boolean)
     .join('\n\n');
 }
@@ -78,7 +78,7 @@ function getChapterParagraphs(chapter) {
 function getPageParagraphs(chapter, pageIndex) {
   const raw = chapter.pages[pageIndex];
   if (!raw) return [];
-  const text = formatReaderPageText(raw, chapter.title);
+  const text = formatReaderPageText(raw, chapter.title, chapter.id);
   return String(text)
     .split(/\n\s*\n/)
     .map((p) => p.replace(/\s*\n\s*/g, ' ').trim())
@@ -814,7 +814,7 @@ function searchBook(query) {
   CHAPTERS.forEach((ch, chIdx) => {
     const startPage = getChapterStartPage(chIdx);
     ch.pages.forEach((rawText, pIdx) => {
-      const text = formatReaderPageText(rawText, ch.title);
+      const text = formatReaderPageText(rawText, ch.title, ch.id);
       const idx = text.toLowerCase().indexOf(q);
       if (idx >= 0) {
         const excerpt = text.slice(Math.max(0, idx - 40), idx + q.length + 60);

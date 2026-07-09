@@ -1,0 +1,9 @@
+Indexed HTML pages: 879
+Outline entries: 0
+Boundary mismatches: 0
+Chapter metadata mismatches: 0
+Page count mismatches: 0
+Content issues: 2
+
+CONTENT ch3-1 p8 minor-diff
+CONTENT ch3-2 p1 content-mismatch

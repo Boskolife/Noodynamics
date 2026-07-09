@@ -1,0 +1,348 @@
+{
+  "indexedPages": 879,
+  "outlineEntries": 0,
+  "boundaryMismatches": [],
+  "chapterOrderMismatches": [],
+  "pageCountMismatches": [],
+  "contentIssues": [
+    {
+      "chapterId": "ch3-1",
+      "page": 8,
+      "type": "minor-diff",
+      "expectedStart": "The Thirty Meter Telescope is the largest telescope ever conceived, with more light-gathering power ",
+      "actualStart": "The Thirty Meter Telescope is the largest telescope ever conceived, with more light-gathering power "
+    },
+    {
+      "chapterId": "ch3-2",
+      "page": 1,
+      "type": "content-mismatch",
+      "expectedStart": "results, and provide interpretations of the sufficient parameters at various levels. Of course, a model is neither a hyp",
+      "actualStart": "Many and manifold attempts have been made to fully comprehend Culture as a development of Homo sapiens sapiens. None has",
+      "expectedLen": 2331,
+      "actualLen": 1994
+    }
+  ],
+  "headingDuplicates": [],
+  "samples": [
+    {
+      "id": "ch1",
+      "title": "Proem: First Epistle to the Highbrows",
+      "start": 8,
+      "end": 58,
+      "extractedPages": 49,
+      "jsonPages": 49,
+      "firstExtracted": "Pray thee, take care, that tak’st my book in hand\n\nTo read it well—that is, to understand.\n\nThe professor of philosophy and religion Jacob N",
+      "firstJson": "Pray thee, take care, that tak’st my book in hand\n\nTo read it well—that is, to understand.\n\nThe professor of philosophy and religion Jacob N"
+    },
+    {
+      "id": "ch2",
+      "title": "1. Introduction",
+      "start": 58,
+      "end": 92,
+      "extractedPages": 32,
+      "jsonPages": 32,
+      "firstExtracted": "Grand Synthesis: Mythology of the 21st Century 1. Introduction The separate Sciences—Epistemology, Physics, Chemistry, Mathematics, Astronom",
+      "firstJson": "Grand Synthesis: Mythology of the 21st Century 1. Introduction The separate Sciences—Epistemology, Physics, Chemistry, Mathematics, Astronom"
+    },
+    {
+      "id": "ch3-1",
+      "title": "2.1 Prelusion",
+      "start": 92,
+      "end": 100,
+      "extractedPages": 8,
+      "jsonPages": 8,
+      "firstExtracted": "Knowledge is ultimate. There can be no explanation of the ‘why’ of knowledge; we can only describe the ‘what’ of knowledge. Namely we can an",
+      "firstJson": "Knowledge is ultimate. There can be no explanation of the ‘why’ of knowledge; we can only describe the ‘what’ of knowledge. Namely we can an"
+    },
+    {
+      "id": "ch3-2",
+      "title": "2.2 A New Philosophy of Culture",
+      "start": 100,
+      "end": 120,
+      "extractedPages": 20,
+      "jsonPages": 20,
+      "firstExtracted": "results, and provide interpretations of the sufficient parameters at various levels. Of course, a model is neither a hypothesis nor a theory",
+      "firstJson": "Many and manifold attempts have been made to fully comprehend Culture as a development of Homo sapiens sapiens. None has been satisfactory, "
+    },
+    {
+      "id": "ch3-3",
+      "title": "2.3 A New Science of Culture-systems",
+      "start": 120,
+      "end": 150,
+      "extractedPages": 30,
+      "jsonPages": 30,
+      "firstExtracted": "connected in manifold ways with all other domains of human experience.\n\nFor this reason an Academic can reflect upon Culture from many point",
+      "firstJson": "connected in manifold ways with all other domains of human experience.\n\nFor this reason an Academic can reflect upon Culture from many point"
+    },
+    {
+      "id": "ch3-4",
+      "title": "2.4 The Expressive Modality of Culture-systems",
+      "start": 150,
+      "end": 164,
+      "extractedPages": 13,
+      "jsonPages": 13,
+      "firstExtracted": "modular subsystems which Academics will, for a variety of reasons, find a useful subject for exploration.\n\nA culture-system is spread out wi",
+      "firstJson": "modular subsystems which Academics will, for a variety of reasons, find a useful subject for exploration.\n\nA culture-system is spread out wi"
+    },
+    {
+      "id": "ch3-5",
+      "title": "2.5 Science as a Mode of Expression",
+      "start": 164,
+      "end": 173,
+      "extractedPages": 8,
+      "jsonPages": 8,
+      "firstExtracted": "determining the configuration of the whole. All are, therefore, overlapping elements in a continuous field. What they have in common constit",
+      "firstJson": "determining the configuration of the whole. All are, therefore, overlapping elements in a continuous field. What they have in common constit"
+    },
+    {
+      "id": "ch3-6",
+      "title": "2.6 Secondary Modes of Expression",
+      "start": 173,
+      "end": 176,
+      "extractedPages": 3,
+      "jsonPages": 3,
+      "firstExtracted": "Saturn as seen from Mimas (1944) by Chesley Bonestell 2.6 Secondary Modes of Expression After Science, Spirituality, and Art, a fourth prima",
+      "firstJson": "Saturn as seen from Mimas (1944) by Chesley Bonestell 2.6 Secondary Modes of Expression After Science, Spirituality, and Art, a fourth prima"
+    },
+    {
+      "id": "ch3-7",
+      "title": "2.7 Unitary Cultural Modality",
+      "start": 176,
+      "end": 185,
+      "extractedPages": 9,
+      "jsonPages": 9,
+      "firstExtracted": "This is the symbol western Science carries as its ontological burden: not ✝ but ∞. William James wrote: The philosophy which is so important",
+      "firstJson": "This is the symbol western Science carries as its ontological burden: not ✝ but ∞. William James wrote: The philosophy which is so important"
+    },
+    {
+      "id": "ch3-8",
+      "title": "2.8 Enculturation",
+      "start": 185,
+      "end": 198,
+      "extractedPages": 12,
+      "jsonPages": 12,
+      "firstExtracted": "Existence per se is dethroned. Noödynamics is therefore a means of ordering experience in a manner conceptually applicable to existential da",
+      "firstJson": "Existence per se is dethroned. Noödynamics is therefore a means of ordering experience in a manner conceptually applicable to existential da"
+    },
+    {
+      "id": "ch4-1",
+      "title": "3.1 Prelusion",
+      "start": 198,
+      "end": 221,
+      "extractedPages": 23,
+      "jsonPages": 23,
+      "firstExtracted": "Only that which made us, meant us to be mightier by and by, Set the sphere of all boundless heavens within the Human eye.\n\nThis text deals w",
+      "firstJson": "Only that which made us, meant us to be mightier by and by, Set the sphere of all boundless heavens within the Human eye.\n\nThis text deals w"
+    },
+    {
+      "id": "ch4-2",
+      "title": "3.2 The Scientific/Spiritual Arms Race: Mutually-Assured Deconstruction",
+      "start": 221,
+      "end": 245,
+      "extractedPages": 23,
+      "jsonPages": 23,
+      "firstExtracted": "Deconstruction The difference between the disciplines of Science and Spirituality as they exist in the West are obvious. The question arises",
+      "firstJson": "Deconstruction The difference between the disciplines of Science and Spirituality as they exist in the West are obvious. The question arises"
+    },
+    {
+      "id": "ch4-3",
+      "title": "3.3 Piercing the Academic Iron Curtain",
+      "start": 245,
+      "end": 266,
+      "extractedPages": 20,
+      "jsonPages": 20,
+      "firstExtracted": "nature. In so far as he roves from these ends, he bereaves himself of power, of auxiliaries; his being shrinks out of all remote channels, h",
+      "firstJson": "nature. In so far as he roves from these ends, he bereaves himself of power, of auxiliaries; his being shrinks out of all remote channels, h"
+    },
+    {
+      "id": "ch4-4",
+      "title": "3.4 The Culture-soul: Unbearable Lightness of Being-in-the-World",
+      "start": 266,
+      "end": 284,
+      "extractedPages": 18,
+      "jsonPages": 18,
+      "firstExtracted": "A hero ventures forth from the world of common day into a region of supernatural wonder: fabulous forces are there encountered and decisive ",
+      "firstJson": "A hero ventures forth from the world of common day into a region of supernatural wonder: fabulous forces are there encountered and decisive "
+    },
+    {
+      "id": "ch4-5",
+      "title": "3.5 Western World-feeling, Christianity, and Postmodern Metaphysics",
+      "start": 284,
+      "end": 313,
+      "extractedPages": 28,
+      "jsonPages": 28,
+      "firstExtracted": "fact that it is the all-inclusive whole that incorporates all of them within itself.\n\nThus ‘bracketing’ here represents an act of the mind w",
+      "firstJson": "fact that it is the all-inclusive whole that incorporates all of them within itself.\n\nThus ‘bracketing’ here represents an act of the mind w"
+    },
+    {
+      "id": "ch4-6",
+      "title": "3.6 The Noödynamic Worldview",
+      "start": 313,
+      "end": 332,
+      "extractedPages": 19,
+      "jsonPages": 19,
+      "firstExtracted": "has tried to emulate this Order out of Chaos from his earliest creations to his latest. “He who does not attach value to Life does not deser",
+      "firstJson": "has tried to emulate this Order out of Chaos from his earliest creations to his latest. “He who does not attach value to Life does not deser"
+    },
+    {
+      "id": "ch4-7",
+      "title": "3.7 The Culture-systemic Theory of Art",
+      "start": 332,
+      "end": 362,
+      "extractedPages": 30,
+      "jsonPages": 30,
+      "firstExtracted": "Aesthetic expression, as a physical embodiment of metaphysical meaning, becomes a liminal force in civilization, a collective interface betw",
+      "firstJson": "Aesthetic expression, as a physical embodiment of metaphysical meaning, becomes a liminal force in civilization, a collective interface betw"
+    },
+    {
+      "id": "ch4-8",
+      "title": "3.8 From Pop-culture to Post-modern Aesthetics",
+      "start": 362,
+      "end": 394,
+      "extractedPages": 31,
+      "jsonPages": 31,
+      "firstExtracted": "Floats though unseen among us—visiting This various world with an inconstant wing As summer winds that creep from flower to flower— Like moo",
+      "firstJson": "Floats though unseen among us—visiting This various world with an inconstant wing As summer winds that creep from flower to flower— Like moo"
+    },
+    {
+      "id": "ch5-1",
+      "title": "4.1 Prelusion",
+      "start": 394,
+      "end": 413,
+      "extractedPages": 19,
+      "jsonPages": 19,
+      "firstExtracted": "Noödynamics will be the first tentative step toward a universal language and method for expressing all cultural concepts and synthesizing th",
+      "firstJson": "Noödynamics will be the first tentative step toward a universal language and method for expressing all cultural concepts and synthesizing th"
+    },
+    {
+      "id": "ch5-2",
+      "title": "4.2 Postmodern Paradigmatics",
+      "start": 413,
+      "end": 435,
+      "extractedPages": 22,
+      "jsonPages": 22,
+      "firstExtracted": "emergence of wholly new schemata. When defending his theory at the International Colloquium in the Philosophy of Science (1965), Kuhn explai",
+      "firstJson": "emergence of wholly new schemata. When defending his theory at the International Colloquium in the Philosophy of Science (1965), Kuhn explai"
+    },
+    {
+      "id": "ch5-3",
+      "title": "4.3 The Nascent Science-based Nature-religion",
+      "start": 435,
+      "end": 456,
+      "extractedPages": 21,
+      "jsonPages": 21,
+      "firstExtracted": "And such in fact is the conduct of the specialist. In politics, art, social usages, in the other sciences, he will adopt the attitude of pri",
+      "firstJson": "And such in fact is the conduct of the specialist. In politics, art, social usages, in the other sciences, he will adopt the attitude of pri"
+    },
+    {
+      "id": "ch5-4",
+      "title": "4.4 Empirical Spirituality",
+      "start": 456,
+      "end": 486,
+      "extractedPages": 30,
+      "jsonPages": 30,
+      "firstExtracted": "Woman Before the Rising Sun by Casper Friedrich (1818) 4.4 Empirical Spirituality We certainly experience within ourselves intuitions of mea",
+      "firstJson": "Woman Before the Rising Sun by Casper Friedrich (1818) 4.4 Empirical Spirituality We certainly experience within ourselves intuitions of mea"
+    },
+    {
+      "id": "ch5-5",
+      "title": "4.5 Logical Faith",
+      "start": 486,
+      "end": 518,
+      "extractedPages": 31,
+      "jsonPages": 31,
+      "firstExtracted": "come from a combination of loose and strict thinking, and this combination is the most precious tool of science.\n\nThe study of cultural real",
+      "firstJson": "come from a combination of loose and strict thinking, and this combination is the most precious tool of science.\n\nThe study of cultural real"
+    },
+    {
+      "id": "ch6-1",
+      "title": "5.1 Prelusion",
+      "start": 518,
+      "end": 552,
+      "extractedPages": 34,
+      "jsonPages": 34,
+      "firstExtracted": "Very few biographies succeed in portraying the straightforward, serene, and regular progress of an individual. Our life is like the Allness ",
+      "firstJson": "Very few biographies succeed in portraying the straightforward, serene, and regular progress of an individual. Our life is like the Allness "
+    },
+    {
+      "id": "ch6-2",
+      "title": "5.2 The Psychographical Paradigm",
+      "start": 552,
+      "end": 575,
+      "extractedPages": 23,
+      "jsonPages": 23,
+      "firstExtracted": "be found to be less coherent than the psychogenetic ground of being as the essence of mind and matter.\n\nIt is not difficult to comprehend th",
+      "firstJson": "be found to be less coherent than the psychogenetic ground of being as the essence of mind and matter.\n\nIt is not difficult to comprehend th"
+    },
+    {
+      "id": "ch6-3",
+      "title": "5.3 The Faustian Mythologem",
+      "start": 575,
+      "end": 626,
+      "extractedPages": 49,
+      "jsonPages": 49,
+      "firstExtracted": "The first known literary work on the Faustian Mythologem is the German Faustbuch (1587), thought to have been written by Johann Spiess. But ",
+      "firstJson": "The first known literary work on the Faustian Mythologem is the German Faustbuch (1587), thought to have been written by Johann Spiess. But "
+    },
+    {
+      "id": "ch6-4",
+      "title": "5.4 Music and Mountains, Painting and Ruins",
+      "start": 626,
+      "end": 643,
+      "extractedPages": 17,
+      "jsonPages": 17,
+      "firstExtracted": "Philosopher explains”: Godhead emerging too in me!\n\nHow, oh God, I have sought for Thee And that which bid me seek Wast Thou in me!\n\nThe Roc",
+      "firstJson": "Philosopher explains”: Godhead emerging too in me!\n\nHow, oh God, I have sought for Thee And that which bid me seek Wast Thou in me!\n\nThe Roc"
+    },
+    {
+      "id": "ch6-5",
+      "title": "5.5 Mathematics: Faustian Catechism",
+      "start": 643,
+      "end": 696,
+      "extractedPages": 52,
+      "jsonPages": 52,
+      "firstExtracted": "fashionable in Victorian England that the wealthy actually built “ruins” on their property. “We have only to follow the tread of the hero's ",
+      "firstJson": "fashionable in Victorian England that the wealthy actually built “ruins” on their property. “We have only to follow the tread of the hero's "
+    },
+    {
+      "id": "ch6-6",
+      "title": "5.6 Technology: Faustian Ritual",
+      "start": 696,
+      "end": 758,
+      "extractedPages": 62,
+      "jsonPages": 62,
+      "firstExtracted": "investigations as well. These scholars spoke of deity as interested in the preservation of cosmic Order and Harmony and Beauty, and it is ob",
+      "firstJson": "investigations as well. These scholars spoke of deity as interested in the preservation of cosmic Order and Harmony and Beauty, and it is ob"
+    },
+    {
+      "id": "ch6-7",
+      "title": "5.7 Psychography in the New Millennium",
+      "start": 758,
+      "end": 784,
+      "extractedPages": 25,
+      "jsonPages": 25,
+      "firstExtracted": "We are greater than the Peoples or the Kings— Be humble, as you crawl beneath our rods!— Our touch can alter all created things, We are ever",
+      "firstJson": "We are greater than the Peoples or the Kings— Be humble, as you crawl beneath our rods!— Our touch can alter all created things, We are ever"
+    },
+    {
+      "id": "ch7",
+      "title": "6. Remembrance of Things Past: The Second Religiosity",
+      "start": 784,
+      "end": 853,
+      "extractedPages": 67,
+      "jsonPages": 67,
+      "firstExtracted": "The morning comes, the night decays, the watchmen leave their stations, the grave is burst, the spices shed, the linen wrapped up; the bones",
+      "firstJson": "The morning comes, the night decays, the watchmen leave their stations, the grave is burst, the spices shed, the linen wrapped up; the bones"
+    },
+    {
+      "id": "ch8",
+      "title": "Bibliography",
+      "start": 853,
+      "end": null,
+      "extractedPages": 25,
+      "jsonPages": 25,
+      "firstExtracted": "Ackerman, Diane. 1983. LADY FAUSTUS. William Morrow & Co., New York Ackermann, Wilhelm and David Hilbert. 1950. PRINCIPLES OF MATHEMATICAL L",
+      "firstJson": "Ackerman, Diane. 1983. LADY FAUSTUS. William Morrow & Co., New York Ackermann, Wilhelm and David Hilbert. 1950. PRINCIPLES OF MATHEMATICAL L"
+    }
+  ]
+}

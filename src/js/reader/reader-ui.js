@@ -285,6 +285,7 @@ function updateContent({ page = readerState.currentPage, updateHash = true } = {
   hideHighlightPreviewTooltip();
 
   updatePageUI(currentPage);
+  updateTocActiveState(info.chapterIndex);
 
   if (updateHash && info.chapter && info.pageIndex === 0) {
     history.replaceState(null, '', `#${getChapterAnchorId(info.chapter)}`);
@@ -358,6 +359,34 @@ function highlightSearchExcerpt(text, query) {
   return parts.join('');
 }
 
+function getActiveGroupChapterId(chapterIndex) {
+  for (let i = chapterIndex; i >= 0; i -= 1) {
+    if (GROUP_HEADERS[CHAPTERS[i].id]) return CHAPTERS[i].id;
+  }
+  return null;
+}
+
+function updateTocActiveState(chapterIndex) {
+  const list = document.getElementById('reader-toc-list');
+  if (!list) return;
+
+  const activeGroupId = getActiveGroupChapterId(chapterIndex);
+
+  list.querySelectorAll('.reader__toc-link').forEach((link) => {
+    const idx = parseInt(link.dataset.chapterIndex, 10);
+    const isActive = idx === chapterIndex;
+    link.classList.toggle('is-active', isActive);
+    link.setAttribute('aria-current', isActive ? 'location' : 'false');
+  });
+
+  list.querySelectorAll('.reader__toc-group').forEach((link) => {
+    const groupId = link.dataset.chapterId || '';
+    const isActive = Boolean(activeGroupId && groupId === activeGroupId);
+    link.classList.toggle('is-active', isActive);
+    link.setAttribute('aria-current', isActive ? 'location' : 'false');
+  });
+}
+
 function renderTOC() {
   const list = document.getElementById('reader-toc-list');
   if (!list) return;
@@ -371,6 +400,7 @@ function renderTOC() {
       const groupLink = document.createElement('a');
       groupLink.className = 'reader__toc-group';
       groupLink.href = `#${getGroupAnchorId(ch.id)}`;
+      groupLink.dataset.chapterId = ch.id;
       groupLink.textContent = groupTitle;
       groupLink.addEventListener('click', (e) => {
         e.preventDefault();

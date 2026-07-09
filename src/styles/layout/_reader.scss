@@ -138,6 +138,12 @@ html:has(.reader-page) {
         color: $color-lightbeige-500;
         outline: none;
       }
+
+      &.is-active {
+        color: $color-lightbeige-500;
+        background-color: rgba($color-white-100, 0.08);
+        font-weight: 700;
+      }
     }
 
     .reader__section-title {
@@ -250,6 +256,10 @@ html:has(.reader-page) {
         font-size: 13px;
         text-transform: none;
         font-weight: 400;
+
+        &.is-active {
+          font-weight: 500;
+        }
       }
     }
   }
@@ -268,13 +278,21 @@ html:has(.reader-page) {
     font-family: inherit;
     text-decoration: none;
     cursor: pointer;
-    transition: color 0.2s;
+    transition: color 0.2s, background-color 0.2s;
+    padding: 6px 8px;
+    border-radius: 4px;
 
     &:hover,
     &:focus,
     &:focus-visible {
       color: $color-brown;
       outline: none;
+    }
+
+    &.is-active {
+      color: $color-brown;
+      font-weight: 700;
+      background-color: rgba($color-brown, 0.1);
     }
   }
 

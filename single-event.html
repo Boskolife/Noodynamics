@@ -4,23 +4,23 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Noodynamics - Application for Membership</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="/Noodynamics/preview/page-reader/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/Noodynamics/preview/page-reader/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/Noodynamics/preview/page-reader/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/Noodynamics/preview/page-reader/favicon/site.webmanifest">
-  <script type="module" crossorigin src="/Noodynamics/preview/page-reader/assets/modal-manager-0667896a.js"></script>
-  <script type="module" crossorigin src="/Noodynamics/preview/page-reader/assets/site-audio-d1be709f.js"></script>
-  <script type="module" crossorigin src="/Noodynamics/preview/page-reader/assets/main-fca1310d.js"></script>
-  <link rel="stylesheet" href="/Noodynamics/preview/page-reader/assets/style-026b4351.css">
+    <title>Noodynamics - Single Event</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/Noodynamics/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/Noodynamics/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/Noodynamics/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/Noodynamics/favicon/site.webmanifest">
+  <script type="module" crossorigin src="/Noodynamics/assets/modal-manager-0667896a.js"></script>
+  <script type="module" crossorigin src="/Noodynamics/assets/site-audio-6ec50106.js"></script>
+  <script type="module" crossorigin src="/Noodynamics/assets/main-d4591464.js"></script>
+  <link rel="stylesheet" href="/Noodynamics/assets/style-9d40ddc9.css">
 </head>
 
-<body class="application-membership-page">
+<body class="single-event-page">
     <header id="header" class="header wow animate__animated animate__fadeInDown" data-wow-duration="0.9s">
         <div class="container">
             <div class="header__inner">
                 <a href="index.html" class="header__logo wow animate__animated animate__zoomIn" data-wow-delay="0.1s">
-                    <img src="/Noodynamics/preview/page-reader/images/logo-text.png" alt="Noodynamics">
+                    <img src="/Noodynamics/images/logo-text.png" alt="Noodynamics">
                 </a>
                 <nav class="header__nav">
                     <ul class="header__nav-list">
@@ -36,12 +36,12 @@
                     <button type="button" class="header__action header__action--primary js-open-auth-popup"
                         aria-haspopup="dialog" aria-expanded="false" aria-controls="auth-popup-backdrop">
                         <span>login</span>
-                        <img src="/Noodynamics/preview/page-reader/icons/login.svg" alt="">
+                        <img src="/Noodynamics/icons/login.svg" alt="">
                     </button>
                     <div class="header__profile-wrap">
                         <button type="button" class="btn btn--primary header__profile js-header-profile is-auth-hidden"
                             aria-label="Profile menu" aria-haspopup="true" aria-expanded="false" aria-controls="header-profile-dropdown">
-                            <img src="/Noodynamics/preview/page-reader/icons/user.svg" alt="" width="24" height="24">
+                            <img src="/Noodynamics/icons/user.svg" alt="" width="24" height="24">
                         </button>
                         <ul id="header-profile-dropdown" class="header__profile-dropdown" role="menu" aria-label="Profile menu" hidden>
                             <li role="none"><button type="button" class="header__profile-dropdown-link js-open-membership-popup" role="menuitem">My membership</button></li>
@@ -61,301 +61,151 @@
             <div class="container">
                 <ul class="breadcrumbs__list">
                     <li class="breadcrumbs__item">
-                        <a href="index.html" class="breadcrumbs__link">home</a>
+                        <a href="events.html" class="breadcrumbs__link">Events</a>
                     </li>
                     <li class="breadcrumbs__item">
-                        <a href="membership.html" class="breadcrumbs__link">membership</a>
-                    </li>
-                    <li class="breadcrumbs__item">
-                        <span class="breadcrumbs__link current">apply for membership </span>
+                        <span class="breadcrumbs__link current">Humanlight Celebration</span>
                     </li>
                 </ul>
             </div>
         </nav>
-        <section class="application-membership">
+        <section class="single-event">
             <div class="container">
-                <h2 class="application-membership__title wow animate__animated animate__fadeInDown" data-wow-delay="0.15s">
-                    Application for <br> Membership
-                </h2>
-                <div class="application-membership__steps wow animate__animated animate__fadeInUp" data-wow-delay="0.2s">
-                    <span class="application-membership__step application-membership__step--active">1. Complete the application form</span>
-                    <span class="application-membership__separator"></span>
-                    <span class="application-membership__step">2. Choose your membership level</span>
+                <h1 class="single-event__title wow animate__animated animate__fadeInDown" data-wow-delay="0.15s">Humanlight Celebration</h1>
+                <div class="single-event__header wow animate__animated animate__fadeInUp" data-wow-delay="0.2s">
+                    <div class="single-event__info">
+                        <span>Palace, Floor T2/T1, Theater 2</span>
+                        <time datetime="2026-01-26">january 26, 2026</time>
+                    </div>
+                    <div class="single-event__actions">
+                        <button class="single-event__btn ">add to calendar
+                            <img src="/Noodynamics/icons/calendar.svg" alt="calendar icon">
+                        </button>
+                        <button class="btn btn--primary">book now</button>
+                    </div>
                 </div>
-                <div class="application-membership__steps-counter">
-                    <span class="application-membership__steps-counter-label">step</span>
-                    <span class="application-membership__steps-counter-current">1</span>
-                    <span class="application-membership__steps-counter-separator">/</span>
-                    <span class="application-membership__steps-counter-total">2</span>
-                </div>
-                <form action="#" class="application-membership__form form-card wide-form wow animate__animated animate__fadeInUp" data-wow-delay="0.25s" method="post" novalidate data-step="1">
-                    <div class="application-membership__form-group form-card__group">
-                        <label for="applicant-name" class="application-membership__form-label form-card__label">Name
-                            <input type="text" id="applicant-name" name="applicantName"
-                                class="application-membership__form-input" placeholder="enter your name" required
-                                aria-required="true" autocomplete="name">
-                        </label>
-                        <label for="applicant-phone" class="application-membership__form-label form-card__label">Phone (for confirmation purposes only)
-                            <input type="tel" id="applicant-phone" name="applicantPhone"
-                                class="application-membership__form-input" placeholder="enter your phone number"
-                                autocomplete="tel" required aria-required="true" inputmode="numeric" data-numeric="phone">
-                        </label>
+                <div class="single-event__inner wow animate__animated animate__fadeInUp" data-wow-delay="0.25s">
+                    <div class="single-event__content">
+                        <p>HumanLight is a Humanist holiday celebrated annually since 2011, created to illuminate the
+                            shared values that unite humanity beyond religious or cultural boundaries. Rooted in secular
+                            humanism, HumanLight emphasizes reason, compassion, humanity, and hope—principles that guide
+                            ethical living and collective progress. This exhibition explores HumanLight not only as a
+                            holiday, but as a living philosophy expressed through art, ideas, and human connection.
+
+                            The exhibition invites visitors to reflect on how reason empowers us to understand the world
+                            through critical thinking, science, and evidence, encouraging informed choices and
+                            thoughtful dialogue. Through visual works, interactive installations, and narrative
+                            displays, the theme of reason is presented as a tool for liberation—allowing individuals to
+                            question, learn, and grow while respecting diverse perspectives.
+
+                            Compassion lies at the heart of HumanLight, and this exhibition highlights acts of empathy,
+                            solidarity, and care that define our shared humanity. Featured works examine kindness in
+                            everyday life, social responsibility, and the moral impulse to reduce suffering and promote
+                            well-being. These pieces remind us that compassion is not passive, but an active commitment
+                            to justice, inclusion, and mutual respect.
+
+                            Humanity, as celebrated by HumanLight, recognizes the inherent dignity and worth of every
+                            person. The exhibition showcases stories and representations of human resilience,
+                            creativity, and cooperation across cultures and generations. By centering human experience,
+                            the exhibition underscores our interconnectedness and our collective responsibility to one
+                            another.
+
+                            Finally, hope is presented as a forward-looking force—an optimism grounded in action rather
+                            than wishful thinking. Through hopeful visions of the future, the exhibition encourages
+                            visitors to imagine
+                            a world shaped by reasoned choices and compassionate values.
+
+                            HumanLight is a reminder that meaning, ethics, and celebration can be rooted in our shared
+                            human experience. This exhibition invites all visitors to engage with these values and to
+                            carry the light of humanity forward into their communities and lives.</p>
                     </div>
-                    <div class="application-membership__form-group form-card__group">
-                        <label for="applicant-email" class="application-membership__form-label form-card__label">Email
-                            <input type="email" id="applicant-email" name="applicantEmail"
-                                class="application-membership__form-input" placeholder="enter your email" required
-                                aria-required="true" autocomplete="email">
-                        </label>
-                        <label for="applicant-address" class="application-membership__form-label form-card__label">Address
-                            <input type="text" id="applicant-address" name="applicantAddress"
-                                class="application-membership__form-input" placeholder="enter your address"
-                                autocomplete="street-address" required aria-required="true">
-                        </label>
-                    </div>
-                    <div class="application-membership__form-group form-card__group">
-                        <label for="date-of-birth" class="application-membership__form-label form-card__label">DATE OF BIRTH
-                            <input type="date" id="date-of-birth" name="dateOfBirth"
-                                class="application-membership__form-input" placeholder="MM/DD/YYYY" autocomplete="bday"
-                                required aria-required="true">
-                        </label>
-                        <label for="marital-status" class="application-membership__form-label form-card__label">marital status
-                            <select id="marital-status" name="maritalStatus" class="application-membership__form-input"
-                                hidden required aria-required="true">
-                                <option value="">Select marital status</option>
-                                <option value="single">Single</option>
-                                <option value="married">Married</option>
-                                <option value="divorced">Divorced</option>
-                                <option value="widowed">Widowed</option>
-                            </select>
-                            <div class="application-membership__select select" data-select-native-id="marital-status">
-                                <button type="button" class="select__trigger" aria-expanded="false"
-                                    aria-haspopup="listbox" aria-label="Select marital status">
-                                    <span class="select__value">Select marital status</span>
-                                    <span class="select__arrow" aria-hidden="true">
-                                        <img src="/Noodynamics/preview/page-reader/icons/arrow-down.svg" alt="Toggle marital status list">
-                                    </span>
-                                </button>
-                                <ul class="select__dropdown" role="listbox" hidden>
-                                    <li class="select__option" role="option" data-value="single">Single</li>
-                                    <li class="select__option" role="option" data-value="married">Married</li>
-                                    <li class="select__option" role="option" data-value="divorced">Divorced</li>
-                                    <li class="select__option" role="option" data-value="widowed">Widowed</li>
-                                </ul>
-                            </div>
-                        </label>
-                    </div>
-                    <fieldset class="application-membership__form-group form-card__group radio-group" aria-labelledby="legend-children">
-                        <legend id="legend-children" class="application-membership__form-label form-card__label">Do you have any
-                            children?</legend>
-                        <div class="application-membership__form-group-radio form-card__group-radio">
-                            <label for="children-yes" class="application-membership__form-label-radio form-card__label-radio">
-                                <input type="radio" id="children-yes" name="children" value="yes" required aria-required="true">
-                                <span class="application-membership__radio-mark form-card__radio-mark"></span>
-                                <span class="application-membership__radio-text">yes</span>
-                            </label>
-                            <label for="children-no" class="application-membership__form-label-radio form-card__label-radio">
-                                <input type="radio" id="children-no" name="children" value="no">
-                                <span class="application-membership__radio-mark form-card__radio-mark"></span>
-                                <span class="application-membership__radio-text">no</span>
-                            </label>
-                        </div>
-                    </fieldset>
-                    <div class="application-membership__form-group form-card__group">
-                        <label for="children-ages" class="application-membership__form-label form-card__label">If yes, age(s)
-                            <input type="text" id="children-ages" name="childrenAges"
-                                class="application-membership__form-input" placeholder="enter age(s)" required aria-required="true"
-                                inputmode="numeric" data-numeric="ages">
-                        </label>
-                        <label for="education" class="application-membership__form-label form-card__label">Education
-                            <input type="text" id="education" name="education"
-                                class="application-membership__form-input" placeholder="enter your education" required aria-required="true">
-                        </label>
-                    </div>
-                    <div class="application-membership__form-group form-card__group">
-                        <label for="languages" class="application-membership__form-label form-card__label">List languages you speak
-                            <input type="text" id="languages" name="languages"
-                                class="application-membership__form-input" placeholder="languages you speak" required aria-required="true">
-                        </label>
-                        <label for="religious-preference" class="application-membership__form-label form-card__label">RELIGIOUS
-                            PREFERENCE
-                            <input type="text" id="religious-preference" name="religiousPreference"
-                                class="application-membership__form-input"
-                                placeholder="enter your RELIGIOUS PREFERENCE" required aria-required="true">
-                        </label>
-                    </div>
-                    <div class="application-membership__form-group form-card__group">
-                        <label for="occupation" class="application-membership__form-label form-card__label">Occupation
-                            <input type="text" id="occupation" name="occupation"
-                                class="application-membership__form-input" placeholder="enter your OCCUPATION" required aria-required="true">
-                        </label>
-                        <label for="employer" class="application-membership__form-label form-card__label">Employer
-                            <input type="text" id="employer" name="employer" class="application-membership__form-input"
-                                placeholder="enter your company name" required aria-required="true">
-                        </label>
-                    </div>
-                    <div class="application-membership__form-group form-card__group">
-                        <label for="job-title" class="application-membership__form-label form-card__label">Job title
-                            <input type="text" id="job-title" name="jobTitle" class="application-membership__form-input"
-                                placeholder="enter your job title" required aria-required="true">
-                        </label>
-                        <label for="years-at-job" class="application-membership__form-label form-card__label">Years at job
-                            <input type="text" id="years-at-job" name="yearsAtJob"
-                                class="application-membership__form-input" placeholder="enter your years at job" required aria-required="true"
-                                inputmode="numeric" data-numeric="integer">
-                        </label>
-                    </div>
-                    <label for="qualifications" class="application-membership__form-label form-card__label">
-                        SPECIAL SCIENTIFIC/SPIRITUAL/ARTISTIC/PHILOSOPHICAL/RELIGIOUS/TECHNOLOGICAL QUALIFICATIONS
-                        <textarea name="qualifications" id="qualifications"
-                            class="application-membership__form-textarea"
-                            placeholder="SPECIAL SCIENTIFIC/SPIRITUAL/ARTISTIC/PHILOSOPHICAL/RELIGIOUS/TECHNOLOGICAL QUALIFICATIONS"
-                            rows="4" required aria-required="true"></textarea>
-                    </label>
-                    <label for="special-interests" class="application-membership__form-label form-card__label">
-                        LIST ANY SPECIAL INTERESTS/HOBBIES/SKILLS THAT MAY BE OF USE TO THE WORK OF THE INSTITUTE
-                        <textarea name="specialInterests" id="special-interests"
-                            class="application-membership__form-textarea"
-                            placeholder="LIST ANY SPECIAL INTERESTS/HOBBIES/SKILLS THAT MAY BE OF USE TO THE WORK OF THE INSTITUTE"
-                            rows="4" required aria-required="true"></textarea>
-                    </label>
-                    <label for="other-memberships" class="application-membership__form-label form-card__label">
-                        LIST MEMBERSHIP IN OTHER ORGANIZATIONS/CLUBS/FRATERNITIES/SOCIETIES
-                        <textarea name="otherMemberships" id="other-memberships"
-                            class="application-membership__form-textarea"
-                            placeholder="LIST MEMBERSHIP IN OTHER ORGANIZATIONS/CLUBS/FRATERNITIES/SOCIETIES"
-                            rows="4" required aria-required="true"></textarea>
-                    </label>
-                    <label for="position-held" class="application-membership__form-label form-card__label">
-                        POSITION HELD THEREIN
-                        <input type="text" id="position-held" name="positionHeld"
-                            class="application-membership__form-input" placeholder="enter your POSITION HELD THEREIN" required aria-required="true">
-                    </label>
-                    <fieldset class="application-membership__form-group form-card__group radio-group"
-                        aria-labelledby="legend-local-participation">
-                        <legend id="legend-local-participation" class="application-membership__form-label form-card__label">Would you be
-                            interested in local
-                            participation in the work of the Institute?</legend>
-                        <div class="application-membership__form-group-radio form-card__group-radio">
-                            <label for="local-participation-yes" class="application-membership__form-label-radio form-card__label-radio">
-                                <input type="radio" id="local-participation-yes" name="localParticipation" value="yes" required aria-required="true">
-                                <span class="application-membership__radio-mark form-card__radio-mark"></span>
-                                <span class="application-membership__radio-text">yes</span>
-                            </label>
-                            <label for="local-participation-no" class="application-membership__form-label-radio form-card__label-radio">
-                                <input type="radio" id="local-participation-no" name="localParticipation" value="no">
-                                <span class="application-membership__radio-mark form-card__radio-mark"></span>
-                                <span class="application-membership__radio-text">no</span>
-                            </label>
-                        </div>
-                    </fieldset>
-                    <label for="comments" class="application-membership__form-label form-card__label">
-                        COMMENTS (optional)
-                        <textarea name="comments" id="comments"
-                            class="application-membership__form-textarea" placeholder="COMMENTS (optional)"
-                            rows="4"></textarea>
-                    </label>
-                    <div class="application-membership__form-group form-card__group">
-                        <label for="print-name" class="application-membership__form-label form-card__label">Print name
-                            <input type="text" id="print-name" name="printName"
-                                class="application-membership__form-input" placeholder="enter print name"
-                                autocomplete="name" required aria-required="true">
-                        </label>
-                        <label for="signature-date" class="application-membership__form-label form-card__label">Date
-                            <input type="date" id="signature-date" name="signatureDate"
-                                class="application-membership__form-input" placeholder="MM/DD/YYYY" required aria-required="true">
-                        </label>
-                    </div>
-                    <div class="application-membership__form-agree-wrapper form-card__agree-wrapper">
-                        <label for="agree" class="application-membership__form-agree form-card__agree">
-                            <input type="checkbox" id="agree" name="agree" value="agree" required aria-required="true">
-                            <span class="application-membership__checkbox-mark form-card__checkbox-mark" aria-hidden="true"></span>
-                            <span class="application-membership__checkbox-text form-card__checkbox-text">
-                                I have read Volume 1 of The Phenomenology of Culture-Systems and the operational
-                                documents of
-                                the Noödynamics Institute and hereby apply for membership. I categorically pledge and
-                                swear upon
-                                my name and honor to abide by the established principles and practices of the Institute,
-                                to
-                                faithfully support and promote its message and mission, to comply with the Code of
-                                Ethics and
-                                all Policies, and to perform all of the duties and obligations of membership. If at any
-                                time I
-                                feel compelled to do otherwise, I will immediately notify Institute headquarters in
-                                writing. I
-                                understand that any violation of these guidelines and strictures on my part will result
-                                in the
-                                termination of my membership.
-                            </span>
-                        </label>
-                        <span id="agree-error" class="application-membership__form-error form-card__error"></span>
-                    </div>
-                    <button type="submit" class="application-membership__form-button btn btn--secondary">Continue to
-                        membership options</button>
-                </form>
-                <div class="application-membership__form-level" data-step="2" hidden>
-                    <h3 class="application-membership__form-level-title">Choose your membership level</h3>
-                    <div class="application-membership__form-level-items">
-                        <div class="application-membership__form-level-item wow animate__animated animate__fadeInUp" data-wow-delay="0.1s" data-level="student">
-                            <div class="application-membership__form-level-item-header">
-                                <h4 class="application-membership__form-level-item-title">Student</h4>
-                                <span class="application-membership__form-level-item-price">$50</span>
-                            </div>
-                            <button type="button" class="application-membership__form-level-item-button btn btn--primary">Select</button>
-                        </div>
-                        <div class="application-membership__form-level-item wow animate__animated animate__fadeInUp" data-wow-delay="0.15s" data-level="scholar">
-                            <div class="application-membership__form-level-item-header">
-                                <h4 class="application-membership__form-level-item-title">Scholar</h4>
-                                <span class="application-membership__form-level-item-price">$50</span>
-                            </div>
-                            <button type="button" class="application-membership__form-level-item-button btn btn--primary">Select</button>
-                        </div>
-                        <div class="application-membership__form-level-item wow animate__animated animate__fadeInUp" data-wow-delay="0.2s" data-level="estate-family">
-                            <div class="application-membership__form-level-item-header">
-                                <h4 class="application-membership__form-level-item-title content-parenthetical">Estate (Family)</h4>
-                                <span class="application-membership__form-level-item-price">$100</span>
-                            </div>
-                            <button type="button" class="application-membership__form-level-item-button btn btn--primary">Select</button>
-                        </div>
-                        <div class="application-membership__form-level-item wow animate__animated animate__fadeInUp" data-wow-delay="0.25s" data-level="supporting-member">
-                            <div class="application-membership__form-level-item-header">
-                                <h4 class="application-membership__form-level-item-title">Supporting Member</h4>
-                                <span class="application-membership__form-level-item-price">$250</span>
-                            </div>
-                            <button type="button" class="application-membership__form-level-item-button btn btn--primary">Select</button>
-                        </div>
-                        <div class="application-membership__form-level-item wow animate__animated animate__fadeInUp" data-wow-delay="0.3s" data-level="contribution-member">
-                            <div class="application-membership__form-level-item-header">
-                                <h4 class="application-membership__form-level-item-title">Contribution Member</h4>
-                                <span class="application-membership__form-level-item-price">$500</span>
-                            </div>
-                            <button type="button" class="application-membership__form-level-item-button btn btn--primary">Select</button>
-                        </div>
-                        <div class="application-membership__form-level-item wow animate__animated animate__fadeInUp" data-wow-delay="0.35s" data-level="sustaining-member">
-                            <div class="application-membership__form-level-item-header">
-                                <h4 class="application-membership__form-level-item-title">Sustaining Member</h4>
-                                <span class="application-membership__form-level-item-price">$1000</span>
-                            </div>
-                            <button type="button" class="application-membership__form-level-item-button btn btn--primary">Select</button>
-                        </div>
-                        <div class="application-membership__form-level-item wow animate__animated animate__fadeInUp" data-wow-delay="0.4s" data-level="culture-bearing-statum">
-                            <div class="application-membership__form-level-item-header">
-                                <h4 class="application-membership__form-level-item-title">Culture-bearing Statum</h4>
-                                <span class="application-membership__form-level-item-price">$5000</span>
-                            </div>
-                            <button type="button" class="application-membership__form-level-item-button btn btn--primary">Select</button>
-                        </div>
-                    </div>
-                    <button type="button" class="application-membership__form-level-btn btn btn--secondary">become a member & continue to payment</button>
+                    <picture class="single-event__img wow animate__animated animate__zoomIn" data-wow-delay="0.3s"><source srcset="images/events-img-1.webp" type="image/webp"><img src="images/events-img-1.png" alt="Description" loading="lazy"></picture>
                 </div>
             </div>
         </section>
+        <div class="events__inner wow animate__animated animate__fadeInUp" data-wow-delay="0.1s">
+            <div class="container">
+                <h3 class="events__inner-title wow animate__animated animate__fadeInDown" data-wow-delay="0.15s">
+                    Other  Exhibitions
+                </h3>
+                <div class="events__inner-content">
+                    <div class="events__inner-item wow animate__animated animate__fadeInUp" data-wow-delay="0.2s" data-event-date="2026-01-26">
+                        <picture class="events__inner-item-img wow animate__animated animate__zoomIn" data-wow-delay="0.25s"><source srcset="images/events-img-1.webp" type="image/webp"><img src="images/events-img-1.png" alt="Description" loading="lazy"></picture>
+                        <div class="events__inner-item-content">
+                            <h4 class="events__inner-item-title">
+                                Humanlight Celebration
+                            </h4>
+                            <p class="events__inner-item-text">This is a Humanist holiday celebrated annually since
+                                2011.
+                                The
+                                secular holiday is intended to focus on the positive human values of reason, compassion,
+                                humanity and hope. www.humanlight.org</p>
+                            <time class="events__inner-item-time" datetime="2026-01-26">january 26, 2026</time>
+                            <button class="events__inner-item-btn btn btn--primary">
+                                book now
+                            </button>
+                        </div>
+                    </div>
+                    <div class="events__inner-item wow animate__animated animate__fadeInUp" data-wow-delay="0.25s" data-event-date="2026-02-14">
+                        <picture class="events__inner-item-img wow animate__animated animate__zoomIn" data-wow-delay="0.25s"><source srcset="images/events-img-1.webp" type="image/webp"><img src="images/events-img-1.png" alt="Description" loading="lazy"></picture>
+                        <div class="events__inner-item-content">
+                            <h4 class="events__inner-item-title">
+                                Humanlight Celebration
+                            </h4>
+                            <p class="events__inner-item-text">This is a Humanist holiday celebrated annually since
+                                2011.
+                                The
+                                secular holiday is intended to focus on the positive human values of reason, compassion,
+                                humanity and hope. www.humanlight.org</p>
+                            <time class="events__inner-item-time" datetime="2026-02-14">february 14, 2026</time>
+                            <button class="events__inner-item-btn btn btn--primary">
+                                book now
+                            </button>
+                        </div>
+                    </div>
+                    <div class="events__inner-item wow animate__animated animate__fadeInUp" data-wow-delay="0.3s" data-event-date="2026-03-08">
+                        <picture class="events__inner-item-img wow animate__animated animate__zoomIn" data-wow-delay="0.25s"><source srcset="images/events-img-1.webp" type="image/webp"><img src="images/events-img-1.png" alt="Description" loading="lazy"></picture>
+                        <div class="events__inner-item-content">
+                            <h4 class="events__inner-item-title">
+                                Humanlight Celebration
+                            </h4>
+                            <p class="events__inner-item-text">This is a Humanist holiday celebrated annually since
+                                2011.
+                                The
+                                secular holiday is intended to focus on the positive human values of reason, compassion,
+                                humanity and hope. www.humanlight.org</p>
+                            <time class="events__inner-item-time" datetime="2026-03-08">march 8, 2026</time>
+                            <button class="events__inner-item-btn btn btn--primary">
+                                book now
+                            </button>
+                        </div>
+                    </div>
+                    <div class="events__inner-item wow animate__animated animate__fadeInUp" data-wow-delay="0.35s" data-event-date="2026-01-15">
+                        <picture class="events__inner-item-img wow animate__animated animate__zoomIn" data-wow-delay="0.25s"><source srcset="images/events-img-1.webp" type="image/webp"><img src="images/events-img-1.png" alt="Description" loading="lazy"></picture>
+                        <div class="events__inner-item-content">
+                            <h4 class="events__inner-item-title">
+                                Humanlight Celebration
+                            </h4>
+                            <p class="events__inner-item-text">This is a Humanist holiday celebrated annually since
+                                2011.
+                                The
+                                secular holiday is intended to focus on the positive human values of reason, compassion,
+                                humanity and hope. www.humanlight.org</p>
+                            <time class="events__inner-item-time" datetime="2026-01-15">january 15, 2026</time>
+                            <button class="events__inner-item-btn btn btn--primary">
+                                book now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
     <div class="popup popup--thanks-support" id="thanks-support-popup-backdrop" aria-hidden="true">
         <div class="popup__overlay" aria-hidden="true"></div>
         <div class="popup__window" role="dialog" aria-modal="true" aria-labelledby="thanks-support-popup-title" aria-describedby="thanks-support-popup-desc">
             <div class="popup__header">
-                <img src="/Noodynamics/preview/page-reader/images/logo-text.png" alt="Noodynamics" class="popup__logo">
+                <img src="/Noodynamics/images/logo-text.png" alt="Noodynamics" class="popup__logo">
                 <h3 class="popup__title">Thank you for your support!</h3>
                 <p class="popup__text">Your donation has been successfully received.
                     We've created an account for you to help you track your donations and manage your membership.</p>
@@ -383,7 +233,7 @@
         <div class="popup__overlay" aria-hidden="true"></div>
         <div class="popup__window" role="dialog" aria-modal="true" aria-labelledby="reset-pass-popup-title" aria-describedby="reset-pass-popup-desc">
             <div class="popup__header">
-                <img src="/Noodynamics/preview/page-reader/images/logo-text.png" alt="Noodynamics" class="popup__logo">
+                <img src="/Noodynamics/images/logo-text.png" alt="Noodynamics" class="popup__logo">
             </div>
             <div class="popup__inner">
                 <h2 id="reset-pass-popup-title" class="popup__title">Password reset</h2>
@@ -405,7 +255,7 @@
         <div class="popup__window" role="dialog" aria-modal="true" aria-labelledby="verify-code-popup-title"
             aria-describedby="verify-code-popup-desc">
             <div class="popup__header">
-                <img src="/Noodynamics/preview/page-reader/images/logo-text.png" alt="Noodynamics" class="popup__logo">
+                <img src="/Noodynamics/images/logo-text.png" alt="Noodynamics" class="popup__logo">
             </div>
             <div class="popup__inner">
                 <h2 id="verify-code-popup-title" class="popup__title">Enter verification code</h2>
@@ -432,7 +282,7 @@
         <div class="popup__overlay" aria-hidden="true"></div>
         <div class="popup__window" role="dialog" aria-modal="true" aria-labelledby="enter-new-password-popup-title" aria-describedby="enter-new-password-popup-desc">
             <div class="popup__header">
-                <img src="/Noodynamics/preview/page-reader/images/logo-text.png" alt="Noodynamics" class="popup__logo">
+                <img src="/Noodynamics/images/logo-text.png" alt="Noodynamics" class="popup__logo">
             </div>
             <div class="popup__inner">
                 <h2 id="enter-new-password-popup-title" class="popup__title">Enter new password</h2>
@@ -457,7 +307,7 @@
         <div class="popup__overlay" aria-hidden="true"></div>
         <div class="popup__window" role="dialog" aria-modal="true" aria-labelledby="reset-complete-popup-title" aria-describedby="reset-complete-popup-desc">
             <div class="popup__header">
-                <img src="/Noodynamics/preview/page-reader/images/logo-text.png" alt="Noodynamics" class="popup__logo">
+                <img src="/Noodynamics/images/logo-text.png" alt="Noodynamics" class="popup__logo">
             </div>
             <div class="popup__inner">
                 <h2 id="reset-complete-popup-title" class="popup__title">Password reset has been completed</h2>
@@ -470,7 +320,7 @@
         <div class="popup__overlay" aria-hidden="true"></div>
         <div class="popup__window" role="dialog" aria-modal="true" aria-labelledby="signup-popup-title" aria-describedby="signup-popup-desc">
             <div class="popup__header">
-                <img src="/Noodynamics/preview/page-reader/images/logo-text.png" alt="Noodynamics" class="popup__logo">
+                <img src="/Noodynamics/images/logo-text.png" alt="Noodynamics" class="popup__logo">
             </div>
             <div class="popup__inner">
                 <h2 id="signup-popup-title" class="popup__title">Sign up</h2>
@@ -507,11 +357,11 @@
                 <p class="popup__text popup__text-social">or sign up with</p>
                 <div class="popup__form-social">
                     <a href="#" class="popup__form-social-link btn btn--black">
-                        <img src="/Noodynamics/preview/page-reader/icons/google.svg" alt="">
+                        <img src="/Noodynamics/icons/google.svg" alt="">
                         Google
                     </a>
                     <a href="#" class="popup__form-social-link btn btn--black">
-                        <img src="/Noodynamics/preview/page-reader/icons/apple.svg" alt="">
+                        <img src="/Noodynamics/icons/apple.svg" alt="">
                         Apple
                     </a>
                 </div>
@@ -525,7 +375,7 @@
         <div class="popup__overlay" aria-hidden="true"></div>
         <div class="popup__window" role="dialog" aria-modal="true" aria-labelledby="auth-popup-title" aria-describedby="auth-popup-desc">
             <div class="popup__header">
-                <img src="/Noodynamics/preview/page-reader/images/logo-text.png" alt="Noodynamics" class="popup__logo">
+                <img src="/Noodynamics/images/logo-text.png" alt="Noodynamics" class="popup__logo">
             </div>
             <div class="popup__inner">
                 <h2 id="auth-popup-title" class="popup__title">Log In or create an account <br> to continue</h2>
@@ -547,11 +397,11 @@
                 <p class="popup__text popup__text-social">or log in with</p>
                 <div class="popup__form-social">
                     <a href="#" class="popup__form-social-link btn btn--black">
-                        <img src="/Noodynamics/preview/page-reader/icons/google.svg" alt="">
+                        <img src="/Noodynamics/icons/google.svg" alt="">
                         Google
                     </a>
                     <a href="#" class="popup__form-social-link btn btn--black">
-                        <img src="/Noodynamics/preview/page-reader/icons/apple.svg" alt="">
+                        <img src="/Noodynamics/icons/apple.svg" alt="">
                         Apple
                     </a>
                 </div>
@@ -565,7 +415,7 @@
         <div class="popup__overlay" aria-hidden="true"></div>
         <div class="popup__window" role="dialog" aria-modal="true" aria-labelledby="cancel-membership-confirm-title" aria-describedby="cancel-membership-confirm-desc">
             <div class="popup__header">
-                <img src="/Noodynamics/preview/page-reader/images/logo-text.png" alt="Noodynamics" class="popup__logo">
+                <img src="/Noodynamics/images/logo-text.png" alt="Noodynamics" class="popup__logo">
             </div>
             <div class="popup__inner">
                 <h2 id="cancel-membership-confirm-title" class="popup__title">Cancel membership?</h2>
@@ -581,7 +431,7 @@
         <div class="popup__overlay" aria-hidden="true"></div>
         <div class="popup__window" role="dialog" aria-modal="true" aria-labelledby="membership-canceled-title" aria-describedby="membership-canceled-desc">
             <div class="popup__header">
-                <img src="/Noodynamics/preview/page-reader/images/logo-text.png" alt="Noodynamics" class="popup__logo">
+                <img src="/Noodynamics/images/logo-text.png" alt="Noodynamics" class="popup__logo">
             </div>
             <div class="popup__inner">
                 <h2 id="membership-canceled-title" class="popup__title">Your membership has been canceled.</h2>
@@ -594,7 +444,7 @@
         <div class="popup__overlay" aria-hidden="true"></div>
         <div class="popup__window" role="dialog" aria-modal="true" aria-labelledby="membership-level-updated-title" aria-describedby="membership-level-updated-desc">
             <div class="popup__header">
-                <img src="/Noodynamics/preview/page-reader/images/logo-text.png" alt="Noodynamics" class="popup__logo">
+                <img src="/Noodynamics/images/logo-text.png" alt="Noodynamics" class="popup__logo">
             </div>
             <div class="popup__inner">
                 <h2 id="membership-level-updated-title" class="popup__title">Membership level updated successfully</h2>
@@ -607,7 +457,7 @@
         <div class="popup__overlay" aria-hidden="true"></div>
         <div class="popup__window" role="dialog" aria-modal="true" aria-labelledby="cancel-monthly-donation-confirm-title" aria-describedby="cancel-monthly-donation-confirm-desc">
             <div class="popup__header">
-                <img src="/Noodynamics/preview/page-reader/images/logo-text.png" alt="Noodynamics" class="popup__logo">
+                <img src="/Noodynamics/images/logo-text.png" alt="Noodynamics" class="popup__logo">
             </div>
             <div class="popup__inner">
                 <h2 id="cancel-monthly-donation-confirm-title" class="popup__title">Cancel monthly donation?</h2>
@@ -624,7 +474,7 @@
         <div class="popup__window" role="dialog" aria-modal="true" aria-labelledby="monthly-donation-canceled-title"
             aria-describedby="monthly-donation-canceled-desc">
             <div class="popup__header">
-                <img src="/Noodynamics/preview/page-reader/images/logo-text.png" alt="Noodynamics" class="popup__logo">
+                <img src="/Noodynamics/images/logo-text.png" alt="Noodynamics" class="popup__logo">
             </div>
             <div class="popup__inner">
                 <h2 id="monthly-donation-canceled-title" class="popup__title">Your membership has been canceled.</h2>
@@ -637,7 +487,7 @@
         <div class="popup__overlay" aria-hidden="true"></div>
         <div class="popup__window" role="dialog" aria-modal="true" aria-labelledby="monthly-donation-updated-title" aria-describedby="monthly-donation-updated-desc">
             <div class="popup__header">
-                <img src="/Noodynamics/preview/page-reader/images/logo-text.png" alt="Noodynamics" class="popup__logo">
+                <img src="/Noodynamics/images/logo-text.png" alt="Noodynamics" class="popup__logo">
             </div>
             <div class="popup__inner">
                 <h2 id="monthly-donation-updated-title" class="popup__title">Monthly donation amount updated successfully</h2>
@@ -653,7 +503,7 @@
             <div class="profile-popup__header">
                 <h2 id="membership-popup-title" class="profile-popup__header-title">My membership</h2>
                 <button type="button" class="profile-popup__close" aria-label="Close popup">
-                    <img src="/Noodynamics/preview/page-reader/icons/cross.svg" alt="" width="24" height="24">
+                    <img src="/Noodynamics/icons/cross.svg" alt="" width="24" height="24">
                 </button>
             </div>
             <div class="profile-popup__inner">
@@ -684,12 +534,12 @@
             <div class="profile-popup__header">
                 <h2 id="change-membership-popup-title" class="profile-popup__header-title">
                     <button type="button" class="profile-popup__header-icon js-back-to-membership" aria-label="Back">
-                        <img src="/Noodynamics/preview/page-reader/icons/arrow-back.svg" alt="" width="24" height="24">
+                        <img src="/Noodynamics/icons/arrow-back.svg" alt="" width="24" height="24">
                     </button>
                     Change membership level
                 </h2>
                 <button type="button" class="profile-popup__close" aria-label="Close popup">
-                    <img src="/Noodynamics/preview/page-reader/icons/cross.svg" alt="" width="24" height="24">
+                    <img src="/Noodynamics/icons/cross.svg" alt="" width="24" height="24">
                 </button>
             </div>
             <div class="profile-popup__inner">
@@ -763,12 +613,12 @@
             <div class="profile-popup__header">
                 <h2 id="change-membership-details-popup-title" class="profile-popup__header-title">
                     <button type="button" class="profile-popup__header-icon js-back-to-change-membership" aria-label="Back">
-                        <img src="/Noodynamics/preview/page-reader/icons/arrow-back.svg" alt="" width="24" height="24">
+                        <img src="/Noodynamics/icons/arrow-back.svg" alt="" width="24" height="24">
                     </button>
                     review details
                 </h2>
                 <button type="button" class="profile-popup__close" aria-label="Close popup">
-                    <img src="/Noodynamics/preview/page-reader/icons/cross.svg" alt="" width="24" height="24">
+                    <img src="/Noodynamics/icons/cross.svg" alt="" width="24" height="24">
                 </button>
             </div>
             <div class="profile-popup__inner">
@@ -806,7 +656,7 @@
             <div class="profile-popup__header">
                 <h2 id="account-details-popup-title" class="profile-popup__header-title">Account details</h2>
                 <button type="button" class="profile-popup__close" aria-label="Close popup">
-                    <img src="/Noodynamics/preview/page-reader/icons/cross.svg" alt="" width="24" height="24">
+                    <img src="/Noodynamics/icons/cross.svg" alt="" width="24" height="24">
                 </button>
             </div>
             <div class="profile-popup__inner">
@@ -842,7 +692,7 @@
             <div class="profile-popup__header">
                 <h2 id="account-change-password-popup-title" class="profile-popup__header-title">Change password</h2>
                 <button type="button" class="profile-popup__close" aria-label="Close popup">
-                    <img src="/Noodynamics/preview/page-reader/icons/cross.svg" alt="" width="24" height="24">
+                    <img src="/Noodynamics/icons/cross.svg" alt="" width="24" height="24">
                 </button>
             </div>
             <div class="profile-popup__inner">
@@ -871,14 +721,14 @@
             <div class="profile-popup__header">
                 <h2 id="donations-popup-title" class="profile-popup__header-title">My donations</h2>
                 <button type="button" class="profile-popup__close" aria-label="Close popup">
-                    <img src="/Noodynamics/preview/page-reader/icons/cross.svg" alt="" width="24" height="24">
+                    <img src="/Noodynamics/icons/cross.svg" alt="" width="24" height="24">
                 </button>
             </div>
             <div class="profile-popup__inner">
                 <div class="profile-popup__donations-summary">
                     <div class="profile-popup__donations-card">
                         <div class="profile-popup__donations-card-icon-wrap">
-                            <img src="/Noodynamics/preview/page-reader/icons/coin.svg" alt="" class="profile-popup__donations-card-icon" width="20"
+                            <img src="/Noodynamics/icons/coin.svg" alt="" class="profile-popup__donations-card-icon" width="20"
                                 height="20">
                             <span class="profile-popup__donations-card-label">Total donated</span>
                         </div>
@@ -886,7 +736,7 @@
                     </div>
                     <div class="profile-popup__donations-card">
                         <div class="profile-popup__donations-card-icon-wrap">
-                            <img src="/Noodynamics/preview/page-reader/icons/calendar-gray.svg" alt="" class="profile-popup__donations-card-icon" width="20"
+                            <img src="/Noodynamics/icons/calendar-gray.svg" alt="" class="profile-popup__donations-card-icon" width="20"
                                 height="20">
                             <span class="profile-popup__donations-card-label">Monthly donation</span>
                         </div>
@@ -961,19 +811,19 @@
             <div class="profile-popup__header">
                 <h2 id="change-monthly-donation-popup-title" class="profile-popup__header-title">
                     <button type="button" class="profile-popup__header-icon js-back-to-donations" aria-label="Back">
-                        <img src="/Noodynamics/preview/page-reader/icons/arrow-back.svg" alt="" width="24" height="24">
+                        <img src="/Noodynamics/icons/arrow-back.svg" alt="" width="24" height="24">
                     </button>
                     Change monthly donation amount
                 </h2>
                 <button type="button" class="profile-popup__close" aria-label="Close popup">
-                    <img src="/Noodynamics/preview/page-reader/icons/cross.svg" alt="" width="24" height="24">
+                    <img src="/Noodynamics/icons/cross.svg" alt="" width="24" height="24">
                 </button>
             </div>
             <div class="profile-popup__inner">
                 <h3 class="profile-popup__inner-subtitle">Select New Monthly Donation Amount</h3>
                 <div class="profile-popup__content profile-popup__content--current-monthly">
                     <div class="profile-popup__content-icon-wrap">
-                        <img src="/Noodynamics/preview/page-reader/icons/calendar-gray.svg" alt="" class="profile-popup__content-icon" width="20"
+                        <img src="/Noodynamics/icons/calendar-gray.svg" alt="" class="profile-popup__content-icon" width="20"
                             height="20">
                         <span class="profile-popup__content-label">Current monthly donation</span>
                     </div>
@@ -1041,12 +891,12 @@
             <div class="profile-popup__header">
                 <h2 id="monthly-donation-setup-popup-title" class="profile-popup__header-title">
                     <button type="button" class="profile-popup__header-icon js-back-to-donations" aria-label="Back">
-                        <img src="/Noodynamics/preview/page-reader/icons/arrow-back.svg" alt="" width="24" height="24">
+                        <img src="/Noodynamics/icons/arrow-back.svg" alt="" width="24" height="24">
                     </button>
                     Monthly donation
                 </h2>
                 <button type="button" class="profile-popup__close" aria-label="Close popup">
-                    <img src="/Noodynamics/preview/page-reader/icons/cross.svg" alt="" width="24" height="24">
+                    <img src="/Noodynamics/icons/cross.svg" alt="" width="24" height="24">
                 </button>
             </div>
             <div class="profile-popup__inner">
@@ -1129,7 +979,7 @@
                             <div class="make-donation__select select" data-select-native-id="monthly-setup-country">
                                 <button type="button" class="select__trigger" aria-expanded="false" aria-haspopup="listbox" aria-label="Select country">
                                     <span class="select__value">Select country</span>
-                                    <span class="select__arrow" aria-hidden="true"><img src="/Noodynamics/preview/page-reader/icons/arrow-down.svg" alt=""></span>
+                                    <span class="select__arrow" aria-hidden="true"><img src="/Noodynamics/icons/arrow-down.svg" alt=""></span>
                                 </button>
                                 <ul class="select__dropdown" role="listbox" hidden>
                                     <li class="select__option" role="option" data-value="US">United States</li>
@@ -1264,9 +1114,9 @@
     </div>
     
     <div class="cta-button">
-        <img class="cta-button__img cta-button__img--left" src="/Noodynamics/preview/page-reader/images/cta-button-img.png" alt= "image not found" class="cta-button__icon">
+        <img class="cta-button__img cta-button__img--left" src="/Noodynamics/images/cta-button-img.png" alt= "image not found" class="cta-button__icon">
         <a href="tel:73773410188" class="cta-button__link">Have questions about Nöodynamics or the Institute? <b>Call (737) 734-1018</b></a>
-        <img class="cta-button__img cta-button__img--right" src="/Noodynamics/preview/page-reader/images/cta-button-img.png" alt= "image not found" class="cta-button__icon">
+        <img class="cta-button__img cta-button__img--right" src="/Noodynamics/images/cta-button-img.png" alt= "image not found" class="cta-button__icon">
     </div>    
 </body>
 

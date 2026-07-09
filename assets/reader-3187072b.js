@@ -1,4 +1,4 @@
-import{i as Ne,c as U,o as He}from"./modal-manager-0667896a.js";import"./site-audio-d1be709f.js";const Pe="phenomenology-culture-systems-v1",Me="The Phenomenology of Culture-Systems",Oe="Volume 1: Grand Synthesis: Mythology of the 21st Century (2018)",ze=[{id:"ch1",title:"Proem: First Epistle to the Highbrows",pages:[`Pray thee, take care, that tak’st my book in hand
+import{i as Ne,c as U,o as He}from"./modal-manager-0667896a.js";import"./site-audio-6ec50106.js";const Pe="phenomenology-culture-systems-v1",Me="The Phenomenology of Culture-Systems",Oe="Volume 1: Grand Synthesis: Mythology of the 21st Century (2018)",ze=[{id:"ch1",title:"Proem: First Epistle to the Highbrows",pages:[`Pray thee, take care, that tak’st my book in hand
 
 To read it well—that is, to understand.
 

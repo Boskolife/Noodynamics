@@ -416,6 +416,16 @@ function renderParagraphBlockHtml(
   return applyHighlightsToParagraphHtml(html, highlights);
 }
 
+function resolveReaderAssetUrl(src) {
+  if (!src) return '';
+  if (/^https?:\/\//i.test(src) || src.startsWith('data:')) return src;
+
+  const base = import.meta.env.BASE_URL || '/';
+  const normalizedBase = base.endsWith('/') ? base : `${base}/`;
+  const path = String(src).replace(/^\//, '');
+  return `${normalizedBase}${path}`;
+}
+
 function renderImageBlockHtml(block) {
   const modifierClass = block.fullPage
     ? ' reader__image-block--full-page'
@@ -423,7 +433,7 @@ function renderImageBlockHtml(block) {
 
   return `
     <figure class="reader__image-block${modifierClass}" data-image-id="${escapeHtml(String(block.id))}">
-      <img class="reader__image" src="${escapeHtml(block.src)}" alt="${escapeHtml(
+      <img class="reader__image" src="${escapeHtml(resolveReaderAssetUrl(block.src))}" alt="${escapeHtml(
         block.alt || '',
       )}" loading="lazy" />
     </figure>

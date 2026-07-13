@@ -539,6 +539,7 @@ html:has(.reader-page) {
 
   &__image-block {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     margin: 0 0 1.4rem;
@@ -551,6 +552,15 @@ html:has(.reader-page) {
     width: auto;
     height: auto;
     border-radius: 8px;
+  }
+
+  &__image-caption {
+    margin-top: 0.6rem;
+    max-width: 36rem;
+    color: $color-brown;
+    font-size: calc(0.78rem * var(--reader-font-scale, 1));
+    line-height: 1.45;
+    text-align: center;
   }
 
   &__note-ref {

@@ -430,12 +430,17 @@ function renderImageBlockHtml(block) {
   const modifierClass = block.fullPage
     ? ' reader__image-block--full-page'
     : '';
+  const caption = String(block.caption || '').trim();
+  const captionHtml = caption
+    ? `<figcaption class="reader__image-caption">${escapeHtml(caption)}</figcaption>`
+    : '';
 
   return `
     <figure class="reader__image-block${modifierClass}" data-image-id="${escapeHtml(String(block.id))}">
       <img class="reader__image" src="${escapeHtml(resolveReaderAssetUrl(block.src))}" alt="${escapeHtml(
-        block.alt || '',
+        block.alt || caption,
       )}" loading="lazy" />
+      ${captionHtml}
     </figure>
   `;
 }

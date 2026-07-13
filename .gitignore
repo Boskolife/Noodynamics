@@ -26,3 +26,4 @@ dist-ssr
 docs/*
 scripts/*
 nd.zip
+src/data/reader/phenomenology-culture-systems-v2.json

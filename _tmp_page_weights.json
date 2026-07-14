@@ -1,0 +1,219 @@
+{
+  "total": 808,
+  "contentPages": 800,
+  "stats": {
+    "min": 85,
+    "p10": 1009,
+    "p25": 1556,
+    "p50": 2015,
+    "p75": 2449,
+    "p90": 2874,
+    "max": 4608,
+    "avg": 2005
+  },
+  "tinyCount": 3,
+  "tiny": [
+    {
+      "ch": "dedication",
+      "id": "pf4",
+      "pageNo": 4,
+      "showTitle": true,
+      "blocks": 1,
+      "images": 0,
+      "hasList": false,
+      "weight": 85,
+      "textLen": 85
+    },
+    {
+      "ch": "3-4-the-culture-soul-unbearable-lightness-of-being-in-the-world",
+      "id": "pf110",
+      "pageNo": 267,
+      "showTitle": false,
+      "blocks": 1,
+      "images": 0,
+      "hasList": false,
+      "weight": 216,
+      "textLen": 216
+    },
+    {
+      "ch": "3-2-the-scientific-spiritual-arms-race-mutually-assured-deconstruction",
+      "id": "pfe0",
+      "pageNo": 220,
+      "showTitle": false,
+      "blocks": 1,
+      "images": 0,
+      "hasList": false,
+      "weight": 305,
+      "textLen": 305
+    }
+  ],
+  "hugeCount": 19,
+  "huge": [
+    {
+      "ch": "3-5-western-world-feeling-christianity-and-postmodern-metaphysics",
+      "id": "pf12f",
+      "pageNo": 296,
+      "showTitle": false,
+      "blocks": 4,
+      "images": 0,
+      "hasList": false,
+      "weight": 4608,
+      "textLen": 4608
+    },
+    {
+      "ch": "4-5-logical-faith",
+      "id": "pf1f5",
+      "pageNo": 483,
+      "showTitle": false,
+      "blocks": 5,
+      "images": 1,
+      "hasList": false,
+      "weight": 4196,
+      "textLen": 3296
+    },
+    {
+      "ch": "5-3-the-faustian-mythologem",
+      "id": "pf248",
+      "pageNo": 562,
+      "showTitle": false,
+      "blocks": 2,
+      "images": 0,
+      "hasList": false,
+      "weight": 4166,
+      "textLen": 4166
+    },
+    {
+      "ch": "2-6-secondary-modes-of-expression",
+      "id": "pfae",
+      "pageNo": 171,
+      "showTitle": false,
+      "blocks": 3,
+      "images": 0,
+      "hasList": false,
+      "weight": 4123,
+      "textLen": 4123
+    },
+    {
+      "ch": "3-6-the-no-dynamic-worldview",
+      "id": "pf14a",
+      "pageNo": 322,
+      "showTitle": false,
+      "blocks": 3,
+      "images": 0,
+      "hasList": false,
+      "weight": 4079,
+      "textLen": 4079
+    },
+    {
+      "ch": "3-8-from-pop-culture-to-post-modern-aesthetics",
+      "id": "pf172",
+      "pageNo": 361,
+      "showTitle": false,
+      "blocks": 4,
+      "images": 0,
+      "hasList": false,
+      "weight": 4059,
+      "textLen": 4059
+    },
+    {
+      "ch": "1-introduction",
+      "id": "pf50",
+      "pageNo": 79,
+      "showTitle": false,
+      "blocks": 3,
+      "images": 0,
+      "hasList": false,
+      "weight": 3835,
+      "textLen": 3835
+    },
+    {
+      "ch": "5-5-mathematics-faustian-catechism",
+      "id": "pf2a7",
+      "pageNo": 652,
+      "showTitle": false,
+      "blocks": 4,
+      "images": 0,
+      "hasList": false,
+      "weight": 3786,
+      "textLen": 3786
+    },
+    {
+      "ch": "3-3-piercing-the-academic-iron-curtain",
+      "id": "pf105",
+      "pageNo": 257,
+      "showTitle": false,
+      "blocks": 3,
+      "images": 0,
+      "hasList": false,
+      "weight": 3775,
+      "textLen": 3775
+    },
+    {
+      "ch": "3-2-the-scientific-spiritual-arms-race-mutually-assured-deconstruction",
+      "id": "pfe9",
+      "pageNo": 229,
+      "showTitle": false,
+      "blocks": 5,
+      "images": 0,
+      "hasList": false,
+      "weight": 3771,
+      "textLen": 3771
+    },
+    {
+      "ch": "4-4-empirical-spirituality",
+      "id": "pf1e4",
+      "pageNo": 466,
+      "showTitle": false,
+      "blocks": 4,
+      "images": 0,
+      "hasList": false,
+      "weight": 3739,
+      "textLen": 3739
+    },
+    {
+      "ch": "4-1-prelusion",
+      "id": "pf18e",
+      "pageNo": 381,
+      "showTitle": false,
+      "blocks": 3,
+      "images": 1,
+      "hasList": false,
+      "weight": 3716,
+      "textLen": 2816
+    },
+    {
+      "ch": "6-remembrance-of-things-past-the-second-religiosity",
+      "id": "pf339",
+      "pageNo": 785,
+      "showTitle": false,
+      "blocks": 4,
+      "images": 0,
+      "hasList": false,
+      "weight": 3686,
+      "textLen": 3686
+    },
+    {
+      "ch": "6-remembrance-of-things-past-the-second-religiosity",
+      "id": "pf34d",
+      "pageNo": 805,
+      "showTitle": false,
+      "blocks": 3,
+      "images": 0,
+      "hasList": false,
+      "weight": 3651,
+      "textLen": 3651
+    },
+    {
+      "ch": "5-4-music-and-mountains-painting-and-ruins",
+      "id": "pf282",
+      "pageNo": 616,
+      "showTitle": false,
+      "blocks": 4,
+      "images": 1,
+      "hasList": false,
+      "weight": 3648,
+      "textLen": 2748
+    }
+  ],
+  "singleSmall": 8
+}

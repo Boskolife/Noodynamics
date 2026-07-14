@@ -426,19 +426,25 @@ function resolveReaderAssetUrl(src) {
   return `${normalizedBase}${path}`;
 }
 
+function stripHtml(str) {
+  return String(str || '')
+    .replace(/<[^>]*>/g, '')
+    .trim();
+}
+
 function renderImageBlockHtml(block) {
   const modifierClass = block.fullPage
     ? ' reader__image-block--full-page'
     : '';
   const caption = String(block.caption || '').trim();
   const captionHtml = caption
-    ? `<figcaption class="reader__image-caption">${escapeHtml(caption)}</figcaption>`
+    ? `<figcaption class="reader__image-caption">${caption}</figcaption>`
     : '';
 
   return `
     <figure class="reader__image-block${modifierClass}" data-image-id="${escapeHtml(String(block.id))}">
       <img class="reader__image" src="${escapeHtml(resolveReaderAssetUrl(block.src))}" alt="${escapeHtml(
-        block.alt || caption,
+        block.alt || stripHtml(caption),
       )}" loading="lazy" />
       ${captionHtml}
     </figure>
@@ -514,9 +520,15 @@ function renderPageHtml(globalPage) {
   if (pageData?.showTitle) {
     const isSub = isSubsectionTitle(chapter.title);
     const headingTag = isSub ? 'h3' : 'h2';
-    const headingClass = isSub
-      ? 'reader__section-title reader__section-title--sub'
-      : 'reader__section-title';
+    const chapterClassName = String(chapter.className || '').trim();
+    const headingClass = [
+      isSub
+        ? 'reader__section-title reader__section-title--sub'
+        : 'reader__section-title',
+      chapterClassName,
+    ]
+      .filter(Boolean)
+      .join(' ');
 
     parts.push(
       `<${headingTag} class="${headingClass}" id="${getChapterAnchorId(chapter)}">${escapeHtml(chapter.title)}</${headingTag}>`,
@@ -1386,9 +1398,12 @@ function initNoteNavigation() {
     const link = event.target.closest('.reader__note-ref, .reader__contents-link');
     if (!link || !textEl.contains(link)) return;
 
-    const targetPage = parseInt(link.dataset.targetPage || '', 10);
     const targetId = link.dataset.readerTarget || '';
     const hashId = link.dataset.readerHash || '';
+    // Prefer resolving by block id so navigation survives pageNo remaps.
+    const resolvedPage = findPageForBlockId(targetId);
+    const fallbackPage = parseInt(link.dataset.targetPage || '', 10);
+    const targetPage = resolvedPage || fallbackPage;
     if (!targetPage) return;
 
     event.preventDefault();

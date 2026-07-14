@@ -77,6 +77,9 @@ html:has(.reader-page) {
   --reader-bg-color: #ffffff;
   --reader-text-align: left;
   --reader-highlight-color: #000000;
+  --reader-link-color: #{$color-brown};
+  --reader-link-hover-color: #{$color-dark-brown};
+  --reader-note-target-bg: #{rgba($color-brown, 0.08)};
 
   display: grid;
   grid-template-columns: 300px 1fr 300px;
@@ -95,6 +98,9 @@ html:has(.reader-page) {
 
   &--night {
     background-color: #181b1f;
+    --reader-link-color: #{$color-lightbeige-500};
+    --reader-link-hover-color: #{$color-lightbeige-300};
+    --reader-note-target-bg: #{rgba($color-lightbeige-500, 0.16)};
     $title-color: $color-lightbeige-500;
     $text-color: $color-white-80;
 
@@ -116,19 +122,45 @@ html:has(.reader-page) {
       color: rgba($color-neutral-100, var(--reader-text-opacity));
     }
 
+    .reader__text .reader__blockquote p {
+      color: $color-lightbeige-500;
+    }
+
     .reader__highlight {
       background-color: #949494;
     }
 
-    .reader__note-ref {
+    .reader__image-caption {
       color: $color-lightbeige-500;
+    }
+
+    .reader__note-ref {
+      color: var(--reader-link-color);
+
+      &:hover,
+      &:focus,
+      &:focus-visible {
+        color: var(--reader-link-hover-color);
+        text-decoration: underline;
+      }
     }
 
     .reader__contents-link {
       &:hover,
       &:focus,
       &:focus-visible {
-        color: $color-lightbeige-500;
+        color: var(--reader-link-hover-color);
+      }
+    }
+
+    .reader__copyright-name,
+    .reader__copyright-link {
+      color: var(--reader-link-color);
+
+      &:hover,
+      &:focus,
+      &:focus-visible {
+        color: var(--reader-link-hover-color);
       }
     }
 
@@ -209,6 +241,9 @@ html:has(.reader-page) {
 
   &--accent {
     background-color: $color-lightbeige-100;
+    --reader-link-color: #{$color-dark-brown};
+    --reader-link-hover-color: #{$color-brown};
+    --reader-note-target-bg: #{rgba($color-dark-brown, 0.1)};
 
     .reader__sidebar {
       background-color: $color-lightbeige-100;
@@ -228,6 +263,62 @@ html:has(.reader-page) {
 
     .reader__bottom-bar {
       background-color: $color-lightbeige-100;
+    }
+
+    .reader__note-ref {
+      color: var(--reader-link-color);
+
+      &:hover,
+      &:focus,
+      &:focus-visible {
+        color: var(--reader-link-hover-color);
+        text-decoration: underline;
+      }
+    }
+
+    .reader__contents-link {
+      &:hover,
+      &:focus,
+      &:focus-visible {
+        color: var(--reader-link-hover-color);
+      }
+    }
+
+    .reader__image-caption {
+      color: $color-dark-brown;
+
+      a {
+        &:hover,
+        &:focus,
+        &:focus-visible {
+          color: var(--reader-link-hover-color);
+        }
+      }
+    }
+
+    .reader__copyright-name,
+    .reader__copyright-link {
+      color: var(--reader-link-color);
+
+      &:hover,
+      &:focus,
+      &:focus-visible {
+        color: var(--reader-link-hover-color);
+      }
+    }
+
+    .reader__toc-group,
+    .reader__toc-link {
+      &:hover,
+      &:focus,
+      &:focus-visible {
+        color: var(--reader-link-hover-color);
+      }
+
+      &.is-active {
+        color: var(--reader-link-color);
+        background-color: var(--reader-note-target-bg);
+      }
     }
   }
 
@@ -475,6 +566,7 @@ html:has(.reader-page) {
   }
 
   &__book-title {
+    text-align: center;
     font-size: 28px;
     font-weight: 600;
     margin-bottom: 20px;
@@ -535,6 +627,40 @@ html:has(.reader-page) {
         margin-bottom: 0;
       }
     }
+
+    .reader__blockquote {
+      margin: 1em auto 1em;
+      max-width: 85%;
+      border: none;
+      text-align: center;
+
+      p {
+        margin: 0;
+        font-size: --reader-font-scale;
+        line-height: 1.55;
+        color: $color-brown;
+      }
+    }
+
+    .reader__footnotes-list,
+    .reader__bibliography-list {
+      margin: 0 0 1em;
+      padding: 0;
+      list-style: none;
+
+      li {
+        margin: 0 0 0.65em;
+        font-size: calc(18px * var(--reader-font-scale));
+        line-height: var(--reader-line-height);
+        letter-spacing: var(--reader-letter-spacing);
+        color: rgba($color-black-100, var(--reader-text-opacity));
+        text-align: var(--reader-text-align);
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
   }
 
   &__image-block {
@@ -561,16 +687,31 @@ html:has(.reader-page) {
     font-size: calc(0.78rem * var(--reader-font-scale, 1));
     line-height: 1.45;
     text-align: center;
+
+    a {
+      color: inherit;
+      text-decoration: underline;
+      transition: color 0.2s ease;
+
+      &:hover,
+      &:focus,
+      &:focus-visible {
+        color: var(--reader-link-hover-color);
+        outline: none;
+      }
+    }
   }
 
   &__note-ref {
-    color: $color-brown;
+    color: var(--reader-link-color);
     text-decoration: none;
     font-weight: 600;
+    transition: color 0.2s ease;
 
     &:hover,
     &:focus,
     &:focus-visible {
+      color: var(--reader-link-hover-color);
       text-decoration: underline;
       outline: none;
     }
@@ -584,20 +725,24 @@ html:has(.reader-page) {
     color: inherit;
     text-decoration: none;
     font: inherit;
+    transition: color 0.2s ease;
 
     &:hover,
     &:focus,
     &:focus-visible {
-      color: $color-brown;
+      color: var(--reader-link-hover-color);
       text-decoration: underline;
       outline: none;
     }
   }
 
-  p.is-note-target {
-    background-color: rgba($color-brown, 0.08);
+  p.is-note-target,
+  li.is-note-target,
+  .reader__footnotes-list.is-note-target,
+  .reader__bibliography-list.is-note-target {
+    background-color: var(--reader-note-target-bg);
     border-radius: 8px;
-    box-shadow: 0 0 0 8px rgba($color-brown, 0.08);
+    box-shadow: 0 0 0 8px var(--reader-note-target-bg);
     transition:
       background-color 0.25s ease,
       box-shadow 0.25s ease;
@@ -632,6 +777,54 @@ html:has(.reader-page) {
       font-size: calc(20px * var(--reader-font-scale));
       font-weight: 500;
       text-transform: none;
+    }
+
+    &--center {
+      text-align: center;
+    }
+  }
+
+  &__section-text {
+    &--center {
+      text-align: center !important;
+    }
+  }
+
+  &__copyright-name {
+    display: block;
+    margin: 0 0 0.35em;
+    font-family: $base-font-sans-serif;
+    font-size: calc(20px * var(--reader-font-scale));
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--reader-link-color);
+    letter-spacing: var(--reader-letter-spacing);
+    transition: color 0.2s ease;
+
+    &:hover,
+    &:focus,
+    &:focus-visible {
+      color: var(--reader-link-hover-color);
+      outline: none;
+    }
+  }
+
+  &__copyright-link {
+    display: block;
+    margin: 0 0 1.2em;
+    color: var(--reader-link-color);
+    font-size: calc(18px * var(--reader-font-scale));
+    line-height: var(--reader-line-height);
+    letter-spacing: var(--reader-letter-spacing);
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover,
+    &:focus,
+    &:focus-visible {
+      color: var(--reader-link-hover-color);
+      text-decoration: underline;
+      outline: none;
     }
   }
 
